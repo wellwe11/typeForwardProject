@@ -7,13 +7,15 @@ const NavBarComponent = ({}) => {
 
   const linkKeys = Object.keys(navLinks);
 
+  console.log(navLinks, linkKeys);
+
   return (
     <div>
       <h1>list:</h1>
       <ul>
         {linkKeys.map((key, index) => (
           <div key={index}>
-            <Link>{key}</Link>
+            <Link to={navLinks[key].baseUrl}>{key}</Link>
           </div>
         ))}
       </ul>

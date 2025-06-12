@@ -9,7 +9,7 @@ function App() {
       <TabComponentProvider>
         <Router>
           <NavBarComponent />
-          <Routes>{/**add upcoming roots here */}</Routes>
+          <Routes>{/* add upcoming roots here */}</Routes>
         </Router>
       </TabComponentProvider>
     </div>
