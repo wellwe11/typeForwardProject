@@ -1,23 +1,40 @@
 import "./App.scss";
-import React, { createContext, useContext, useMemo } from "react";
-const fonts = import.meta.glob("./assets/fonts");
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+const fonts = import.meta.glob("./resourceFolder_typeFoward/assets/fonts/*/**");
 
 const NavLinksContext = createContext();
 
-function IconsGallery() {
-  const [fonts, setFonts] = React.useState([]);
+const getFileNames = (files, replace) => {
+  const allFiles = Object.keys(files);
+  const fileFolders = new Set();
 
-  React.useEffect(() => {
-    const imports = Object.values(fonts).map((importFn) => importFn());
-    Promise.all(imports).then((modules) => {
-      setFonts(modules.map((mod, index) => <mod.default key={index} />));
-    });
-  }, []);
+  allFiles.forEach((filePath) => {
+    const parts = filePath.split("/");
+    parts.pop();
+    const folderPath = parts.join("/").replace(replace, "");
+    fileFolders.add(folderPath);
+  });
 
-  console.log(fonts);
-}
+  return Array.from(fileFolders);
+};
 
 export const TabComponentProvider = ({ children }) => {
+  const [fontsNames, setFontsNames] = useState([]);
+  useEffect(() => {
+    const folders = getFileNames(
+      fonts,
+      "./resourceFolder_typeFoward/assets/fonts/"
+    );
+
+    setFontsNames(folders);
+  }, []);
+
   // create a direct link
   const createRoute =
     (base) =>
@@ -43,11 +60,7 @@ export const TabComponentProvider = ({ children }) => {
     () => ({
       home: { baseUrl: baseRoute() },
       // display on homepage
-      typefaces: createSubRoutes(baseRoute("typefaces"), [
-        "serif",
-        "sans-serif",
-        "display",
-      ]),
+      typefaces: createSubRoutes(baseRoute("typefaces"), fontsNames),
       subscribe: { baseUrl: baseRoute() },
       services: { baseUrl: baseRoute() },
 
@@ -57,7 +70,7 @@ export const TabComponentProvider = ({ children }) => {
       about: { baseUrl: baseRoute("about") },
       blog: { baseUrl: baseRoute("blog") },
     }),
-    []
+    [fontsNames]
   );
   return (
     <NavLinksContext.Provider value={navLinks}>
