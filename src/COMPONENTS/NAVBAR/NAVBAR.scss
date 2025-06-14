@@ -7,46 +7,108 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
-  .navBarUl {
-    width: var(--InlineWidth);
+.LogoSVG {
+  svg {
+    cursor: pointer;
+  }
 
-    height: 70px;
+  #darkGroup {
+    fill: white;
+  }
+
+  #lightGroup {
+    fill: white;
+  }
+
+  #darkOne,
+  #lightOne,
+  #darkTwo {
+    transition: all 1s ease;
+  }
+  #darkTwo {
+    transform: translateX(-100%);
+  }
+}
+
+.isHover {
+  #lightOne {
+    transform: translate(40%);
+  }
+
+  #darkOne {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+
+  #darkTwo {
+    transform: translateX(10%);
+  }
+}
+
+.LogoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  padding: 10px;
+
+  .logoTitle {
+    max-width: 50%;
+    font-family: "font-Oddval", sans-serif;
+    line-height: 30px;
+    font-weight: 400;
+  }
+  .SVGContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    transform: translate(200%, -24%);
+  }
+}
+
+.LogoContainer:hover {
+}
+
+.navBarUl {
+  width: var(--InlineWidth);
+
+  display: flex;
+  justify-content: space-between;
+
+  .LinksContainer {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-around;
 
-    .LinksContainer {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
+    .uniqueLinkContainer {
+      cursor: pointer;
+      position: relative;
+      height: 100%;
 
-      .uniqueLinkContainer {
-        padding: 10px;
-        cursor: pointer;
-        position: relative;
-        height: 100%;
+      .keyTextSpan {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 
-        .keyTextSpan {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
+        font-variation-settings: "wght" 500;
+        transition: font-variation-settings 0.3s ease;
 
-          font-variation-settings: "wght" 500;
-          transition: font-variation-settings 0.3s ease;
-
-          .keyText {
-          }
-        }
-
-        &:hover .keyTextSpan {
-          font-variation-settings: "wght" 820;
+        .keyText {
         }
       }
 
-      .keyTextSpanHidden {
-        opacity: 0;
+      &:hover .keyTextSpan {
+        font-variation-settings: "wght" 820;
       }
+    }
+
+    .keyTextSpanHidden {
+      opacity: 0;
     }
   }
 }

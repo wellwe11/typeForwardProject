@@ -1,10 +1,10 @@
 :root {
-  font-family: "font-forward", sans-serif;
+  font-family: "font-Gogh", sans-serif;
   font-feature-settings: "liga", "dlig", "calt";
   line-height: 1.5;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: white;
   background-color: #242424;
 
   font-synthesis: none;
@@ -18,9 +18,18 @@
 }
 
 @font-face {
-  font-family: "font-forward";
+  font-family: "font-Gogh";
   src: url(./resourceFolder_typeFoward/assets/fonts/Gogh/GoghVariableVF.woff),
     url(./resourceFolder_typeFoward/assets/fonts/Gogh/GoghVariableVF.woff2);
+
+  font-weight: 100 900;
+  font-stretch: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "font-Oddval";
+  src: url(./resourceFolder_typeFoward/assets/fonts/Oddval/OddvalVariable-VariableVF.woff2);
 
   font-weight: 100 900;
   font-stretch: normal;
