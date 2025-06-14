@@ -5,8 +5,7 @@ import React, { useState } from "react";
 import "./NAVBAR.scss";
 import SvgLogo from "./svgLogo";
 
-const LogoButton = ({ linkKeys, navLinks }) => {
-  const homeItem = linkKeys[0];
+const LogoButton = ({ navLinks }) => {
   const [isHover, setIsHover] = useState(false);
 
   const handleIsHover = () => setIsHover(!isHover);
@@ -18,7 +17,7 @@ const LogoButton = ({ linkKeys, navLinks }) => {
         onMouseLeave={handleIsHover}
         to={navLinks.home.baseUrl}
       >
-        <h1 className="logoTitle">Type Forward</h1>
+        <h1 className="logoTitle">type Forward</h1>
         <div className="SVGContainer">
           <SvgLogo isHover={isHover} />
         </div>
@@ -39,7 +38,7 @@ const NavButtons = () => {
 
   return (
     <ul className="navBarUl">
-      <LogoButton linkKeys={linkKeys} navLinks={navLinks} />
+      <LogoButton navLinks={navLinks} />
       <div className="LinksContainer">
         {restItems.map((key, index) => (
           <div key={index} className="uniqueLinkContainer">
@@ -48,7 +47,7 @@ const NavButtons = () => {
                 <h2 className="keyText">{firstLetterCapital(key)}</h2>
               </span>
               <span className="keyTextSpanHidden">
-                <h1>{key}</h1>
+                <h2>{key}</h2>
               </span>
             </Link>
           </div>

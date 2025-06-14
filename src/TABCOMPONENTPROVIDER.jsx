@@ -10,9 +10,8 @@ const fonts = import.meta.glob("./resourceFolder_typeFoward/assets/fonts/*/**");
 
 const NavLinksContext = createContext();
 
-// render files 
+// render files
 const getFileNames = (files) => {
-  
   const allFiles = Object.keys(files);
 
   const fileFolders = {};
@@ -23,12 +22,17 @@ const getFileNames = (files) => {
     const fontFile = parts[5];
 
     if (!fileFolders[fileName]) {
-      fileFolders[fileName] = { fonts: [fontFile] };
+      fileFolders[fileName] = {
+        fonts: [fontFile],
+        importers: [files[filePath]],
+      };
     } else if (fileFolders[fileName]) {
       fileFolders[fileName].fonts.push(fontFile);
+      fileFolders[fileName].importers.push(files[filePath]);
     }
   });
 
+  console.log(fileFolders);
   return fileFolders;
 };
 
@@ -46,6 +50,7 @@ export const TabComponentProvider = ({ children }) => {
     (path = "") =>
       `${base}/${path}`;
 
+  // if needed, real website
   const actualUrl = createRoute("https://www.typeforward.com");
 
   // temp url for this project
@@ -56,11 +61,14 @@ export const TabComponentProvider = ({ children }) => {
     const route = createRoute(base);
     const result = { baseUrl: route() };
 
-    result.links = Object.entries(paths).map(([folderName, { fonts }]) => ({
-      name: folderName,
-      url: route(folderName),
-      count: fonts,
-    }));
+    result.links = Object.entries(paths).map(
+      ([folderName, { fonts, importers }]) => ({
+        name: folderName,
+        url: route(folderName),
+        count: fonts,
+        importers: importers,
+      })
+    );
 
     return result;
   };

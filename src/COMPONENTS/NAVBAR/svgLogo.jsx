@@ -6,13 +6,11 @@ const SvgLogo = ({ isHover }) => {
     <div className="LogoSVG">
       <svg
         className={isHover ? "isHover" : ""}
-        width="50"
-        height="100"
         viewBox="0 0 140 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="Frame 1" clip-path="url(#clip0_1_2)">
+        <g id="Frame 1" clipPath="url(#clip0_1_2)">
           <g id="lightGroup">
             <path
               id="lightOne"

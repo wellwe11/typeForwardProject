@@ -1,7 +1,7 @@
 .navBarContainer {
   background-color: black;
+  border-bottom: 2px solid white;
 
-  position: fixed;
   width: 100%;
 
   display: flex;
@@ -12,6 +12,8 @@
 .LogoSVG {
   svg {
     cursor: pointer;
+    width: 50px;
+    height: 100px;
   }
 
   #darkGroup {
@@ -25,7 +27,7 @@
   #darkOne,
   #lightOne,
   #darkTwo {
-    transition: all 1s ease;
+    transition: all 0.5s ease-out;
   }
   #darkTwo {
     transform: translateX(-100%);
@@ -52,25 +54,27 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  cursor: pointer;
 
-  padding: 10px;
+  padding: 15px;
 
   .logoTitle {
     max-width: 50%;
     font-family: "font-Oddval", sans-serif;
     line-height: 30px;
-    font-weight: 400;
+    font-weight: 500;
+
+    &:hover {
+    }
   }
+
   .SVGContainer {
     position: absolute;
     top: 0;
     left: 0;
 
-    transform: translate(200%, -24%);
+    transform: translate(218%, -18%);
   }
-}
-
-.LogoContainer:hover {
 }
 
 .navBarUl {
@@ -88,6 +92,8 @@
       cursor: pointer;
       position: relative;
       height: 100%;
+
+      padding: 10px;
 
       .keyTextSpan {
         position: absolute;
@@ -109,6 +115,37 @@
 
     .keyTextSpanHidden {
       opacity: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .LogoSVG {
+    svg {
+      width: 40px !important;
+      height: 80px !important;
+    }
+  }
+
+  .LogoContainer {
+    .SVGContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      transform: translate(200%, -11%);
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .LogoContainer {
+    .SVGContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      transform: translate(180%, -11%);
     }
   }
 }
