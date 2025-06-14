@@ -12,9 +12,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --AppWidthMax: 1440px;
-  --AppWidth: 100vw;
-  --InlineWidth: 1150px;
+  @media screen and (min-width: 1000px) {
+    --AppWidthMax: 1440px;
+    --AppWidth: 100vw;
+    --InlineWidth: 1150px;
+  }
 }
 
 @font-face {

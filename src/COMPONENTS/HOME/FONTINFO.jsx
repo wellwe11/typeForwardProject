@@ -1,19 +1,19 @@
 const fontInfo = {
-  Karst: <span>Geometric sans serif with contemporary, edgy character</span>,
+  Karst: "Geometric sans serif with contemporary, edgy character",
 
-  Garet: <span>Geometric sans serif perfect for every project</span>,
+  Garet: "Geometric sans serif perfect for every project",
 
-  Bion: <span>Geometric sans serif with a distinct character</span>,
+  Bion: "Geometric sans serif with a distinct character",
 
-  "Oddval Text": <span>Geometric sans serif full of personality</span>,
+  "Oddval Text": "Geometric sans serif full of personality",
 
-  Oddval: <span>Decorative geometric sans serif with prominent ink traps</span>,
+  Oddval: "Decorative geometric sans serif with prominent ink traps",
 
-  Gogh: <span>Geometric sans serif ideal for setting text</span>,
+  Gogh: "Geometric sans serif ideal for setting text",
 
-  "Em One": <span>Geometric sans serif with moderate proportions</span>,
+  "Em One": "Geometric sans serif with moderate proportions",
 
-  Steam: <span>Display typeface with playful character</span>,
+  Steam: "Display typeface with playful character",
 };
 
 export default fontInfo;

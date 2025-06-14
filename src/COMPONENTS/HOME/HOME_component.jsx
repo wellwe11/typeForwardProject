@@ -1,5 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
+import fontInfo from "./FONTINFO";
+
+import "./HOME.scss";
 
 const TypeFaceComponent = ({ type }) => {
   const [fontUrl, setFontUrl] = useState(null);
@@ -39,9 +42,17 @@ const TypeFaceComponent = ({ type }) => {
     };
   }, [fontUrl, type?.name]);
 
+  console.log(type);
+
   return (
-    <div style={{ fontFamily: type?.name }}>
-      <h1>{type?.name}</h1>
+    <div className="typeFaceContainer" style={{ fontFamily: type?.name }}>
+      <h1 className="typeFaceName">{type?.name}</h1>
+      <h3 className="typeFaceDescription">{fontInfo[type?.name]}</h3>
+      <div className="fontAvaliableContainer">
+        <h4>Fonts: {type.count.length}</h4>
+        {/* <h4>Free: {type?.free.length} </h4> */}
+        <h4>Free: 2</h4>
+      </div>
     </div>
   );
 };
@@ -52,9 +63,12 @@ const HomeComponent = () => {
   const types = navLinks?.typefaces?.links || [];
 
   return (
-    <div>
+    <div className="typeFaceSection">
+      <div className="typeFaceSectionTitle">
+        <h1>Typefaces</h1>
+      </div>
       {types.map((type, index) => (
-        <div key={index}>
+        <div className="typeFaceComponent" key={index}>
           <TypeFaceComponent type={type} />
         </div>
       ))}

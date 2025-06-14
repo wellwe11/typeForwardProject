@@ -17,7 +17,7 @@ const LogoButton = ({ navLinks }) => {
         onMouseLeave={handleIsHover}
         to={navLinks.home.baseUrl}
       >
-        <h1 className="logoTitle">type Forward</h1>
+        <h1 className="logoTitle">type forward</h1>
         <div className="SVGContainer">
           <SvgLogo isHover={isHover} />
         </div>
