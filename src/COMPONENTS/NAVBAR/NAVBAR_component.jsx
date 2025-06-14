@@ -12,6 +12,10 @@ const NavBarComponent = ({}) => {
   const homeItem = linkKeys[0];
   const restItems = linkKeys.slice(1, linkKeys.length);
 
+  // So each button-text is displayed with capital letter at start as the nexted objects are all small lettered
+  const firstLetterCapital = (string) =>
+    string.charAt(0).toUpperCase() + string.slice(1);
+
   return (
     <div className="navBarContainer">
       <ul className="navBarUl">
@@ -22,7 +26,10 @@ const NavBarComponent = ({}) => {
           {restItems.map((key, index) => (
             <div key={index} className="uniqueLinkContainer">
               <Link to={navLinks[key].baseUrl}>
-                <span className="keyText">
+                <span className="keyTextSpan">
+                  <h3 className="keyText">{firstLetterCapital(key)}</h3>
+                </span>
+                <span className="keyTextSpanHidden">
                   <h3>{key}</h3>
                 </span>
               </Link>
