@@ -1,0 +1,46 @@
+.navBarContainer {
+  background-color: black;
+
+  position: fixed;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .navBarUl {
+    width: var(--InlineWidth);
+
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+
+    .LinksContainer {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      min-width: 60%;
+
+      .uniqueLinkContainer {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+
+        .keyText {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%); // This centers it correctly
+
+          cursor: pointer;
+          font-variation-settings: "wght" 400;
+          transition: font-variation-settings 0.3s ease;
+        }
+
+        &:hover .keyText {
+          font-variation-settings: "wght" 700;
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,15 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+}
+
+.appContainer {
+  width: var(--AppWidth);
+  max-width: var(--AppWidthMax);
+
+  display: flex;
+  justify-content: center;
+
+  background-color: orange;
+
+  padding: 0;
+  margin: 0;
 }

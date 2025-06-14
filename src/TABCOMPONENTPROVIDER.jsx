@@ -10,27 +10,32 @@ const fonts = import.meta.glob("./resourceFolder_typeFoward/assets/fonts/*/**");
 
 const NavLinksContext = createContext();
 
-const getFileNames = (files, replace) => {
+// render files 
+const getFileNames = (files) => {
+  
   const allFiles = Object.keys(files);
-  const fileFolders = new Set();
+
+  const fileFolders = {};
 
   allFiles.forEach((filePath) => {
     const parts = filePath.split("/");
-    parts.pop();
-    const folderPath = parts.join("/").replace(replace, "");
-    fileFolders.add(folderPath);
+    const fileName = parts[4];
+    const fontFile = parts[5];
+
+    if (!fileFolders[fileName]) {
+      fileFolders[fileName] = { fonts: [fontFile] };
+    } else if (fileFolders[fileName]) {
+      fileFolders[fileName].fonts.push(fontFile);
+    }
   });
 
-  return Array.from(fileFolders);
+  return fileFolders;
 };
 
 export const TabComponentProvider = ({ children }) => {
   const [fontsNames, setFontsNames] = useState([]);
   useEffect(() => {
-    const folders = getFileNames(
-      fonts,
-      "./resourceFolder_typeFoward/assets/fonts/"
-    );
+    const folders = getFileNames(fonts);
 
     setFontsNames(folders);
   }, []);
@@ -51,7 +56,11 @@ export const TabComponentProvider = ({ children }) => {
     const route = createRoute(base);
     const result = { baseUrl: route() };
 
-    result.links = paths.map((p) => route(p));
+    result.links = Object.entries(paths).map(([folderName, { fonts }]) => ({
+      name: folderName,
+      url: route(folderName),
+      count: fonts,
+    }));
 
     return result;
   };
@@ -65,7 +74,6 @@ export const TabComponentProvider = ({ children }) => {
       services: { baseUrl: baseRoute() },
 
       // display on new pages
-
       trails: { baseUrl: baseRoute("trails") },
       about: { baseUrl: baseRoute("about") },
       blog: { baseUrl: baseRoute("blog") },

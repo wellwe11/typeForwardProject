@@ -1,15 +1,19 @@
+import HomeComponent from "./COMPONENTS/HOME/HOME_component";
 import NavBarComponent from "./COMPONENTS/NAVBAR/NAVBAR_component";
 import { TabComponentProvider } from "./TABCOMPONENTPROVIDER";
-import { BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
+import "./App.scss";
 
 function App() {
   return (
-    <div>
-      <h1>Hello</h1>
+    <div className="appContainer">
       <TabComponentProvider>
         <Router>
           <NavBarComponent />
-          <Routes>{/* add upcoming roots here */}</Routes>
+          <Routes>
+            <Route path="/" element={<HomeComponent />} />
+          </Routes>
         </Router>
       </TabComponentProvider>
     </div>
