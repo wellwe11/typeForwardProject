@@ -55,6 +55,33 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "font-EmOne";
+  src: url(./resourceFolder_typeFoward/assets/fonts/EmOne/EmOneTVariable.woff),
+    url(./resourceFolder_typeFoward/assets/fonts/EmOne/EmOneTVariable.woff2);
+  font-weight: 100 900;
+  font-stretch: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "font-Garet";
+  src: url(./resourceFolder_typeFoward/assets/fonts/Garet/GaretVariableVF.woff),
+    url(./resourceFolder_typeFoward/assets/fonts/Garet/GaretVariableVF.woff2);
+  font-weight: 100 900;
+  font-stretch: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "font-Steam";
+  src: url(./resourceFolder_typeFoward/assets/fonts/Steam/Steam-Base.woff),
+    url(./resourceFolder_typeFoward/assets/fonts/Steam/Steam-Base.woff2);
+  font-weight: 100 900;
+  font-stretch: normal;
+  font-style: normal;
+}
+
 /* Basic CSS Reset */
 * {
   margin: 0;

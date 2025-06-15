@@ -4,7 +4,28 @@ import fontInfo from "./FONTINFO";
 
 import "./HOME.scss";
 
-const ForwardWelcomeComponent = () => {
+const ForwardWelcomeComponent = ({}) => {
+  const navLinks = useNavLinks();
+
+  const [fonts, setFonts] = useState();
+  const [activeFontIndex, setActiveFontIndex] = useState(2);
+
+  // click container to change font
+  // will need to update in future if API-structure changes (since actual font-names include spaces)
+  const changeFont = () => {
+    if (!fonts) return "Oddval";
+
+    if (activeFontIndex === 4) return setActiveFontIndex(2);
+
+    return setActiveFontIndex((prev) => prev + 1);
+  };
+
+  useEffect(() => {
+    setFonts(navLinks?.typefaces.links);
+  }, [navLinks]);
+
+  console.log(navLinks, fonts);
+
   const textRef = useRef(null);
   const animationFrame = useRef(null);
 
@@ -32,9 +53,21 @@ const ForwardWelcomeComponent = () => {
   }, []);
 
   return (
-    <div className="forwardWelcome" onMouseMove={handleMouseMove}>
+    <div
+      className="forwardWelcome"
+      onMouseMove={handleMouseMove}
+      onClick={changeFont}
+    >
       <div className="welcomeTextContainer">
-        <h1 ref={textRef} className="welcomeText">
+        <h1
+          ref={textRef}
+          className="welcomeText"
+          style={{
+            fontFamily: `${
+              !fonts ? "font-Forward" : "font-" + fonts[activeFontIndex]?.name
+            }, sans-serif`,
+          }}
+        >
           forward
         </h1>
       </div>
@@ -80,8 +113,6 @@ const TypeFaceComponent = ({ type }) => {
     };
   }, [fontUrl, type?.name]);
 
-  console.log(type);
-
   return (
     <div className="typeFaceContainer" style={{ fontFamily: type?.name }}>
       <h1 className="typeFaceName">{type?.name}</h1>
@@ -93,6 +124,17 @@ const TypeFaceComponent = ({ type }) => {
       </div>
     </div>
   );
+};
+
+const TypeButtonExplore = () => {
+  // explore takes you to ./typefaces/type
+};
+
+const TypeButtonDownload = () => {
+  // download takes you to form that includes:
+  // "Get *amount of free fonts*, enter email"
+  // email field
+  // yes i would like to receive emails from typeforward
 };
 
 const TypeComponent = () => {
