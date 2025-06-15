@@ -1,7 +1,30 @@
+.forwardWelcome {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .welcomeTextContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .welcomeText {
+      display: flex;
+      transition: all 0.2s ease;
+      font-size: 300px;
+      padding: 110px;
+      font-family: "font-Forward", sans-serif;
+    }
+  }
+}
+
 .typeFaceSection {
+  margin-top: 100px;
+
   color: black;
   background-color: white;
-  margin-top: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,11 +63,14 @@
   .typeFaceDescription {
     font-family: sans-serif;
     font-weight: 400;
+    margin-left: 10px;
   }
 
   .fontAvaliableContainer {
     display: flex;
+    margin-left: 10px;
     h4 {
+      margin-right: 10px;
       font-family: sans-serif;
       font-weight: 200;
     }

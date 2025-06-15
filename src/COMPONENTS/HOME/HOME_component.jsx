@@ -1,8 +1,46 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
 import fontInfo from "./FONTINFO";
 
 import "./HOME.scss";
+
+const ForwardWelcomeComponent = () => {
+  const textRef = useRef(null);
+  const animationFrame = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
+
+    animationFrame.current = requestAnimationFrame(() => {
+      const x = e.clientX / 30;
+      const y = e.clientY * 1.2;
+
+      if (textRef.current) {
+        textRef.current.style.fontVariationSettings = `'wght' ${y}, 'wdth' ${x}`;
+
+        if (x > 50) {
+          textRef.current.style.fontSize = x;
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
+    };
+  }, []);
+
+  return (
+    <div className="forwardWelcome" onMouseMove={handleMouseMove}>
+      <div className="welcomeTextContainer">
+        <h1 ref={textRef} className="welcomeText">
+          forward
+        </h1>
+      </div>
+    </div>
+  );
+};
 
 const TypeFaceComponent = ({ type }) => {
   const [fontUrl, setFontUrl] = useState(null);
@@ -57,7 +95,7 @@ const TypeFaceComponent = ({ type }) => {
   );
 };
 
-const HomeComponent = () => {
+const TypeComponent = () => {
   const navLinks = useNavLinks();
 
   const types = navLinks?.typefaces?.links || [];
@@ -72,6 +110,15 @@ const HomeComponent = () => {
           <TypeFaceComponent type={type} />
         </div>
       ))}
+    </div>
+  );
+};
+
+const HomeComponent = () => {
+  return (
+    <div>
+      <ForwardWelcomeComponent />
+      <TypeComponent />
     </div>
   );
 };

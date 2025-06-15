@@ -5,8 +5,8 @@
 
   color-scheme: light dark;
   color: white;
-  background-color: #242424;
 
+  background-color: white;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -33,6 +33,23 @@
   font-family: "font-Oddval";
   src: url(./resourceFolder_typeFoward/assets/fonts/Oddval/OddvalVariable-VariableVF.woff2);
 
+  font-weight: 100 900;
+  font-stretch: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "font-Bion";
+  src: url(./resourceFolder_typeFoward/assets/fonts/Bion/);
+  font-weight: 100 900;
+  font-stretch: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "font-Forward";
+  src: url(./resourceFolder_typeFoward/assets/fonts/forwardVF.woff),
+    url(./resourceFolder_typeFoward/assets/fonts/forwardVF.woff2);
   font-weight: 100 900;
   font-stretch: normal;
   font-style: normal;

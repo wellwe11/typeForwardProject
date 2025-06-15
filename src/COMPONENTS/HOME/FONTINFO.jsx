@@ -5,13 +5,13 @@ const fontInfo = {
 
   Bion: "Geometric sans serif with a distinct character",
 
-  "Oddval Text": "Geometric sans serif full of personality",
+  OddvalText: "Geometric sans serif full of personality",
 
   Oddval: "Decorative geometric sans serif with prominent ink traps",
 
   Gogh: "Geometric sans serif ideal for setting text",
 
-  "Em One": "Geometric sans serif with moderate proportions",
+  EmOne: "Geometric sans serif with moderate proportions",
 
   Steam: "Display typeface with playful character",
 };
