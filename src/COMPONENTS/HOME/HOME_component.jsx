@@ -8,22 +8,19 @@ import "./HOME.scss";
 const ForwardWelcomeComponent = ({}) => {
   const navLinks = useNavLinks();
 
-  const [fonts, setFonts] = useState();
   const [activeFontIndex, setActiveFontIndex] = useState(2);
+  const flexibleFonts = ["Oddval", "EmOne", "Gogh"];
 
   // click container to change font
   // will need to update in future if API-structure changes (since actual font-names include spaces)
   const changeFont = () => {
-    if (!fonts) return "Oddval";
+    if (!navLinks) return "Oddval";
 
-    if (activeFontIndex === 4) return setActiveFontIndex(2);
+    if (activeFontIndex === flexibleFonts.length - 1)
+      return setActiveFontIndex(0);
 
     return setActiveFontIndex((prev) => prev + 1);
   };
-
-  useEffect(() => {
-    setFonts(navLinks?.typefaces.links);
-  }, [navLinks]);
 
   const textRef = useRef(null);
   const animationFrame = useRef(null);
@@ -38,12 +35,10 @@ const ForwardWelcomeComponent = ({}) => {
       if (textRef.current) {
         textRef.current.style.fontVariationSettings = `'wght' ${y}, 'wdth' ${x}`;
 
-        if (x > 0.2 && x < 1.15) {
+        if (x > 0.2 && x < 1) {
           textRef.current.style.transform = `scaleX(${x})`;
           textRef.current.style.display = "inline-block";
         }
-
-        console.log(x, y);
       }
     });
   };
@@ -66,7 +61,9 @@ const ForwardWelcomeComponent = ({}) => {
           className="welcomeText"
           style={{
             fontFamily: `${
-              !fonts ? "font-Forward" : "font-" + fonts[activeFontIndex]?.name
+              !navLinks
+                ? "font-Forward"
+                : "font-" + flexibleFonts[activeFontIndex]
             }, sans-serif`,
           }}
         >
