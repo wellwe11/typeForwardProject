@@ -32,15 +32,18 @@ const ForwardWelcomeComponent = ({}) => {
     if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
 
     animationFrame.current = requestAnimationFrame(() => {
-      const x = e.clientX / 30;
+      const x = e.clientX / 1000;
       const y = e.clientY * 1.2;
 
       if (textRef.current) {
         textRef.current.style.fontVariationSettings = `'wght' ${y}, 'wdth' ${x}`;
 
-        if (x > 50) {
-          textRef.current.style.fontSize = x;
+        if (x > 0.2 && x < 1.15) {
+          textRef.current.style.transform = `scaleX(${x})`;
+          textRef.current.style.display = "inline-block";
         }
+
+        console.log(x, y);
       }
     });
   };
