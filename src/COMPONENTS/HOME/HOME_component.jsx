@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
 import fontInfo from "./FONTINFO";
+import { Link } from "react-router-dom";
 
 import "./HOME.scss";
 
@@ -23,8 +24,6 @@ const ForwardWelcomeComponent = ({}) => {
   useEffect(() => {
     setFonts(navLinks?.typefaces.links);
   }, [navLinks]);
-
-  console.log(navLinks, fonts);
 
   const textRef = useRef(null);
   const animationFrame = useRef(null);
@@ -99,7 +98,7 @@ const TypeFaceComponent = ({ type }) => {
     style.innerHTML = `
       @font-face {
         font-family: '${type.name}';
-        src: url('${fontUrl}') format('woff2');
+        src: url('${fontUrl}');
         font-weight: normal;
         font-style: normal;
       }
@@ -113,12 +112,16 @@ const TypeFaceComponent = ({ type }) => {
     };
   }, [fontUrl, type?.name]);
 
+  function addSpaceBeforeCaps(text) {
+    return text.replace(/([a-z])([A-Z])/g, "$1 $2");
+  }
+
   return (
     <div className="typeFaceContainer" style={{ fontFamily: type?.name }}>
-      <h1 className="typeFaceName">{type?.name}</h1>
+      <h1 className="typeFaceName">{addSpaceBeforeCaps(type?.name)}</h1>
       <h3 className="typeFaceDescription">{fontInfo[type?.name]}</h3>
       <div className="fontAvaliableContainer">
-        <h4>Fonts: {type.count.length}</h4>
+        <h4>Fonts: {type.count?.length}</h4>
         {/* <h4>Free: {type?.free.length} </h4> */}
         <h4>Free: 2</h4>
       </div>
@@ -126,15 +129,33 @@ const TypeFaceComponent = ({ type }) => {
   );
 };
 
-const TypeButtonExplore = () => {
+const TypeButtonExplore = ({ type }) => {
   // explore takes you to ./typefaces/type
+  return (
+    <div className="typeButtonBuyContainer">
+      <Link to={`./typefaces/${type}`}>
+        <span>
+          <h3 className="buttonFont">{"Explore"}</h3>
+        </span>
+      </Link>
+    </div>
+  );
 };
 
-const TypeButtonDownload = () => {
+const TypeButtonDownload = ({ type }) => {
   // download takes you to form that includes:
   // "Get *amount of free fonts*, enter email"
   // email field
   // yes i would like to receive emails from typeforward
+  return (
+    <div className="typeButtonDownloadContainer">
+      <button>
+        <span>
+          <h3 className="buttonFont">{"Download"}</h3>
+        </span>
+      </button>
+    </div>
+  );
 };
 
 const TypeComponent = () => {
@@ -150,6 +171,10 @@ const TypeComponent = () => {
       {types.map((type, index) => (
         <div className="typeFaceComponent" key={index}>
           <TypeFaceComponent type={type} />
+          <div className="buyDownloadButtonsContainer">
+            <TypeButtonExplore type={types[index].name} />
+            <TypeButtonDownload type={types[index].name} />
+          </div>
         </div>
       ))}
     </div>
