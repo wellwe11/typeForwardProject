@@ -4,6 +4,7 @@ import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
 import "./HOME.scss";
 import TypeComponent from "./TYPEFACE";
 import TypeServicesComponent from "./TYPE_SERVICES";
+import SubsrcibeComponent from "./SUBSCRIBE";
 
 const ForwardWelcomeComponent = ({}) => {
   const navLinks = useNavLinks();
@@ -80,6 +81,7 @@ const HomeComponent = () => {
       <ForwardWelcomeComponent />
       <TypeComponent />
       <TypeServicesComponent />
+      <SubsrcibeComponent />
     </div>
   );
 };

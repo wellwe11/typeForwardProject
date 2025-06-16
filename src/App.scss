@@ -1,13 +1,14 @@
 #root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .appContainer {
-  width: var(--AppWidth);
-  max-width: var(--AppWidthMax);
-
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   padding: 0;
   margin: 0;
