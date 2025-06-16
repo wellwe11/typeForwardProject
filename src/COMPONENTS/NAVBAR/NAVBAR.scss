@@ -31,10 +31,14 @@
   #darkOne,
   #lightOne,
   #darkTwo {
-    transition: all 0.5s ease-out;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
   #darkTwo {
     transform: translateX(-100%);
+  }
+
+  #lightOne {
+    transform: translate(5%);
   }
 }
 
@@ -49,7 +53,7 @@
   }
 
   #darkTwo {
-    transform: translateX(10%);
+    transform: translateX(15%);
   }
 }
 
@@ -78,7 +82,7 @@
     top: 0;
     left: 0;
 
-    transform: translate(218%, -18%);
+    transform: translate(170%, -18%);
   }
 }
 
@@ -138,7 +142,7 @@
       top: 0;
       left: 0;
 
-      transform: translate(200%, -11%);
+      transform: translate(145%, -11%);
     }
   }
 }
@@ -150,7 +154,7 @@
       top: 0;
       left: 0;
 
-      transform: translate(180%, -11%);
+      transform: translate(130%, -11%);
     }
   }
 }

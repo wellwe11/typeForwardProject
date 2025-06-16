@@ -12,11 +12,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media screen and (min-width: 1000px) {
-    --AppWidthMax: 1440px;
-    --AppWidth: 100vw;
-    --InlineWidth: 1150px;
-  }
+  --AppWidthMax: 1440px;
+  --AppWidth: 100vw;
+  --InlineWidth: 1150px;
+  --inlineContentWidth: 80%;
 }
 
 @font-face {
@@ -131,6 +130,10 @@ a {
   h2 {
     font-size: 1.2rem;
   }
+
+  h3 {
+    font-size: 1rem;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -141,10 +144,16 @@ a {
   h2 {
     font-size: 1rem;
   }
+
+  h3 {
+  }
 }
 
 @media screen and (max-width: 600px) {
   h2 {
     font-size: 0.9rem;
+  }
+
+  h3 {
   }
 }

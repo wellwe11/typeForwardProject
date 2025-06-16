@@ -95,13 +95,13 @@ const TypeComponent = () => {
   const types = navLinks?.typefaces?.links || [];
 
   return (
-    <div className="typeFaceSection">
+    <section className="typeFaceSection">
       <div className="typeFaceSectionTitle">
         <h1>Typefaces</h1>
       </div>
       <div className="typeFaceSectionContainer">
         {types.map((type, index) => (
-          <div className="typeFace">
+          <section className="typeFace">
             <div className="innerWidthContainer" key={index}>
               <TypeFaceComponent type={type} />
               <div className="buyDownloadButtonsContainer">
@@ -109,10 +109,10 @@ const TypeComponent = () => {
                 <TypeButtonDownload type={types[index].name} />
               </div>
             </div>
-          </div>
+          </section>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

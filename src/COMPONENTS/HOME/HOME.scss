@@ -51,7 +51,9 @@
   align-items: center;
 
   .typeFaceSectionTitle {
-    width: var(--InlineWidth);
+    max-width: var(--InlineWidth);
+
+    width: 90%;
     h1 {
       font-family: sans-serif;
       font-weight: 400;
@@ -59,7 +61,8 @@
   }
 
   .typeFaceSectionContainer {
-    width: var(--InlineWidth);
+    max-width: var(--InlineWidth);
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,12 +74,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
       .innerWidthContainer {
+        padding-top: 50px;
+        padding-bottom: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
 
-        width: 90%;
+        width: var(--inlineContentWidth);
 
         .buyDownloadButtonsContainer {
           height: 200px;
@@ -140,7 +146,6 @@
 }
 
 .typeFaceContainer {
-  min-height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -148,27 +153,38 @@
   width: 50%;
 
   .typeFaceName {
-    font-size: 120px;
     max-width: 500px;
-
-    line-height: 130px;
-
-    margin-bottom: 30px;
   }
 
   .typeFaceDescription {
     font-family: sans-serif;
     font-weight: 400;
-    margin-left: 10px;
+    margin-left: 5px;
   }
 
   .fontAvaliableContainer {
     display: flex;
-    margin-left: 10px;
+    margin-left: 5px;
     h4 {
       margin-right: 10px;
       font-family: sans-serif;
       font-weight: 200;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    min-height: 400px;
+    .typeFaceName {
+      margin-bottom: 30px;
+      font-size: 120px;
+      line-height: 130px;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .typeFaceName {
+      font-size: 80px;
+      line-height: 90px;
     }
   }
 }
@@ -177,13 +193,16 @@
   background-color: black;
   width: 100%;
 
+  height: 1000px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   .typeServicesContainer {
-    width: var(--InlineWidth);
+    max-width: var(--InlineWidth);
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -192,67 +211,149 @@
     padding-bottom: 50px;
 
     .innerWidthContainer {
-      width: 90%;
+      width: var(--inlineContentWidth);
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
 
       .serviceTitle {
-        font-size: 100px;
-        line-height: 100px;
       }
 
       .componentText {
         .bold {
+          font-weight: 600;
         }
 
         .thin {
-          font-weight: 400;
+          font-weight: 450;
         }
-      }
-
-      .brSpaceOne {
-        height: 50px;
       }
 
       .textPart {
-        width: 55%;
-
-        .brSpaceTwo {
-          height: 80px;
-        }
+        width: 60%;
       }
 
       .imagePart {
-        width: 30%;
+        width: 32%;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
         position: relative;
 
         .insideImagePart {
-          width: 300px;
-          height: 350px;
+          width: 100%;
+          height: 100%;
           border: 2px solid white;
 
           position: absolute;
 
           .borderContainer {
+            cursor: pointer;
             position: absolute;
 
-            right: 30px;
-            bottom: 30px;
-            width: 300px;
+            right: 25px;
+            bottom: 20px;
 
-            height: 350px;
+            width: 100%;
+            height: 100%;
             border: 2px solid white;
             background-color: black;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             img {
               filter: invert(1);
             }
+
+            .learnMorebutton {
+              cursor: pointer;
+              height: 22%;
+              width: 100%;
+              transition: all 0.2s ease-out;
+              border-top: 2px solid white;
+
+              .buttonText {
+                font-weight: 400;
+              }
+
+              &:hover {
+                background-color: white;
+                color: black;
+              }
+            }
+          }
+
+          &:hover {
+            button {
+              background-color: white;
+              color: black;
+            }
           }
         }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    min-height: 400px;
+
+    .innerWidthContainer {
+      .serviceTitle {
+        font-size: 100px;
+        line-height: 100px;
+      }
+
+      .brSpaceOne {
+        height: 40px;
+      }
+
+      .brSpaceTwo {
+        height: 80px;
+      }
+
+      .imagePart {
+        height: 400px;
+
+        img {
+          width: 100%;
+        }
+
+        .insideImagePart {
+          margin-top: 30px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .innerWidthContainer {
+      .serviceTitle {
+        font-size: 60px;
+        line-height: 80px;
+      }
+
+      .brSpaceOne {
+        height: 20px;
+      }
+
+      .brSpaceTwo {
+        height: 10px;
+      }
+    }
+
+    .imagePart {
+      height: 250px;
+
+      img {
+        width: 60%;
+      }
+
+      .learnMorebutton {
+        min-height: 60px;
+      }
+
+      .insideImagePart {
+        margin-top: 30px;
       }
     }
   }

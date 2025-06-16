@@ -34,6 +34,11 @@ const TypeServicesComponent = () => {
             <div className="insideImagePart">
               <div className="borderContainer">
                 <img src={mobileServiceIcon} alt="" />
+                <button className="learnMorebutton">
+                  <span>
+                    <h2 className="buttonText">Learn more</h2>
+                  </span>
+                </button>
               </div>
             </div>
           </div>
