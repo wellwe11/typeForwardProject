@@ -99,15 +99,19 @@ const TypeComponent = () => {
       <div className="typeFaceSectionTitle">
         <h1>Typefaces</h1>
       </div>
-      {types.map((type, index) => (
-        <div className="typeFaceComponent" key={index}>
-          <TypeFaceComponent type={type} />
-          <div className="buyDownloadButtonsContainer">
-            <TypeButtonExplore type={types[index].name} />
-            <TypeButtonDownload type={types[index].name} />
+      <div className="typeFaceSectionContainer">
+        {types.map((type, index) => (
+          <div className="typeFace">
+            <div className="innerWidthContainer" key={index}>
+              <TypeFaceComponent type={type} />
+              <div className="buyDownloadButtonsContainer">
+                <TypeButtonExplore type={types[index].name} />
+                <TypeButtonDownload type={types[index].name} />
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
