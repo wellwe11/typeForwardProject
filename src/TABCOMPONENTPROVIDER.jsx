@@ -77,7 +77,7 @@ export const TabComponentProvider = ({ children }) => {
     () => ({
       home: { baseUrl: baseRoute() },
       // display on homepage
-      typefaces: createSubRoutes(baseRoute("typefaces"), fontsNames),
+      typefaces: createSubRoutes(baseRoute("."), fontsNames),
       subscribe: { baseUrl: baseRoute() },
       services: { baseUrl: baseRoute() },
 
