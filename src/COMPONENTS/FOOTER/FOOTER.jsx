@@ -31,6 +31,7 @@ const FooterComponent = () => {
             {navButtonNames.map((button, i) => (
               <button key={i} className="linkButton">
                 <h3 className="linkText">{button}</h3>
+                <div className="linkUnderline"></div>
               </button>
             ))}
             <button className="linkButton email">

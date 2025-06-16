@@ -23,6 +23,7 @@
 
       .rightReserved {
         .rightReservedText {
+          font-weight: 450;
           color: rgb(216, 216, 216);
         }
       }
@@ -36,9 +37,12 @@
 
         .linkButton {
           cursor: pointer;
-          padding: 3px;
+          padding-top: 8px;
+          padding-bottom: 8px;
           transition: all 0.2s ease;
           color: rgb(216, 216, 216);
+
+          position: relative;
 
           .linkText {
             font-weight: 450;
@@ -49,10 +53,25 @@
               font-weight: 800;
             }
           }
-        }
 
-        .linkButton:hover {
-          color: white;
+          .linkUnderline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 0px;
+            background-color: white;
+
+            transition: all 0.2s ease;
+          }
+
+          &:hover {
+            color: white;
+
+            .linkUnderline {
+              width: 100%;
+            }
+          }
         }
       }
 
