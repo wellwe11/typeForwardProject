@@ -1,0 +1,105 @@
+.footerSection {
+  width: 100vw;
+  background-color: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .footerContainer {
+    width: var(--InlineWidth);
+
+    padding-top: 100px;
+    padding-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .innerWidthContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      width: var(--inlineContentWidth);
+
+      .rightReserved {
+        .rightReservedText {
+          color: rgb(216, 216, 216);
+        }
+      }
+
+      .linksContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        width: 35%;
+
+        .linkButton {
+          cursor: pointer;
+          padding: 3px;
+          transition: all 0.2s ease;
+          color: rgb(216, 216, 216);
+
+          .linkText {
+            font-weight: 450;
+          }
+
+          &.email {
+            .linkText {
+              font-weight: 800;
+            }
+          }
+        }
+
+        .linkButton:hover {
+          color: white;
+        }
+      }
+
+      .linkImagesContainer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-top: 50px;
+
+        .iconButtonContainer {
+          width: 55px;
+          height: 55px;
+          border: 2px solid white;
+
+          .insideIconButtonContainer {
+            width: 55px;
+            height: 55px;
+            margin-left: -12px;
+            margin-top: -10px;
+            background-color: black;
+            border: 2px solid white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease-in;
+            .iconButton {
+              cursor: pointer;
+              img {
+                transition: all 0.2s ease-in;
+                height: 50px;
+                width: 50px;
+
+                filter: invert(1);
+              }
+            }
+
+            &:hover {
+              background-color: white;
+
+              img {
+                filter: invert(0);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

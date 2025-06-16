@@ -7,8 +7,6 @@ const SubsrcibeComponent = () => {
   const [subscribeClicked, setSubscribeClicked] = useState(false);
   const handleSubscribeClicked = () => setSubscribeClicked(!subscribeClicked);
 
-  console.log(subscribeClicked);
-
   const subscribeInfo = (
     <div className="subInfoTextContainer">
       <span>

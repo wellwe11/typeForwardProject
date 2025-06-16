@@ -4,6 +4,7 @@ import { TabComponentProvider } from "./TABCOMPONENTPROVIDER";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import "./App.scss";
+import FooterComponent from "./COMPONENTS/FOOTER/FOOTER";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<HomeComponent />} />
           </Routes>
         </Router>
+        <FooterComponent />
       </TabComponentProvider>
     </div>
   );
