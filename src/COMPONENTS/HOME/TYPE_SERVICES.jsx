@@ -1,4 +1,5 @@
 import "./HOME.scss";
+import { Link } from "react-router-dom";
 
 import mobileServiceIcon from "../../resourceFolder_typeFoward/assets/images/mobile-type-services.svg";
 
@@ -34,11 +35,11 @@ const TypeServicesComponent = () => {
             <div className="insideImagePart">
               <div className="borderContainer">
                 <img src={mobileServiceIcon} alt="" />
-                <button className="learnMorebutton">
+                <Link className="learnMorebutton" to="./services">
                   <span>
                     <h2 className="buttonText">Learn more</h2>
                   </span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>

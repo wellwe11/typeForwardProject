@@ -7,7 +7,6 @@ import instagramIcon from "../../resourceFolder_typeFoward/assets/images/instagr
 
 const FooterComponent = () => {
   const todaysYear = new Date().getFullYear();
-  console.log(todaysYear);
 
   const navButtonNames = [
     "About",

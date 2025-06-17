@@ -7,11 +7,11 @@ import TypeServicesComponent from "./TYPE_SERVICES";
 import SubsrcibeComponent from "./SUBSCRIBE/SUBSCRIBE";
 
 const CurrentImageDotComp = ({ array, activeIndex, setActiveIndex }) => {
-  console.log(activeIndex);
   return (
     <div className="currentImageDotCompContainer">
       {array.map((font, index) => (
         <button
+          key={index}
           onClick={() => setActiveIndex(index)}
           className={`dot ${activeIndex === index ? "activeDot" : ""}`}
         >
@@ -117,9 +117,9 @@ const HomeComponent = () => {
 
 export default HomeComponent;
 
-// type services learn more direct to services page
 // email input needs to add warning if no email is entered
 // add button to email input
 // fix fonts to typefaces
 // navbar change color on scroll
 // add functionality to footer
+// reset page-view to top when switching pages

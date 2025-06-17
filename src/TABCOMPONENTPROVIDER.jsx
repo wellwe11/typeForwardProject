@@ -32,7 +32,6 @@ const getFileNames = (files) => {
     }
   });
 
-  console.log(fileFolders);
   return fileFolders;
 };
 
@@ -79,7 +78,7 @@ export const TabComponentProvider = ({ children }) => {
       // display on homepage
       typefaces: createSubRoutes(baseRoute("."), fontsNames),
       subscribe: { baseUrl: baseRoute() },
-      services: { baseUrl: baseRoute() },
+      services: { baseUrl: baseRoute("services") },
 
       // display on new pages
       trails: { baseUrl: baseRoute("trails") },

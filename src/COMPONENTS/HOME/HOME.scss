@@ -344,6 +344,10 @@
               transition: all 0.2s ease-out;
               border-top: 2px solid white;
 
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
               .buttonText {
                 font-weight: 400;
               }

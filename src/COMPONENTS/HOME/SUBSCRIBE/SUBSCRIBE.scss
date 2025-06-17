@@ -82,6 +82,20 @@
     margin-right: -2.5px;
     margin-bottom: -2.5px;
   }
+
+  .subBtnContainer {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+
+    height: 94%;
+
+    padding: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .subscribeContainer {
@@ -156,4 +170,8 @@
       }
     }
   }
+}
+
+.subscribeButtonContainer {
+  cursor: pointer;
 }

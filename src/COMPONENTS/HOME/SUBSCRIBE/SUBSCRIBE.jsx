@@ -1,36 +1,98 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./SUBSCRIBE.scss";
+
+const SubscribeButton = ({ canClick, type, handler }) => {
+  return (
+    <button className="subscribeButtonContainer" type={type} onClick={handler}>
+      <h1 style={{ color: canClick ? "black" : "gray" }}>→</h1>
+    </button>
+  );
+};
 
 const EmailInput = () => {
   const [inputHover, setInputHover] = useState(false);
+  const [submitMail, setSubmitMail] = useState(null);
+  const [emailInput, setEmailInput] = useState("");
   const handleInputHover = () => setInputHover(!inputHover);
+
+  const handleInput = (e) => {
+    e.preventDefault();
+    if (e && !emailInput.includes("@")) {
+      return setSubmitMail(false);
+    } else {
+      setSubmitMail(null);
+      setEmailInput("");
+    }
+  };
 
   return (
     <div className="inputContainer">
       <div
         className="inputSmallBox"
-        style={{ visibility: inputHover ? "visible" : "" }}
+        style={{
+          visibility: inputHover ? "visible" : "",
+          border:
+            submitMail === false || emailInput.includes("@")
+              ? "2px solid red"
+              : "",
+        }}
       ></div>
       <div
         className="inputSmallBox"
-        style={{ visibility: inputHover ? "visible" : "" }}
+        style={{
+          visibility: inputHover ? "visible" : "",
+          border:
+            submitMail === false || emailInput.includes("@")
+              ? "2px solid red"
+              : "",
+        }}
       ></div>
       <div
         className="inputSmallBox"
-        style={{ visibility: inputHover ? "visible" : "" }}
+        style={{
+          visibility: inputHover ? "visible" : "",
+          border:
+            submitMail === false || emailInput.includes("@")
+              ? "2px solid red"
+              : "",
+        }}
       ></div>
       <div
         className="inputSmallBox"
-        style={{ visibility: inputHover ? "visible" : "" }}
+        style={{
+          visibility: inputHover ? "visible" : "",
+          border:
+            submitMail === false || emailInput.includes("@")
+              ? "2px solid red"
+              : "",
+        }}
       ></div>
-      <input
-        type="email"
-        name="email"
-        className="input"
-        placeholder="Enter your email"
-        onFocus={handleInputHover}
-        onBlur={handleInputHover}
-      />
+      <form>
+        <input
+          type="email"
+          name="email"
+          className="input"
+          placeholder="Enter your email"
+          onFocus={handleInputHover}
+          onBlur={handleInputHover}
+          onChange={(e) => setEmailInput(e.target.value)}
+          value={emailInput}
+          style={{
+            border:
+              submitMail === false || emailInput.includes("@")
+                ? "2px solid red"
+                : "",
+          }}
+          onKeyDown={(e) => (e === "enter" ? handleInput(e) : "")}
+        />
+        <div className="subBtnContainer">
+          <SubscribeButton
+            type={"submit"}
+            handler={handleInput}
+            canClick={emailInput.includes("@") ? true : false}
+          />
+        </div>
+      </form>
     </div>
   );
 };
