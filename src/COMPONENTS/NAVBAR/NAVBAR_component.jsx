@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import "./NAVBAR.scss";
 import SvgLogo from "./svgLogo";
 
-const LogoButton = ({ navLinks }) => {
+const LogoButton = ({ navLinks, backgroundColor }) => {
   const [isHover, setIsHover] = useState(false);
 
   const handleIsHover = () => setIsHover(!isHover);
@@ -19,14 +19,14 @@ const LogoButton = ({ navLinks }) => {
       >
         <h1 className="logoTitle">type forward</h1>
         <div className="SVGContainer">
-          <SvgLogo isHover={isHover} />
+          <SvgLogo isHover={isHover} backgroundColor={backgroundColor} />
         </div>
       </Link>
     </div>
   );
 };
 
-const NavButtons = () => {
+const NavButtons = ({ backgroundColor }) => {
   const navLinks = useNavLinks();
   const linkKeys = Object.keys(navLinks);
 
@@ -38,7 +38,7 @@ const NavButtons = () => {
 
   return (
     <ul className="navBarUl">
-      <LogoButton navLinks={navLinks} />
+      <LogoButton navLinks={navLinks} backgroundColor={backgroundColor} />
       <div className="LinksContainer">
         {restItems.map((key, index) => (
           <div key={index} className="uniqueLinkContainer">
@@ -57,10 +57,18 @@ const NavButtons = () => {
   );
 };
 
-const NavBarComponent = ({}) => {
+const NavBarComponent = ({ backgroundColor }) => {
   return (
-    <div className="navBarContainer">
-      <NavButtons />
+    <div
+      className="navBarContainer"
+      style={{
+        backgroundColor: backgroundColor === "white" ? "black" : "white",
+        color: backgroundColor === "black" ? "black" : "white",
+        borderBottom:
+          backgroundColor === "black" ? "2px solid black" : "2px solid white",
+      }}
+    >
+      <NavButtons backgroundColor={backgroundColor} />
     </div>
   );
 };

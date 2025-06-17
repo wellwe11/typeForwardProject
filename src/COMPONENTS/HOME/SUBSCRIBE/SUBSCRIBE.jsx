@@ -171,13 +171,18 @@ const SubscribeInfo = () => {
   );
 };
 
-const SubsrcibeComponent = () => {
+const SubsrcibeComponent = ({ sectionRef }) => {
   return (
-    <section className="subscribeComponentSection">
-      <div className="subscribeComponentContainer">
-        <div className="innerWidthContainer">
-          <EnterEmailAndOrSub>Subscribe</EnterEmailAndOrSub>
-          <SubscribeInfo />
+    <section
+      className="sectionWhite"
+      ref={(el) => (sectionRef.current[3] = el)}
+    >
+      <div className="subscribeComponentSection">
+        <div className="subscribeComponentContainer">
+          <div className="innerWidthContainer">
+            <EnterEmailAndOrSub>Subscribe</EnterEmailAndOrSub>
+            <SubscribeInfo />
+          </div>
         </div>
       </div>
     </section>

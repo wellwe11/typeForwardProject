@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "./HOME.scss";
 import SubsrcibeComponent, { EnterEmailAndOrSub } from "./SUBSCRIBE/SUBSCRIBE";
 
-const TypeFaceComponent = ({ type }) => {
+const TypeFaceComponent = ({ type, handleDisplayForm }) => {
   const [fontUrl, setFontUrl] = useState(null);
 
   useEffect(() => {
@@ -53,9 +53,15 @@ const TypeFaceComponent = ({ type }) => {
       <h1 className="typeFaceName">{addSpaceBeforeCaps(type?.name)}</h1>
       <h3 className="typeFaceDescription">{fontInfo[type?.name]}</h3>
       <div className="fontAvaliableContainer">
-        <h4>Fonts: {type.count?.length}</h4>
+        <Link to={`./typefaces/${type?.name}`} className="fontInfoBtn">
+          <h3 className="fontInfo">{type.count?.length} FONTS</h3>
+          <div className="fontUnderline"></div>
+        </Link>
         {/* <h4>Free: {type?.free.length} </h4> */}
-        <h4>Free: 2</h4>
+        <button className="fontInfoBtn" onClick={handleDisplayForm}>
+          <h3 className="fontInfo">2 FREE</h3>
+          <div className="fontUnderline"></div>
+        </button>
       </div>
     </div>
   );
@@ -146,7 +152,7 @@ const DownloadForm = ({ type, displayForm, setDisplayForm, index }) => {
   );
 };
 
-const TypeComponent = () => {
+const TypeComponent = ({ sectionRef }) => {
   const [displayForm, setDisplayForm] = useState(null);
   const handleDisplayForm = (i) => setDisplayForm(i);
   const navLinks = useNavLinks();
@@ -166,31 +172,39 @@ const TypeComponent = () => {
   }, [displayForm]);
 
   return (
-    <section className="typeFaceSection">
-      <div className="typeFaceSectionTitle">
-        <h1>Typefaces</h1>
-      </div>
-      <div className="typeFaceSectionContainer">
-        {types.map((type, index) => (
-          <section className="typeFace" key={index}>
-            <DownloadForm
-              type={type}
-              displayForm={displayForm}
-              setDisplayForm={setDisplayForm}
-              index={index}
-            />
-            <div className="innerWidthContainer" key={index}>
-              <TypeFaceComponent type={type} />
-              <div className="buyDownloadButtonsContainer">
-                <TypeButtonExplore type={types[index].name} />
-                <TypeButtonDownload
-                  type={types[index].name}
+    <section
+      className="sectionWhite"
+      ref={(el) => (sectionRef.current[1] = el)}
+    >
+      <div className="typeFaceSection">
+        <div className="typeFaceSectionTitle">
+          <h1>Typefaces</h1>
+        </div>
+        <div className="typeFaceSectionContainer">
+          {types.map((type, index) => (
+            <section className="typeFace" key={index}>
+              <DownloadForm
+                type={type}
+                displayForm={displayForm}
+                setDisplayForm={setDisplayForm}
+                index={index}
+              />
+              <div className="innerWidthContainer" key={index}>
+                <TypeFaceComponent
+                  type={type}
                   handleDisplayForm={() => handleDisplayForm(index)}
                 />
+                <div className="buyDownloadButtonsContainer">
+                  <TypeButtonExplore type={types[index].name} />
+                  <TypeButtonDownload
+                    type={types[index].name}
+                    handleDisplayForm={() => handleDisplayForm(index)}
+                  />
+                </div>
               </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          ))}
+        </div>
       </div>
     </section>
   );

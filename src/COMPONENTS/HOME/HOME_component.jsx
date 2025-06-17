@@ -22,7 +22,7 @@ const CurrentImageDotComp = ({ array, activeIndex, setActiveIndex }) => {
   );
 };
 
-const ForwardWelcomeComponent = ({}) => {
+const ForwardWelcomeComponent = ({ sectionRef }) => {
   const navLinks = useNavLinks();
 
   const [activeFontIndex, setActiveFontIndex] = useState(2);
@@ -69,55 +69,59 @@ const ForwardWelcomeComponent = ({}) => {
   }, []);
 
   return (
-    <div
-      className="forwardWelcome"
-      onMouseMove={!fontButtonsHover ? handleMouseMove : null}
-      onClick={!fontButtonsHover ? changeFont : null}
+    <section
+      className="sectionBlack"
+      ref={(el) => (sectionRef.current[0] = el)}
     >
-      <div className="welcomeTextContainer">
-        <h1
-          ref={textRef}
-          className="welcomeText"
-          style={{
-            fontFamily: `${
-              !navLinks
-                ? "font-Forward"
-                : "font-" + flexibleFonts[activeFontIndex]
-            }, sans-serif`,
-          }}
-        >
-          forward
-        </h1>
-      </div>
       <div
-        className="dotContainer"
-        onMouseEnter={handleFontButtonsHover}
-        onMouseLeave={handleFontButtonsHover}
+        className="forwardWelcome"
+        onMouseMove={!fontButtonsHover ? handleMouseMove : null}
+        onClick={!fontButtonsHover ? changeFont : null}
       >
-        <CurrentImageDotComp
-          array={flexibleFonts}
-          activeIndex={activeFontIndex}
-          setActiveIndex={setActiveFontIndex}
-        />
+        <div className="welcomeTextContainer">
+          <h1
+            ref={textRef}
+            className="welcomeText"
+            style={{
+              fontFamily: `${
+                !navLinks
+                  ? "font-Forward"
+                  : "font-" + flexibleFonts[activeFontIndex]
+              }, sans-serif`,
+            }}
+          >
+            forward
+          </h1>
+        </div>
+        <div
+          className="dotContainer"
+          onMouseEnter={handleFontButtonsHover}
+          onMouseLeave={handleFontButtonsHover}
+        >
+          <CurrentImageDotComp
+            array={flexibleFonts}
+            activeIndex={activeFontIndex}
+            setActiveIndex={setActiveFontIndex}
+          />
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-const HomeComponent = () => {
+const HomeComponent = ({ sectionRef }) => {
   return (
     <div className="homeContainer">
-      <ForwardWelcomeComponent />
-      <TypeComponent />
-      <TypeServicesComponent />
-      <SubsrcibeComponent />
+      <ForwardWelcomeComponent sectionRef={sectionRef} />
+      <TypeComponent sectionRef={sectionRef} />
+      <TypeServicesComponent sectionRef={sectionRef} />
+      <SubsrcibeComponent sectionRef={sectionRef} />
     </div>
   );
 };
 
 export default HomeComponent;
 
-// fix fonts to typefaces
 // navbar change color on scroll
 // add functionality to footer
 // reset page-view to top when switching pages

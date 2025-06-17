@@ -1,3 +1,15 @@
+.sectionWhite {
+  background-color: #ffffff;
+  width: 100vw;
+}
+
+.sectionBlack {
+  background-color: #111111;
+  color: white;
+
+  min-width: 100vw;
+}
+
 .homeContainer {
   display: flex;
   flex-direction: column;
@@ -222,25 +234,46 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   width: 60%;
 
   .typeFaceName {
   }
 
   .typeFaceDescription {
-    font-family: sans-serif;
-    font-weight: 400;
+    font-family: "font-Gogh", sans-serif;
+    font-weight: 450;
     margin-left: 5px;
   }
 
   .fontAvaliableContainer {
     display: flex;
-    margin-left: 5px;
-    h4 {
-      margin-right: 10px;
-      font-family: sans-serif;
-      font-weight: 200;
+    .fontInfoBtn {
+      cursor: pointer;
+      .fontInfo {
+        width: 100%;
+
+        font-family: "font-Gogh", sans-serif;
+        font-weight: 450;
+        color: black;
+      }
+
+      .fontUnderline {
+        background-color: black;
+        height: 2px;
+        width: 0px;
+        transition: width 0.2s ease;
+      }
+
+      &:hover {
+        .fontUnderline {
+          width: 100%;
+        }
+      }
+    }
+
+    .fontInfoBtn:nth-of-type(1) {
+      margin-right: 15px;
+      margin-left: 5px;
     }
   }
 

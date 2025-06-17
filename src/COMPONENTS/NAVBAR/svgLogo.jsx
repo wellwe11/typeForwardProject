@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./NAVBAR.scss";
 
-const SvgLogo = ({ isHover }) => {
+const SvgLogo = ({ isHover, backgroundColor }) => {
+  console.log(backgroundColor);
   return (
     <div className="LogoSVG">
       <svg
@@ -11,13 +12,19 @@ const SvgLogo = ({ isHover }) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <g id="Frame 1" clipPath="url(#clip0_1_2)">
-          <g id="lightGroup">
+          <g
+            id="lightGroup"
+            style={{ fill: backgroundColor === "black" ? "black" : "white" }}
+          >
             <path
               id="lightOne"
               d="M48.0471 50.0943L7.5063 73.4062L7.58796 26.6409L48.0471 50.0943Z"
             />
           </g>
-          <g id="darkGroup">
+          <g
+            id="darkGroup"
+            style={{ fill: backgroundColor === "black" ? "black" : "white" }}
+          >
             <path
               id="darkOne"
               d="M89.0471 50.0942L48.5063 73.4062L48.5879 26.6409L89.0471 50.0942Z"
@@ -30,7 +37,7 @@ const SvgLogo = ({ isHover }) => {
         </g>
         <defs>
           <clipPath id="clip0_1_2">
-            <rect width="140" height="100" fill="white" />
+            <rect width="140" height="100" fill="black" />
           </clipPath>
         </defs>
       </svg>

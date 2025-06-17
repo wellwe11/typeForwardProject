@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import mobileServiceIcon from "../../resourceFolder_typeFoward/assets/images/mobile-type-services.svg";
 
-const TypeServicesComponent = () => {
+const TypeServicesComponent = ({ sectionRef }) => {
   const componentText = (
     <span className="componentText">
       <h3 className="bold">
@@ -23,23 +23,28 @@ const TypeServicesComponent = () => {
   );
 
   return (
-    <section className="serviceSection">
-      <div className="typeServicesContainer">
-        <div className="innerWidthContainer">
-          <div className="textPart">
-            <h1 className="serviceTitle">Type Services</h1>
-            <div className="brSpaceTwo" />
-            {componentText}
-          </div>
-          <div className="imagePart">
-            <div className="insideImagePart">
-              <div className="borderContainer">
-                <img src={mobileServiceIcon} alt="" />
-                <Link className="learnMorebutton" to="./services">
-                  <span>
-                    <h2 className="buttonText">Learn more</h2>
-                  </span>
-                </Link>
+    <section
+      className="sectionBlack"
+      ref={(el) => (sectionRef.current[2] = el)}
+    >
+      <div className="serviceSection">
+        <div className="typeServicesContainer">
+          <div className="innerWidthContainer">
+            <div className="textPart">
+              <h1 className="serviceTitle">Type Services</h1>
+              <div className="brSpaceTwo" />
+              {componentText}
+            </div>
+            <div className="imagePart">
+              <div className="insideImagePart">
+                <div className="borderContainer">
+                  <img src={mobileServiceIcon} alt="" />
+                  <Link className="learnMorebutton" to="./services">
+                    <span>
+                      <h2 className="buttonText">Learn more</h2>
+                    </span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

@@ -5,15 +5,47 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import "./App.scss";
 import FooterComponent from "./COMPONENTS/FOOTER/FOOTER";
+import { useEffect, useRef, useState } from "react";
 
 function App() {
+  const sectionRefs = useRef([]);
+  const [navbarColor, setNavColor] = useState("white");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries.find((entry) => entry.isIntersecting);
+        if (visibleEntry) {
+          const classList = visibleEntry.target.classList;
+          if (classList.contains("sectionBlack")) {
+            setNavColor("white");
+          } else {
+            setNavColor("black");
+          }
+        }
+      },
+      {
+        threshold: 0.17,
+      }
+    );
+
+    sectionRefs.current.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="appContainer">
       <TabComponentProvider>
         <Router>
-          <NavBarComponent />
+          <NavBarComponent backgroundColor={navbarColor} />
           <Routes>
-            <Route path="/" element={<HomeComponent />} />
+            <Route
+              path="/"
+              element={<HomeComponent sectionRef={sectionRefs} />}
+            />
           </Routes>
         </Router>
         <FooterComponent />
