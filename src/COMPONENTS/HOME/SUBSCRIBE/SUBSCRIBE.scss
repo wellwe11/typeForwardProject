@@ -48,7 +48,7 @@
   }
 
   .inputSmallBox {
-    transition: all 0.2s ease-in-out;
+    transition: visibility 0.2s ease-in-out;
     visibility: hidden;
     position: absolute;
 
@@ -85,7 +85,7 @@
 }
 
 .subscribeContainer {
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   justify-content: center;
 
@@ -94,6 +94,7 @@
     margin-right: 10px;
     border: 2px solid black;
     height: 20px;
+    min-width: 20px;
     width: 20px;
 
     display: flex;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
 import fontInfo from "./FONTINFO";
 import { Link } from "react-router-dom";
@@ -74,14 +74,14 @@ const TypeButtonExplore = ({ type }) => {
   );
 };
 
-const TypeButtonDownload = ({ type }) => {
+const TypeButtonDownload = ({ type, handleDisplayForm }) => {
   // download takes you to form that includes:
   // "Get *amount of free fonts*, enter email"
   // email field
   // yes i would like to receive emails from typeforward
   return (
     <div className="typeButtonDownloadContainer">
-      <button>
+      <button onClick={handleDisplayForm}>
         <span>
           <h3 className="buttonFont">{"Download"}</h3>
         </span>
@@ -90,23 +90,56 @@ const TypeButtonDownload = ({ type }) => {
   );
 };
 
-const DownloadForm = ({ type }) => {
-  return (
-    <div>
-      <div>X</div>
-      <div>
-        <div>
-          <h1>Get 2 free fonts</h1>
-        </div>
+const DownloadForm = ({ type, displayForm, setDisplayForm, index }) => {
+  const formRef = useRef();
 
-        <div>
-          <h4>
-            Enter your e-mail to get "typeOne" and "typeTwo" free desktop and
-            web fonts with license to use as you wish.
-          </h4>
-        </div>
-        <div>
-          <EnterEmailAndOrSub />
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (displayForm !== index) return;
+
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        setDisplayForm(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [displayForm, index, setDisplayForm]);
+
+  return (
+    <div
+      className="downloadFormContainer"
+      style={{
+        visibility: displayForm === index ? "visible" : "hidden",
+        opacity: displayForm === index ? "1" : "0",
+      }}
+    >
+      <div
+        className="formIsVisible"
+        style={{
+          opacity: displayForm === index ? "1" : "0",
+        }}
+      ></div>
+      <div className="outContainerStyle">
+        <div className="innerContainer" ref={formRef}>
+          <div className="closeContainer">
+            <button onClick={() => setDisplayForm(null)}>X</button>
+          </div>
+          <div className="contentContainer">
+            <div className="titleContainer">
+              <h1 className="title">Get 2 free fonts</h1>
+            </div>
+            <div className="subinfoContainer">
+              <h4 className="subinfo">
+                {`Enter your e-mail to get ${type?.name} and ${type?.name} free desktop and
+              web fonts with license to use as you wish.`}
+              </h4>
+            </div>
+            <div className="enterEmailContainer">
+              <EnterEmailAndOrSub />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -114,24 +147,46 @@ const DownloadForm = ({ type }) => {
 };
 
 const TypeComponent = () => {
+  const [displayForm, setDisplayForm] = useState(null);
+  const handleDisplayForm = (i) => setDisplayForm(i);
   const navLinks = useNavLinks();
 
   const types = navLinks?.typefaces?.links || [];
 
+  useEffect(() => {
+    if (displayForm !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [displayForm]);
+
   return (
     <section className="typeFaceSection">
-      <DownloadForm />
       <div className="typeFaceSectionTitle">
         <h1>Typefaces</h1>
       </div>
       <div className="typeFaceSectionContainer">
         {types.map((type, index) => (
-          <section className="typeFace">
+          <section className="typeFace" key={index}>
+            <DownloadForm
+              type={type}
+              displayForm={displayForm}
+              setDisplayForm={setDisplayForm}
+              index={index}
+            />
             <div className="innerWidthContainer" key={index}>
               <TypeFaceComponent type={type} />
               <div className="buyDownloadButtonsContainer">
                 <TypeButtonExplore type={types[index].name} />
-                <TypeButtonDownload type={types[index].name} />
+                <TypeButtonDownload
+                  type={types[index].name}
+                  handleDisplayForm={() => handleDisplayForm(index)}
+                />
               </div>
             </div>
           </section>
