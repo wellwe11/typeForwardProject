@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
 
 import "./HOME.scss";
@@ -120,4 +120,4 @@ const HomeComponent = ({ sectionRef }) => {
   );
 };
 
-export default HomeComponent;
+export default memo(HomeComponent);

@@ -1,5 +1,6 @@
 import "./HOME.scss";
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
 import mobileServiceIcon from "../../resourceFolder_typeFoward/assets/images/mobile-type-services.svg";
 
@@ -54,4 +55,4 @@ const TypeServicesComponent = ({ sectionRef }) => {
   );
 };
 
-export default TypeServicesComponent;
+export default memo(TypeServicesComponent);

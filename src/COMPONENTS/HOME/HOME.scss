@@ -73,7 +73,7 @@
 
   .dot {
     cursor: pointer;
-    border-radius: 90px;
+    border-radius: 1px;
     margin: 3.5px;
     transition: all 0.2s ease;
     background-color: white;
@@ -91,7 +91,7 @@
       margin: 2.5px;
       .innerDot {
         height: 10px;
-        width: 12px;
+        width: 13px;
       }
     }
   }
@@ -113,7 +113,7 @@
     height: 10px;
     width: 10px;
 
-    border-radius: 90px;
+    border-radius: 2px;
   }
 }
 

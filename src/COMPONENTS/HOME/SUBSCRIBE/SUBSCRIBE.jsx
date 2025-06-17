@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import "./SUBSCRIBE.scss";
 
 const SubscribeButton = ({ canClick, type, handler }) => {
@@ -189,4 +189,4 @@ const SubsrcibeComponent = ({ sectionRef }) => {
   );
 };
 
-export default SubsrcibeComponent;
+export default memo(SubsrcibeComponent);
