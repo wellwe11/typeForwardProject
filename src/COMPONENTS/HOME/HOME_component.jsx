@@ -4,7 +4,7 @@ import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
 import "./HOME.scss";
 import TypeComponent from "./TYPEFACE";
 import TypeServicesComponent from "./TYPE_SERVICES";
-import SubsrcibeComponent from "./SUBSCRIBE";
+import SubsrcibeComponent from "./SUBSCRIBE/SUBSCRIBE";
 
 const ForwardWelcomeComponent = ({}) => {
   const navLinks = useNavLinks();
@@ -87,3 +87,12 @@ const HomeComponent = () => {
 };
 
 export default HomeComponent;
+
+// add form to download button
+// type services learn more direct to services page
+// email input needs to add warning if no email is entered
+// add button to email input
+// fix fonts to typefaces
+// navbar change color on scroll
+// add functionality to footer
+// fix small scares to only work on hovering input for subscribe

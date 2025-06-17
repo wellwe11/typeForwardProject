@@ -4,6 +4,7 @@ import fontInfo from "./FONTINFO";
 import { Link } from "react-router-dom";
 
 import "./HOME.scss";
+import SubsrcibeComponent, { EnterEmailAndOrSub } from "./SUBSCRIBE/SUBSCRIBE";
 
 const TypeFaceComponent = ({ type }) => {
   const [fontUrl, setFontUrl] = useState(null);
@@ -89,6 +90,29 @@ const TypeButtonDownload = ({ type }) => {
   );
 };
 
+const DownloadForm = ({ type }) => {
+  return (
+    <div>
+      <div>X</div>
+      <div>
+        <div>
+          <h1>Get 2 free fonts</h1>
+        </div>
+
+        <div>
+          <h4>
+            Enter your e-mail to get "typeOne" and "typeTwo" free desktop and
+            web fonts with license to use as you wish.
+          </h4>
+        </div>
+        <div>
+          <EnterEmailAndOrSub />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const TypeComponent = () => {
   const navLinks = useNavLinks();
 
@@ -96,6 +120,7 @@ const TypeComponent = () => {
 
   return (
     <section className="typeFaceSection">
+      <DownloadForm />
       <div className="typeFaceSectionTitle">
         <h1>Typefaces</h1>
       </div>
