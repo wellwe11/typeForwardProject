@@ -14,13 +14,15 @@
   margin-top: 90px;
   background-color: black;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 
   width: 100%;
-  cursor: pointer;
+  height: 665px;
 
   .welcomeTextContainer {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,10 +31,78 @@
       display: flex;
       transition: all 0.2s ease;
       font-size: 300px;
-      padding: 110px;
 
       user-select: none;
+
+      padding: 0;
+      margin: 0;
     }
+  }
+  .dotContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+
+    padding: 20px;
+
+    cursor: pointer;
+  }
+}
+
+.currentImageDotCompContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+
+  border-radius: 17px;
+  cursor: pointer;
+
+  .dot {
+    cursor: pointer;
+    border-radius: 90px;
+    margin: 3.5px;
+    transition: all 0.2s ease;
+    background-color: white;
+    height: 20px;
+    width: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      height: 20px;
+      width: 22px;
+
+      margin: 2.5px;
+      .innerDot {
+        height: 10px;
+        width: 12px;
+      }
+    }
+  }
+
+  .activeDot {
+    height: 20px !important;
+    width: 30px !important;
+    margin: 3.5px !important;
+
+    .innerDot {
+      height: 10px !important;
+      width: 15px !important;
+    }
+  }
+
+  .innerDot {
+    transition: all 0.2s ease;
+    background-color: black;
+    border: 1px solid white;
+    height: 10px;
+    width: 10px;
+
+    border-radius: 90px;
   }
 }
 
@@ -368,6 +438,7 @@
   align-items: center;
 
   width: 550px;
+
   height: 550px;
 
   position: fixed;
@@ -377,6 +448,11 @@
 
   z-index: 3;
   transition: all 0.3s ease;
+
+  @media screen and (max-width: 800px) {
+    width: 400px;
+    right: 50px;
+  }
 
   .formIsVisible {
     transition: opacity 0.5s ease;

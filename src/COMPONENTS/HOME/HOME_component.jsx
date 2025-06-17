@@ -6,11 +6,29 @@ import TypeComponent from "./TYPEFACE";
 import TypeServicesComponent from "./TYPE_SERVICES";
 import SubsrcibeComponent from "./SUBSCRIBE/SUBSCRIBE";
 
+const CurrentImageDotComp = ({ array, activeIndex, setActiveIndex }) => {
+  console.log(activeIndex);
+  return (
+    <div className="currentImageDotCompContainer">
+      {array.map((font, index) => (
+        <button
+          onClick={() => setActiveIndex(index)}
+          className={`dot ${activeIndex === index ? "activeDot" : ""}`}
+        >
+          <div className="innerDot"></div>
+        </button>
+      ))}
+    </div>
+  );
+};
+
 const ForwardWelcomeComponent = ({}) => {
   const navLinks = useNavLinks();
 
   const [activeFontIndex, setActiveFontIndex] = useState(2);
   const flexibleFonts = ["Oddval", "EmOne", "Gogh"];
+  const [fontButtonsHover, setFontButtonsHover] = useState(false);
+  const handleFontButtonsHover = () => setFontButtonsHover(!fontButtonsHover);
 
   // click container to change font
   // will need to update in future if API-structure changes (since actual font-names include spaces)
@@ -53,8 +71,8 @@ const ForwardWelcomeComponent = ({}) => {
   return (
     <div
       className="forwardWelcome"
-      onMouseMove={handleMouseMove}
-      onClick={changeFont}
+      onMouseMove={!fontButtonsHover ? handleMouseMove : null}
+      onClick={!fontButtonsHover ? changeFont : null}
     >
       <div className="welcomeTextContainer">
         <h1
@@ -70,6 +88,17 @@ const ForwardWelcomeComponent = ({}) => {
         >
           forward
         </h1>
+      </div>
+      <div
+        className="dotContainer"
+        onMouseEnter={handleFontButtonsHover}
+        onMouseLeave={handleFontButtonsHover}
+      >
+        <CurrentImageDotComp
+          array={flexibleFonts}
+          activeIndex={activeFontIndex}
+          setActiveIndex={setActiveFontIndex}
+        />
       </div>
     </div>
   );
@@ -88,11 +117,9 @@ const HomeComponent = () => {
 
 export default HomeComponent;
 
-// add form to download button
 // type services learn more direct to services page
 // email input needs to add warning if no email is entered
 // add button to email input
 // fix fonts to typefaces
 // navbar change color on scroll
 // add functionality to footer
-// fix small scares to only work on hovering input for subscribe
