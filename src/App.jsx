@@ -2,10 +2,23 @@ import HomeComponent from "./COMPONENTS/HOME/HOME_component";
 import NavBarComponent from "./COMPONENTS/NAVBAR/NAVBAR_component";
 import { TabComponentProvider } from "./TABCOMPONENTPROVIDER";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import "./App.scss";
 import FooterComponent from "./COMPONENTS/FOOTER/FOOTER";
 import { useEffect, useRef, useState } from "react";
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, [pathname]);
+
+  return null;
+};
 
 function App() {
   const sectionRefs = useRef([]);
@@ -40,6 +53,7 @@ function App() {
     <div className="appContainer">
       <TabComponentProvider>
         <Router>
+          <ScrollToTop />
           <NavBarComponent backgroundColor={navbarColor} />
           <Routes>
             <Route
@@ -47,8 +61,8 @@ function App() {
               element={<HomeComponent sectionRef={sectionRefs} />}
             />
           </Routes>
+          <FooterComponent />
         </Router>
-        <FooterComponent />
       </TabComponentProvider>
     </div>
   );

@@ -81,12 +81,13 @@ export const TabComponentProvider = ({ children }) => {
       services: { baseUrl: baseRoute("services") },
 
       // display on new pages
-      trails: { baseUrl: baseRoute("trails") },
+      "trail fonts": { baseUrl: baseRoute("trail_fonts") },
       about: { baseUrl: baseRoute("about") },
       blog: { baseUrl: baseRoute("blog") },
     }),
     [fontsNames]
   );
+
   return (
     <NavLinksContext.Provider value={navLinks}>
       {children}

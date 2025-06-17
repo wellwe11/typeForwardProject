@@ -121,7 +121,3 @@ const HomeComponent = ({ sectionRef }) => {
 };
 
 export default HomeComponent;
-
-// navbar change color on scroll
-// add functionality to footer
-// reset page-view to top when switching pages

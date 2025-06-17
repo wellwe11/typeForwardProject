@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./NAVBAR.scss";
 import SvgLogo from "./svgLogo";
@@ -27,6 +27,8 @@ const LogoButton = ({ navLinks, backgroundColor }) => {
 };
 
 const NavButtons = ({ backgroundColor }) => {
+  const [activeTab, setActiveTab] = useState("");
+  const location = useLocation();
   const navLinks = useNavLinks();
   const linkKeys = Object.keys(navLinks);
 
@@ -36,6 +38,10 @@ const NavButtons = ({ backgroundColor }) => {
   const firstLetterCapital = (string) =>
     string.charAt(0).toUpperCase() + string.slice(1);
 
+  useEffect(() => {
+    setActiveTab(location?.pathname.replace("/", ""));
+  }, [location]);
+
   return (
     <ul className="navBarUl">
       <LogoButton navLinks={navLinks} backgroundColor={backgroundColor} />
@@ -44,7 +50,15 @@ const NavButtons = ({ backgroundColor }) => {
           <div key={index} className="uniqueLinkContainer">
             <Link to={navLinks[key].baseUrl}>
               <span className="keyTextSpan">
-                <h2 className="keyText">{firstLetterCapital(key)}</h2>
+                <h2
+                  className="keyText"
+                  style={{
+                    fontVariationSettings:
+                      key === activeTab ? "'wght' 820" : "",
+                  }}
+                >
+                  {firstLetterCapital(key)}
+                </h2>
               </span>
               <span className="keyTextSpanHidden">
                 <h2>{key}</h2>

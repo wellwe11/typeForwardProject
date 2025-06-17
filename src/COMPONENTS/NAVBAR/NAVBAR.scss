@@ -99,9 +99,8 @@
     .uniqueLinkContainer {
       cursor: pointer;
       position: relative;
-      height: 100%;
 
-      padding: 20px;
+      padding: 15px;
 
       .keyTextSpan {
         position: absolute;
@@ -113,6 +112,7 @@
         transition: font-variation-settings 0.3s ease;
 
         .keyText {
+          white-space: nowrap;
         }
       }
 
