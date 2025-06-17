@@ -32,7 +32,9 @@ const EmailInput = () => {
         style={{
           visibility: inputHover ? "visible" : "",
           border:
-            submitMail === false || emailInput.includes("@")
+            submitMail === false &&
+            emailInput.length > 1 &&
+            !emailInput.includes("@")
               ? "2px solid red"
               : "",
         }}
@@ -42,7 +44,9 @@ const EmailInput = () => {
         style={{
           visibility: inputHover ? "visible" : "",
           border:
-            submitMail === false || emailInput.includes("@")
+            submitMail === false &&
+            emailInput.length > 1 &&
+            !emailInput.includes("@")
               ? "2px solid red"
               : "",
         }}
@@ -52,7 +56,9 @@ const EmailInput = () => {
         style={{
           visibility: inputHover ? "visible" : "",
           border:
-            submitMail === false || emailInput.includes("@")
+            submitMail === false &&
+            emailInput.length > 1 &&
+            !emailInput.includes("@")
               ? "2px solid red"
               : "",
         }}
@@ -62,7 +68,9 @@ const EmailInput = () => {
         style={{
           visibility: inputHover ? "visible" : "",
           border:
-            submitMail === false || emailInput.includes("@")
+            submitMail === false &&
+            emailInput.length > 1 &&
+            !emailInput.includes("@")
               ? "2px solid red"
               : "",
         }}
@@ -79,7 +87,9 @@ const EmailInput = () => {
           value={emailInput}
           style={{
             border:
-              submitMail === false || emailInput.includes("@")
+              submitMail === false &&
+              emailInput.length > 1 &&
+              !emailInput.includes("@")
                 ? "2px solid red"
                 : "",
           }}

@@ -117,8 +117,6 @@ const HomeComponent = () => {
 
 export default HomeComponent;
 
-// email input needs to add warning if no email is entered
-// add button to email input
 // fix fonts to typefaces
 // navbar change color on scroll
 // add functionality to footer
