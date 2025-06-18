@@ -6,15 +6,9 @@ import dribblbleIcon from "../../resourceFolder_typeFoward/assets/images/dribbbl
 import myFontsIcon from "../../resourceFolder_typeFoward/assets/images/myfonts.min.svg";
 import behanceIcon from "../../resourceFolder_typeFoward/assets/images/behance.min.svg";
 import instagramIcon from "../../resourceFolder_typeFoward/assets/images/instagram.min.svg";
-import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
 
 const FooterComponent = () => {
   const todaysYear = new Date().getFullYear();
-
-  const navLinks = useNavLinks();
-  const linkKeys = Object.keys(navLinks);
-
-  console.log(navLinks);
 
   const navButtonNames = {
     About: "about",

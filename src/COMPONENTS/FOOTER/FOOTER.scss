@@ -21,6 +21,23 @@
 
       width: var(--inlineContentWidth);
 
+      @media screen and (max-width: 800px) {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .rightReserved {
+          order: 2;
+          margin-top: 50px;
+        }
+
+        .linksContainer {
+          order: 1;
+        }
+
+        .linkImagesContainer {
+        }
+      }
+
       .rightReserved {
         .rightReservedText {
           font-weight: 450;
@@ -77,6 +94,7 @@
 
       .linkImagesContainer {
         width: 100%;
+        min-width: 300px;
         display: flex;
         justify-content: space-between;
         padding-top: 50px;
