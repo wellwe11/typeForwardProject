@@ -5,6 +5,17 @@ import React, { useEffect, useState } from "react";
 import "./NAVBAR.scss";
 import SvgLogo from "./svgLogo";
 
+const ToggleMenuButton = ({ showButtons, setShowButtons }) => {
+  const handleShowButtons = () => setShowButtons(!showButtons);
+  return (
+    <div className="toggleMenuButton">
+      <button className="viewMenuButtons" onClick={handleShowButtons}>
+        <h1>{showButtons ? "X" : "+"}</h1>
+      </button>
+    </div>
+  );
+};
+
 const LogoButton = ({ navLinks, backgroundColor }) => {
   const [isHover, setIsHover] = useState(false);
 
@@ -27,12 +38,23 @@ const LogoButton = ({ navLinks, backgroundColor }) => {
 };
 
 const NavButtons = ({ backgroundColor }) => {
+  const [showButtons, setShowButtons] = useState(false);
   const [activeTab, setActiveTab] = useState("");
   const location = useLocation();
   const navLinks = useNavLinks();
   const linkKeys = Object.keys(navLinks);
 
   const restItems = linkKeys.slice(1, linkKeys.length);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowButtons(window.innerWidth >= 800 ? false : "");
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // So each button-text is displayed with capital letter at start as the nexted objects are all small lettered
   const firstLetterCapital = (string) =>
@@ -46,8 +68,16 @@ const NavButtons = ({ backgroundColor }) => {
     <ul className="navBarUl">
       <LogoButton navLinks={navLinks} backgroundColor={backgroundColor} />
       <div className="LinksContainer">
+        <ToggleMenuButton
+          showButtons={showButtons}
+          setShowButtons={setShowButtons}
+        />
         {restItems.map((key, index) => (
-          <div key={index} className="uniqueLinkContainer">
+          <div
+            key={index}
+            className="uniqueLinkContainer"
+            style={{ display: showButtons ? "flex" : "" }}
+          >
             <Link to={navLinks[key].baseUrl}>
               <span className="keyTextSpan">
                 <h2

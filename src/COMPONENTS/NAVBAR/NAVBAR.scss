@@ -128,10 +128,12 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .LogoSVG {
-    svg {
-      width: 40px !important;
-      height: 80px !important;
+  .navBarUl {
+    .LogoSVG {
+      svg {
+        width: 40px !important;
+        height: 80px !important;
+      }
     }
   }
 
@@ -147,13 +149,45 @@
 }
 
 @media screen and (max-width: 800px) {
-  .LogoContainer {
-    .SVGContainer {
-      position: absolute;
-      top: 0;
-      left: 0;
+  .navBarUl {
+    flex-direction: column;
 
-      transform: translate(130%, -11%);
+    .LinksContainer {
+      .uniqueLinkContainer {
+        display: none;
+      }
     }
+
+    .LogoContainer {
+      width: 100px;
+      margin-left: 20px;
+      height: 90px;
+      .SVGContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        transform: translate(130%, -11%);
+      }
+    }
+
+    .LinksContainer {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+
+  .toggleMenuButton {
+    visibility: visible !important;
+  }
+}
+
+.toggleMenuButton {
+  visibility: hidden;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+
+  .viewMenuButtons {
   }
 }
