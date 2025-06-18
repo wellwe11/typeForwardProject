@@ -68,12 +68,11 @@
   align-items: center;
   width: 100%;
 
-  border-radius: 17px;
   cursor: pointer;
 
   .dot {
     cursor: pointer;
-    border-radius: 1px;
+    border-radius: 90px;
     margin: 3.5px;
     transition: all 0.2s ease;
     background-color: white;
@@ -91,7 +90,7 @@
       margin: 2.5px;
       .innerDot {
         height: 10px;
-        width: 13px;
+        width: 12px;
       }
     }
   }
@@ -113,7 +112,7 @@
     height: 10px;
     width: 10px;
 
-    border-radius: 2px;
+    border-radius: 90px;
   }
 }
 
@@ -135,10 +134,15 @@
   .typeFaceSectionTitle {
     max-width: var(--InlineWidth);
 
-    width: 90%;
+    width: 100%;
+
     h1 {
-      font-family: sans-serif;
+      font-family: "font-Gogh", sans-serif;
       font-weight: 400;
+    }
+
+    @media screen and (max-width: 700px) {
+      width: 70%;
     }
   }
 
@@ -159,12 +163,23 @@
 
       position: relative;
 
+      @media screen and (max-width: 700px) {
+        width: 70%;
+        justify-content: flex-start;
+      }
+
       .innerWidthContainer {
         padding-top: 50px;
         padding-bottom: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        @media screen and (max-width: 700px) {
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+        }
 
         width: var(--inlineContentWidth);
 
@@ -176,6 +191,15 @@
           align-items: center;
 
           width: 30%;
+
+          @media screen and (max-width: 700px) {
+            flex-direction: column;
+            margin-left: 15px;
+
+            align-items: flex-start;
+
+            height: 160px;
+          }
 
           .typeButtonBuyContainer {
           }
@@ -235,6 +259,12 @@
   justify-content: center;
   width: 60%;
 
+  @media screen and (max-width: 700px) {
+    width: 70%;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
   .typeFaceName {
   }
 
@@ -291,13 +321,20 @@
       line-height: 90px;
     }
   }
+
+  @media screen and (max-width: 400px) {
+    .typeFaceName {
+      font-size: 50px;
+      line-height: 60px;
+    }
+  }
 }
 
 .serviceSection {
   background-color: black;
   width: 100%;
 
-  height: 1000px;
+  max-height: 1000px;
 
   display: flex;
   flex-direction: column;
@@ -319,6 +356,8 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
+
+      max-height: 100%;
 
       .serviceTitle {
       }
@@ -363,15 +402,19 @@
 
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: space-evenly;
             align-items: center;
+
             img {
               filter: invert(1);
+              width: 80%;
             }
 
             .learnMorebutton {
+              position: absolute;
+              bottom: 0;
               cursor: pointer;
-              height: 22%;
+              height: 18%;
               width: 100%;
               transition: all 0.2s ease-out;
               border-top: 2px solid white;
@@ -395,6 +438,54 @@
             button {
               background-color: white;
               color: black;
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      .innerWidthContainer {
+        flex-direction: column;
+        align-items: center;
+
+        .textPart {
+          order: 1;
+        }
+
+        .imagePart {
+          order: 2;
+          margin-bottom: 20px;
+          height: 150px;
+
+          .borderContainer {
+            justify-content: center !important;
+
+            img {
+              width: 50% !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .innerWidthContainer {
+      .imagePart {
+        margin-top: 50px;
+        height: 70px !important;
+        width: 100%;
+
+        .insideImagePart {
+          border: none;
+          .borderContainer {
+            img {
+              display: none;
+            }
+
+            .learnMorebutton {
+              border: none;
             }
           }
         }
@@ -462,6 +553,12 @@
 
       .insideImagePart {
         margin-top: 30px;
+
+        .borderContainer {
+          img {
+            margin-top: -60px;
+          }
+        }
       }
     }
   }
@@ -475,7 +572,7 @@
 
   width: 550px;
 
-  height: 550px;
+  height: 70vh;
 
   position: fixed;
 
@@ -563,7 +660,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        height: 500px;
+        height: 60vh;
+        min-width: 400px;
         padding-left: 50px;
         padding-right: 70px;
         padding-bottom: 70px;

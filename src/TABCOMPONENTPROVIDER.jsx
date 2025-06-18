@@ -75,14 +75,12 @@ export const TabComponentProvider = ({ children }) => {
   const navLinks = useMemo(
     () => ({
       home: { baseUrl: baseRoute() },
-      // display on homepage
-      typefaces: createSubRoutes(baseRoute("."), fontsNames),
-      subscribe: { baseUrl: baseRoute() },
-      services: { baseUrl: baseRoute("services") },
 
-      // display on new pages
+      typefaces: createSubRoutes(baseRoute("."), fontsNames), // goes to home page > typefaces section
+      services: { baseUrl: baseRoute("services") },
       "trail fonts": { baseUrl: baseRoute("trail_fonts") },
-      about: { baseUrl: baseRoute("about") },
+      "about us": { baseUrl: baseRoute("about_us") },
+      subscribe: { baseUrl: baseRoute() }, // goes to subscribe on whatever page you are at
       blog: { baseUrl: baseRoute("blog") },
     }),
     [fontsNames]

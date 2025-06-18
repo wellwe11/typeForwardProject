@@ -177,10 +177,10 @@ const TypeComponent = ({ sectionRef }) => {
       ref={(el) => (sectionRef.current[1] = el)}
     >
       <div className="typeFaceSection">
-        <div className="typeFaceSectionTitle">
-          <h1>Typefaces</h1>
-        </div>
         <div className="typeFaceSectionContainer">
+          <div className="typeFaceSectionTitle">
+            <h1>Typefaces</h1>
+          </div>
           {types.map((type, index) => (
             <section className="typeFace" key={index}>
               <DownloadForm
