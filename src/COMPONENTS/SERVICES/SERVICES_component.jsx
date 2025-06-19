@@ -28,6 +28,39 @@ const TypeServices = ({ sections }) => {
               </div>
             ))}
           </div>
+          <div className="typeServiceText">
+            <div className="typeServiceTextOne">
+              <span>
+                <h3 className="bold">
+                  Whether it’s one of our finely-tuned creations, a custom-built
+                  font, tailor-made lettering or an exclusive logotype, your
+                  brand deserves a competitive edge. So why wait?
+                </h3>
+                <br />
+                <h3 className="thin">
+                  At Type Forward, we believe in the power of individuality and
+                  strive to offer a full range of services that will serve
+                  everyone, from newly-minted startups to veteran players.
+                  Choose from our library of meticulously crafted fonts or get
+                  in touch for a custom-built product explicitly designed for
+                  your requirements. Rejuvenate your visual identity with a
+                  brand new logotype, or get in touch to learn more about our
+                  numerous licensing options. No matter the project, we are here
+                  to help bring your business to a higher standard.
+                </h3>
+              </span>
+            </div>
+            <div className="typeServiceTextTwo">
+              <span>
+                <h3 className="thin">
+                  Have a question? Feel free to email us at
+                </h3>
+                <button className="mailButton">
+                  <h3 className="bold">contact@typeforward.com</h3>
+                </button>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
