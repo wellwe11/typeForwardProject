@@ -3,6 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .borderDiv {
+    width: var(--InlineWidth);
+    height: 2px;
+    background-color: black;
+  }
 }
 
 .bold {
@@ -11,6 +17,9 @@
 
 .thin {
   font-weight: 400;
+}
+
+.sectionsSection {
 }
 
 .sectionsContainer {
@@ -35,6 +44,8 @@
       }
 
       .sectionWrapper {
+        margin-top: 100px;
+        margin-bottom: 100px;
         width: var(--inlineContentWidth);
         padding: 20px;
         display: flex;
@@ -55,7 +66,8 @@
         }
 
         .imageContainer {
-          width: 30%;
+          width: 300px;
+          height: 400px;
         }
       }
     }
@@ -119,7 +131,7 @@
           background-color: black;
 
           height: 250px;
-          width: 200px;
+          width: 170px;
         }
       }
 

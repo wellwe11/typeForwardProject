@@ -1,4 +1,5 @@
 import "./abstract.scss";
+import { Link } from "react-router-dom";
 
 const BorderWithBorderBox = ({
   children,
@@ -6,12 +7,14 @@ const BorderWithBorderBox = ({
   backgroundColor = "black",
   button,
   event,
-  Link,
+  showLink,
   linkTo,
   alt,
-  textSize = "h2",
+  textSize,
 }) => {
   const TextTag = textSize;
+
+  console.log(TextTag);
   const bgColor = backgroundColor;
   const textColor = bgColor === "black" ? "white" : "black";
   const borderColor =
@@ -25,7 +28,7 @@ const BorderWithBorderBox = ({
         "--text-color": textColor,
       }}
     >
-      <div className="borderOutside"></div>
+      <div className="borderOutside" style={{ border: borderColor }}></div>
       <div
         className="borderContainer"
         style={{
@@ -58,9 +61,9 @@ const BorderWithBorderBox = ({
             </span>
           </button>
         )}
-        {Link && (
+        {showLink && (
           <Link
-            className="learnMorebutton"
+            className="button"
             to={`./${linkTo}`}
             style={{
               borderTop: borderColor,

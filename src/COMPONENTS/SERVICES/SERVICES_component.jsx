@@ -23,7 +23,7 @@ const TypeServices = ({ sections }) => {
                   button={true}
                   event={""}
                   backgroundColor="black"
-                  textSize="h2"
+                  textSize="h3"
                 >
                   {entry[0]}
                 </BorderWithBorderBox>
@@ -70,7 +70,6 @@ const TypeServices = ({ sections }) => {
 };
 
 const Sections = ({ sections }) => {
-  const sectionsObject = Object.keys(sections);
   const sectionEntries = Object.entries(sections);
   console.log(sectionEntries);
   return (
@@ -93,7 +92,7 @@ const Sections = ({ sections }) => {
                   backgroundColor="white"
                   textSize="h2"
                 >
-                  {section[0]}
+                  {"Get in touch"}
                 </BorderWithBorderBox>
               </aside>
             </div>
@@ -194,7 +193,7 @@ const SectionComponent = ({ sectionRef }) => {
   };
 
   return (
-    <div>
+    <div className="sectionsSection">
       <section
         className="sectionBlack"
         ref={(el) => (sectionRef.current[5] = el)}
@@ -215,6 +214,7 @@ const ServicesComponent = ({ sectionRef }) => {
   return (
     <div className="servicesComponentContainer">
       <SectionComponent sectionRef={sectionRef} />
+      <div className="borderDiv"></div>
       <SubscribeComponent sectionRef={sectionRef} />
     </div>
   );

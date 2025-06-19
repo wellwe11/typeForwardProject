@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { memo } from "react";
 
 import mobileServiceIcon from "../../resourceFolder_typeFoward/assets/images/mobile-type-services.svg";
+import BorderWithBorderBox from "../abstract_components/borderWithBorder";
 
 const TypeServicesComponent = ({ sectionRef }) => {
   const componentText = (
@@ -37,16 +38,15 @@ const TypeServicesComponent = ({ sectionRef }) => {
               {componentText}
             </div>
             <div className="imagePart">
-              <div className="insideImagePart">
-                <div className="borderContainer">
-                  <img src={mobileServiceIcon} alt="" />
-                  <Link className="learnMorebutton" to="./services">
-                    <span>
-                      <h2 className="buttonText">Learn more</h2>
-                    </span>
-                  </Link>
-                </div>
-              </div>
+              <BorderWithBorderBox
+                img={mobileServiceIcon}
+                showLink={true}
+                linkTo={"services"}
+                backgroundColor="black"
+                textSize="h2"
+              >
+                {"Learn more"}
+              </BorderWithBorderBox>
             </div>
           </div>
         </div>
