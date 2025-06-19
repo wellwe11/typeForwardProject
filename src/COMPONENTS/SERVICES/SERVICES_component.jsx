@@ -5,6 +5,7 @@ import fontModificationIcon from "../../resourceFolder_typeFoward/assets/images/
 import customTypefaceIcon from "../../resourceFolder_typeFoward/assets/images/desktop-small-custom-typeface.svg";
 import designServiceIcon from "../../resourceFolder_typeFoward/assets/images/desktop-small-design-services.svg";
 import customLicensingIcon from "../../resourceFolder_typeFoward/assets/images/desktop-small-custom-licensing.svg";
+import BorderWithBorderBox from "../abstract_components/borderWithBorder";
 
 const TypeServices = ({ sections }) => {
   const sectionEntries = Object.entries(sections);
@@ -17,14 +18,15 @@ const TypeServices = ({ sections }) => {
           <div className="typeServicesIconsContainer">
             {sectionEntries.map((entry, index) => (
               <div key={index} className="outerContainer">
-                <div className="outerBorder">
-                  <img className="imageEmpty" src={entry[1].icon} alt="" />
-                  <button className="serviceButtonEmpty">{entry[0]}</button>
-                  <div className="innerContainer">
-                    <img className="image" src={entry[1].icon} alt="" />
-                    <button className="serviceButton">{entry[0]}</button>
-                  </div>
-                </div>
+                <BorderWithBorderBox
+                  img={entry[1].icon}
+                  button={true}
+                  event={""}
+                  backgroundColor="black"
+                  textSize="h2"
+                >
+                  {entry[0]}
+                </BorderWithBorderBox>
               </div>
             ))}
           </div>
@@ -72,12 +74,29 @@ const Sections = ({ sections }) => {
   const sectionEntries = Object.entries(sections);
   console.log(sectionEntries);
   return (
-    <div className="sectionContainer">
+    <div className="sectionsContainer">
       <div className="contentContainer">
         {sectionEntries.map((section, index) => (
           <section key={index} className="section">
-            <h1>{section[0]}</h1>
-            <h4>{section[1].text}</h4>
+            <header>
+              <h1>{section[0]}</h1>
+            </header>
+            <div className="sectionWrapper">
+              <main className="sectionContent">
+                <h4>{section[1].text}</h4>
+              </main>
+              <aside className="imageContainer">
+                <BorderWithBorderBox
+                  img={section[1].icon}
+                  button={true}
+                  event={""}
+                  backgroundColor="white"
+                  textSize="h2"
+                >
+                  {section[0]}
+                </BorderWithBorderBox>
+              </aside>
+            </div>
           </section>
         ))}
       </div>

@@ -13,16 +13,51 @@
   font-weight: 400;
 }
 
-.sectionContainer {
+.sectionsContainer {
+  margin-top: 150px;
   width: 100%;
-  height: 600px;
+  min-height: 600px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .contentContainer {
-    width: fit-content;
-
+    max-width: var(--InlineWidth);
     .section {
-      border-top: 2px solid black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       color: black;
+      header {
+        width: 100%;
+        border-bottom: 2px solid black;
+      }
+
+      .sectionWrapper {
+        width: var(--inlineContentWidth);
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        .sectionContent {
+          color: black;
+
+          width: 50%;
+
+          .bold {
+            padding-bottom: 30px;
+          }
+
+          .thin {
+            padding-top: 30px;
+          }
+        }
+
+        .imageContainer {
+          width: 30%;
+        }
+      }
     }
   }
 }
@@ -74,86 +109,17 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
+        min-width: 100%;
 
         @media screen and (max-width: 700px) {
           display: none;
         }
 
         .outerContainer {
-          border: 20px solid black;
-          position: relative;
           background-color: black;
-          min-width: 145px !important;
 
-          .outerBorder {
-            height: 100%;
-            width: 100%;
-            border: 2px solid white;
-
-            .imageEmpty {
-              height: 100%;
-              width: 170px;
-            }
-
-            @media screen and (max-width: 1200px) {
-              border: none;
-              background-color: none;
-
-              .outerBorder {
-                display: none;
-              }
-            }
-
-            .serviceButtonEmpty {
-              cursor: pointer;
-              width: 100%;
-              height: 80px;
-              transition: background-color 0.2s ease, color 0.2s ease;
-              color: black;
-            }
-
-            .innerContainer {
-              position: absolute;
-              left: -20px;
-              top: -20px;
-              border: 2px solid white;
-
-              background-color: black;
-
-              height: fit-content;
-
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              cursor: pointer;
-
-              .image {
-                filter: invert(1);
-                height: 100%;
-                width: 170px;
-              }
-
-              .serviceButton {
-                cursor: pointer;
-                width: 100%;
-                min-height: 80px;
-                border-top: 2px solid white;
-                transition: background-color 0.2s ease, color 0.2s ease;
-
-                font-weight: 550;
-                padding: 10px;
-              }
-
-              &:hover {
-                .serviceButton {
-                  background-color: white;
-                  color: black;
-                }
-              }
-            }
-          }
+          height: 250px;
+          width: 200px;
         }
       }
 
