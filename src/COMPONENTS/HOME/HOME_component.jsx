@@ -1,7 +1,10 @@
-import { useEffect, useRef, useState, memo } from "react";
+import React, { useEffect, useRef, useState, memo } from "react";
 import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
 
 import "./HOME.scss";
+
+import "../../index.scss";
+
 import TypeComponent from "./TYPEFACE";
 import TypeServicesComponent from "./TYPE_SERVICES";
 import SubsrcibeComponent from "./SUBSCRIBE/SUBSCRIBE";
@@ -120,4 +123,4 @@ const HomeComponent = ({ sectionRef }) => {
   );
 };
 
-export default memo(HomeComponent);
+export default React.memo(HomeComponent);

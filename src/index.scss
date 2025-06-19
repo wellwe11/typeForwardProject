@@ -18,6 +18,18 @@
   --inlineContentWidth: 80%;
 }
 
+.sectionWhite {
+  background-color: #ffffff;
+  width: 100vw;
+}
+
+.sectionBlack {
+  background-color: #111111;
+  color: white;
+
+  width: 100vw;
+}
+
 @font-face {
   font-family: "font-Gogh";
   src: url(./resourceFolder_typeFoward/assets/fonts/Gogh/GoghVariableVF.woff),

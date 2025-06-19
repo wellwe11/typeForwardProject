@@ -2,6 +2,8 @@ import "./FOOTER.scss";
 
 import { Link } from "react-router-dom";
 
+import React, { memo } from "react";
+
 import dribblbleIcon from "../../resourceFolder_typeFoward/assets/images/dribbble.min.svg";
 import myFontsIcon from "../../resourceFolder_typeFoward/assets/images/myfonts.min.svg";
 import behanceIcon from "../../resourceFolder_typeFoward/assets/images/behance.min.svg";

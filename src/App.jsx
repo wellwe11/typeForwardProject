@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import "./App.scss";
 import FooterComponent from "./COMPONENTS/FOOTER/FOOTER";
 import { useEffect, useRef, useState } from "react";
+import ServicesComponent from "./COMPONENTS/SERVICES/SERVICES_component";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -22,7 +23,7 @@ const ScrollToTop = () => {
 
 function App() {
   const sectionRefs = useRef([]);
-  const [navbarColor, setNavColor] = useState("white");
+  const [navbarColor, setNavColor] = useState("black");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,9 +32,9 @@ function App() {
         if (visibleEntry) {
           const classList = visibleEntry.target.classList;
           if (classList.contains("sectionBlack")) {
-            setNavColor("white");
-          } else {
             setNavColor("black");
+          } else {
+            setNavColor("white");
           }
         }
       },
@@ -60,6 +61,10 @@ function App() {
               path="/"
               element={<HomeComponent sectionRef={sectionRefs} />}
             />
+            <Route
+              path="services"
+              element={<ServicesComponent sectionRef={sectionRefs} />}
+            />
           </Routes>
           <FooterComponent />
         </Router>
@@ -69,3 +74,14 @@ function App() {
 }
 
 export default App;
+
+/**
+ * bugs on original website:
+ * ". Type&nbsp;Forward " on https://www.typeforward.com/services#custom-licensing
+ *
+ *
+ *
+ * on-page reload, reset view-point to top
+ * currently, navbar doesnt change color if you change page
+ * navbutton on small screens (x/+) needs to change color with navbar
+ */

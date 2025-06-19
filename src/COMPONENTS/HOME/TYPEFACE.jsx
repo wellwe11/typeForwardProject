@@ -171,6 +171,7 @@ const TypeComponent = ({ sectionRef }) => {
     };
   }, [displayForm]);
 
+  console.log(sectionRef);
   return (
     <section
       className="sectionWhite"

@@ -14,7 +14,7 @@ const SvgLogo = ({ isHover, backgroundColor }) => {
         <g id="Frame 1" clipPath="url(#clip0_1_2)">
           <g
             id="lightGroup"
-            style={{ fill: backgroundColor === "black" ? "black" : "white" }}
+            style={{ fill: backgroundColor === "white" ? "black" : "white" }}
           >
             <path
               id="lightOne"
@@ -23,7 +23,7 @@ const SvgLogo = ({ isHover, backgroundColor }) => {
           </g>
           <g
             id="darkGroup"
-            style={{ fill: backgroundColor === "black" ? "black" : "white" }}
+            style={{ fill: backgroundColor === "white" ? "black" : "white" }}
           >
             <path
               id="darkOne"
@@ -37,7 +37,7 @@ const SvgLogo = ({ isHover, backgroundColor }) => {
         </g>
         <defs>
           <clipPath id="clip0_1_2">
-            <rect width="140" height="100" fill="black" />
+            <rect width="140" height="100" fill="white" />
           </clipPath>
         </defs>
       </svg>

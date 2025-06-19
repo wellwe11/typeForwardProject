@@ -106,10 +106,10 @@ const NavBarComponent = ({ backgroundColor }) => {
     <div
       className="navBarContainer"
       style={{
-        backgroundColor: backgroundColor === "white" ? "black" : "white",
-        color: backgroundColor === "black" ? "black" : "white",
+        backgroundColor: backgroundColor === "white" ? "white" : "black",
+        color: backgroundColor === "black" ? "white" : "black",
         borderBottom:
-          backgroundColor === "black" ? "2px solid black" : "2px solid white",
+          backgroundColor === "white" ? "2px solid black" : "2px solid white",
       }}
     >
       <NavButtons backgroundColor={backgroundColor} />
