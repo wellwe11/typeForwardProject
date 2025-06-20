@@ -1,5 +1,6 @@
 import { useEffect, useState, memo } from "react";
 import "./SUBSCRIBE.scss";
+import H_OneComponent from "../../abstract_components/componentTitle/componentTitle";
 
 const SubscribeButton = ({ canClick, type, handler }) => {
   return (
@@ -9,7 +10,7 @@ const SubscribeButton = ({ canClick, type, handler }) => {
   );
 };
 
-const EmailInput = () => {
+export const EmailInput = () => {
   const [inputHover, setInputHover] = useState(false);
   const [submitMail, setSubmitMail] = useState(null);
   const [emailInput, setEmailInput] = useState("");
@@ -107,7 +108,7 @@ const EmailInput = () => {
   );
 };
 
-const SubCheck = () => {
+export const SubCheck = () => {
   const [subscribeClicked, setSubscribeClicked] = useState(false);
   const handleSubscribeClicked = () => setSubscribeClicked(!subscribeClicked);
   return (
@@ -137,14 +138,14 @@ const SubCheck = () => {
 export const EnterEmailAndOrSub = ({ children }) => {
   return (
     <div className="enterInfoContainer">
-      <h1 className="title">{children}</h1>
+      <H_OneComponent title={children} />
       <EmailInput />
       <SubCheck />
     </div>
   );
 };
 
-const SubscribeInfo = () => {
+export const SubscribeInfo = () => {
   return (
     <div className="subscribeInfo">
       <div className="subInfoTextContainer">
@@ -180,8 +181,12 @@ const SubsrcibeComponent = ({ sectionRef }) => {
       <div className="subscribeComponentSection">
         <div className="subscribeComponentContainer">
           <div className="innerWidthContainer">
-            <EnterEmailAndOrSub>Subscribe</EnterEmailAndOrSub>
-            <SubscribeInfo />
+            <div className="enterEmailAndOrSubContainer">
+              <EnterEmailAndOrSub>Subscribe</EnterEmailAndOrSub>
+            </div>
+            <div className="subscribeInfoComponentContainer">
+              <SubscribeInfo />
+            </div>
           </div>
         </div>
       </div>

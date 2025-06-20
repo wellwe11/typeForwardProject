@@ -1,0 +1,106 @@
+.trailFontsSection {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  .trailFontsContainer {
+    width: var(--InlineWidth);
+
+    color: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .innerWidthContainer {
+      width: var(--inlineContentWidth);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      height: 100vh;
+
+      padding-top: 30px;
+      padding-bottom: 30px;
+
+      .titleContainer {
+        width: 50%;
+      }
+
+      .content {
+        display: flex;
+
+        .leftContentContainer {
+          width: 60%;
+        }
+
+        .rightContentContainer {
+          width: 40%;
+        }
+
+        @media screen and (max-width: 1000px) {
+          flex-direction: column;
+
+          .leftContentContainer,
+          .rightContentContainer {
+            width: 60%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+          }
+
+          .leftContentContainer {
+            order: 2;
+            width: 100%;
+          }
+
+          .rightContentContainer {
+            order: 1;
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.leftContent {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  flex-direction: column;
+
+  .topContent {
+  }
+
+  .bottomContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .subscribeContentContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .SubscribeInfoContainer {
+      max-width: 90%;
+    }
+  }
+  .contactUsContainer {
+  }
+
+  @media screen and (max-width: 1000px) {
+    .contactUsContainer {
+      margin-top: 20px;
+    }
+  }
+}
+
+.rightContent {
+  display: flex;
+}

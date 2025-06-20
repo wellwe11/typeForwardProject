@@ -368,9 +368,6 @@
 
       max-height: 100%;
 
-      .serviceTitle {
-      }
-
       .componentText {
         .bold {
           font-weight: 600;
@@ -385,23 +382,22 @@
         width: 60%;
       }
 
-      .imagePart {
-        width: 60%;
-
-        position: relative;
+      .imagePartContainer {
+        width: 30%;
       }
     }
 
     @media screen and (max-width: 700px) {
       .innerWidthContainer {
         flex-direction: column;
-        align-items: center;
+        align-items: space;
 
         .textPart {
           order: 1;
         }
 
-        .imagePart {
+        .imagePartContainer {
+          margin-top: 20px;
           order: 2;
           margin-bottom: 20px;
           height: 150px;
@@ -412,7 +408,7 @@
 
   @media screen and (max-width: 500px) {
     .innerWidthContainer {
-      .imagePart {
+      .imagePartContainer {
         margin-top: 50px;
         height: 70px !important;
         width: 100%;
@@ -424,11 +420,6 @@
     min-height: 400px;
 
     .innerWidthContainer {
-      .serviceTitle {
-        font-size: 100px;
-        line-height: 100px;
-      }
-
       .brSpaceOne {
         height: 40px;
       }
@@ -437,7 +428,7 @@
         height: 80px;
       }
 
-      .imagePart {
+      .imagePartContainer {
         height: 400px;
       }
     }
@@ -445,11 +436,6 @@
 
   @media screen and (max-width: 1000px) {
     .innerWidthContainer {
-      .serviceTitle {
-        font-size: 60px;
-        line-height: 80px;
-      }
-
       .brSpaceOne {
         height: 20px;
       }
@@ -459,7 +445,7 @@
       }
     }
 
-    .imagePart {
+    .imagePartContainer {
       height: 250px;
     }
   }

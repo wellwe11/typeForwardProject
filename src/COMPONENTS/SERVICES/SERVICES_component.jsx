@@ -6,6 +6,8 @@ import customTypefaceIcon from "../../resourceFolder_typeFoward/assets/images/de
 import designServiceIcon from "../../resourceFolder_typeFoward/assets/images/desktop-small-design-services.svg";
 import customLicensingIcon from "../../resourceFolder_typeFoward/assets/images/desktop-small-custom-licensing.svg";
 import BorderWithBorderBox from "../abstract_components/borderWithBorder";
+import ContactUsComp from "../abstract_components/contactUs/contactUs";
+import H_OneComponent from "../abstract_components/componentTitle/componentTitle";
 
 const TypeServices = ({ sections }) => {
   const sectionEntries = Object.entries(sections);
@@ -14,14 +16,16 @@ const TypeServices = ({ sections }) => {
     <div className="typeServiceSection">
       <div className="typeServicesContainer">
         <div className="innerWidthContainer">
-          <h1 className="typeServicesTitle">Type Services</h1>
+          <div className="titleContainer">
+            <H_OneComponent title={"Type Services"} />
+          </div>
           <div className="typeServicesIconsContainer">
             {sectionEntries.map((entry, index) => (
               <div key={index} className="outerContainer">
                 <BorderWithBorderBox
                   img={entry[1].icon}
                   button={true}
-                  event={""}
+                  event={null}
                   backgroundColor="black"
                   textSize="h3"
                 >
@@ -53,14 +57,7 @@ const TypeServices = ({ sections }) => {
               </span>
             </div>
             <div className="typeServiceTextTwo">
-              <span>
-                <h3 className="thin">
-                  Have a question? Feel free to email us at
-                </h3>
-                <button className="mailButton">
-                  <h3 className="bold">contact@typeforward.com</h3>
-                </button>
-              </span>
+              <ContactUsComp color={"white"} />
             </div>
           </div>
         </div>
@@ -87,7 +84,7 @@ const Sections = ({ sections }) => {
                 <BorderWithBorderBox
                   img={section[1].icon}
                   button={true}
-                  event={""}
+                  event={null}
                   backgroundColor="white"
                   textSize="h2"
                 >

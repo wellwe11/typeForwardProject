@@ -1,0 +1,22 @@
+.title {
+  font-size: 150px;
+  line-height: 150px;
+  font-family: "font-Gogh", sans-serif;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1440px) {
+  .title {
+    font-size: 7vw;
+    line-height: 8vw;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .title {
+    font-size: 10vw;
+    line-height: 10vw;
+  }
+}

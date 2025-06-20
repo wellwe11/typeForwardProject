@@ -9,33 +9,44 @@
   align-items: center;
 
   .subscribeComponentContainer {
-    width: var(--InlineWidth);
+    max-width: var(--InlineWidth);
+    width: 90%;
 
     display: flex;
     justify-content: center;
     align-items: center;
     .innerWidthContainer {
+      width: var(--inlineContentWidth);
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      width: var(--inlineContentWidth);
       min-height: 400px;
+
+      .enterEmailAndOrSubContainer {
+        max-width: 50%;
+      }
+
+      .subscribeInfoComponentContainer {
+        max-width: 40%;
+      }
 
       @media screen and (max-width: 1000px) {
         flex-direction: column;
+        align-items: flex-start;
         justify-content: center;
+
+        .enterEmailAndOrSubContainer {
+          max-width: 80%;
+        }
+
+        .subscribeInfoComponentContainer {
+          max-width: 80%;
+        }
       }
 
       .enterInfoContainer {
         max-width: 100%;
-        .title {
-          font-size: 100px;
-
-          @media screen and (max-width: 700px) {
-            font-size: 70px;
-          }
-        }
       }
     }
   }
@@ -150,22 +161,22 @@
 }
 
 .subscribeInfo {
-  width: 35%;
+  width: 100%;
+  margin-top: clamp(3px, 3vh, 20px);
 
   @media screen and (max-width: 1000px) {
-    margin-top: 30px;
     width: 80%;
   }
 
   @media screen and (max-width: 700px) {
-    margin-top: 30px;
     width: 100%;
   }
 
   .subInfoTextContainer {
     .subInfoText {
-      font-weight: 200;
-      color: gray;
+      font-weight: 300;
+      color: rgb(144, 144, 144);
+      font-size: clamp(0.7rem, 2vw, 1rem);
     }
 
     button {

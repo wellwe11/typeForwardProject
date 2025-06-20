@@ -8,6 +8,7 @@ import "./App.scss";
 import FooterComponent from "./COMPONENTS/FOOTER/FOOTER";
 import { useEffect, useRef, useState } from "react";
 import ServicesComponent from "./COMPONENTS/SERVICES/SERVICES_component";
+import TrailFontsComponent from "./COMPONENTS/TRAIL_FONTS/TRAIL_FONTS";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -64,6 +65,10 @@ function App() {
             <Route
               path="services"
               element={<ServicesComponent sectionRef={sectionRefs} />}
+            />
+            <Route
+              path="trail_fonts"
+              element={<TrailFontsComponent sectionRef={sectionRefs} />}
             />
           </Routes>
           <FooterComponent />

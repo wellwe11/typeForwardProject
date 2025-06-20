@@ -4,6 +4,7 @@ import { memo } from "react";
 
 import mobileServiceIcon from "../../resourceFolder_typeFoward/assets/images/mobile-type-services.svg";
 import BorderWithBorderBox from "../abstract_components/borderWithBorder";
+import H_OneComponent from "../abstract_components/componentTitle/componentTitle";
 
 const TypeServicesComponent = ({ sectionRef }) => {
   const componentText = (
@@ -33,11 +34,11 @@ const TypeServicesComponent = ({ sectionRef }) => {
         <div className="typeServicesContainer">
           <div className="innerWidthContainer">
             <div className="textPart">
-              <h1 className="serviceTitle">Type Services</h1>
+              <H_OneComponent title={"Type Services"} />
               <div className="brSpaceTwo" />
               {componentText}
             </div>
-            <div className="imagePart">
+            <div className="imagePartContainer">
               <BorderWithBorderBox
                 img={mobileServiceIcon}
                 showLink={true}

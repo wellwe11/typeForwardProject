@@ -11,14 +11,6 @@
   }
 }
 
-.bold {
-  font-weight: 600;
-}
-
-.thin {
-  font-weight: 400;
-}
-
 .sectionsSection {
 }
 
@@ -138,28 +130,16 @@
       flex-direction: column;
       justify-content: space-between;
 
-      .typeServicesTitle {
-        font-size: 150px;
-        line-height: 150px;
-
+      .titleContainer {
         width: 40%;
-        font-family: "font-Gogh", sans-serif;
-      }
 
-      @media screen and (max-width: 1440px) {
-        .typeServicesTitle {
-          font-size: 10vw;
-          line-height: 12vw;
+        @media screen and (max-width: 1000px) {
+          width: 80%;
         }
       }
 
       @media screen and (max-width: 700px) {
         align-items: center;
-        .typeServicesTitle {
-          width: 80%;
-          font-size: 15vw;
-          line-height: 20vw;
-        }
       }
 
       .typeServicesIconsContainer {
@@ -203,27 +183,11 @@
 
         .typeServiceTextOne {
           max-width: 60%;
-          span {
-            .bold,
-            .thin {
-              margin: 0 auto;
-            }
-          }
         }
 
         .typeServiceTextTwo {
           width: 30%;
           max-width: 250px;
-          span {
-            .thin {
-            }
-
-            .mailButton {
-              cursor: pointer;
-              .bold {
-              }
-            }
-          }
         }
 
         @media screen and (max-width: 700px) {
