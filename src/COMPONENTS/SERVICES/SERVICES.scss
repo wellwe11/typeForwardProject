@@ -5,9 +5,9 @@
   align-items: center;
 
   .borderDiv {
-    width: var(--InlineWidth);
     height: 2px;
     background-color: black;
+    width: var(--inlineContentWidth);
   }
 }
 
@@ -41,6 +41,14 @@
       header {
         width: 100%;
         border-bottom: 2px solid black;
+
+        @media screen and (max-width: 70rem) {
+          width: var(--inlineContentWidth);
+        }
+
+        .sectionsTitle {
+          width: 100%;
+        }
       }
 
       .sectionWrapper {
@@ -51,6 +59,7 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+
         .sectionContent {
           color: black;
 
@@ -69,6 +78,36 @@
           width: 300px;
           height: 400px;
         }
+
+        @media screen and (max-width: 1000px) {
+          .sectionContent {
+            width: 50%;
+          }
+          .imageContainer {
+            width: 30vw;
+            height: 33vw;
+          }
+        }
+
+        @media screen and (max-width: 850px) {
+          flex-direction: column;
+          align-items: center;
+
+          .sectionContent {
+            width: 80%;
+          }
+          .imageContainer {
+            margin-top: 7vw;
+          }
+        }
+
+        @media screen and (max-width: 700px) {
+          .sectionContent {
+          }
+
+          .imageContainer {
+          }
+        }
       }
     }
   }
@@ -82,8 +121,6 @@
   align-items: center;
   background-color: black;
 
-  min-height: 60vw;
-
   .typeServicesContainer {
     padding-top: 140px;
     padding-bottom: 150px;
@@ -95,29 +132,38 @@
     align-items: center;
 
     .innerWidthContainer {
-      width: var(--inlineContentWidth);
+      max-width: var(--inlineContentWidth);
 
-      min-height: 40vw;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
 
       .typeServicesTitle {
-        font-size: 7vw;
-        line-height: 7vw;
+        font-size: 150px;
+        line-height: 150px;
 
         width: 40%;
         font-family: "font-Gogh", sans-serif;
+      }
 
-        @media screen and (max-width: 700px) {
-          font-size: 20vw;
+      @media screen and (max-width: 1440px) {
+        .typeServicesTitle {
+          font-size: 10vw;
+          line-height: 12vw;
+        }
+      }
+
+      @media screen and (max-width: 700px) {
+        align-items: center;
+        .typeServicesTitle {
+          width: 80%;
+          font-size: 15vw;
           line-height: 20vw;
-          margin-left: -30px;
         }
       }
 
       .typeServicesIconsContainer {
-        margin-top: 7vw;
+        margin-top: 100px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -133,12 +179,28 @@
           height: 250px;
           width: 170px;
         }
+
+        @media screen and (max-width: 1000px) {
+          .outerContainer {
+            height: 25vw;
+            width: 15vw;
+          }
+        }
+
+        @media screen and (max-width: 700px) {
+          display: none;
+          .outerContainer {
+            height: 200px;
+            width: 130px;
+          }
+        }
       }
 
       .typeServiceText {
         margin-top: 100px;
         display: flex;
         justify-content: space-between;
+
         .typeServiceTextOne {
           max-width: 60%;
           span {
@@ -148,19 +210,35 @@
             }
           }
         }
-      }
 
-      .typeServiceTextTwo {
-        width: 30%;
-        max-width: 250px;
-        span {
-          .thin {
+        .typeServiceTextTwo {
+          width: 30%;
+          max-width: 250px;
+          span {
+            .thin {
+            }
+
+            .mailButton {
+              cursor: pointer;
+              .bold {
+              }
+            }
+          }
+        }
+
+        @media screen and (max-width: 700px) {
+          flex-direction: column;
+          align-items: center;
+          margin-top: 40px;
+
+          .typeServiceTextOne,
+          .typeServiceTextTwo {
+            width: 100%;
+            max-width: 80%;
           }
 
-          .mailButton {
-            cursor: pointer;
-            .bold {
-            }
+          .typeServiceTextTwo {
+            margin-top: 6vw;
           }
         }
       }

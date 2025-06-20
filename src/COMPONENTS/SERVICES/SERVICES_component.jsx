@@ -71,14 +71,13 @@ const TypeServices = ({ sections }) => {
 
 const Sections = ({ sections }) => {
   const sectionEntries = Object.entries(sections);
-  console.log(sectionEntries);
   return (
     <div className="sectionsContainer">
       <div className="contentContainer">
         {sectionEntries.map((section, index) => (
           <section key={index} className="section">
             <header>
-              <h1>{section[0]}</h1>
+              <h1 className="sectionsTitle">{section[0]}</h1>
             </header>
             <div className="sectionWrapper">
               <main className="sectionContent">
