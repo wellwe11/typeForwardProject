@@ -9,6 +9,7 @@ import FooterComponent from "./COMPONENTS/FOOTER/FOOTER";
 import { useEffect, useRef, useState } from "react";
 import ServicesComponent from "./COMPONENTS/SERVICES/SERVICES_component";
 import TrailFontsComponent from "./COMPONENTS/TRAIL_FONTS/TRAIL_FONTS";
+import AboutUsComponent from "./COMPONENTS/ABOUT US/ABOUTUS_component";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -70,6 +71,10 @@ function App() {
               path="trail_fonts"
               element={<TrailFontsComponent sectionRef={sectionRefs} />}
             />
+            <Route
+              path="about_us"
+              element={<AboutUsComponent sectionRef={sectionRefs} />}
+            />
           </Routes>
           <FooterComponent />
         </Router>
@@ -85,6 +90,8 @@ export default App;
  * ". Type&nbsp;Forward " on https://www.typeforward.com/services#custom-licensing
  *
  *
+ * move subscribe from home to abstract_components
+ * move borderWidthBorder.jsx to its own folder and rename abstract.scss
  *
  * on-page reload, reset view-point to top
  * currently, navbar doesnt change color if you change page

@@ -1,0 +1,46 @@
+.linkImagesContainer {
+  width: 100%;
+  min-width: 300px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 50px;
+
+  .iconButtonContainer {
+    width: 55px;
+    height: 55px;
+    border: 2px solid var(--borderColor);
+
+    .insideIconButtonContainer {
+      width: 55px;
+      height: 55px;
+      margin-left: -12px;
+      margin-top: -10px;
+
+      background-color: var(--bgColor);
+      border: 2px solid var(--borderColor);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s ease-in;
+      .iconButton {
+        cursor: pointer;
+        img {
+          transition: all 0.2s ease-in;
+          height: 50px;
+          width: 50px;
+
+          filter: var(--filterColorBlack);
+        }
+      }
+
+      &:hover {
+        background-color: var(--textColor);
+
+        img {
+          filter: var(--filterColorWhite);
+        }
+      }
+    }
+  }
+}
