@@ -128,8 +128,6 @@
 }
 
 .typeFaceSection {
-  margin-top: 100px;
-
   color: black;
   background-color: white;
 
@@ -341,108 +339,54 @@
   }
 }
 
-.serviceSection {
-  background-color: black;
-  width: 100%;
-
+.typeServiceContentContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  height: 100%;
 
-  .typeServicesContainer {
-    max-width: var(--InlineWidth);
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding-top: 50px;
-    padding-bottom: 50px;
-
-    .innerWidthContainer {
-      width: var(--inlineContentWidth);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      max-height: 100%;
-
-      .componentText {
-        .bold {
-          font-weight: 600;
-        }
-
-        .thin {
-          font-weight: 450;
-        }
-      }
-
-      .textPart {
-        width: 60%;
-      }
-
-      .imagePartContainer {
-        width: 20vw;
-        height: 30vw;
-      }
-    }
-
-    @media screen and (max-width: 700px) {
-      .innerWidthContainer {
-        flex-direction: column;
-        align-items: space;
-
-        .textPart {
-          order: 1;
-        }
-
-        .imagePartContainer {
-          margin-top: 30px;
-          order: 2;
-        }
-      }
-    }
+  .textPart {
+    width: 60%;
   }
 
-  @media screen and (max-width: 500px) {
-    .innerWidthContainer {
-      .imagePartContainer {
-      }
-    }
+  .imagePartContainer {
+    width: 20vw;
+    height: 30vw;
   }
 
-  @media screen and (min-width: 1000px) {
-    min-height: 400px;
-
-    .innerWidthContainer {
-      .brSpaceOne {
-        height: 40px;
-      }
-
-      .brSpaceTwo {
-        height: 80px;
-      }
-
-      .imagePartContainer {
-        height: 400px;
-      }
-    }
-  }
-
-  @media screen and (max-width: 1000px) {
-    .innerWidthContainer {
-      .brSpaceOne {
-        height: 20px;
-      }
-
-      .brSpaceTwo {
-        height: 10px;
-      }
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    .textPart {
+      order: 1;
     }
 
     .imagePartContainer {
-      height: 250px;
+      margin-top: 30px;
+      order: 2;
+    }
+
+    @media screen and (max-width: 500px) {
+      .innerWidthContainer {
+        .imagePartContainer {
+        }
+      }
+    }
+
+    @media screen and (min-width: 1000px) {
+      .innerWidthContainer {
+        .imagePartContainer {
+          height: 400px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1000px) {
+      .innerWidthContainer {
+        .imagePartContainer {
+          height: 250px;
+        }
+      }
     }
   }
 }

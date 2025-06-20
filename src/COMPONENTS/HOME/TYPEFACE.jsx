@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import "./HOME.scss";
 import SubsrcibeComponent, { EnterEmailAndOrSub } from "./SUBSCRIBE/SUBSCRIBE";
+import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
 
 const TypeFaceComponent = ({ type, handleDisplayForm }) => {
   const [fontUrl, setFontUrl] = useState(null);

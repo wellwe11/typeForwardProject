@@ -93,6 +93,11 @@ export default App;
  * move subscribe from home to abstract_components
  * move borderWidthBorder.jsx to its own folder and rename abstract.scss
  *
+ * Currently, about us in anvbar isnt thick when seleceted, because the link is "about_us" which doesnt match the text "about us"
+ *
+ *
+ * on home page -> download -> form doesnt pop up in center of screen
+ *
  * on-page reload, reset view-point to top
  * currently, navbar doesnt change color if you change page
  * navbutton on small screens (x/+) needs to change color with navbar

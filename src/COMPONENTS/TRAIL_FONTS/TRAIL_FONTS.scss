@@ -23,7 +23,7 @@
       flex-direction: column;
       justify-content: space-between;
 
-      height: 100vh;
+      height: clamp(800px, 120vh, 1050px);
 
       padding-top: 30px;
       padding-bottom: 30px;
@@ -35,13 +35,16 @@
       .content {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 30px;
+
+        min-height: 500px;
 
         .leftContentContainer {
           width: 55%;
         }
 
         .rightContentContainer {
-          width: 40%;
+          width: 35%;
         }
 
         @media screen and (max-width: 1000px) {
