@@ -1,9 +1,9 @@
 import "./smallIconsComponent.scss";
 
-import dribblbleIcon from "../../../resourceFolder_typeFoward/assets/images/dribbble.min.svg";
-import myFontsIcon from "../../../resourceFolder_typeFoward/assets/images/myfonts.min.svg";
-import behanceIcon from "../../../resourceFolder_typeFoward/assets/images/behance.min.svg";
-import instagramIcon from "../../../resourceFolder_typeFoward/assets/images/instagram.min.svg";
+import dribblbleIcon from "../../../resourceFolder_typeFoward/images/dribbble.min.svg";
+import myFontsIcon from "../../../resourceFolder_typeFoward/images/myfonts.min.svg";
+import behanceIcon from "../../../resourceFolder_typeFoward/images/behance.min.svg";
+import instagramIcon from "../../../resourceFolder_typeFoward/images/instagram.min.svg";
 
 const LinkImagesComponent = ({ sectionColor }) => {
   const bgColor = sectionColor === "black" ? "black" : "white";

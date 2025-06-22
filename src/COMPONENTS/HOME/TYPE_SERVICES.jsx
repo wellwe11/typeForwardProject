@@ -2,7 +2,7 @@ import "./HOME.scss";
 import { Link } from "react-router-dom";
 import { memo } from "react";
 
-import mobileServiceIcon from "../../resourceFolder_typeFoward/assets/images/mobile-type-services.svg";
+import mobileServiceIcon from "../../resourceFolder_typeFoward/images/mobile-type-services.svg";
 import BorderWithBorderBox from "../abstract_components/borderWithBorder";
 import H_OneComponent from "../abstract_components/componentTitle/componentTitle";
 import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
