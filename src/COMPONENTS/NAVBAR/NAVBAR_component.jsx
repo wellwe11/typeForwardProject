@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
 import React, { useEffect, useState } from "react";
 
 import "./NAVBAR.scss";
@@ -16,18 +15,14 @@ const ToggleMenuButton = ({ showButtons, setShowButtons }) => {
   );
 };
 
-const LogoButton = ({ navLinks, backgroundColor }) => {
+const LogoButton = ({ backgroundColor }) => {
   const [isHover, setIsHover] = useState(false);
 
   const handleIsHover = () => setIsHover(!isHover);
 
   return (
     <div className="LogoContainer">
-      <Link
-        onMouseEnter={handleIsHover}
-        onMouseLeave={handleIsHover}
-        to={navLinks.home.baseUrl}
-      >
+      <Link onMouseEnter={handleIsHover} onMouseLeave={handleIsHover} to={"./"}>
         <h1 className="logoTitle">type forward</h1>
         <div className="SVGContainer">
           <SvgLogo isHover={isHover} backgroundColor={backgroundColor} />
@@ -37,14 +32,12 @@ const LogoButton = ({ navLinks, backgroundColor }) => {
   );
 };
 
-const NavButtons = ({ backgroundColor }) => {
+const NavButtons = ({ backgroundColor, data }) => {
   const [showButtons, setShowButtons] = useState(false);
   const [activeTab, setActiveTab] = useState("");
   const location = useLocation();
-  const navLinks = useNavLinks();
-  const linkKeys = Object.keys(navLinks);
 
-  const restItems = linkKeys.slice(1, linkKeys.length);
+  const buttonsObject = Object.keys(data);
 
   useEffect(() => {
     const handleResize = () => {
@@ -66,19 +59,19 @@ const NavButtons = ({ backgroundColor }) => {
 
   return (
     <ul className="navBarUl">
-      <LogoButton navLinks={navLinks} backgroundColor={backgroundColor} />
+      <LogoButton backgroundColor={backgroundColor} />
       <div className="LinksContainer">
         <ToggleMenuButton
           showButtons={showButtons}
           setShowButtons={setShowButtons}
         />
-        {restItems.map((key, index) => (
+        {buttonsObject.map((key, index) => (
           <div
             key={index}
             className="uniqueLinkContainer"
             style={{ display: showButtons ? "flex" : "" }}
           >
-            <Link to={navLinks[key].baseUrl}>
+            <Link to={data[key].linkUrl}>
               <span className="keyTextSpan">
                 <h2
                   className="keyText"
@@ -87,7 +80,7 @@ const NavButtons = ({ backgroundColor }) => {
                       key === activeTab ? "'wght' 820" : "",
                   }}
                 >
-                  {firstLetterCapital(key)}
+                  {firstLetterCapital(key).replace(/_/g, " ")}
                 </h2>
               </span>
               <span className="keyTextSpanHidden">
@@ -101,7 +94,7 @@ const NavButtons = ({ backgroundColor }) => {
   );
 };
 
-const NavBarComponent = ({ backgroundColor }) => {
+const NavBarComponent = ({ backgroundColor, data }) => {
   return (
     <div
       className="navBarContainer"
@@ -112,7 +105,7 @@ const NavBarComponent = ({ backgroundColor }) => {
           backgroundColor === "white" ? "2px solid black" : "2px solid white",
       }}
     >
-      <NavButtons backgroundColor={backgroundColor} />
+      <NavButtons backgroundColor={backgroundColor} data={data} />
     </div>
   );
 };

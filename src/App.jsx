@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import ServicesComponent from "./COMPONENTS/SERVICES/SERVICES_component";
 import TrailFontsComponent from "./COMPONENTS/TRAIL_FONTS/TRAIL_FONTS";
 import AboutUsComponent from "./COMPONENTS/ABOUT US/ABOUTUS_component";
-import SectionComponentHandler from "./COMPONENTS/abstract_components/Sections/Sections";
+import { ExportData } from "./COMPONENTS/abstract_components/Sections/Sections";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -28,37 +28,40 @@ function App() {
   const sectionRefs = useRef([]);
   const [navbarColor, setNavColor] = useState("black");
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries.find((entry) => entry.isIntersecting);
-        if (visibleEntry) {
-          const classList = visibleEntry.target.classList;
-          if (classList.contains("sectionBlack")) {
-            setNavColor("black");
-          } else {
-            setNavColor("white");
-          }
-        }
-      },
-      {
-        threshold: 0.17,
-      }
-    );
+  let data = ExportData();
+  console.log(data);
 
-    sectionRefs.current.forEach((section) => {
-      if (section) observer.observe(section);
-    });
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       const visibleEntry = entries.find((entry) => entry.isIntersecting);
+  //       if (visibleEntry) {
+  //         const classList = visibleEntry.target.classList;
+  //         if (classList.contains("sectionBlack")) {
+  //           setNavColor("black");
+  //         } else {
+  //           setNavColor("white");
+  //         }
+  //       }
+  //     },
+  //     {
+  //       threshold: 0.17,
+  //     }
+  //   );
 
-    return () => observer.disconnect();
-  }, []);
+  //   sectionRefs.current.forEach((section) => {
+  //     if (section) observer.observe(section);
+  //   });
+
+  //   return () => observer.disconnect();
+  // }, []);
 
   return (
     <div className="appContainer">
       <TabComponentProvider>
         <Router>
           <ScrollToTop />
-          {/* <NavBarComponent backgroundColor={navbarColor} /> */}
+          <NavBarComponent backgroundColor={navbarColor} data={data} />
           <Routes>
             {/* <Route
               path="/"
@@ -76,7 +79,6 @@ function App() {
               path="about_us"
               element={<AboutUsComponent sectionRef={sectionRefs} />}
             /> */}
-            <Route path="/" element={<SectionComponentHandler />} />
           </Routes>
           {/* <FooterComponent /> */}
         </Router>

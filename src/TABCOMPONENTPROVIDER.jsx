@@ -35,6 +35,35 @@ const getFileNames = (files) => {
   return fileFolders;
 };
 
+// create a direct link
+export const createRoute =
+  (base) =>
+  (path = "") =>
+    `${base}/${path}`;
+
+// if needed, real website
+const actualUrl = createRoute("https://www.typeforward.com");
+
+// temp url for this project
+const baseRoute = createRoute("http://localhost:5173");
+
+// create url that has links
+export const createSubRoutes = (base, paths) => {
+  const route = createRoute(base);
+  const result = { baseUrl: route() };
+
+  result.links = Object.entries(paths).map(
+    ([folderName, { fonts, importers }]) => ({
+      name: folderName,
+      url: route(folderName),
+      count: fonts,
+      importers: importers,
+    })
+  );
+
+  return result;
+};
+
 export const TabComponentProvider = ({ children }) => {
   const [fontsNames, setFontsNames] = useState([]);
   useEffect(() => {
@@ -42,35 +71,6 @@ export const TabComponentProvider = ({ children }) => {
 
     setFontsNames(folders);
   }, []);
-
-  // create a direct link
-  const createRoute =
-    (base) =>
-    (path = "") =>
-      `${base}/${path}`;
-
-  // if needed, real website
-  const actualUrl = createRoute("https://www.typeforward.com");
-
-  // temp url for this project
-  const baseRoute = createRoute("http://localhost:5173");
-
-  // create url that has links
-  const createSubRoutes = (base, paths) => {
-    const route = createRoute(base);
-    const result = { baseUrl: route() };
-
-    result.links = Object.entries(paths).map(
-      ([folderName, { fonts, importers }]) => ({
-        name: folderName,
-        url: route(folderName),
-        count: fonts,
-        importers: importers,
-      })
-    );
-
-    return result;
-  };
 
   const navLinks = useMemo(
     () => ({

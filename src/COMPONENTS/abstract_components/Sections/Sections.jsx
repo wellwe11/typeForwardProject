@@ -1,49 +1,19 @@
 import { useEffect, useState } from "react";
-import BoldAndThinText from "../boldAndThinText/boldAndThinText";
-
-// gaol Object
-const object = {
-  "about us": {
-    content: {
-      "Mirela Belova": {
-        images: { someImage: { url: "" }, someImageTwo: { url: "" } },
-        bio: "",
-      },
-      "Stan Partalev": {
-        // ..more files
-      },
-    },
-  },
-
-  services: {
-    content: {
-      "Custom Licensing": {
-        images: { someImage: { url: "" }, someImageTwo: { url: "" } },
-        bio: "",
-      },
-      "Custom Typeface": {
-        images: { someImage: { url: "" }, someImageTwo: { url: "" } },
-        bio: "",
-      },
-    },
-  },
-};
 
 // goal is to dynamically have files which will allow admin to update nav-buttons & its content
 // first import local file
+
 const localData = import.meta.glob(
-  "../../../resourceFolder_typeFoward/assets/*/**",
-  { eager: true, as: "url" }
+  "../../../resourceFolder_typeFoward/assets/**/*",
+  {
+    eager: true,
+    as: "url",
+  }
 );
 
 // remove all file-path that wont be used inside of the main-objet 'api'
-const cleanPathFile = (data) =>
-  Object.keys(data).map((path) =>
-    path
-      .replace("../../../resourceFolder_typeFoward/assets/", "")
-      .trim()
-      .split("/")
-  );
+const cleanPathFile = (data, replace) =>
+  Object.keys(data).map((path) => path.replace(replace, "").trim().split("/"));
 
 // now sort each tab below their corresponding file
 // since file-path is built like /file/secondFile/thirdFile, we already have a hierarchy to build an object from
@@ -57,26 +27,43 @@ const sortFiles = (data) => {
 
   data.forEach((segments) => {
     let current = localObj;
-    let length = Object.keys(current).length;
 
     segments.forEach((key, index) => {
+      let length = Object.keys(current).length;
+
       if (index === segments.length - 1) {
         const keyExtension = key.split(".").pop().toLowerCase();
 
+        console.log(segments[0]);
         if (imageFiles.includes(keyExtension)) {
-          current[length] = { url: key };
+          current[length] = {
+            url:
+              `../../../resourceFolder_typeFoward/assets/${segments[0]}/${segments[1]}/` +
+              key,
+          };
         }
 
         if (typeFiles.includes(keyExtension)) {
-          current[length] = { url: key };
+          current[length] = {
+            url:
+              `../../../resourceFolder_typeFoward/assets/${segments[0]}/${segments[1]}/` +
+              key,
+          };
         }
 
         if (bioFiles.includes(keyExtension)) {
-          current[length] = { url: key };
+          current[length] = {
+            url:
+              `../../../resourceFolder_typeFoward/assets/${segments[0]}/${segments[1]}/` +
+              key,
+          };
         }
       } else {
         if (!current[key]) {
           current[key] = {};
+          if (index === 0) {
+            current[key] = { linkUrl: segments[index] };
+          }
         }
 
         current = current[key];
@@ -87,16 +74,17 @@ const sortFiles = (data) => {
   return localObj;
 };
 
-const SectionComponentHandler = () => {
+export const ExportData = () => {
   const [objectData, setObjectData] = useState({});
 
   useEffect(() => {
-    const cleanedPath = cleanPathFile(localData);
+    const cleanedPath = cleanPathFile(
+      localData,
+      "../../../resourceFolder_typeFoward/assets/"
+    );
     const structured = sortFiles(cleanedPath);
     setObjectData(structured);
-
-    console.log(structured);
   }, []);
-};
 
-export default SectionComponentHandler;
+  return objectData;
+};

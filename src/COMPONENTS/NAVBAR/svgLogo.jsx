@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./NAVBAR.scss";
 
 const SvgLogo = ({ isHover, backgroundColor }) => {
-  console.log(backgroundColor);
   return (
     <div className="LogoSVG">
       <svg
