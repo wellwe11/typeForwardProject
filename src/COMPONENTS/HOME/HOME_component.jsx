@@ -112,11 +112,11 @@ const ForwardWelcomeComponent = ({ sectionRef }) => {
   );
 };
 
-const HomeComponent = ({ sectionRef }) => {
+const HomeComponent = ({ sectionRef, data }) => {
   return (
     <div className="homeContainer">
       <ForwardWelcomeComponent sectionRef={sectionRef} />
-      <TypeComponent sectionRef={sectionRef} />
+      <TypeComponent sectionRef={sectionRef} data={data} />
       <TypeServicesComponent sectionRef={sectionRef} />
       <SubsrcibeComponent sectionRef={sectionRef} />
     </div>

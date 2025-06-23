@@ -8,30 +8,15 @@ import SubsrcibeComponent, { EnterEmailAndOrSub } from "./SUBSCRIBE/SUBSCRIBE";
 import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
 
 const TypeFaceComponent = ({ type, handleDisplayForm }) => {
-  const [fontUrl, setFontUrl] = useState(null);
-
   useEffect(() => {
-    if (!type?.importers || !type.importers.length) return;
-
-    const importFn = async () => {
-      const fontFile = await type.importers[0]();
-
-      const url = fontFile.default || fontFile;
-      setFontUrl(url);
-    };
-
-    importFn();
-  }, [type]);
-
-  useEffect(() => {
-    if (!fontUrl || !type?.name) return;
+    if (!type[0] || !type[1]) return;
 
     const style = document.createElement("style");
-    style.id = `dynamic-font-${type.name}`;
+    style.id = `dynamic-font-${type?.[0]}`;
     style.innerHTML = `
       @font-face {
-        font-family: '${type.name}';
-        src: url('${fontUrl}');
+        font-family: '${type?.[0]}';
+        src: url('${type?.[1]?.fonts?.[0]?.url}');
         font-weight: normal;
         font-style: normal;
       }
@@ -40,22 +25,24 @@ const TypeFaceComponent = ({ type, handleDisplayForm }) => {
     document.head.appendChild(style);
 
     return () => {
-      const existing = document.getElementById(`dynamic-font-${type.name}`);
+      const existing = document.getElementById(`dynamic-font-${type[0]}`);
       if (existing) document.head.removeChild(existing);
     };
-  }, [fontUrl, type?.name]);
+  }, [type]);
 
   function addSpaceBeforeCaps(text) {
     return text.replace(/([a-z])([A-Z])/g, "$1 $2");
   }
 
+  console.log(type);
+
   return (
-    <div className="typeFaceContainer" style={{ fontFamily: type?.name }}>
-      <h1 className="typeFaceName">{addSpaceBeforeCaps(type?.name)}</h1>
-      <h3 className="typeFaceDescription">{fontInfo[type?.name]}</h3>
+    <div className="typeFaceContainer" style={{ fontFamily: type[0] }}>
+      <h1 className="typeFaceName">{addSpaceBeforeCaps(type[0])}</h1>
+      <h3 className="typeFaceDescription">{fontInfo[type[0]]}</h3>
       <div className="fontAvaliableContainer">
-        <Link to={`./typefaces/${type?.name}`} className="fontInfoBtn">
-          <h3 className="fontInfo">{type.count?.length} FONTS</h3>
+        <Link to={`./typefaces/${type[0]}`} className="fontInfoBtn">
+          <h3 className="fontInfo">{type[1].fonts?.length} FONTS</h3>
           <div className="fontUnderline"></div>
         </Link>
         {/* <h4>Free: {type?.free.length} </h4> */}
@@ -153,12 +140,22 @@ const DownloadForm = ({ type, displayForm, setDisplayForm, index }) => {
   );
 };
 
-const TypeComponent = ({ sectionRef }) => {
+const TypeComponent = ({ sectionRef, data }) => {
   const [displayForm, setDisplayForm] = useState(null);
   const handleDisplayForm = (i) => setDisplayForm(i);
+
+  const [fonts, setFonts] = useState();
   const navLinks = useNavLinks();
 
   const types = navLinks?.typefaces?.links || [];
+
+  useEffect(() => {
+    if (Object.keys(data)?.length > 0) {
+      setFonts(Object.entries(data?.typefaces?.fonts));
+    }
+  }, [data]);
+
+  console.log(fonts);
 
   useEffect(() => {
     if (displayForm !== null) {
@@ -172,7 +169,6 @@ const TypeComponent = ({ sectionRef }) => {
     };
   }, [displayForm]);
 
-  console.log(sectionRef);
   return (
     <section
       className="sectionWhite"
@@ -183,29 +179,30 @@ const TypeComponent = ({ sectionRef }) => {
           <div className="typeFaceSectionTitle">
             <h1>Typefaces</h1>
           </div>
-          {types.map((type, index) => (
-            <section className="typeFace" key={index}>
-              <DownloadForm
-                type={type}
-                displayForm={displayForm}
-                setDisplayForm={setDisplayForm}
-                index={index}
-              />
-              <div className="innerWidthContainer" key={index}>
-                <TypeFaceComponent
+          {fonts &&
+            fonts.map((type, index) => (
+              <section className="typeFace" key={index}>
+                <DownloadForm
                   type={type}
-                  handleDisplayForm={() => handleDisplayForm(index)}
+                  displayForm={displayForm}
+                  setDisplayForm={setDisplayForm}
+                  index={index}
                 />
-                <div className="buyDownloadButtonsContainer">
-                  <TypeButtonExplore type={types[index].name} />
-                  <TypeButtonDownload
-                    type={types[index].name}
+                <div className="innerWidthContainer" key={index}>
+                  <TypeFaceComponent
+                    type={type}
                     handleDisplayForm={() => handleDisplayForm(index)}
                   />
+                  <div className="buyDownloadButtonsContainer">
+                    <TypeButtonExplore type={type[0]} />
+                    <TypeButtonDownload
+                      type={type[0]}
+                      handleDisplayForm={() => handleDisplayForm(index)}
+                    />
+                  </div>
                 </div>
-              </div>
-            </section>
-          ))}
+              </section>
+            ))}
         </div>
       </div>
     </section>

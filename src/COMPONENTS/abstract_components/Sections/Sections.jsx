@@ -32,35 +32,40 @@ const sortFiles = (data) => {
       let length = Object.keys(current).length;
 
       if (index === segments.length - 1) {
+        const absolutePath =
+          localData[
+            `../../../resourceFolder_typeFoward/assets/${segments.join("/")}`
+          ];
+
         const keyExtension = key.split(".").pop().toLowerCase();
 
-        console.log(segments[0]);
         if (imageFiles.includes(keyExtension)) {
           current[length] = {
-            url:
-              `../../../resourceFolder_typeFoward/assets/${segments[0]}/${segments[1]}/` +
-              key,
+            url: absolutePath,
           };
         }
 
         if (typeFiles.includes(keyExtension)) {
-          current[length] = {
-            url:
-              `../../../resourceFolder_typeFoward/assets/${segments[0]}/${segments[1]}/` +
-              key,
-          };
+          const fullPath = `../../../resourceFolder_typeFoward/assets/${segments.join(
+            "/"
+          )}`;
+
+          current[length] = { url: localData[fullPath] };
         }
 
         if (bioFiles.includes(keyExtension)) {
           current[length] = {
-            url:
-              `../../../resourceFolder_typeFoward/assets/${segments[0]}/${segments[1]}/` +
-              key,
+            url: absolutePath,
           };
         }
       } else {
         if (!current[key]) {
-          current[key] = {};
+          if (index === segments.length - 2) {
+            current[key] = [];
+          } else {
+            current[key] = {};
+          }
+
           if (index === 0) {
             current[key] = { linkUrl: segments[index] };
           }

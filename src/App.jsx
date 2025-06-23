@@ -63,10 +63,11 @@ function App() {
           <ScrollToTop />
           <NavBarComponent backgroundColor={navbarColor} data={data} />
           <Routes>
-            {/* <Route
+            <Route
               path="/"
-              element={<HomeComponent sectionRef={sectionRefs} />}
+              element={<HomeComponent sectionRef={sectionRefs} data={data} />}
             />
+            {/*
             <Route
               path="services"
               element={<ServicesComponent sectionRef={sectionRefs} />}
