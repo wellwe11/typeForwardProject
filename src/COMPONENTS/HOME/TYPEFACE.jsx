@@ -47,7 +47,7 @@ const TypeFaceComponent = ({ type, handleDisplayForm }) => {
         </Link>
         {/* <h4>Free: {type?.free.length} </h4> */}
         <button className="fontInfoBtn" onClick={handleDisplayForm}>
-          <h3 className="fontInfo">2 FREE</h3>
+          <h3 className="fontInfo">{type[1].free_Fonts?.length} FREE</h3>
           <div className="fontUnderline"></div>
         </button>
       </div>
@@ -126,8 +126,11 @@ const DownloadForm = ({ type, displayForm, setDisplayForm, index }) => {
             </div>
             <div className="subinfoContainer">
               <h4 className="subinfo">
-                {`Enter your e-mail to get ${type?.name} and ${type?.name} free desktop and
-              web fonts with license to use as you wish.`}
+                {`Enter your e-mail to get ${type[1].free_Fonts[0].name} ${
+                  type[1].free_Fonts[3]?.name
+                    ? "and " + type[1].free_Fonts[3]?.name
+                    : ""
+                } free desktop and web fonts with license to use as you wish.`}
               </h4>
             </div>
             <div className="enterEmailContainer">

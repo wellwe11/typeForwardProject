@@ -50,7 +50,12 @@ const sortFiles = (data) => {
             "/"
           )}`;
 
-          current[length] = { url: localData[fullPath] };
+          const fontName = segments[4]
+            .replace(/-/g, " ")
+            .replace(/\./g, " ")
+            .replace(/\d+/g, "")
+            .replace(/woff\d*/g, "");
+          current[length] = { url: localData[fullPath], name: fontName };
         }
 
         if (bioFiles.includes(keyExtension)) {
