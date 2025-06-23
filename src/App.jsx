@@ -67,12 +67,14 @@ function App() {
               path="/"
               element={<HomeComponent sectionRef={sectionRefs} data={data} />}
             />
-            {/*
+
             <Route
               path="services"
-              element={<ServicesComponent sectionRef={sectionRefs} />}
+              element={
+                <ServicesComponent sectionRef={sectionRefs} data={data} />
+              }
             />
-            <Route
+            {/* <Route
               path="trail_fonts"
               element={<TrailFontsComponent sectionRef={sectionRefs} />}
             />
@@ -81,7 +83,7 @@ function App() {
               element={<AboutUsComponent sectionRef={sectionRefs} />}
             /> */}
           </Routes>
-          {/* <FooterComponent /> */}
+          <FooterComponent />
         </Router>
       </TabComponentProvider>
     </div>

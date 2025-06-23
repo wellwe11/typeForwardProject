@@ -11,8 +11,10 @@ import H_OneComponent from "../abstract_components/componentTitle/componentTitle
 import BoldAndThinText from "../abstract_components/boldAndThinText/boldAndThinText";
 import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
 
-const TypeServices = ({ sections, sectionRef }) => {
+const TypeServices = ({ sections, sectionRef, data }) => {
   const sectionEntries = Object.entries(sections);
+
+  console.log(data);
 
   const boldText =
     "Whether it’s one of our finely-tuned creations, a custom-built font, tailor-made lettering or an exclusive logotype, your brand deserves a competitive edge. So why wait?";
@@ -24,44 +26,47 @@ const TypeServices = ({ sections, sectionRef }) => {
       sectionColor={"black"}
       sectionRef={(el) => (sectionRef.current[5] = el)}
     >
-      <div className="typeServiceSectionContainer">
-        <div className="titleContainer">
-          <H_OneComponent title={"Type Services"} />
-        </div>
-        <div className="typeServicesIconsContainer">
-          {sectionEntries.map((entry, index) => (
-            <div key={index} className="outerContainer">
-              <BorderWithBorderBox
-                img={entry[1].icon}
-                button={true}
-                event={null}
-                backgroundColor="black"
-                textSize="h3"
-              >
-                {entry[0]}
-              </BorderWithBorderBox>
+      {data && (
+        <div className="typeServiceSectionContainer">
+          <div className="titleContainer">
+            <H_OneComponent title={`Type ${data[0][1]}`} />
+          </div>
+          <div className="typeServicesIconsContainer">
+            {data.slice(1).map(([key, value]) => (
+              <div key={key + " " + value} className="outerContainer">
+                <BorderWithBorderBox
+                  img={value.images?.[0].url}
+                  button={true}
+                  event={null}
+                  backgroundColor="black"
+                  textSize="h3"
+                >
+                  {key.replace(/_/g, " ")}
+                </BorderWithBorderBox>
+              </div>
+            ))}
+          </div>
+          <div className="typeServiceText">
+            <div className="typeServiceTextOne">
+              <BoldAndThinText
+                boldText={boldText}
+                thinText={thinText}
+                amountOfSpace={3}
+              />
             </div>
-          ))}
-        </div>
-        <div className="typeServiceText">
-          <div className="typeServiceTextOne">
-            <BoldAndThinText
-              boldText={boldText}
-              thinText={thinText}
-              amountOfSpace={3}
-            />
-          </div>
-          <div className="typeServiceTextTwo">
-            <ContactUsComp color={"white"} />
+            <div className="typeServiceTextTwo">
+              <ContactUsComp color={"white"} />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </SizeContainerComponent>
   );
 };
 
-export const Sections = ({ sections }) => {
+export const Sections = ({ sections, data }) => {
   const sectionEntries = Object.entries(sections);
+
   return (
     <div className="sectionsContainer">
       <div className="contentContainer">
@@ -93,7 +98,7 @@ export const Sections = ({ sections }) => {
   );
 };
 
-const SectionComponent = ({ sectionRef }) => {
+const SectionComponent = ({ sectionRef, data }) => {
   const sections = {
     "Font Modification": {
       name: "Font Modification",
@@ -146,22 +151,28 @@ const SectionComponent = ({ sectionRef }) => {
 
   return (
     <div className="sectionsSection">
-      <TypeServices sections={sections} sectionRef={sectionRef} />
+      <TypeServices sections={sections} sectionRef={sectionRef} data={data} />
 
       <section
         className="sectionWhite"
         ref={(el) => (sectionRef.current[6] = el)}
+        data={data}
       >
-        <Sections sections={sections} />
+        <Sections sections={sections} data={data} />
       </section>
     </div>
   );
 };
 
-const ServicesComponent = ({ sectionRef }) => {
+const ServicesComponent = ({ sectionRef, data }) => {
+  if (!data || !data.services) {
+    return <div>Loading...</div>;
+  }
+  const dataServices = Object.entries(data.services);
+
   return (
     <div className="servicesComponentContainer">
-      <SectionComponent sectionRef={sectionRef} />
+      <SectionComponent sectionRef={sectionRef} data={dataServices} />
       <div className="borderDiv"></div>
       <SubscribeComponent sectionRef={sectionRef} />
     </div>

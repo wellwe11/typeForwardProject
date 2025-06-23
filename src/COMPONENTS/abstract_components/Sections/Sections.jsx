@@ -40,6 +40,7 @@ const sortFiles = (data) => {
         const keyExtension = key.split(".").pop().toLowerCase();
 
         if (imageFiles.includes(keyExtension)) {
+          console.log(absolutePath);
           current[length] = {
             url: absolutePath,
           };

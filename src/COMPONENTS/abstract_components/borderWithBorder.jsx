@@ -14,7 +14,6 @@ const BorderWithBorderBox = ({
 }) => {
   const TextTag = textSize;
 
-  console.log(TextTag);
   const bgColor = backgroundColor;
   const textColor = bgColor === "black" ? "white" : "black";
   const borderColor =
