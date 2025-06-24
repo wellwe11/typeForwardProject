@@ -180,10 +180,12 @@ const ProfilesComponent = ({
 
   if (dataServices) {
     const filteredData = dataServices.filter(
-      ([key, value]) => value !== section && key !== "bio"
+      ([key, value]) =>
+        value !== section && key !== "_embedded" && key !== "bio"
     );
 
     console.log(filteredData);
+
     return (
       <div className="profilesComponentContainer">
         <Profiles

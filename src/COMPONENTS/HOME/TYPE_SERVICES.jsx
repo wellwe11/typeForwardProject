@@ -1,5 +1,4 @@
 import "./HOME.scss";
-import { Link } from "react-router-dom";
 import { memo, useEffect, useState } from "react";
 
 import BorderWithBorderBox from "../abstract_components/borderWithBorder";
@@ -8,19 +7,11 @@ import SizeContainerComponent from "../abstract_components/sizeContainer/sizeCon
 import BoldAndThinText from "../abstract_components/boldAndThinText/boldAndThinText";
 
 import fetchText from "../../functions/importFont";
+import findItem from "../../functions/findNestedItemInObj";
 
 const TypeServicesComponent = ({ sectionRef, data }) => {
   const [boldText, setBoldText] = useState("");
   const [thinText, setThinText] = useState("");
-
-  const findItem = (data, find) => {
-    for (let key in data) {
-      if (data[key].includes(find)) {
-        return data[key][1];
-      }
-    }
-  };
-
   const text = findItem(data, "bio")[0].url;
   const images = findItem(data, "images")[0].url;
 

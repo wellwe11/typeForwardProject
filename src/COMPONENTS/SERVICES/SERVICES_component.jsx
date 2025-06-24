@@ -14,14 +14,21 @@ import ProfilesComponent from "../abstract_components/mappedSections/mappedSecti
 const TypeServices = ({ sectionRef, data }) => {
   const [thinText, setThinText] = useState("");
   const [boldText, setBoldText] = useState("");
+  const dataobject = Object.fromEntries(data);
 
+  console.log(dataobject);
   useEffect(() => {
-    const mdUrl = data[1][1][0].url;
+    const mdUrl = dataobject.bio[0].url;
 
     if (mdUrl) {
       fetchText(mdUrl, setThinText, setBoldText);
     }
   }, []);
+
+  const displayIcons = data.filter(
+    ([key, value]) =>
+      key !== "bio" && key !== "_embedded" && value !== "services"
+  );
 
   return (
     <SizeContainerComponent
@@ -30,10 +37,10 @@ const TypeServices = ({ sectionRef, data }) => {
     >
       <div className="typeServiceSectionContainer">
         <div className="titleContainer">
-          <H_OneComponent title={`Type ${data[0][1]}`} />
+          <H_OneComponent title={`Type ${dataobject.linkUrl}`} />
         </div>
         <div className="typeServicesIconsContainer">
-          {data.slice(2).map(([key, value]) => (
+          {displayIcons.map(([key, value]) => (
             <div key={key + " " + value} className="outerContainer">
               <BorderWithBorderBox
                 img={value.images?.[0].url}
@@ -71,6 +78,8 @@ const ServicesComponent = ({ sectionRef, data }) => {
 
   if (data.services) {
     const dataEntries = Object.entries(data?.services);
+    console.log(dataEntries);
+
     return (
       <div className="servicesComponentContainer">
         <TypeServices sectionRef={sectionRef} data={dataEntries} />

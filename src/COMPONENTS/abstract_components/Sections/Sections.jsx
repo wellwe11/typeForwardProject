@@ -24,6 +24,7 @@ const sortFiles = (data) => {
   const imageFiles = ["png", "svg", "jpg", "jpeg", "gif", "webp"];
   const typeFiles = ["woff", "woff2"];
   const bioFiles = ["md"];
+  const jsonFiles = ["json"];
 
   data.forEach((segments) => {
     let current = localObj;
@@ -63,6 +64,16 @@ const sortFiles = (data) => {
             url: absolutePath,
           };
         }
+
+        if (jsonFiles.includes(keyExtension)) {
+          // const JSONfile = JSON.parse(absolutePath);
+          fetch(absolutePath)
+            .then((res) => res.json())
+            .then((json) => (current._embedded = { info: json }))
+            .catch((err) =>
+              console.error("Failed to fetch json in Sections.jsx", err)
+            );
+        }
       } else {
         if (!current[key]) {
           if (index === segments.length - 2) {
@@ -93,8 +104,21 @@ export const ExportData = () => {
       "../../../resourceFolder_typeFoward/assets/"
     );
     const structured = sortFiles(cleanedPath);
-    setObjectData(structured);
+
+    setTimeout(() => {
+      const sorted = sortByPosition(structured);
+      setObjectData(Object.fromEntries(sorted));
+    }, 100);
   }, []);
+
+  // order by json file
+
+  const sortByPosition = (items) => {
+    return Object.entries(items).sort(
+      ([, a], [, b]) =>
+        +a?._embedded.info.position - +b?._embedded.info.position
+    );
+  };
 
   return objectData;
 };
