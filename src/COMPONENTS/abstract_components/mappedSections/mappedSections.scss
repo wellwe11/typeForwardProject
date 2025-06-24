@@ -29,11 +29,13 @@
       flex-direction: column;
 
       .leftSide {
+        order: 2;
         width: 80%;
+        padding-top: 50px;
       }
 
       .rightSide {
-        padding-top: 50px;
+        order: 1;
       }
     }
   }
