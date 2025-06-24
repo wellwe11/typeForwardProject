@@ -1,26 +1,32 @@
 import "./HOME.scss";
 import { Link } from "react-router-dom";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 
-import mobileServiceIcon from "../../resourceFolder_typeFoward/images/mobile-type-services.svg";
 import BorderWithBorderBox from "../abstract_components/borderWithBorder";
 import H_OneComponent from "../abstract_components/componentTitle/componentTitle";
 import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
 import BoldAndThinText from "../abstract_components/boldAndThinText/boldAndThinText";
 
-const TypeServicesComponent = ({ sectionRef }) => {
-  const boldText = `
-Whether it’s one of our finely-tuned creations, a custom-built font,
-tailor-made lettering or an exclusive logotype, your brand deserves a
-competitive edge. So why wait?
-`;
-  const thinText = `
-At Type Forward, we believe in the power of individuality. It’s a notion
-that can trace its roots back to the origins of design and one that has
-propelled us to new horizons while enriching our shared perspectives.
-Deep within our vaults, we have something for everyone, newly-minted
-startups or veteran players alike.
-`;
+import fetchText from "../../functions/importFont";
+
+const TypeServicesComponent = ({ sectionRef, data }) => {
+  const [boldText, setBoldText] = useState("");
+  const [thinText, setThinText] = useState("");
+
+  const findItem = (data, find) => {
+    for (let key in data) {
+      if (data[key].includes(find)) {
+        return data[key][1];
+      }
+    }
+  };
+
+  const text = findItem(data, "bio")[0].url;
+  const images = findItem(data, "images")[0].url;
+
+  useEffect(() => {
+    fetchText(text, setThinText, setBoldText);
+  }, []);
 
   return (
     <SizeContainerComponent
@@ -40,9 +46,10 @@ startups or veteran players alike.
         </div>
         <div className="imagePartContainer">
           <BorderWithBorderBox
-            img={mobileServiceIcon}
+            img={images}
             showLink={true}
-            linkTo={"services"}
+            eventHandler={"Link"}
+            event={"services"}
             backgroundColor="black"
             textSize="h2"
           >

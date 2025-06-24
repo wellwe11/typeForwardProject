@@ -113,14 +113,17 @@ const ForwardWelcomeComponent = ({ sectionRef }) => {
 };
 
 const HomeComponent = ({ sectionRef, data }) => {
-  return (
-    <div className="homeContainer">
-      <ForwardWelcomeComponent sectionRef={sectionRef} />
-      <TypeComponent sectionRef={sectionRef} data={data} />
-      <TypeServicesComponent sectionRef={sectionRef} />
-      <SubsrcibeComponent sectionRef={sectionRef} />
-    </div>
-  );
+  if (data.typefaces) {
+    const dataEntries = Object.entries(data?.typefaces);
+    return (
+      <div className="homeContainer">
+        <ForwardWelcomeComponent sectionRef={sectionRef} />
+        <TypeComponent sectionRef={sectionRef} data={data} />
+        <TypeServicesComponent sectionRef={sectionRef} data={dataEntries} />
+        <SubsrcibeComponent sectionRef={sectionRef} />
+      </div>
+    );
+  }
 };
 
 export default React.memo(HomeComponent);

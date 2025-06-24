@@ -89,7 +89,7 @@ const ProfileText = ({ data, fontColor }) => {
 
 const ProfileSocials = () => {};
 
-const Profile = ({
+export const Profile = ({
   profile,
   data,
   canHover,

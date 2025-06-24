@@ -67,7 +67,7 @@ const BorderWithBorderBox = ({
         {eventHandler === "Link" && (
           <Link
             className="button"
-            to={`./${event}`}
+            to={`/${event}`}
             style={{
               borderTop: borderColor,
             }}

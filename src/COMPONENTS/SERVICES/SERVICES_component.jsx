@@ -70,12 +70,10 @@ const ServicesComponent = ({ sectionRef, data }) => {
   }
 
   if (data.services) {
+    const dataEntries = Object.entries(data?.services);
     return (
       <div className="servicesComponentContainer">
-        <TypeServices
-          sectionRef={sectionRef}
-          data={Object.entries(data?.services)}
-        />
+        <TypeServices sectionRef={sectionRef} data={dataEntries} />
         <ProfilesComponent
           data={data}
           canHover={false}

@@ -34,8 +34,6 @@ const TypeFaceComponent = ({ type, handleDisplayForm }) => {
     return text.replace(/([a-z])([A-Z])/g, "$1 $2");
   }
 
-  console.log(type);
-
   return (
     <div className="typeFaceContainer" style={{ fontFamily: type[0] }}>
       <h1 className="typeFaceName">{addSpaceBeforeCaps(type[0])}</h1>
@@ -157,8 +155,6 @@ const TypeComponent = ({ sectionRef, data }) => {
       setFonts(Object.entries(data?.typefaces?.fonts));
     }
   }, [data]);
-
-  console.log(fonts);
 
   useEffect(() => {
     if (displayForm !== null) {
