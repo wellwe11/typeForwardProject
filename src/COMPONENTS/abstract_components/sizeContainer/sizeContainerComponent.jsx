@@ -1,6 +1,10 @@
 import "./sizeContainerComponent.scss";
 
-const SizeContainerComponent = ({ children, sectionColor, sectionRef }) => {
+const SizeContainerComponent = ({
+  children,
+  sectionColor = "black",
+  sectionRef,
+}) => {
   const firstLetterCapital = (string) =>
     string.charAt(0).toUpperCase() + string.slice(1);
 

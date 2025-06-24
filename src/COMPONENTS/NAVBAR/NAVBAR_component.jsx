@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+
 import React, { useEffect, useState } from "react";
 
 import "./NAVBAR.scss";
@@ -22,7 +23,11 @@ const LogoButton = ({ backgroundColor }) => {
 
   return (
     <div className="LogoContainer">
-      <Link onMouseEnter={handleIsHover} onMouseLeave={handleIsHover} to={"./"}>
+      <Link
+        onMouseEnter={handleIsHover}
+        onMouseLeave={handleIsHover}
+        to={"./typefaces"}
+      >
         <h1 className="logoTitle">type forward</h1>
         <div className="SVGContainer">
           <SvgLogo isHover={isHover} backgroundColor={backgroundColor} />

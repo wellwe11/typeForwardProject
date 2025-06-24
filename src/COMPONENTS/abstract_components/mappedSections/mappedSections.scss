@@ -1,0 +1,44 @@
+.profileContainer {
+  margin-bottom: 10vw;
+  margin-top: 10vw;
+  .profileNameContainer {
+    min-width: 120%;
+    margin-left: -10%;
+
+    .profileName {
+    }
+  }
+
+  .profileContent {
+    margin-top: 5vw;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    .leftSide {
+      width: 55%;
+    }
+
+    .rightSide {
+      width: 35%;
+    }
+
+    @media screen and (max-width: 1000px) {
+      flex-direction: column;
+
+      .leftSide {
+        width: 80%;
+      }
+
+      .rightSide {
+        padding-top: 50px;
+      }
+    }
+  }
+}
+
+.profilePictureContainer {
+  height: 100%;
+}

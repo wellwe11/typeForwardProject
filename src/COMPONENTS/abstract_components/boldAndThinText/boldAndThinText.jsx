@@ -5,6 +5,7 @@ const BoldAndThinText = ({
   thinWeight = 400,
   fontType = "h3",
   amountOfSpace = 2,
+  fontColor = "white",
 }) => {
   const FontTag = fontType;
 
@@ -21,11 +22,17 @@ const BoldAndThinText = ({
 
   return (
     <span className="componentText">
-      <FontTag className="bold" style={{ fontWeight: boldWeight }}>
+      <FontTag
+        className="bold"
+        style={{ fontWeight: boldWeight, color: fontColor }}
+      >
         {boldText}
       </FontTag>
       {BrSpace}
-      <FontTag className="thin" style={{ fontWeight: thinWeight }}>
+      <FontTag
+        className="thin"
+        style={{ fontWeight: thinWeight, color: fontColor }}
+      >
         {thinText}
       </FontTag>
     </span>

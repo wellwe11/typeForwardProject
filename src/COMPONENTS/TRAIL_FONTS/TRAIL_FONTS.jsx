@@ -4,18 +4,28 @@ import ContactUsComp from "../abstract_components/contactUs/contactUs";
 import H_OneComponent from "../abstract_components/componentTitle/componentTitle";
 import BoldAndThinText from "../abstract_components/boldAndThinText/boldAndThinText";
 import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
+import { useEffect, useState } from "react";
+import fetchText from "../../functions/importFont";
 
-const SignUpInfoContent = () => {
-  const boldText =
-    "Sign up for our mailing list to get access to all of our font files and give them a test run.";
-  const thinText =
-    "The trial fonts are for testing and evaluation purposes only, so you can make sure they're the perfect fit for your project before committing. And if you need any help or have any questions along the way, don't hesitate to contact us – we're always happy to help our customers find the right font for their needs.";
+const SignUpInfoContent = ({ data }) => {
+  const [thinText, setThinText] = useState("");
+  const [boldText, setBoldText] = useState("");
+  console.log(data);
+
+  useEffect(() => {
+    const mdUrl = data.filter((e) => e.includes("bio"));
+    const text = mdUrl[0][1][0].url;
+    if (mdUrl) {
+      fetchText(text, setThinText, setBoldText);
+    }
+  }, []);
 
   return (
     <BoldAndThinText
       boldText={boldText}
       thinText={thinText}
       amountOfSpace={2}
+      fontColor="black"
     />
   );
 };
@@ -39,24 +49,31 @@ const SubscribeContent = () => {
   );
 };
 
-const TrailFontsComponent = () => {
-  return (
-    <SizeContainerComponent sectionColor={"white"}>
-      <div className="trailFontContainer">
-        <div className="titleContainer">
-          <H_OneComponent title={"Download trial fonts"} />
-        </div>
-        <div className="content">
-          <div className="leftContentContainer">
-            <SubscribeContent />
+const TrailFontsComponent = ({ data }) => {
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  if (data.trail_fonts) {
+    const dataTrailFonts = Object.entries(data?.trail_fonts);
+    return (
+      <SizeContainerComponent sectionColor={"white"}>
+        <div className="trailFontContainer">
+          <div className="titleContainer">
+            <H_OneComponent title={"Download trial fonts"} />
           </div>
-          <div className="rightContentContainer">
-            <SignUpInfoContent />
+          <div className="content">
+            <div className="leftContentContainer">
+              <SubscribeContent />
+            </div>
+            <div className="rightContentContainer">
+              <SignUpInfoContent data={dataTrailFonts} />
+            </div>
           </div>
         </div>
-      </div>
-    </SizeContainerComponent>
-  );
+      </SizeContainerComponent>
+    );
+  }
 };
 
 export default TrailFontsComponent;

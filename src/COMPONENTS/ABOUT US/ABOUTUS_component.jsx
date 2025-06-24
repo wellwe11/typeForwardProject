@@ -5,13 +5,21 @@ import H_OneComponent from "../abstract_components/componentTitle/componentTitle
 import ContactUsComp from "../abstract_components/contactUs/contactUs";
 import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
 import LinkImagesComponent from "../abstract_components/smallIcons/smallIconsComponent";
+import { useEffect, useState } from "react";
+import fetchText from "../../functions/importFont";
+import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 
-const AboutUsInfoContainer = () => {
-  const boldText =
-    "Type Forward is an independent type foundry founded by us - Stan Partalev and Mirela Belova.";
+const AboutUsInfoContainer = ({ data }) => {
+  const [boldText, setBoldText] = useState("");
+  const [thinText, setThinText] = useState("");
 
-  const thinText =
-    "After working together with significant ease for the past few years, we decided it was time to team up. We started out as visual artists in various fields. However, we both found ourselves most inspired when creating functional designs, which in time grew into a passion for typography and type design. Driven by shared vision and inspiration, we focus on producing high-quality original fonts with great technological care. Now with several years of experience working on different successful typefaces, we are ever so motivated to share what we are capable of.";
+  useEffect(() => {
+    const mdUrl = data.filter((e) => e.includes("bio"));
+    const text = mdUrl[0][1][0].url;
+    if (mdUrl) {
+      fetchText(text, setThinText, setBoldText);
+    }
+  }, []);
 
   return (
     <SizeContainerComponent sectionColor={"black"}>
@@ -36,12 +44,31 @@ const AboutUsInfoContainer = () => {
   );
 };
 
-const AboutUsComponent = () => {
-  return (
-    <div>
-      <AboutUsInfoContainer />
-    </div>
-  );
+const AboutUsComponent = ({ data }) => {
+  if (!data.about_us) {
+    return (
+      <div>
+        <h1>...Loading</h1>
+      </div>
+    );
+  }
+
+  if (data.about_us) {
+    const aboutUsEntries = Object.entries(data.about_us);
+
+    return (
+      <div>
+        <AboutUsInfoContainer data={aboutUsEntries} />
+        <ProfilesComponent
+          data={data}
+          canHover={true}
+          section={"about_us"}
+          sectionColor={"white"}
+          sliceAmount={1}
+        />
+      </div>
+    );
+  }
 };
 
 export default AboutUsComponent;

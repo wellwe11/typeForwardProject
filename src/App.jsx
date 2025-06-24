@@ -27,67 +27,82 @@ const ScrollToTop = () => {
 function App() {
   const sectionRefs = useRef([]);
   const [navbarColor, setNavColor] = useState("black");
-
   let data = ExportData();
-  console.log(data);
 
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       const visibleEntry = entries.find((entry) => entry.isIntersecting);
-  //       if (visibleEntry) {
-  //         const classList = visibleEntry.target.classList;
-  //         if (classList.contains("sectionBlack")) {
-  //           setNavColor("black");
-  //         } else {
-  //           setNavColor("white");
-  //         }
-  //       }
-  //     },
-  //     {
-  //       threshold: 0.17,
-  //     }
-  //   );
+  if (!data) {
+    return (
+      <div>
+        <h1>...Loading</h1>
+      </div>
+    );
+  }
 
-  //   sectionRefs.current.forEach((section) => {
-  //     if (section) observer.observe(section);
-  //   });
+  if (data) {
+    console.log(data);
 
-  //   return () => observer.disconnect();
-  // }, []);
+    // useEffect(() => {
+    //   const observer = new IntersectionObserver(
+    //     (entries) => {
+    //       const visibleEntry = entries.find((entry) => entry.isIntersecting);
+    //       if (visibleEntry) {
+    //         const classList = visibleEntry.target.classList;
+    //         if (classList.contains("sectionBlack")) {
+    //           setNavColor("black");
+    //         } else {
+    //           setNavColor("white");
+    //         }
+    //       }
+    //     },
+    //     {
+    //       threshold: 0.17,
+    //     }
+    //   );
 
-  return (
-    <div className="appContainer">
-      <TabComponentProvider>
-        <Router>
-          <ScrollToTop />
-          <NavBarComponent backgroundColor={navbarColor} data={data} />
-          <Routes>
-            <Route
-              path="/"
-              element={<HomeComponent sectionRef={sectionRefs} data={data} />}
-            />
+    //   sectionRefs.current.forEach((section) => {
+    //     if (section) observer.observe(section);
+    //   });
 
-            <Route
-              path="services"
-              element={
-                <ServicesComponent sectionRef={sectionRefs} data={data} />
-              }
-            />
-            {/* <Route
-              path="trail_fonts"
-              element={<TrailFontsComponent sectionRef={sectionRefs} />}
-            />
-            <Route
-              path="about_us"
-              element={<AboutUsComponent sectionRef={sectionRefs} />}
-            /> */}
-          </Routes>
-          <FooterComponent />
-        </Router>
-      </TabComponentProvider>
-    </div>
-  );
+    //   return () => observer.disconnect();
+    // }, []);
+
+    return (
+      <div className="appContainer">
+        <TabComponentProvider>
+          <Router>
+            <ScrollToTop />
+            <NavBarComponent backgroundColor={navbarColor} data={data} />
+            <Routes>
+              <Route
+                path="/typefaces"
+                element={<HomeComponent sectionRef={sectionRefs} data={data} />}
+              />
+
+              <Route
+                path="services"
+                element={
+                  <ServicesComponent sectionRef={sectionRefs} data={data} />
+                }
+              />
+              <Route
+                path="trail_fonts"
+                element={
+                  <TrailFontsComponent sectionRef={sectionRefs} data={data} />
+                }
+              />
+
+              <Route
+                path="about_us"
+                element={
+                  <AboutUsComponent sectionRef={sectionRefs} data={data} />
+                }
+              />
+            </Routes>
+            <FooterComponent />
+          </Router>
+        </TabComponentProvider>
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -5,12 +5,10 @@ const BorderWithBorderBox = ({
   children,
   img,
   backgroundColor = "black",
-  button,
+  eventHandler,
   event,
-  showLink,
-  linkTo,
   alt,
-  textSize,
+  textSize = "h3",
 }) => {
   const TextTag = textSize;
 
@@ -38,9 +36,14 @@ const BorderWithBorderBox = ({
         <img
           src={img}
           alt={alt}
-          style={{ filter: backgroundColor === "black" ? "invert(1)" : "none" }}
+          style={{
+            filter: backgroundColor === "black" ? "invert(1)" : "none",
+            height: !eventHandler ? "100%" : "",
+            maxHeight: !eventHandler ? "100%" : "",
+          }}
         />
-        {button && (
+
+        {eventHandler === "button" && (
           <button
             onClick={event}
             className="button"
@@ -55,15 +58,16 @@ const BorderWithBorderBox = ({
                   color: textColor,
                 }}
               >
-                {children}
+                {children || "please add text"}
               </TextTag>
             </span>
           </button>
         )}
-        {showLink && (
+
+        {eventHandler === "Link" && (
           <Link
             className="button"
-            to={`./${linkTo}`}
+            to={`./${event}`}
             style={{
               borderTop: borderColor,
             }}
