@@ -1,5 +1,7 @@
 import "./ABOUTUS.scss";
 
+import React, { memo } from "react";
+
 import TopSectionBio from "../abstract_components/topSectionBio/topSectionBio";
 import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 
@@ -29,4 +31,4 @@ const AboutUsComponent = ({ data }) => {
   }
 };
 
-export default AboutUsComponent;
+export default React.memo(AboutUsComponent);

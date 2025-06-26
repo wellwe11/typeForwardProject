@@ -40,25 +40,32 @@ const ProfileImage = ({
       className="profilePictureContainer"
     >
       {canHover ? (
-        !pictureHover ? (
-          <BorderWithBorderBox
-            img={images.mainImage?.[0].url}
-            backgroundColor={sectionColor === "white" ? "white" : "black"}
-            eventHandler={linkOrButton}
-            event={event}
+        <div>
+          <div className="firstImage">
+            <BorderWithBorderBox
+              img={images.mainImage?.[0].url}
+              backgroundColor={sectionColor === "white" ? "white" : "black"}
+              eventHandler={linkOrButton}
+              event={event}
+            >
+              {children}
+            </BorderWithBorderBox>
+          </div>
+
+          <div
+            className="secondImage"
+            style={{ opacity: pictureHover ? "1" : "" }}
           >
-            {children}
-          </BorderWithBorderBox>
-        ) : (
-          <BorderWithBorderBox
-            img={images.rest?.[0].url}
-            backgroundColor={sectionColor === "white" ? "white" : "black"}
-            eventHandler={linkOrButton}
-            event={event}
-          >
-            {children}
-          </BorderWithBorderBox>
-        )
+            <BorderWithBorderBox
+              img={images.rest?.[0].url}
+              backgroundColor={sectionColor === "white" ? "white" : "black"}
+              eventHandler={linkOrButton}
+              event={event}
+            >
+              {children}
+            </BorderWithBorderBox>
+          </div>
+        </div>
       ) : (
         <BorderWithBorderBox
           img={images.rest?.[0].url}

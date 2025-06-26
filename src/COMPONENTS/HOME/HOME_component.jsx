@@ -12,7 +12,7 @@ import ProfilesComponent from "../abstract_components/mappedSections/mappedSecti
 const CurrentImageDotComp = ({ array, activeIndex, setActiveIndex }) => {
   return (
     <div className="currentImageDotCompContainer">
-      {array.map((font, index) => (
+      {array.map((_, index) => (
         <button
           key={index}
           onClick={() => setActiveIndex(index)}
@@ -114,8 +114,6 @@ const ForwardWelcomeComponent = ({ sectionRef }) => {
 
 const HomeComponent = ({ sectionRef, data }) => {
   if (data.typefaces) {
-    const dataEntries = Object.entries(data?.typefaces);
-
     return (
       <div className="homeContainer">
         <ForwardWelcomeComponent sectionRef={sectionRef} />
@@ -127,8 +125,8 @@ const HomeComponent = ({ sectionRef, data }) => {
           canHover={false}
           section={"typefaces"}
           sectionColor={"black"}
-          linkOrButton={"button"}
-          event={""}
+          linkOrButton={"Link"}
+          event={"services"}
           eventName={"Learn more"}
         />
         <SubsrcibeComponent sectionRef={sectionRef} />

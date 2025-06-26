@@ -34,10 +34,11 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
 
     img {
       display: flex;
-      width: 100%;
+      min-width: 120%;
       max-height: 70%;
     }
 
