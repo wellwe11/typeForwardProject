@@ -1,7 +1,7 @@
 import "./smallIconsComponent.scss";
 
 const icons = import.meta.glob(
-  "../../../resourceFolder_typeFoward/socials_icons/*.svg",
+  "../../../resourceFolder_typeFoward/extended_assets/socials_icons/*.svg",
   {
     eager: true,
     as: "url",
@@ -15,7 +15,6 @@ const LinkImagesComponent = ({ sectionColor, data }) => {
   const imageFilterBlack = bgColor === "black" ? "invert(1)" : "invert(0)";
   const imageFilterWhite = bgColor === "white" ? "invert(1)" : "invert(0)";
 
-  console.log(icons);
   if (!data)
     return (
       <div>
@@ -24,6 +23,8 @@ const LinkImagesComponent = ({ sectionColor, data }) => {
     );
 
   const dataEntries = Object.entries(data);
+
+  console.log(dataEntries);
 
   return (
     <div
@@ -37,28 +38,25 @@ const LinkImagesComponent = ({ sectionColor, data }) => {
       }}
     >
       {icons &&
-        dataEntries.map(([index, obj]) => {
-          console.log(index, obj);
-          return (
-            <div className="iconButtonContainer">
-              <div className="insideIconButtonContainer">
-                <button
-                  className="iconButton"
-                  onClick={() => window.open(obj, "_blank")}
-                >
-                  <img
-                    src={
-                      icons[
-                        `../../../resourceFolder_typeFoward/socials_icons/${index}.min.svg`
-                      ]
-                    }
-                    alt=""
-                  />
-                </button>
-              </div>
+        dataEntries.map(([index, obj]) => (
+          <div className="iconButtonContainer">
+            <div className="insideIconButtonContainer">
+              <button
+                className="iconButton"
+                onClick={() => window.open(obj, "_blank")}
+              >
+                <img
+                  src={
+                    icons[
+                      `../../../resourceFolder_typeFoward/extended_assets/socials_icons/${index}.min.svg`
+                    ]
+                  }
+                  alt=""
+                />
+              </button>
             </div>
-          );
-        })}
+          </div>
+        ))}
     </div>
   );
 };

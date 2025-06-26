@@ -1,8 +1,6 @@
 // goal is to dynamically have files which will allow admin to update nav-buttons & its content
 // first import local file
 
-import { useState } from "react";
-
 // remove all file-path that wont be used inside of the main-objet 'api'
 const cleanPathFile = (data, replace) =>
   Object.keys(data).map((path) => path.replace(replace, "").trim().split("/"));
@@ -18,51 +16,55 @@ const sortFiles = async (data, fullData, path) => {
   const jsonFiles = ["json"];
 
   for (const segments of data) {
-    let current = localObj;
+    if (segments[0] === "assets" || segments[0] === "extended_assets") {
+      console.log(segments[0]);
 
-    for (let index = 0; index < segments.length; index++) {
-      const key = segments[index];
-      const length = Object.keys(current).length;
+      let current = localObj;
 
-      if (index === segments.length - 1) {
-        const absolutePath = fullData[`${path}${segments.join("/")}`];
-        const keyExtension = key.split(".").pop().toLowerCase();
+      for (let index = 0; index < segments.length; index++) {
+        const key = segments[index];
+        const length = Object.keys(current).length;
 
-        if (imageFiles.includes(keyExtension)) {
-          current[length] = { url: absolutePath };
-        }
+        if (index === segments.length - 1) {
+          const absolutePath = fullData[`${path}${segments.join("/")}`];
+          const keyExtension = key.split(".").pop().toLowerCase();
 
-        if (typeFiles.includes(keyExtension)) {
-          const fontName = segments[4]
-            .replace(/-/g, " ")
-            .replace(/\./g, " ")
-            .replace(/\d+/g, "")
-            .replace(/woff\d*/g, "");
-          current[length] = {
-            url: fullData[`${path}${segments.join("/")}`],
-            name: fontName,
-          };
-        }
-
-        if (bioFiles.includes(keyExtension)) {
-          current[length] = { url: absolutePath };
-        }
-
-        if (jsonFiles.includes(keyExtension)) {
-          try {
-            const res = await fetch(absolutePath);
-            const json = await res.json();
-            current._embedded = { info: json };
-          } catch (err) {
-            console.error("Failed to fetch json in Sections.jsx", err);
+          if (imageFiles.includes(keyExtension)) {
+            current[length] = { url: absolutePath };
           }
-        }
-      } else {
-        if (!current[key]) {
-          current[key] = index === segments.length - 2 ? [] : {};
-        }
 
-        current = current[key];
+          if (typeFiles.includes(keyExtension)) {
+            const fontName = segments[4]
+              .replace(/-/g, " ")
+              .replace(/\./g, " ")
+              .replace(/\d+/g, "")
+              .replace(/woff\d*/g, "");
+            current[length] = {
+              url: fullData[`${path}${segments.join("/")}`],
+              name: fontName,
+            };
+          }
+
+          if (bioFiles.includes(keyExtension)) {
+            current[length] = { url: absolutePath };
+          }
+
+          if (jsonFiles.includes(keyExtension)) {
+            try {
+              const res = await fetch(absolutePath);
+              const json = await res.json();
+              current._embedded = { info: json };
+            } catch (err) {
+              console.error("Failed to fetch json in Sections.jsx", err);
+            }
+          }
+        } else {
+          if (!current[key]) {
+            current[key] = index === segments.length - 2 ? [] : {};
+          }
+
+          current = current[key];
+        }
       }
     }
   }
@@ -82,8 +84,13 @@ export const exportData = async (localData, path) => {
   };
 
   if (structured) {
-    const sorted = sortByPosition(structured);
+    const sorted = sortByPosition(structured.assets);
 
-    return Object.fromEntries(sorted);
+    if (sorted) {
+      return {
+        assets: Object.fromEntries(sorted),
+        extended_assets: structured.extended_assets,
+      };
+    }
   }
 };

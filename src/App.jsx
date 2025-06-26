@@ -12,7 +12,7 @@ import TrailFontsComponent from "./COMPONENTS/TRAIL_FONTS/TRAIL_FONTS";
 import AboutUsComponent from "./COMPONENTS/ABOUT US/ABOUTUS_component";
 import { exportData } from "./COMPONENTS/abstract_components/Sections/Sections";
 
-const localData = import.meta.glob("./resourceFolder_typeFoward/assets/**/*", {
+const localData = import.meta.glob("./resourceFolder_typeFoward/**/*", {
   eager: true,
   as: "url",
 });
@@ -32,23 +32,22 @@ const ScrollToTop = () => {
 function App() {
   const sectionRefs = useRef([]);
   const [navbarColor, setNavColor] = useState("black");
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       const fetchedData = await exportData(
         localData,
-        "./resourceFolder_typeFoward/assets/"
+        "./resourceFolder_typeFoward/"
       );
 
-      if (fetchedData) {
-        setData(fetchedData);
-      }
+      setData(fetchedData.assets);
     };
 
     fetchData();
   }, []);
 
+  console.log(data);
   if (!data) {
     return (
       <div>
@@ -84,7 +83,7 @@ function App() {
 
   if (!data.typefaces?._embedded) return null;
 
-  if (data.typefaces?._embedded) {
+  if (data) {
     return (
       <div className="appContainer">
         <TabComponentProvider>
