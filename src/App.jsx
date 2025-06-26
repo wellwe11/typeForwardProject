@@ -10,7 +10,12 @@ import { useEffect, useRef, useState } from "react";
 import ServicesComponent from "./COMPONENTS/SERVICES/SERVICES_component";
 import TrailFontsComponent from "./COMPONENTS/TRAIL_FONTS/TRAIL_FONTS";
 import AboutUsComponent from "./COMPONENTS/ABOUT US/ABOUTUS_component";
-import { ExportData } from "./COMPONENTS/abstract_components/Sections/Sections";
+import { exportData } from "./COMPONENTS/abstract_components/Sections/Sections";
+
+const localData = import.meta.glob("./resourceFolder_typeFoward/assets/**/*", {
+  eager: true,
+  as: "url",
+});
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -27,7 +32,22 @@ const ScrollToTop = () => {
 function App() {
   const sectionRefs = useRef([]);
   const [navbarColor, setNavColor] = useState("black");
-  let data = ExportData();
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedData = await exportData(
+        localData,
+        "./resourceFolder_typeFoward/assets/"
+      );
+
+      if (fetchedData) {
+        setData(fetchedData);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   if (!data) {
     return (
