@@ -67,19 +67,19 @@ const NavButtons = ({ backgroundColor, data }) => {
               key={index}
               className="uniqueLinkContainer"
               style={{ display: showButtons ? "flex" : "" }}
-              onClick={() =>
-                setActiveTab(
-                  !obj._embedded.info.linkTo.includes("#")
-                    ? obj._embedded.info.linkTo.toLowerCase()
-                    : ""
-                )
-              }
             >
               <Link
                 to={
                   !obj._embedded.info.linkTo.includes("#")
                     ? obj._embedded.info.linkTo
                     : ""
+                }
+                onClick={() =>
+                  setActiveTab(
+                    !obj._embedded.info.linkTo.includes("#")
+                      ? obj._embedded.info.linkTo.toLowerCase()
+                      : ""
+                  )
                 }
               >
                 <span className="keyTextSpan">

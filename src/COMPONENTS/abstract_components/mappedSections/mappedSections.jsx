@@ -7,7 +7,14 @@ import fetchText from "../../../functions/importFont";
 import SizeContainerComponent from "../sizeContainer/sizeContainerComponent";
 import BoldAndThinText from "../boldAndThinText/boldAndThinText";
 
-const ProfileImage = ({ children, data, canHover, linkOrButton, event }) => {
+const ProfileImage = ({
+  children,
+  data,
+  canHover,
+  linkOrButton,
+  event,
+  sectionColor,
+}) => {
   const [pictureHover, setPictureHover] = useState(false);
   const [images, setImages] = useState([]);
 
@@ -36,7 +43,7 @@ const ProfileImage = ({ children, data, canHover, linkOrButton, event }) => {
         !pictureHover ? (
           <BorderWithBorderBox
             img={images.mainImage?.[0].url}
-            backgroundColor="white"
+            backgroundColor={sectionColor === "white" ? "white" : "black"}
             eventHandler={linkOrButton}
             event={event}
           >
@@ -45,7 +52,7 @@ const ProfileImage = ({ children, data, canHover, linkOrButton, event }) => {
         ) : (
           <BorderWithBorderBox
             img={images.rest?.[0].url}
-            backgroundColor="white"
+            backgroundColor={sectionColor === "white" ? "white" : "black"}
             eventHandler={linkOrButton}
             event={event}
           >
@@ -55,7 +62,7 @@ const ProfileImage = ({ children, data, canHover, linkOrButton, event }) => {
       ) : (
         <BorderWithBorderBox
           img={images.rest?.[0].url}
-          backgroundColor="white"
+          backgroundColor={sectionColor === "white" ? "white" : "black"}
           eventHandler={linkOrButton}
           event={event}
         >
@@ -75,6 +82,7 @@ const ProfileText = ({ data, fontColor }) => {
       fetchText(data, setThinText, setBoldText);
     }
   }, []);
+
   return (
     <div>
       <BoldAndThinText
@@ -91,12 +99,14 @@ const ProfileSocials = () => {};
 
 export const Profile = ({
   profile,
+  profileTitle,
   data,
   canHover,
   linkOrButton,
   event,
   eventName,
   fontColor,
+  sectionColor,
 }) => {
   const text = data.bio?.[0].url;
   const images = data?.images;
@@ -106,10 +116,17 @@ export const Profile = ({
     <div className="profileContainer">
       <div
         className="profileNameContainer"
-        style={{ borderBottom: "2px solid " + fontColor }}
+        style={{
+          borderBottom:
+            profileTitle && profileTitle.length < 1
+              ? "2px solid " + fontColor
+              : !profileTitle
+              ? "2px solid " + fontColor
+              : sectionColor,
+        }}
       >
         <h1 className="profileName" style={{ color: fontColor }}>
-          {name}
+          {profileTitle || name}
         </h1>
       </div>
 
@@ -124,6 +141,7 @@ export const Profile = ({
             canHover={canHover}
             linkOrButton={linkOrButton}
             event={event}
+            sectionColor={sectionColor}
           >
             {eventName || name}
           </ProfileImage>
@@ -136,7 +154,7 @@ export const Profile = ({
 const Profiles = ({
   data,
   canHover,
-
+  profileTitle,
   sectionColor,
   linkOrButton,
   event,
@@ -149,6 +167,7 @@ const Profiles = ({
         {data.map(([key, value]) => (
           <div key={`${key} profile`} className="profileContainer">
             <Profile
+              profileTitle={profileTitle}
               profile={key}
               data={value}
               canHover={canHover}
@@ -173,19 +192,16 @@ const ProfilesComponent = ({
   linkOrButton,
   event,
   eventName,
+  profileTitle,
 }) => {
-  const dataServices = Object.entries(data[section]);
+  const dataServices = Object.entries(data[section].services);
 
   if (dataServices) {
-    const filteredData = dataServices.filter(
-      ([key, value]) =>
-        value !== section && key !== "_embedded" && key !== "bio"
-    );
-
     return (
       <div className="profilesComponentContainer">
         <Profiles
-          data={filteredData}
+          profileTitle={profileTitle}
+          data={dataServices}
           canHover={canHover}
           sectionColor={sectionColor}
           linkOrButton={linkOrButton}

@@ -18,18 +18,20 @@ const TopSectionBio = ({
 }) => {
   const [thinText, setThinText] = useState("");
   const [boldText, setBoldText] = useState("");
-  const dataobject = Object.fromEntries(data);
-  const componentTitle = dataobject._embedded.info.title;
+  const dataobject = Object.fromEntries(data).services;
+  const updatedData = Object.fromEntries(data);
+  const componentTitle = Object.fromEntries(data)._embedded.info.title;
+  console.log(data, dataobject, updatedData);
 
   useEffect(() => {
-    const mdUrl = dataobject.bio[0].url;
+    const mdUrl = updatedData.bio[0].url;
 
     if (mdUrl) {
       fetchText(mdUrl, setThinText, setBoldText);
     }
   }, []);
 
-  const displayIcons = data.filter(
+  const displayIcons = Object.entries(updatedData.services).filter(
     ([key, value]) =>
       key !== "bio" && key !== "_embedded" && value !== "services"
   );
@@ -72,7 +74,7 @@ const TopSectionBio = ({
             {displaySocials && (
               <LinkImagesComponent
                 sectionColor={"black"}
-                data={dataobject._embedded.info.socials}
+                data={updatedData._embedded.info.socials}
               />
             )}
           </div>

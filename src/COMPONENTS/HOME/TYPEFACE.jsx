@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
-import fontInfo from "./FONTINFO";
 import { Link } from "react-router-dom";
 
 import "./HOME.scss";
 import { EnterEmailAndOrSub } from "./SUBSCRIBE/SUBSCRIBE";
+import fetchText from "../../functions/importFont";
 
 const TypeFaceComponent = ({ type, handleDisplayForm }) => {
+  const [thinTex, setThinText] = useState();
   useEffect(() => {
     if (!type[0] || !type[1]) return;
 
@@ -33,10 +34,12 @@ const TypeFaceComponent = ({ type, handleDisplayForm }) => {
     return text.replace(/([a-z])([A-Z])/g, "$1 $2");
   }
 
+  fetchText(type[1].bio[0].url, setThinText);
+
   return (
     <div className="typeFaceContainer" style={{ fontFamily: type[0] }}>
       <h1 className="typeFaceName">{addSpaceBeforeCaps(type[0])}</h1>
-      <h3 className="typeFaceDescription">{fontInfo[type[0]]}</h3>
+      <h3 className="typeFaceDescription">{thinTex}</h3>
       <div className="fontAvaliableContainer">
         <Link to={`./typefaces/${type[0]}`} className="fontInfoBtn">
           <h3 className="fontInfo">{type[1].fonts?.length} FONTS</h3>

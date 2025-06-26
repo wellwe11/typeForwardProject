@@ -1,7 +1,7 @@
 import "./ABOUTUS.scss";
 
-import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 import TopSectionBio from "../abstract_components/topSectionBio/topSectionBio";
+import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 
 const AboutUsComponent = ({ data }) => {
   if (!data.about_us) {
@@ -23,7 +23,6 @@ const AboutUsComponent = ({ data }) => {
           canHover={true}
           section={"about_us"}
           sectionColor={"white"}
-          sliceAmount={1}
         />
       </div>
     );

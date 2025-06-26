@@ -6,8 +6,8 @@ import "./HOME.scss";
 import "../../index.scss";
 
 import TypeComponent from "./TYPEFACE";
-import TypeServicesComponent from "./TYPE_SERVICES";
 import SubsrcibeComponent from "./SUBSCRIBE/SUBSCRIBE";
+import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 
 const CurrentImageDotComp = ({ array, activeIndex, setActiveIndex }) => {
   return (
@@ -115,11 +115,22 @@ const ForwardWelcomeComponent = ({ sectionRef }) => {
 const HomeComponent = ({ sectionRef, data }) => {
   if (data.typefaces) {
     const dataEntries = Object.entries(data?.typefaces);
+
     return (
       <div className="homeContainer">
         <ForwardWelcomeComponent sectionRef={sectionRef} />
         <TypeComponent sectionRef={sectionRef} data={data} />
-        <TypeServicesComponent sectionRef={sectionRef} data={dataEntries} />
+
+        <ProfilesComponent
+          data={data}
+          profileTitle={" "}
+          canHover={false}
+          section={"typefaces"}
+          sectionColor={"black"}
+          linkOrButton={"button"}
+          event={""}
+          eventName={"Learn more"}
+        />
         <SubsrcibeComponent sectionRef={sectionRef} />
       </div>
     );

@@ -17,8 +17,6 @@ const sortFiles = async (data, fullData, path) => {
 
   for (const segments of data) {
     if (segments[0] === "assets" || segments[0] === "extended_assets") {
-      console.log(segments[0]);
-
       let current = localObj;
 
       for (let index = 0; index < segments.length; index++) {

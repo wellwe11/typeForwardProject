@@ -11,6 +11,7 @@ const ServicesComponent = ({ sectionRef, data }) => {
 
   if (data.services) {
     const dataEntries = Object.entries(data?.services);
+    console.log(dataEntries);
 
     return (
       <div className="servicesComponentContainer">
