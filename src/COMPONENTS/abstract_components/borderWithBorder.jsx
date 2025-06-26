@@ -33,16 +33,17 @@ const BorderWithBorderBox = ({
           border: borderColor,
         }}
       >
-        <img
-          src={img}
-          alt={alt}
-          style={{
-            filter: backgroundColor === "black" ? "invert(1)" : "none",
-            height: !eventHandler ? "100%" : "",
-            maxHeight: !eventHandler ? "100%" : "",
-          }}
-        />
-
+        <div className="imgContainer">
+          <img
+            src={img}
+            alt={alt}
+            style={{
+              filter: backgroundColor === "black" ? "invert(1)" : "none",
+              height: !eventHandler ? "100%" : "",
+              maxHeight: !eventHandler ? "100%" : "",
+            }}
+          />
+        </div>
         {eventHandler === "button" && (
           <button
             onClick={event}
