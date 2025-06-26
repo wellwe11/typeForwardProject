@@ -143,8 +143,6 @@ const Profiles = ({
   eventName,
   fontColor = sectionColor === "black" ? "white" : "black",
 }) => {
-  console.log(data);
-
   return (
     <SizeContainerComponent sectionColor={sectionColor || "white"}>
       <div className="profilesContainer">
@@ -183,8 +181,6 @@ const ProfilesComponent = ({
       ([key, value]) =>
         value !== section && key !== "_embedded" && key !== "bio"
     );
-
-    console.log(filteredData);
 
     return (
       <div className="profilesComponentContainer">

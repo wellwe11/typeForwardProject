@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavLinks } from "../../TABCOMPONENTPROVIDER";
+
 import fontInfo from "./FONTINFO";
 import { Link } from "react-router-dom";
 
 import "./HOME.scss";
-import SubsrcibeComponent, { EnterEmailAndOrSub } from "./SUBSCRIBE/SUBSCRIBE";
-import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
+import { EnterEmailAndOrSub } from "./SUBSCRIBE/SUBSCRIBE";
 
 const TypeFaceComponent = ({ type, handleDisplayForm }) => {
   useEffect(() => {
@@ -146,9 +145,6 @@ const TypeComponent = ({ sectionRef, data }) => {
   const handleDisplayForm = (i) => setDisplayForm(i);
 
   const [fonts, setFonts] = useState();
-  const navLinks = useNavLinks();
-
-  const types = navLinks?.typefaces?.links || [];
 
   useEffect(() => {
     if (Object.keys(data)?.length > 0) {

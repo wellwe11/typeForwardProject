@@ -12,7 +12,7 @@ const localData = import.meta.glob(
 );
 
 // remove all file-path that wont be used inside of the main-objet 'api'
-const cleanPathFile = (data, replace) =>
+const cleanPathFile = (data, replace, path) =>
   Object.keys(data).map((path) => path.replace(replace, "").trim().split("/"));
 
 // now sort each tab below their corresponding file
@@ -47,16 +47,12 @@ const sortFiles = (data) => {
         }
 
         if (typeFiles.includes(keyExtension)) {
-          const fullPath = `../../../resourceFolder_typeFoward/assets/${segments.join(
-            "/"
-          )}`;
-
           const fontName = segments[4]
             .replace(/-/g, " ")
             .replace(/\./g, " ")
             .replace(/\d+/g, "")
             .replace(/woff\d*/g, "");
-          current[length] = { url: localData[fullPath], name: fontName };
+          current[length] = { url: localData[absolutePath], name: fontName };
         }
 
         if (bioFiles.includes(keyExtension)) {
@@ -81,10 +77,6 @@ const sortFiles = (data) => {
           } else {
             current[key] = {};
           }
-
-          if (index === 0) {
-            current[key] = { linkUrl: segments[index] };
-          }
         }
 
         current = current[key];
@@ -95,7 +87,7 @@ const sortFiles = (data) => {
   return localObj;
 };
 
-export const ExportData = () => {
+export const ExportData = ({ localData, path }) => {
   const [objectData, setObjectData] = useState({});
 
   useEffect(() => {

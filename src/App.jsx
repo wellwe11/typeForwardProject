@@ -37,34 +37,34 @@ function App() {
     );
   }
 
-  if (data) {
-    console.log(data);
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       const visibleEntry = entries.find((entry) => entry.isIntersecting);
+  //       if (visibleEntry) {
+  //         const classList = visibleEntry.target.classList;
+  //         if (classList.contains("sectionBlack")) {
+  //           setNavColor("black");
+  //         } else {
+  //           setNavColor("white");
+  //         }
+  //       }
+  //     },
+  //     {
+  //       threshold: 0.17,
+  //     }
+  //   );
 
-    // useEffect(() => {
-    //   const observer = new IntersectionObserver(
-    //     (entries) => {
-    //       const visibleEntry = entries.find((entry) => entry.isIntersecting);
-    //       if (visibleEntry) {
-    //         const classList = visibleEntry.target.classList;
-    //         if (classList.contains("sectionBlack")) {
-    //           setNavColor("black");
-    //         } else {
-    //           setNavColor("white");
-    //         }
-    //       }
-    //     },
-    //     {
-    //       threshold: 0.17,
-    //     }
-    //   );
+  //   sectionRefs.current.forEach((section) => {
+  //     if (section) observer.observe(section);
+  //   });
 
-    //   sectionRefs.current.forEach((section) => {
-    //     if (section) observer.observe(section);
-    //   });
+  //   return () => observer.disconnect();
+  // }, []);
 
-    //   return () => observer.disconnect();
-    // }, []);
+  if (!data.typefaces?._embedded) return null;
 
+  if (data.typefaces?._embedded) {
     return (
       <div className="appContainer">
         <TabComponentProvider>
@@ -73,7 +73,7 @@ function App() {
             <NavBarComponent backgroundColor={navbarColor} data={data} />
             <Routes>
               <Route
-                path="/typefaces"
+                path=""
                 element={<HomeComponent sectionRef={sectionRefs} data={data} />}
               />
 
