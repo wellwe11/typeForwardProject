@@ -29,6 +29,7 @@ const ServicesComponent = ({ sectionRef, data }) => {
           linkOrButton={"button"}
           event={""}
           eventName={"Get in touch"}
+          flexOrder={2}
         />
 
         <div className="borderDiv"></div>

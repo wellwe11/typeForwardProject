@@ -25,6 +25,7 @@ const AboutUsComponent = ({ data }) => {
           canHover={true}
           section={"about_us"}
           sectionColor={"white"}
+          flexOrder={1}
         />
       </div>
     );

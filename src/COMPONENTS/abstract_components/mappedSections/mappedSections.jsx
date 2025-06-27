@@ -114,6 +114,7 @@ export const Profile = ({
   eventName,
   fontColor,
   sectionColor,
+  flexOrder,
 }) => {
   const text = data.bio?.[0].url;
   const images = data?.images;
@@ -138,11 +139,16 @@ export const Profile = ({
       </div>
 
       <div className="profileContent">
-        <div className="leftSide">
+        <div className="leftSide" style={{ order: flexOrder === 1 ? 2 : "" }}>
           <ProfileText data={text} fontColor={fontColor} />
           <ProfileSocials />
         </div>
-        <div className="rightSide">
+        <div
+          className="rightSide"
+          style={{
+            "--flex-order": flexOrder,
+          }}
+        >
           <ProfileImage
             data={images}
             canHover={canHover}
@@ -167,6 +173,7 @@ const Profiles = ({
   event,
   eventName,
   fontColor = sectionColor === "black" ? "white" : "black",
+  flexOrder,
 }) => {
   return (
     <SizeContainerComponent sectionColor={sectionColor || "white"}>
@@ -183,6 +190,7 @@ const Profiles = ({
               eventName={eventName}
               fontColor={fontColor}
               sectionColor={sectionColor}
+              flexOrder={flexOrder}
             />
           </div>
         ))}
@@ -200,6 +208,7 @@ const ProfilesComponent = ({
   event,
   eventName,
   profileTitle,
+  flexOrder,
 }) => {
   const dataServices = Object.entries(data[section].services);
 
@@ -215,6 +224,7 @@ const ProfilesComponent = ({
           event={event}
           eventName={eventName}
           section={section}
+          flexOrder={flexOrder}
         />
       </div>
     );

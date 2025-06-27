@@ -128,6 +128,7 @@ const HomeComponent = ({ sectionRef, data }) => {
           linkOrButton={"Link"}
           event={"services"}
           eventName={"Learn more"}
+          flexOrder={2}
         />
         <SubsrcibeComponent sectionRef={sectionRef} />
       </div>

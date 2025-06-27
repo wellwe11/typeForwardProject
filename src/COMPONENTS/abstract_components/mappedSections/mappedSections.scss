@@ -20,24 +20,26 @@
 
     .leftSide {
       width: 55%;
+      order: 1;
     }
 
     .rightSide {
       width: 35%;
       min-width: 250px;
+      order: 2;
     }
 
     @media screen and (max-width: 1000px) {
       flex-direction: column;
 
       .leftSide {
-        order: 2;
         width: 80%;
         padding-top: 50px;
+        padding-bottom: 50px;
       }
 
       .rightSide {
-        order: 1;
+        order: var(--flex-order);
       }
     }
   }
