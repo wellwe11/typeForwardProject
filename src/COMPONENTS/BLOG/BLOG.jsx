@@ -1,16 +1,19 @@
+import "./BLOG.scss";
 import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 import { GridImageEffect } from "./gridWaveEffect";
 
+import SubsrcibeComponent from "../HOME/SUBSCRIBE/SUBSCRIBE";
+
 import { WaveImageEffect } from "./blobWaveEffect";
 
-const BlogComponent = ({ data }) => {
+const BlogComponent = ({ data, sectionRef }) => {
   if (data.blog) {
     console.log(data);
     return (
-      <div>
+      <div className="blogContainer">
         <ProfilesComponent
           data={data}
-          profileTitle={" "}
+          profileTitle={""}
           canHover={false}
           section={"blog"}
           sectionColor={"white"}
@@ -21,6 +24,8 @@ const BlogComponent = ({ data }) => {
           headerSize={4.5}
           ExternalImage={[GridImageEffect, WaveImageEffect]}
         />
+        <div className="borderDiv"></div>
+        <SubsrcibeComponent sectionRef={sectionRef} />
       </div>
     );
   }

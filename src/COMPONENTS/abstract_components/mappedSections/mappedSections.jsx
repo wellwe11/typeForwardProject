@@ -241,7 +241,9 @@ const Profiles = ({
               flexOrder={flexOrder}
               profileHeader={profileHeader}
               headerSize={headerSize}
-              ExternalImage={ExternalImage[index] || ExternalImage}
+              ExternalImage={
+                ExternalImage ? ExternalImage[index] || ExternalImage : ""
+              }
             />
           </div>
         ))}

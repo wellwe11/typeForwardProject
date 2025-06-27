@@ -88,10 +88,7 @@ export const GridImageEffect = ({ image }) => {
 
       renderer = new THREE.WebGLRenderer({ antialias: true });
 
-      renderer.setSize(
-        imageContainer.offsetWidth * 1,
-        imageContainer.offsetHeight * 1
-      );
+      renderer.setSize(imageContainer.offsetWidth, imageContainer.offsetHeight);
 
       renderer.setPixelRatio(window.devicePixelRatio);
       imageContainer.appendChild(renderer.domElement);
