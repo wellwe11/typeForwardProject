@@ -1,4 +1,5 @@
 import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
+import ImageContainer from "./gridWaveEffect";
 
 const BlogComponent = ({ data }) => {
   console.log(data);
@@ -16,6 +17,7 @@ const BlogComponent = ({ data }) => {
           eventName={"Learn more"}
           flexOrder={2}
           headerSize={4.5}
+          externalImage={ImageContainer}
         />
       </div>
     );

@@ -16,6 +16,7 @@ const ProfileImage = ({
   linkOrButton,
   event,
   sectionColor,
+  externalImage,
 }) => {
   const [pictureHover, setPictureHover] = useState(false);
   const [images, setImages] = useState([]);
@@ -70,10 +71,10 @@ const ProfileImage = ({
         </div>
       ) : (
         <BorderWithBorderBox
-          img={images.rest?.[0].url}
           backgroundColor={sectionColor === "white" ? "white" : "black"}
           eventHandler={linkOrButton}
           event={event}
+          externalImage={externalImage}
         >
           {children}
         </BorderWithBorderBox>
@@ -124,6 +125,7 @@ export const Profile = ({
   flexOrder,
   profileHeader,
   headerSize,
+  externalImage,
 }) => {
   const text = data.bio?.[0].url;
   const images = data?.images;
@@ -169,6 +171,7 @@ export const Profile = ({
             linkOrButton={linkOrButton}
             event={event}
             sectionColor={sectionColor}
+            externalImage={externalImage}
           >
             {eventName || name}
           </ProfileImage>
@@ -190,6 +193,7 @@ const Profiles = ({
   flexOrder,
   profileHeader,
   headerSize,
+  externalImage,
 }) => {
   const [specificTitle, setSpecificTitle] = useState("");
 
@@ -229,6 +233,7 @@ const Profiles = ({
               flexOrder={flexOrder}
               profileHeader={profileHeader || specificTitle}
               headerSize={headerSize}
+              externalImage={externalImage}
             />
           </div>
         ))}
@@ -249,6 +254,7 @@ const ProfilesComponent = ({
   flexOrder,
   profileHeader,
   headerSize,
+  externalImage,
 }) => {
   const dataServices = Object.entries(data[section].services);
 
@@ -267,6 +273,7 @@ const ProfilesComponent = ({
           flexOrder={flexOrder}
           profileHeader={profileHeader}
           headerSize={headerSize}
+          externalImage={externalImage}
         />
       </div>
     );
