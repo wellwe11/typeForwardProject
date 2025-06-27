@@ -2,11 +2,11 @@ const fetchText = async (data, thinSetter, boldSetter) => {
   return fetch(data)
     .then((res) => res.json())
     .then((mdText) => {
-      if (thinSetter) {
+      if (thinSetter && mdText.thin) {
         thinSetter(mdText.thin);
       }
 
-      if (boldSetter) {
+      if (boldSetter && mdText.bold) {
         boldSetter(mdText.bold);
       }
     })

@@ -7,6 +7,7 @@ import fetchText from "../../../functions/importFont";
 import SizeContainerComponent from "../sizeContainer/sizeContainerComponent";
 import BoldAndThinText from "../boldAndThinText/boldAndThinText";
 import H_OneComponent from "../componentTitle/componentTitle";
+import fetchSpecificItem from "../../../functions/fetchSpecificItem";
 
 const ProfileImage = ({
   children,
@@ -81,7 +82,7 @@ const ProfileImage = ({
   );
 };
 
-const ProfileText = ({ data, fontColor, profileHeader }) => {
+const ProfileText = ({ data, fontColor, profileHeader, headerSize }) => {
   const [thinText, setThinText] = useState("");
   const [boldText, setBoldText] = useState("");
 
@@ -93,7 +94,11 @@ const ProfileText = ({ data, fontColor, profileHeader }) => {
 
   return (
     <div className="profileText">
-      <H_OneComponent textColor={"white"} title={profileHeader} />
+      <H_OneComponent
+        textSize={headerSize}
+        textColor={"white"}
+        title={profileHeader}
+      />
       <BoldAndThinText
         boldText={boldText}
         thinText={thinText}
@@ -118,6 +123,7 @@ export const Profile = ({
   sectionColor,
   flexOrder,
   profileHeader,
+  headerSize,
 }) => {
   const text = data.bio?.[0].url;
   const images = data?.images;
@@ -147,6 +153,7 @@ export const Profile = ({
             data={text}
             fontColor={fontColor}
             profileHeader={profileHeader}
+            headerSize={headerSize}
           />
           <ProfileSocials />
         </div>
@@ -182,7 +189,28 @@ const Profiles = ({
   fontColor = sectionColor === "black" ? "white" : "black",
   flexOrder,
   profileHeader,
+  headerSize,
 }) => {
+  const [specificTitle, setSpecificTitle] = useState("");
+
+  if (data[0][1].bio) {
+    const fetchItems = async () => {
+      const fetchedText = await fetchSpecificItem(
+        data[0][1].bio[0].url,
+        "bigTitle"
+      );
+
+      if (fetchedText) {
+        setSpecificTitle(fetchedText);
+      }
+    };
+
+    useEffect(() => {
+      fetchItems();
+    }, []);
+  }
+  console.log(specificTitle);
+
   return (
     <SizeContainerComponent sectionColor={sectionColor || "white"}>
       <div className="profilesContainer">
@@ -199,7 +227,8 @@ const Profiles = ({
               fontColor={fontColor}
               sectionColor={sectionColor}
               flexOrder={flexOrder}
-              profileHeader={profileHeader}
+              profileHeader={profileHeader || specificTitle}
+              headerSize={headerSize}
             />
           </div>
         ))}
@@ -219,6 +248,7 @@ const ProfilesComponent = ({
   profileTitle,
   flexOrder,
   profileHeader,
+  headerSize,
 }) => {
   const dataServices = Object.entries(data[section].services);
 
@@ -236,6 +266,7 @@ const ProfilesComponent = ({
           section={section}
           flexOrder={flexOrder}
           profileHeader={profileHeader}
+          headerSize={headerSize}
         />
       </div>
     );
