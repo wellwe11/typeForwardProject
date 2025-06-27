@@ -44,7 +44,10 @@ const TopSectionBio = ({
         <div className="titleContainer">
           <H_OneComponent title={configuredTitle || componentTitle} />
         </div>
-        <div className="topSectionBioIconsContainer">
+        <div
+          className="topSectionBioIconsContainer"
+          style={{ marginBottom: displayImages ? "100px" : "" }}
+        >
           {displayImages &&
             displayIcons.map(([key, value]) => (
               <div key={key + " " + value} className="outerContainer">

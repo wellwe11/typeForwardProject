@@ -4,8 +4,9 @@ import React, { memo } from "react";
 
 import TopSectionBio from "../abstract_components/topSectionBio/topSectionBio";
 import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
+import SubscribeComponent from "../HOME/SUBSCRIBE/SUBSCRIBE";
 
-const AboutUsComponent = ({ data }) => {
+const AboutUsComponent = ({ data, sectionRef }) => {
   if (!data.about_us) {
     return (
       <div>
@@ -18,7 +19,7 @@ const AboutUsComponent = ({ data }) => {
     const aboutUsEntries = Object.entries(data.about_us);
 
     return (
-      <div>
+      <div className="aboutUsComponent">
         <TopSectionBio data={aboutUsEntries} displaySocials={true} />
         <ProfilesComponent
           data={data}
@@ -27,6 +28,15 @@ const AboutUsComponent = ({ data }) => {
           sectionColor={"white"}
           flexOrder={1}
         />
+        <div
+          className="borderDiv"
+          style={{
+            width: "var(--inlineContentWidth)",
+            height: "2px",
+            backgroundColor: "black",
+          }}
+        ></div>
+        <SubscribeComponent sectionRef={sectionRef} />
       </div>
     );
   }

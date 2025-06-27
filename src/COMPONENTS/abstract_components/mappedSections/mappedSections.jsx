@@ -161,12 +161,7 @@ export const Profile = ({
       <div
         className="profileNameContainer"
         style={{
-          borderBottom:
-            profileTitle && profileTitle.length < 1
-              ? "2px solid " + fontColor
-              : !profileTitle
-              ? "2px solid " + fontColor
-              : sectionColor,
+          borderBottom: profileTitle === false ? "" : "2px solid " + fontColor,
         }}
       >
         <h1 className="profileName" style={{ color: fontColor }}>

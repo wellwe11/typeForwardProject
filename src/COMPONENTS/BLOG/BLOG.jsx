@@ -13,7 +13,7 @@ const BlogComponent = ({ data, sectionRef }) => {
       <div className="blogContainer">
         <ProfilesComponent
           data={data}
-          profileTitle={""}
+          profileTitle={" "}
           canHover={false}
           section={"blog"}
           sectionColor={"white"}
