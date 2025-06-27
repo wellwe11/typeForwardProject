@@ -9,8 +9,9 @@ import FooterComponent from "./COMPONENTS/FOOTER/FOOTER";
 import { useEffect, useRef, useState } from "react";
 import ServicesComponent from "./COMPONENTS/SERVICES/SERVICES_component";
 import TrailFontsComponent from "./COMPONENTS/TRAIL_FONTS/TRAIL_FONTS";
-import AboutUsComponent from "./COMPONENTS/ABOUT US/ABOUTUS_component";
+import AboutUsComponent from "./COMPONENTS/ABOUT_US/ABOUTUS_component";
 import { exportData } from "./COMPONENTS/abstract_components/Sections/Sections";
+import BlogComponent from "./COMPONENTS/BLOG/BLOG";
 
 const localData = import.meta.glob("./resourceFolder_typeFoward/**/*", {
   eager: true,
@@ -114,6 +115,10 @@ function App() {
                 element={
                   <AboutUsComponent sectionRef={sectionRefs} data={data} />
                 }
+              />
+              <Route
+                path="blog"
+                element={<BlogComponent sectionRef={sectionRefs} data={data} />}
               />
             </Routes>
             <FooterComponent />

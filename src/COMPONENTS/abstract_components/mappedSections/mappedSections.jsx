@@ -6,6 +6,7 @@ import firstLetterCapital from "../../../functions/turnFirstLetterCapital";
 import fetchText from "../../../functions/importFont";
 import SizeContainerComponent from "../sizeContainer/sizeContainerComponent";
 import BoldAndThinText from "../boldAndThinText/boldAndThinText";
+import H_OneComponent from "../componentTitle/componentTitle";
 
 const ProfileImage = ({
   children,
@@ -80,7 +81,7 @@ const ProfileImage = ({
   );
 };
 
-const ProfileText = ({ data, fontColor }) => {
+const ProfileText = ({ data, fontColor, profileHeader }) => {
   const [thinText, setThinText] = useState("");
   const [boldText, setBoldText] = useState("");
 
@@ -91,7 +92,8 @@ const ProfileText = ({ data, fontColor }) => {
   }, []);
 
   return (
-    <div>
+    <div className="profileText">
+      <H_OneComponent textColor={"white"} title={profileHeader} />
       <BoldAndThinText
         boldText={boldText}
         thinText={thinText}
@@ -115,6 +117,7 @@ export const Profile = ({
   fontColor,
   sectionColor,
   flexOrder,
+  profileHeader,
 }) => {
   const text = data.bio?.[0].url;
   const images = data?.images;
@@ -140,7 +143,11 @@ export const Profile = ({
 
       <div className="profileContent">
         <div className="leftSide" style={{ order: flexOrder === 1 ? 2 : "" }}>
-          <ProfileText data={text} fontColor={fontColor} />
+          <ProfileText
+            data={text}
+            fontColor={fontColor}
+            profileHeader={profileHeader}
+          />
           <ProfileSocials />
         </div>
         <div
@@ -174,6 +181,7 @@ const Profiles = ({
   eventName,
   fontColor = sectionColor === "black" ? "white" : "black",
   flexOrder,
+  profileHeader,
 }) => {
   return (
     <SizeContainerComponent sectionColor={sectionColor || "white"}>
@@ -191,6 +199,7 @@ const Profiles = ({
               fontColor={fontColor}
               sectionColor={sectionColor}
               flexOrder={flexOrder}
+              profileHeader={profileHeader}
             />
           </div>
         ))}
@@ -209,6 +218,7 @@ const ProfilesComponent = ({
   eventName,
   profileTitle,
   flexOrder,
+  profileHeader,
 }) => {
   const dataServices = Object.entries(data[section].services);
 
@@ -225,6 +235,7 @@ const ProfilesComponent = ({
           eventName={eventName}
           section={section}
           flexOrder={flexOrder}
+          profileHeader={profileHeader}
         />
       </div>
     );

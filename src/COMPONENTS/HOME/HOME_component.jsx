@@ -122,6 +122,7 @@ const HomeComponent = ({ sectionRef, data }) => {
         <ProfilesComponent
           data={data}
           profileTitle={" "}
+          profileHeader={"Type Services"}
           canHover={false}
           section={"typefaces"}
           sectionColor={"black"}
