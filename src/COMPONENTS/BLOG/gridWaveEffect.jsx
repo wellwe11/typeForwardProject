@@ -1,16 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import "./BLOG.scss";
+import "./gridWave.scss";
 
-import Image from "../../resourceFolder_typeFoward/assets/blog/services/oddval/images/01-OddvalBlog-4-Square-Thumb.png";
-
-const ImageContainer = () => {
+export const GridImageEffect = ({ image }) => {
   const containerRef = useRef(null);
   const imageRef = useRef(null);
 
   useEffect(() => {
-    const imageElement = imageRef.current;
+    if (!containerRef.current || !imageRef.current) {
+      console.log("Refs not ready yet");
+      return;
+    }
     const imageContainer = containerRef.current;
+    const imageElement = imageRef.current;
 
     let easeFactor = 0.02;
     let scene, camera, renderer, planeMesh;
@@ -20,40 +22,40 @@ const ImageContainer = () => {
     let prevPosition = { x: 0.5, y: 0.5 };
 
     const vertexShader = `
-      varying vec2 vUv;
-      void main() {
-        vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1);
-      }
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1);
+    }
     `;
 
     const fragmentShader = `
-      varying vec2 vUv;
-      uniform sampler2D u_texture;    
-      uniform vec2 u_mouse;
-      uniform vec2 u_prevMouse;
-      uniform float u_aberrationIntensity;
-
-      void main() {
-          vec2 gridUV = floor(vUv * vec2(20.0, 20.0)) / vec2(20.0, 20.0);
-          vec2 centerOfPixel = gridUV + vec2(1.0/20.0, 1.0/20.0);
-          
-          vec2 mouseDirection = u_mouse - u_prevMouse;
-          
-          vec2 pixelToMouseDirection = centerOfPixel - u_mouse;
-          float pixelDistanceToMouse = length(pixelToMouseDirection);
-          float strength = smoothstep(0.3, 0.0, pixelDistanceToMouse);
+    varying vec2 vUv;
+    uniform sampler2D u_texture;    
+    uniform vec2 u_mouse;
+    uniform vec2 u_prevMouse;
+    uniform float u_aberrationIntensity;
     
-          vec2 uvOffset = strength * - mouseDirection * 0.2;
-          vec2 uv = vUv - uvOffset;
-
-          vec4 colorR = texture2D(u_texture, uv + vec2(strength * u_aberrationIntensity * 0.01, 0.0));
-          vec4 colorG = texture2D(u_texture, uv);
-          vec4 colorB = texture2D(u_texture, uv - vec2(strength * u_aberrationIntensity * 0.01, 0.0));
-
-          gl_FragColor = vec4(colorR.r, colorG.g, colorB.b, 1.0);
-      }
-    `;
+    void main() {
+        vec2 gridUV = floor(vUv * vec2(20.0, 20.0)) / vec2(20.0, 20.0);
+        vec2 centerOfPixel = gridUV + vec2(1.0/20.0, 1.0/20.0);
+        
+        vec2 mouseDirection = u_mouse - u_prevMouse;
+        
+        vec2 pixelToMouseDirection = centerOfPixel - u_mouse;
+        float pixelDistanceToMouse = length(pixelToMouseDirection);
+        float strength = smoothstep(0.3, 0.0, pixelDistanceToMouse);
+        
+        vec2 uvOffset = strength * - mouseDirection * 0.23;
+        vec2 uv = vUv - uvOffset;
+        
+        vec4 colorR = texture2D(u_texture, uv + vec2(strength * u_aberrationIntensity * 0.01, 0.0));
+        vec4 colorG = texture2D(u_texture, uv);
+        vec4 colorB = texture2D(u_texture, uv - vec2(strength * u_aberrationIntensity * 0.01, 0.0));
+        
+        gl_FragColor = vec4(colorR.r, colorG.g, colorB.b, 1.0);
+        }
+        `;
 
     const initializeScene = (texture) => {
       scene = new THREE.Scene();
@@ -159,13 +161,11 @@ const ImageContainer = () => {
       imageContainer.removeEventListener("mouseenter", handleMouseEnter);
       imageContainer.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []);
+  }, [image]);
 
   return (
-    <div id="imageContainer" ref={containerRef}>
-      <img id="myImage" ref={imageRef} src={Image} alt="Interactive" />
+    <div id="imageContainerGrid" ref={containerRef}>
+      <img id="imageGrid" ref={imageRef} src={image} alt="Interactive" />
     </div>
   );
 };
-
-export default ImageContainer;

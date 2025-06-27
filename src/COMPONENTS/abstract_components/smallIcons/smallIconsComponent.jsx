@@ -24,8 +24,6 @@ const LinkImagesComponent = ({ sectionColor, data }) => {
 
   const dataEntries = Object.entries(data);
 
-  console.log(dataEntries);
-
   return (
     <div
       className="linkImagesContainer"

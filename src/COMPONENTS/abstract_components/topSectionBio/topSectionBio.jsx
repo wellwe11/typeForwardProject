@@ -21,7 +21,6 @@ const TopSectionBio = ({
   const dataobject = Object.fromEntries(data).services;
   const updatedData = Object.fromEntries(data);
   const componentTitle = Object.fromEntries(data)._embedded.info.title;
-  console.log(data, dataobject, updatedData);
 
   useEffect(() => {
     const mdUrl = updatedData.bio[0].url;

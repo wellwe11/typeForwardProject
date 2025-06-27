@@ -9,7 +9,7 @@ const BorderWithBorderBox = ({
   event,
   alt,
   textSize = "h3",
-  externalImage,
+  ExternalImage,
 }) => {
   const TextTag = textSize;
 
@@ -18,8 +18,7 @@ const BorderWithBorderBox = ({
   const borderColor =
     bgColor === "black" ? "2px solid white" : " 2px solid black";
 
-  const ExternalImageComponent = externalImage;
-
+  const ExternalImageComp = ExternalImage;
   return (
     <div
       className="imagePart"
@@ -36,7 +35,7 @@ const BorderWithBorderBox = ({
           border: borderColor,
         }}
       >
-        {!externalImage ? (
+        {!ExternalImage ? (
           <div className="imgContainer">
             <img
               src={img}
@@ -49,7 +48,7 @@ const BorderWithBorderBox = ({
             />
           </div>
         ) : (
-          <ExternalImageComponent />
+          <ExternalImageComp image={img} />
         )}
         {eventHandler === "button" && (
           <button

@@ -1,0 +1,22 @@
+#imageContainerBlob {
+  position: relative;
+
+  overflow: hidden;
+
+  width: 100%;
+  height: 100%;
+
+  transition: all ease 0.5s;
+}
+
+#imageContainerBlob > * {
+  position: absolute;
+  inset: 0;
+  height: 100% !important;
+  width: 100% !important;
+  object-fit: cover;
+
+  canvas {
+    display: block;
+  }
+}

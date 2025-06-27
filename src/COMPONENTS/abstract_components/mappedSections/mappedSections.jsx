@@ -16,15 +16,15 @@ const ProfileImage = ({
   linkOrButton,
   event,
   sectionColor,
-  externalImage,
+  ExternalImage,
 }) => {
   const [pictureHover, setPictureHover] = useState(false);
   const [images, setImages] = useState([]);
 
   const findMainImage = (...urls) => {
     return {
-      mainImage: urls[0].filter((u) => u.url.includes("main")),
-      rest: urls[0].filter((u) => !u.url.includes("main")),
+      mainImage: urls[0].filter((u) => u.url.includes("main")) || [],
+      rest: urls[0].filter((u) => !u.url.includes("main")) || {},
     };
   };
 
@@ -71,10 +71,11 @@ const ProfileImage = ({
         </div>
       ) : (
         <BorderWithBorderBox
+          img={images.mainImage?.[0]?.url || images.rest?.[0]?.url}
           backgroundColor={sectionColor === "white" ? "white" : "black"}
           eventHandler={linkOrButton}
           event={event}
-          externalImage={externalImage}
+          ExternalImage={ExternalImage}
         >
           {children}
         </BorderWithBorderBox>
@@ -83,7 +84,13 @@ const ProfileImage = ({
   );
 };
 
-const ProfileText = ({ data, fontColor, profileHeader, headerSize }) => {
+const ProfileText = ({
+  data,
+  fontColor,
+  profileHeader,
+  headerSize,
+  sectionColor,
+}) => {
   const [thinText, setThinText] = useState("");
   const [boldText, setBoldText] = useState("");
 
@@ -97,7 +104,7 @@ const ProfileText = ({ data, fontColor, profileHeader, headerSize }) => {
     <div className="profileText">
       <H_OneComponent
         textSize={headerSize}
-        textColor={"white"}
+        textColor={sectionColor === "white" ? "black" : "white"}
         title={profileHeader}
       />
       <BoldAndThinText
@@ -125,11 +132,29 @@ export const Profile = ({
   flexOrder,
   profileHeader,
   headerSize,
-  externalImage,
+  ExternalImage,
 }) => {
   const text = data.bio?.[0].url;
   const images = data?.images;
   const name = firstLetterCapital(profile);
+
+  const [specificTitle, setSpecificTitle] = useState("");
+
+  console.log(data);
+
+  if (data.bio) {
+    const fetchItems = async () => {
+      const fetchedText = await fetchSpecificItem(data.bio[0].url, "bigTitle");
+
+      if (fetchedText) {
+        setSpecificTitle(fetchedText);
+      }
+    };
+
+    useEffect(() => {
+      fetchItems();
+    }, []);
+  }
 
   return (
     <div className="profileContainer">
@@ -154,8 +179,9 @@ export const Profile = ({
           <ProfileText
             data={text}
             fontColor={fontColor}
-            profileHeader={profileHeader}
+            profileHeader={specificTitle || profileHeader}
             headerSize={headerSize}
+            sectionColor={sectionColor}
           />
           <ProfileSocials />
         </div>
@@ -171,7 +197,7 @@ export const Profile = ({
             linkOrButton={linkOrButton}
             event={event}
             sectionColor={sectionColor}
-            externalImage={externalImage}
+            ExternalImage={ExternalImage}
           >
             {eventName || name}
           </ProfileImage>
@@ -193,32 +219,14 @@ const Profiles = ({
   flexOrder,
   profileHeader,
   headerSize,
-  externalImage,
+  ExternalImage,
 }) => {
-  const [specificTitle, setSpecificTitle] = useState("");
-
-  if (data[0][1].bio) {
-    const fetchItems = async () => {
-      const fetchedText = await fetchSpecificItem(
-        data[0][1].bio[0].url,
-        "bigTitle"
-      );
-
-      if (fetchedText) {
-        setSpecificTitle(fetchedText);
-      }
-    };
-
-    useEffect(() => {
-      fetchItems();
-    }, []);
-  }
-  console.log(specificTitle);
+  console.log(data);
 
   return (
     <SizeContainerComponent sectionColor={sectionColor || "white"}>
       <div className="profilesContainer">
-        {data.map(([key, value]) => (
+        {data.map(([key, value], index) => (
           <div key={`${key} profile`} className="profileContainer">
             <Profile
               profileTitle={profileTitle}
@@ -231,9 +239,9 @@ const Profiles = ({
               fontColor={fontColor}
               sectionColor={sectionColor}
               flexOrder={flexOrder}
-              profileHeader={profileHeader || specificTitle}
+              profileHeader={profileHeader}
               headerSize={headerSize}
-              externalImage={externalImage}
+              ExternalImage={ExternalImage[index] || ExternalImage}
             />
           </div>
         ))}
@@ -254,7 +262,7 @@ const ProfilesComponent = ({
   flexOrder,
   profileHeader,
   headerSize,
-  externalImage,
+  ExternalImage,
 }) => {
   const dataServices = Object.entries(data[section].services);
 
@@ -273,7 +281,7 @@ const ProfilesComponent = ({
           flexOrder={flexOrder}
           profileHeader={profileHeader}
           headerSize={headerSize}
-          externalImage={externalImage}
+          ExternalImage={ExternalImage}
         />
       </div>
     );
