@@ -11,7 +11,6 @@ const ServicesComponent = ({ sectionRef, data }) => {
 
   if (data.services) {
     const dataEntries = Object.entries(data?.services);
-    console.log(dataEntries);
 
     return (
       <div className="servicesComponentContainer">
@@ -27,7 +26,7 @@ const ServicesComponent = ({ sectionRef, data }) => {
           section={"services"}
           sectionColor={"white"}
           linkOrButton={"button"}
-          event={""}
+          event={null}
           eventName={"Get in touch"}
           flexOrder={2}
         />

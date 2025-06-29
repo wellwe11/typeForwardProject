@@ -140,8 +140,6 @@ export const Profile = ({
 
   const [specificTitle, setSpecificTitle] = useState("");
 
-  console.log(data);
-
   if (data.bio) {
     const fetchItems = async () => {
       const fetchedText = await fetchSpecificItem(data.bio[0].url, "bigTitle");
@@ -151,9 +149,7 @@ export const Profile = ({
       }
     };
 
-    useEffect(() => {
-      fetchItems();
-    }, []);
+    fetchItems();
   }
 
   return (
@@ -161,11 +157,16 @@ export const Profile = ({
       <div
         className="profileNameContainer"
         style={{
-          borderBottom: profileTitle === false ? "" : "2px solid " + fontColor,
+          borderBottom:
+            profileTitle && profileTitle?.toLowerCase().includes("no border")
+              ? ""
+              : "2px solid " + fontColor,
         }}
       >
         <h1 className="profileName" style={{ color: fontColor }}>
-          {profileTitle || name}
+          {profileTitle && profileTitle?.toLowerCase().includes("no title")
+            ? ""
+            : profileTitle || name}
         </h1>
       </div>
 
@@ -216,8 +217,7 @@ const Profiles = ({
   headerSize,
   ExternalImage,
 }) => {
-  console.log(data);
-
+  console.log(event);
   return (
     <SizeContainerComponent sectionColor={sectionColor || "white"}>
       <div className="profilesContainer">
@@ -229,7 +229,7 @@ const Profiles = ({
               data={value}
               canHover={canHover}
               linkOrButton={linkOrButton}
-              event={event}
+              event={event && event.length > 0 ? event[index] : event}
               eventName={eventName}
               fontColor={fontColor}
               sectionColor={sectionColor}

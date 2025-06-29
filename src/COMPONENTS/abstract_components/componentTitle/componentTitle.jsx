@@ -3,9 +3,7 @@ import "./componentTitle.scss";
 const H_OneComponent = ({ title, textColor, textSize }) => {
   const lineHeight = textSize + 1;
 
-  console.log(title);
-
-  const minsSize = 50;
+  const minsSize = 30;
   const maxSize = 80;
   return (
     <h1

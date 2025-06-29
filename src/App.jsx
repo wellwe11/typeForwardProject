@@ -12,6 +12,7 @@ import TrailFontsComponent from "./COMPONENTS/TRAIL_FONTS/TRAIL_FONTS";
 import AboutUsComponent from "./COMPONENTS/ABOUT_US/ABOUTUS_component";
 import { exportData } from "./COMPONENTS/abstract_components/Sections/Sections";
 import BlogComponent from "./COMPONENTS/BLOG/BLOG";
+import BlogPosterComponent from "./COMPONENTS/BLOG_POSTER/blog_posterComponent";
 
 const localData = import.meta.glob("./resourceFolder_typeFoward/**/*", {
   eager: true,
@@ -119,6 +120,10 @@ function App() {
               <Route
                 path="blog"
                 element={<BlogComponent sectionRef={sectionRefs} data={data} />}
+              />
+              <Route
+                path="blog/blog_poster"
+                element={<BlogPosterComponent data={data} />}
               />
             </Routes>
             <FooterComponent />

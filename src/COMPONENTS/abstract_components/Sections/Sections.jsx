@@ -10,6 +10,7 @@ const cleanPathFile = (data, replace) =>
 const sortFiles = async (data, fullData, path) => {
   const localObj = {};
 
+  const videoFiles = ["mp4"];
   const imageFiles = ["png", "svg", "jpg", "jpeg", "gif", "webp"];
   const typeFiles = ["woff", "woff2"];
   const bioFiles = ["md"];
@@ -26,6 +27,10 @@ const sortFiles = async (data, fullData, path) => {
         if (index === segments.length - 1) {
           const absolutePath = fullData[`${path}${segments.join("/")}`];
           const keyExtension = key.split(".").pop().toLowerCase();
+
+          if (videoFiles.includes(keyExtension)) {
+            current[length] = { url: absolutePath };
+          }
 
           if (imageFiles.includes(keyExtension)) {
             current[length] = { url: absolutePath };

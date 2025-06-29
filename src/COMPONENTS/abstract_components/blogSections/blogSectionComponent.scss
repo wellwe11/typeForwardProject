@@ -1,0 +1,81 @@
+.blogSectionComponent {
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 100px;
+  width: 80vw;
+
+  @media screen and (max-width: 700px) {
+    width: 60vw;
+  }
+}
+
+.headerSectionContainer {
+  display: flex;
+  flex-direction: column;
+
+  .headerBio {
+    margin-left: 5vw;
+    width: 60vw;
+    .headerContainer {
+      padding-top: 5vw;
+      padding-bottom: 2vw;
+    }
+
+    .dateContainer {
+      padding-bottom: 5vw;
+      .dateText {
+        color: black;
+      }
+    }
+
+    .headerSectionsContainer {
+      padding-left: 2vw;
+      .headerSection {
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+
+        color: black;
+
+        &::marker {
+          font-size: 1.8vw;
+        }
+
+        .headerLiButton {
+          cursor: pointer;
+
+          .underLine {
+            transition: width 0.2s ease-out;
+            width: 0%;
+            height: 3.5px;
+            background-color: black;
+            opacity: 0;
+          }
+
+          &:hover {
+            .underLine {
+              width: 100%;
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
+  }
+}
+
+.blogImageContainer {
+  box-shadow: 20px 16px 0 rgb(0, 0, 0);
+  border: 2px solid black;
+  outline: 3px solid white;
+
+  .headerImage {
+  }
+}
+
+.blogSectionsContainer {
+}

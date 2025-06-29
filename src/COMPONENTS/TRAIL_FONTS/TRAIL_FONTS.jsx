@@ -10,7 +10,6 @@ import fetchText from "../../functions/importFont";
 const SignUpInfoContent = ({ data }) => {
   const [thinText, setThinText] = useState("");
   const [boldText, setBoldText] = useState("");
-  console.log(data);
 
   useEffect(() => {
     const mdUrl = data.filter((e) => e.includes("bio"));
