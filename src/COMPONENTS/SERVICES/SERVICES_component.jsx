@@ -31,7 +31,6 @@ const ServicesComponent = ({ sectionRef, data }) => {
           flexOrder={2}
         />
 
-        <div className="borderDiv"></div>
         <SubscribeComponent sectionRef={sectionRef} />
       </div>
     );

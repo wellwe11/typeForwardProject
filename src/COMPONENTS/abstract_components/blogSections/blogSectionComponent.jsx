@@ -2,6 +2,7 @@ import "./blogSectionComponent.scss";
 import { useEffect, useState } from "react";
 import H_OneComponent from "../componentTitle/componentTitle";
 import fetchAllText from "../../../functions/fetchAllText";
+import SubscribeComponent from "../../HOME/SUBSCRIBE/SUBSCRIBE";
 
 const sortByPosition = (items) => {
   return items.sort(
@@ -111,24 +112,26 @@ const BlogContent = ({ data, images, videos }) => {
           </div>
         )}
 
-        {localCodeText && (
-          <pre className="code-section">
-            <code>{localCodeText.replace(/`/g, "")}</code>
-          </pre>
-        )}
+        <div>
+          {localCodeText && (
+            <pre className="code-section">
+              <code>{localCodeText.replace(/`/g, "")}</code>
+            </pre>
+          )}
 
-        {localSections && (
-          <ul className="blogSectionUl">
-            {localSections.map((section, index) => (
-              <li className="blogLi" key={index}>
-                <h4 className="blogLiText">
-                  <strong>{section.bold} </strong>
-                  {section.thin} <a href={section.linkTo}>{section.link}</a>
-                </h4>
-              </li>
-            ))}
-          </ul>
-        )}
+          {localSections && (
+            <ul className="blogSectionUl">
+              {localSections.map((section, index) => (
+                <li className="blogLi" key={index}>
+                  <h4 className="blogLiText">
+                    <strong>{section.bold} </strong>
+                    {section.thin} <a href={section.linkTo}>{section.link}</a>
+                  </h4>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
         <h4 className="blogSubText" style={{ color: "black" }}>
           {localBioText}
@@ -263,6 +266,7 @@ const BlogSectionComponent = ({ data }) => {
     <div className="blogSectionComponent">
       <HeaderSection data={data.header} sections={data.sections} />
       <BlogSections data={data.sections} />
+      <SubscribeComponent sectionRef={" "} />
     </div>
   );
 };

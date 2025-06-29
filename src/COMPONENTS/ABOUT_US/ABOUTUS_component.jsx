@@ -28,14 +28,7 @@ const AboutUsComponent = ({ data, sectionRef }) => {
           sectionColor={"white"}
           flexOrder={1}
         />
-        <div
-          className="borderDiv"
-          style={{
-            width: "var(--inlineContentWidth)",
-            height: "2px",
-            backgroundColor: "black",
-          }}
-        ></div>
+
         <SubscribeComponent sectionRef={sectionRef} />
       </div>
     );

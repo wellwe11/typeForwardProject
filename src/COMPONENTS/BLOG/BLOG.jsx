@@ -27,7 +27,7 @@ const BlogComponent = ({ data, sectionRef }) => {
           headerSize={4.5}
           ExternalImage={[GridImageEffect, WaveImageEffect]}
         />
-        <div className="borderDiv"></div>
+
         <SubsrcibeComponent sectionRef={sectionRef} />
       </div>
     );
