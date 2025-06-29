@@ -8,6 +8,8 @@ const fetchAllText = async (data) => {
       boldText: json.bold,
       thinText: json.thin,
       bioText: json.bio,
+      sections: json.sections,
+      link: json.link,
     };
   } else {
     console.error("fetchAllText cannot fetch data:", data);

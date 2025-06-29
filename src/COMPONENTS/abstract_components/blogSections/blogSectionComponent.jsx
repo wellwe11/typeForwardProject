@@ -9,28 +9,36 @@ const sortByPosition = (items) => {
   );
 };
 
-const BlogTexts = ({ data, images, videos }) => {
+const BlogContent = ({ data, images, videos }) => {
   const [localThinText, setThinText] = useState(null);
   const [localBioText, setBioText] = useState(null);
   const [localImages, setLocalImages] = useState(null);
   const [localVideos, setLocalVideos] = useState(null);
+  const [localSections, setLocalSections] = useState(null);
 
   const sortType = (type, setter) => {
-    // const sortedImagesObj = imageFolder.reduce((acc, [_, image]) => {
-    const sortedImagesObj = type.map((i, index) =>
-      i.url.toLowerCase().includes("square")
-        ? { square: i.url }
-        : { main: i.url }
-    );
+    const sorted = {};
 
-    setter(sortedImagesObj);
+    type.forEach((i) => {
+      if (i.url.toLowerCase().includes("square")) {
+        sorted.square = i.url;
+      } else {
+        sorted.main = i.url;
+      }
+    });
+
+    setter(sorted);
   };
 
   const getText = async (url) => {
-    const { thinText, bioText } = await fetchAllText(url);
+    const { thinText, bioText, sections } = await fetchAllText(url);
 
     setThinText(thinText);
     setBioText(bioText);
+
+    if (sections) {
+      setLocalSections(sections);
+    }
   };
 
   useEffect(() => {
@@ -47,36 +55,63 @@ const BlogTexts = ({ data, images, videos }) => {
     }
   }, [images, videos]);
 
+  console.log(localSections);
   if (localThinText || localBioText || localImages || localVideos) {
     return (
-      <div>
-        <h3 style={{ color: "black" }}>{localThinText}</h3>
+      <div className="blogContentContainer">
+        <h3 className="blogMainText" style={{ color: "black" }}>
+          {localThinText}
+        </h3>
         {localVideos && (
-          <video
-            preload="none"
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster={localImages[0].square}
-          >
-            <source
-              src={localVideos[0].square}
-              type="video/mp4"
-              media="(max-width: 999px)"
-            />
-            <source src={localVideos[1].main} type="video/mp4" />
-          </video>
+          <div className="blogImageContainer">
+            <video
+              preload="none"
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={localImages.square}
+            >
+              <source
+                src={localVideos.square}
+                type="video/mp4"
+                media="(max-width: 999px)"
+              />
+              <source
+                src={localVideos.main}
+                type="video/mp4"
+                media="(min-width: 1000px)"
+              />
+              <source src={localVideos.main} type="video/mp4" />
+            </video>
+          </div>
         )}
 
         {!localVideos && localImages && (
-          <picture>
-            <source src={localImages[0].square} media="(max-width: 999px)" />
-            <source src={localImages[1].main} media="(min-width: 1000px)" />
-            <img src={localImages[0].square} alt="fallback image" />
-          </picture>
+          <div className="blogImageContainer">
+            <picture>
+              <source media="(min-width: 1000px)" srcSet={localImages.main} />
+              <source media="(max-width: 999px)" srcSet={localImages.square} />
+              <img src={localImages.main} alt="fallback image" />
+            </picture>
+          </div>
         )}
-        <h4 style={{ color: "black" }}>{localBioText}</h4>
+
+        {localSections && (
+          <ul className="blogSectionUl">
+            {localSections.map((section) => (
+              <li className="blogLi">
+                <h4 className="blogLiText">
+                  <strong>{section.bold} </strong>
+                  {section.thin} <a href={section.linkTo}>{section.link}</a>
+                </h4>
+              </li>
+            ))}
+          </ul>
+        )}
+        <h4 className="blogSubText" style={{ color: "black" }}>
+          {localBioText}
+        </h4>
       </div>
     );
   }
@@ -93,19 +128,17 @@ const BlogSection = ({ data }) => {
 
   if (sectionsSorted) {
     return (
-      <div>
-        {sectionsSorted.map(([section, input]) => {
-          console.log(section, input);
-          return (
-            <div key={section}>
-              <BlogTexts
-                data={input.bio[0]?.url}
-                images={input.images || null}
-                videos={input.videos || null}
-              />
-            </div>
-          );
-        })}
+      <div className="blogSection">
+        <div className="border"></div>
+        {sectionsSorted.map(([section, input]) => (
+          <div key={section}>
+            <BlogContent
+              data={input.bio[0]?.url}
+              images={input.images || null}
+              videos={input.videos || null}
+            />
+          </div>
+        ))}
       </div>
     );
   }
@@ -127,7 +160,7 @@ const BlogSections = ({ data }) => {
       {sectionsSorted.map(([section, obj]) => (
         <div className="blogSectionContainer" key={section}>
           <div className="blogSectionTitleContainer">
-            <h3>{section}</h3>
+            <h2>{section.replace(/_/g, " ")}</h2>
           </div>
           <BlogSection data={obj} />
         </div>
