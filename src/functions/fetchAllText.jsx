@@ -10,6 +10,7 @@ const fetchAllText = async (data) => {
       bioText: json.bio,
       sections: json.sections,
       link: json.link,
+      codeText: json.codeText,
     };
   } else {
     console.error("fetchAllText cannot fetch data:", data);

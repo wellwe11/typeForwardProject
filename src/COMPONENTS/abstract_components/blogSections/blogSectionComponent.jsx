@@ -15,6 +15,7 @@ const BlogContent = ({ data, images, videos }) => {
   const [localImages, setLocalImages] = useState(null);
   const [localVideos, setLocalVideos] = useState(null);
   const [localSections, setLocalSections] = useState(null);
+  const [localCodeText, setLocalCodeText] = useState(null);
 
   const sortType = (type, setter) => {
     const sorted = {};
@@ -31,13 +32,17 @@ const BlogContent = ({ data, images, videos }) => {
   };
 
   const getText = async (url) => {
-    const { thinText, bioText, sections } = await fetchAllText(url);
+    const { thinText, bioText, sections, codeText } = await fetchAllText(url);
 
     setThinText(thinText);
     setBioText(bioText);
 
     if (sections) {
       setLocalSections(sections);
+    }
+
+    if (codeText) {
+      setLocalCodeText(codeText);
     }
   };
 
@@ -55,8 +60,17 @@ const BlogContent = ({ data, images, videos }) => {
     }
   }, [images, videos]);
 
-  console.log(localSections);
-  if (localThinText || localBioText || localImages || localVideos) {
+  if (localCodeText) {
+    console.log(localCodeText);
+  }
+
+  if (
+    localThinText ||
+    localBioText ||
+    localImages ||
+    localVideos ||
+    localCodeText
+  ) {
     return (
       <div className="blogContentContainer">
         <h3 className="blogMainText" style={{ color: "black" }}>
@@ -97,10 +111,16 @@ const BlogContent = ({ data, images, videos }) => {
           </div>
         )}
 
+        {localCodeText && (
+          <pre className="code-section">
+            <code>{localCodeText.replace(/`/g, "")}</code>
+          </pre>
+        )}
+
         {localSections && (
           <ul className="blogSectionUl">
-            {localSections.map((section) => (
-              <li className="blogLi">
+            {localSections.map((section, index) => (
+              <li className="blogLi" key={index}>
                 <h4 className="blogLiText">
                   <strong>{section.bold} </strong>
                   {section.thin} <a href={section.linkTo}>{section.link}</a>
@@ -109,6 +129,7 @@ const BlogContent = ({ data, images, videos }) => {
             ))}
           </ul>
         )}
+
         <h4 className="blogSubText" style={{ color: "black" }}>
           {localBioText}
         </h4>
