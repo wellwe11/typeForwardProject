@@ -1,8 +1,9 @@
 import "./blogSectionComponent.scss";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import H_OneComponent from "../componentTitle/componentTitle";
 import fetchAllText from "../../../functions/fetchAllText";
 import SubscribeComponent from "../../HOME/SUBSCRIBE/SUBSCRIBE";
+import RenderLineSplit from "../renderLineSplit";
 
 const sortByPosition = (items) => {
   return items.sort(
@@ -17,6 +18,8 @@ const BlogContent = ({ data, images, videos }) => {
   const [localVideos, setLocalVideos] = useState(null);
   const [localSections, setLocalSections] = useState(null);
   const [localCodeText, setLocalCodeText] = useState(null);
+  const [localLinkTo, setLocalLinkTo] = useState(null);
+  const [localLink, setLocalLink] = useState(null);
 
   const sortType = (type, setter) => {
     const sorted = {};
@@ -33,7 +36,10 @@ const BlogContent = ({ data, images, videos }) => {
   };
 
   const getText = async (url) => {
-    const { thinText, bioText, sections, codeText } = await fetchAllText(url);
+    const { thinText, bioText, sections, codeText, link, linkTo } =
+      await fetchAllText(url);
+
+    console.log(link, linkTo);
 
     setThinText(thinText);
     setBioText(bioText);
@@ -44,6 +50,14 @@ const BlogContent = ({ data, images, videos }) => {
 
     if (codeText) {
       setLocalCodeText(codeText);
+    }
+
+    if (link) {
+      setLocalLink(link);
+    }
+
+    if (linkTo) {
+      setLocalLinkTo(linkTo);
     }
   };
 
@@ -61,10 +75,6 @@ const BlogContent = ({ data, images, videos }) => {
     }
   }, [images, videos]);
 
-  if (localCodeText) {
-    console.log(localCodeText);
-  }
-
   if (
     localThinText ||
     localBioText ||
@@ -74,8 +84,27 @@ const BlogContent = ({ data, images, videos }) => {
   ) {
     return (
       <div className="blogContentContainer">
-        <h3 className="blogMainText" style={{ color: "black" }}>
-          {localThinText}
+        <h3 className="blogMainText">
+          {localThinText?.includes("REPLACE_LINK")
+            ? localThinText?.split("REPLACE_LINK").map((part, index, arr) => (
+                <React.Fragment key={index}>
+                  {part}
+                  {index < arr.length - 1 && localLinkTo?.[index] && (
+                    <button>
+                      <a
+                        href={localLinkTo[index]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {Array.isArray(localLink)
+                          ? localLink[index]
+                          : localLink}
+                      </a>
+                    </button>
+                  )}
+                </React.Fragment>
+              ))
+            : localThinText}
         </h3>
         {localVideos && (
           <div className="blogImageContainer">
@@ -105,7 +134,10 @@ const BlogContent = ({ data, images, videos }) => {
         {!localVideos && localImages && (
           <div className="blogImageContainer">
             <picture>
-              <source media="(min-width: 1000px)" srcSet={localImages.main} />
+              <source
+                media="(min-width:image/svg+xml 1000px)"
+                srcSet={localImages.main}
+              />
               <source media="(max-width: 999px)" srcSet={localImages.square} />
               <img src={localImages.main} alt="fallback image" />
             </picture>
@@ -125,7 +157,25 @@ const BlogContent = ({ data, images, videos }) => {
                 <li className="blogLi" key={index}>
                   <h4 className="blogLiText">
                     <strong>{section.bold} </strong>
-                    {section.thin} <a href={section.linkTo}>{section.link}</a>
+                    {section.thin
+                      .split("REPLACE_LINK")
+                      .map((part, index, arr) => (
+                        <React.Fragment>
+                          {part}
+                          {index < arr.length - 1 &&
+                            section.linkTo?.[index] && (
+                              <a
+                                href={section.linkTo[index]}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {Array.isArray(section.link)
+                                  ? section.link[index]
+                                  : section.link}
+                              </a>
+                            )}
+                        </React.Fragment>
+                      ))}
                   </h4>
                 </li>
               ))}
@@ -197,8 +247,8 @@ const HeaderSection = ({ data, sections }) => {
   const [title, setTitle] = useState();
   const [boldText, setBoldText] = useState();
   const [thinText, setThinText] = useState();
-  const [imagesObj, setImagesObj] = useState({});
-  const imageFolder = Object.entries(data.images);
+  const [mediaObj, setMediaObj] = useState({});
+  const mediaFolder = Object.entries(data.media);
 
   const getText = async () => {
     const { bigTitle, boldText, thinText } = await fetchAllText(data[0].url);
@@ -207,34 +257,62 @@ const HeaderSection = ({ data, sections }) => {
     setThinText(thinText);
   };
 
-  const sortImages = () => {
-    const sortedImagesObj = imageFolder.reduce((acc, [_, image]) => {
-      const key = image.url.toLowerCase().includes("square")
+  const sortMedia = () => {
+    const sortedImagesObj = mediaFolder.reduce((acc, [_, media]) => {
+      const key = media.url.toLowerCase().includes("square")
         ? "square"
         : "main";
-      acc[key] = image;
+      acc[key] = media;
 
       return acc;
     }, {});
 
-    setImagesObj(sortedImagesObj);
+    setMediaObj(sortedImagesObj);
   };
 
   useEffect(() => {
     getText();
-    sortImages();
+    sortMedia();
   }, []);
 
-  if ((title, thinText, imagesObj, sections)) {
+  if ((title, thinText, mediaObj, sections)) {
     const sectionsKeys = Object.keys(sections);
     return (
       <div className="headerSectionContainer">
         <div className="blogImageContainer">
-          <picture>
-            <source media="(max-width: 999px)" srcSet={imagesObj.square?.url} />
-            <source media="(min-width: 1000px)" srcSet={imagesObj.main?.url} />
-            <img src={imagesObj.square?.url} alt="Header image" />
-          </picture>
+          {mediaObj.main?.url.match(/\.(svg|jpe?g|png|webp)$/) && (
+            <picture className="mediaSource">
+              <source
+                media="(max-width: 999px)"
+                srcSet={mediaObj.square?.url}
+              />
+              <source media="(min-width: 1000px)" srcSet={mediaObj.main?.url} />
+              <img src={mediaObj.main?.url} alt="Header image fallback" />
+            </picture>
+          )}
+
+          {mediaObj.main?.url.match(/\.(mp4)$/) && (
+            <video
+              preload="none"
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={mediaObj?.main.url}
+            >
+              <source
+                src={mediaObj?.square.url}
+                type="video/mp4"
+                media="(max-width: 999px)"
+              />
+              <source
+                src={mediaObj?.main.url}
+                type="video/mp4"
+                media="(min-width: 1000px)"
+              />
+              <img src={mediaObj.square?.url} alt="Header video fallback" />
+            </video>
+          )}
         </div>
         <div className="headerBio">
           <div className="headerContainer">

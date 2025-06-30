@@ -23,4 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-/src/resourceFolder_typeFoward/
+/public/resourceFolder_typeFoward/
+

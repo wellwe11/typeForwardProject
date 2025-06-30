@@ -25,7 +25,11 @@ const sortFiles = async (data, fullData, path) => {
         const length = Object.keys(current).length;
 
         if (index === segments.length - 1) {
-          const absolutePath = fullData[`${path}${segments.join("/")}`];
+          const absolutePath = fullData[`${path}${segments.join("/")}`].replace(
+            "/public",
+            ""
+          );
+
           const keyExtension = key.split(".").pop().toLowerCase();
 
           if (videoFiles.includes(keyExtension)) {
@@ -43,7 +47,9 @@ const sortFiles = async (data, fullData, path) => {
               .replace(/\d+/g, "")
               .replace(/woff\d*/g, "");
             current[length] = {
-              url: fullData[`${path}${segments.join("/")}`],
+              url: fullData[
+                `${path}${segments.join("/").replace("/public", "")}`
+              ],
               name: fontName,
             };
           }
@@ -77,6 +83,7 @@ const sortFiles = async (data, fullData, path) => {
 
 export const exportData = async (localData, path) => {
   const cleanedPath = cleanPathFile(localData, path);
+
   const structured = await sortFiles(cleanedPath, localData, path);
 
   const sortByPosition = (items) => {

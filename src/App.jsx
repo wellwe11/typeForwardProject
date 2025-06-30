@@ -14,7 +14,7 @@ import { exportData } from "./COMPONENTS/abstract_components/Sections/Sections";
 import BlogComponent from "./COMPONENTS/BLOG/BLOG";
 import BlogPosterComponent from "./COMPONENTS/BLOG_POSTER/blog_posterComponent";
 
-const localData = import.meta.glob("./resourceFolder_typeFoward/**/*", {
+const localData = import.meta.glob("../public/resourceFolder_typeFoward/**/*", {
   eager: true,
   as: "url",
 });
@@ -40,7 +40,7 @@ function App() {
     const fetchData = async () => {
       const fetchedData = await exportData(
         localData,
-        "./resourceFolder_typeFoward/"
+        "../public/resourceFolder_typeFoward/"
       );
 
       setData(fetchedData.assets);
@@ -139,7 +139,7 @@ export default App;
 /**
  * bugs on original website:
  * ". Type&nbsp;Forward " on https://www.typeforward.com/services#custom-licensing
- *
+ *“A typeface that is odd and oval, why not call it “Oddval,” suggested the designers at FourPlus. We immediately fell in love with it. We knew the name might sound strange but wasn’t that the point from the beginning?
  *
  * move subscribe from home to abstract_components
  * move borderWidthBorder.jsx to its own folder and rename abstract.scss
