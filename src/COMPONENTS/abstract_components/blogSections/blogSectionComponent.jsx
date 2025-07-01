@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import H_OneComponent from "../componentTitle/componentTitle";
 import fetchAllText from "../../../functions/fetchAllText";
 import SubscribeComponent from "../../HOME/SUBSCRIBE/SUBSCRIBE";
-import RenderLineSplit from "../renderLineSplit";
+import ReactMarkdown from "react-markdown";
 
 const sortByPosition = (items) => {
   return items.sort(
@@ -18,8 +18,6 @@ const BlogContent = ({ data, images, videos }) => {
   const [localVideos, setLocalVideos] = useState(null);
   const [localSections, setLocalSections] = useState(null);
   const [localCodeText, setLocalCodeText] = useState(null);
-  const [localLinkTo, setLocalLinkTo] = useState(null);
-  const [localLink, setLocalLink] = useState(null);
 
   const sortType = (type, setter) => {
     const sorted = {};
@@ -36,10 +34,7 @@ const BlogContent = ({ data, images, videos }) => {
   };
 
   const getText = async (url) => {
-    const { thinText, bioText, sections, codeText, link, linkTo } =
-      await fetchAllText(url);
-
-    console.log(link, linkTo);
+    const { thinText, bioText, sections, codeText } = await fetchAllText(url);
 
     setThinText(thinText);
     setBioText(bioText);
@@ -50,14 +45,6 @@ const BlogContent = ({ data, images, videos }) => {
 
     if (codeText) {
       setLocalCodeText(codeText);
-    }
-
-    if (link) {
-      setLocalLink(link);
-    }
-
-    if (linkTo) {
-      setLocalLinkTo(linkTo);
     }
   };
 
@@ -85,26 +72,7 @@ const BlogContent = ({ data, images, videos }) => {
     return (
       <div className="blogContentContainer">
         <h3 className="blogMainText">
-          {localThinText?.includes("REPLACE_LINK")
-            ? localThinText?.split("REPLACE_LINK").map((part, index, arr) => (
-                <React.Fragment key={index}>
-                  {part}
-                  {index < arr.length - 1 && localLinkTo?.[index] && (
-                    <button>
-                      <a
-                        href={localLinkTo[index]}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {Array.isArray(localLink)
-                          ? localLink[index]
-                          : localLink}
-                      </a>
-                    </button>
-                  )}
-                </React.Fragment>
-              ))
-            : localThinText}
+          <ReactMarkdown>{localThinText}</ReactMarkdown>
         </h3>
         {localVideos && (
           <div className="blogImageContainer">
@@ -126,7 +94,6 @@ const BlogContent = ({ data, images, videos }) => {
                 type="video/mp4"
                 media="(min-width: 1000px)"
               />
-              <source src={localVideos.main} type="video/mp4" />
             </video>
           </div>
         )}
@@ -157,25 +124,7 @@ const BlogContent = ({ data, images, videos }) => {
                 <li className="blogLi" key={index}>
                   <h4 className="blogLiText">
                     <strong>{section.bold} </strong>
-                    {section.thin
-                      .split("REPLACE_LINK")
-                      .map((part, index, arr) => (
-                        <React.Fragment>
-                          {part}
-                          {index < arr.length - 1 &&
-                            section.linkTo?.[index] && (
-                              <a
-                                href={section.linkTo[index]}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {Array.isArray(section.link)
-                                  ? section.link[index]
-                                  : section.link}
-                              </a>
-                            )}
-                        </React.Fragment>
-                      ))}
+                    <ReactMarkdown>{section.thin}</ReactMarkdown>
                   </h4>
                 </li>
               ))}
@@ -249,6 +198,7 @@ const HeaderSection = ({ data, sections }) => {
   const [thinText, setThinText] = useState();
   const [mediaObj, setMediaObj] = useState({});
   const mediaFolder = Object.entries(data.media);
+  console.log(data, mediaFolder);
 
   const getText = async () => {
     const { bigTitle, boldText, thinText } = await fetchAllText(data[0].url);
@@ -320,6 +270,11 @@ const HeaderSection = ({ data, sections }) => {
           </div>
           <div className="dateContainer">
             <h2 className="dateText">{boldText}</h2>
+          </div>
+          <div className="headerBioTextContainer">
+            <h3 className="headerBioText">
+              <ReactMarkdown>{thinText}</ReactMarkdown>
+            </h3>
           </div>
           <ul className="headerSectionsContainer">
             {sectionsKeys.map((section, index) => (

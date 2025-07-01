@@ -14,6 +14,7 @@
 .headerSectionContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
 
@@ -28,6 +29,14 @@
     .dateContainer {
       padding-bottom: 5vw;
       .dateText {
+        color: black;
+      }
+    }
+    .headerBioTextContainer {
+      padding-bottom: 5vw;
+      .headerBioText {
+        white-space: pre-line;
+        font-variation-settings: "wght" 400;
         color: black;
       }
     }
@@ -65,8 +74,8 @@
       }
     }
 
-    @media screen and (max-width: 800px) {
-      width: 100%;
+    @media screen and (max-width: 1000px) {
+      width: 65%;
     }
   }
 }
@@ -80,10 +89,15 @@
 
   .headerImage {
   }
+
+  @media screen and (max-width: 1000px) {
+    width: 60%;
+  }
 }
 
 .blogSectionsContainer {
   padding-top: 10vw;
+  width: 80vw;
 
   .blogSectionTitleContainer {
     color: black;
@@ -107,6 +121,7 @@
   text-align: start;
 
   .blogMainText {
+    white-space: pre-line;
     color: black;
     padding-top: 5vw;
     padding-bottom: 5vw;
@@ -114,6 +129,10 @@
     font-variation-settings: "wght" 500;
     line-height: 1.9rem;
     font-size: 1.1rem;
+
+    a {
+      text-decoration: underline;
+    }
 
     button {
       a {
@@ -132,6 +151,10 @@
     font-family: "font-Gogh-italic", sans-serif;
     font-style: italic;
     width: 95%;
+
+    @media screen and (max-width: 1000px) {
+      width: 55%;
+    }
   }
 
   .blogSectionUl {
@@ -173,6 +196,10 @@
     scroll-behavior: none;
 
     code {
+    }
+
+    @media screen and (max-width: 1000px) {
+      width: 80vw;
     }
   }
 }
