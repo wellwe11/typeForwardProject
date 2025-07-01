@@ -2,36 +2,15 @@ import "./blogSectionComponent.scss";
 import React, { useEffect, useState } from "react";
 import H_OneComponent from "../componentTitle/componentTitle";
 import fetchAllText from "../../../functions/fetchAllText";
-import SubscribeComponent from "../../HOME/SUBSCRIBE/SUBSCRIBE";
 import ReactMarkdown from "react-markdown";
-
-const sortByPosition = (items) => {
-  return items.sort(
-    ([, a], [, b]) => +a?._embedded.info.position - +b?._embedded.info.position
-  );
-};
+import sortByPosition from "../../../functions/sortByPosition";
+import DisplayMediaComponent from "../displayMediaComponent/displayMediaComponent";
 
 const BlogContent = ({ data, images, videos }) => {
   const [localThinText, setThinText] = useState(null);
   const [localBioText, setBioText] = useState(null);
-  const [localImages, setLocalImages] = useState(null);
-  const [localVideos, setLocalVideos] = useState(null);
   const [localSections, setLocalSections] = useState(null);
   const [localCodeText, setLocalCodeText] = useState(null);
-
-  const sortType = (type, setter) => {
-    const sorted = {};
-
-    type.forEach((i) => {
-      if (i.url.toLowerCase().includes("square")) {
-        sorted.square = i.url;
-      } else {
-        sorted.main = i.url;
-      }
-    });
-
-    setter(sorted);
-  };
 
   const getText = async (url) => {
     const { thinText, bioText, sections, codeText } = await fetchAllText(url);
@@ -52,65 +31,13 @@ const BlogContent = ({ data, images, videos }) => {
     getText(data);
   }, []);
 
-  useEffect(() => {
-    if (images) {
-      sortType(images, setLocalImages);
-    }
-
-    if (videos) {
-      sortType(videos, setLocalVideos);
-    }
-  }, [images, videos]);
-
-  if (
-    localThinText ||
-    localBioText ||
-    localImages ||
-    localVideos ||
-    localCodeText
-  ) {
+  if (localThinText || localBioText || localCodeText) {
     return (
       <div className="blogContentContainer">
         <h3 className="blogMainText">
           <ReactMarkdown>{localThinText}</ReactMarkdown>
         </h3>
-        {localVideos && (
-          <div className="blogImageContainer">
-            <video
-              preload="none"
-              autoPlay
-              loop
-              muted
-              playsInline
-              poster={localImages.square}
-            >
-              <source
-                src={localVideos.square}
-                type="video/mp4"
-                media="(max-width: 999px)"
-              />
-              <source
-                src={localVideos.main}
-                type="video/mp4"
-                media="(min-width: 1000px)"
-              />
-            </video>
-          </div>
-        )}
-
-        {!localVideos && localImages && (
-          <div className="blogImageContainer">
-            <picture>
-              <source
-                media="(min-width:image/svg+xml 1000px)"
-                srcSet={localImages.main}
-              />
-              <source media="(max-width: 999px)" srcSet={localImages.square} />
-              <img src={localImages.main} alt="fallback image" />
-            </picture>
-          </div>
-        )}
-
+        <DisplayMediaComponent images={images} video={videos} />
         <div>
           {localCodeText && (
             <pre className="code-section">
@@ -167,7 +94,7 @@ const BlogSection = ({ data }) => {
   }
 };
 
-const BlogSections = ({ data }) => {
+export const BlogSections = ({ data }) => {
   const sectionEntries = Object.entries(data);
 
   const sortByPosition = (items) => {
@@ -192,13 +119,10 @@ const BlogSections = ({ data }) => {
   );
 };
 
-const HeaderSection = ({ data, sections }) => {
+export const HeaderSection = ({ data, sections }) => {
   const [title, setTitle] = useState();
   const [boldText, setBoldText] = useState();
   const [thinText, setThinText] = useState();
-  const [mediaObj, setMediaObj] = useState({});
-  const mediaFolder = Object.entries(data.media);
-  console.log(data, mediaFolder);
 
   const getText = async () => {
     const { bigTitle, boldText, thinText } = await fetchAllText(data[0].url);
@@ -207,63 +131,16 @@ const HeaderSection = ({ data, sections }) => {
     setThinText(thinText);
   };
 
-  const sortMedia = () => {
-    const sortedImagesObj = mediaFolder.reduce((acc, [_, media]) => {
-      const key = media.url.toLowerCase().includes("square")
-        ? "square"
-        : "main";
-      acc[key] = media;
-
-      return acc;
-    }, {});
-
-    setMediaObj(sortedImagesObj);
-  };
-
   useEffect(() => {
     getText();
-    sortMedia();
   }, []);
 
-  if ((title, thinText, mediaObj, sections)) {
+  if ((title, thinText, sections)) {
     const sectionsKeys = Object.keys(sections);
     return (
       <div className="headerSectionContainer">
-        <div className="blogImageContainer">
-          {mediaObj.main?.url.match(/\.(svg|jpe?g|png|webp)$/) && (
-            <picture className="mediaSource">
-              <source
-                media="(max-width: 999px)"
-                srcSet={mediaObj.square?.url}
-              />
-              <source media="(min-width: 1000px)" srcSet={mediaObj.main?.url} />
-              <img src={mediaObj.main?.url} alt="Header image fallback" />
-            </picture>
-          )}
+        <DisplayMediaComponent images={data.images} videos={data.videos} />
 
-          {mediaObj.main?.url.match(/\.(mp4)$/) && (
-            <video
-              preload="none"
-              autoPlay
-              loop
-              muted
-              playsInline
-              poster={mediaObj?.main.url}
-            >
-              <source
-                src={mediaObj?.square.url}
-                type="video/mp4"
-                media="(max-width: 999px)"
-              />
-              <source
-                src={mediaObj?.main.url}
-                type="video/mp4"
-                media="(min-width: 1000px)"
-              />
-              <img src={mediaObj.square?.url} alt="Header video fallback" />
-            </video>
-          )}
-        </div>
         <div className="headerBio">
           <div className="headerContainer">
             <H_OneComponent title={title} textColor={"black"} textSize={5} />
@@ -293,15 +170,3 @@ const HeaderSection = ({ data, sections }) => {
     );
   }
 };
-
-const BlogSectionComponent = ({ data }) => {
-  return (
-    <div className="blogSectionComponent">
-      <HeaderSection data={data.header} sections={data.sections} />
-      <BlogSections data={data.sections} />
-      <SubscribeComponent sectionRef={" "} />
-    </div>
-  );
-};
-
-export default BlogSectionComponent;

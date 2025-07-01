@@ -1,7 +1,7 @@
 import "./smallIconsComponent.scss";
 
 const icons = import.meta.glob(
-  "../../../resourceFolder_typeFoward/extended_assets/socials_icons/*.svg",
+  "../../../../public/resourceFolder_typeFoward/extended_assets/socials_icons/*.svg",
   {
     eager: true,
     as: "url",
@@ -46,7 +46,7 @@ const LinkImagesComponent = ({ sectionColor, data }) => {
                 <img
                   src={
                     icons[
-                      `../../../resourceFolder_typeFoward/extended_assets/socials_icons/${index}.min.svg`
+                      `../../../../public/resourceFolder_typeFoward/extended_assets/socials_icons/${index}.min.svg`
                     ]
                   }
                   alt=""

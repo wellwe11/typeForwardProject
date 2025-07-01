@@ -35,6 +35,7 @@ const TopSectionBio = ({
       key !== "bio" && key !== "_embedded" && value !== "services"
   );
 
+  console.log(updatedData);
   return (
     <SizeContainerComponent
       sectionColor={"black"}

@@ -1,5 +1,11 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import BlogSectionComponent from "../abstract_components/blogSections/blogSectionComponent";
+import "./blog_poster.scss";
+import { useLocation } from "react-router-dom";
+import {
+  BlogSections,
+  HeaderSection,
+} from "../abstract_components/blogSections/blogSectionComponent";
+
+import SubscribeComponent from "../HOME/SUBSCRIBE/SUBSCRIBE";
 
 const BlogPosterComponent = ({ data }) => {
   const { hash } = useLocation(); // blog_poster#posterOne etc
@@ -12,9 +18,16 @@ const BlogPosterComponent = ({ data }) => {
       link.includes(hash.replace(/#/g, ""))
     );
 
+    const specifiedData = blogData[0][1].blog || [];
+
     return (
-      <div>
-        <BlogSectionComponent data={blogData[0][1].blog || []} />
+      <div className="blogSectionComponent">
+        <HeaderSection
+          data={specifiedData.header}
+          sections={specifiedData.sections}
+        />
+        <BlogSections data={specifiedData.sections} />
+        <SubscribeComponent sectionRef={" "} />
       </div>
     );
   }
