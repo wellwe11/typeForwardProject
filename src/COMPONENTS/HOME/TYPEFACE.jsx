@@ -11,12 +11,15 @@ const TypeFaceComponent = ({ type, handleDisplayForm }) => {
   useEffect(() => {
     if (!type[0] || !type[1]) return;
 
+    const fontEntries = Object.entries(type?.[1]?.fonts);
+
+    console.log(fontEntries, type?.[0]);
     const style = document.createElement("style");
     style.id = `dynamic-font-${type?.[0]}`;
     style.innerHTML = `
       @font-face {
         font-family: '${type?.[0]}';
-        src: url('${type?.[1]?.fonts?.[0]?.url}');
+        src: url('${fontEntries?.[0]?.[1]?.[0]?.url}');
         font-weight: normal;
         font-style: normal;
       }
@@ -41,13 +44,17 @@ const TypeFaceComponent = ({ type, handleDisplayForm }) => {
       <h1 className="typeFaceName">{addSpaceBeforeCaps(type[0])}</h1>
       <h3 className="typeFaceDescription">{thinTex}</h3>
       <div className="fontAvaliableContainer">
-        <Link to={`./typefaces/${type[0]}`} className="fontInfoBtn">
-          <h3 className="fontInfo">{type[1].fonts?.length} FONTS</h3>
+        <Link to={`./typefaces/type#${type[0]}`} className="fontInfoBtn">
+          <h3 className="fontInfo">
+            {Object.keys(type?.[1]?.fonts).length} FONTS
+          </h3>
           <div className="fontUnderline"></div>
         </Link>
         {/* <h4>Free: {type?.free.length} </h4> */}
         <button className="fontInfoBtn" onClick={handleDisplayForm}>
-          <h3 className="fontInfo">{type[1].free_Fonts?.length} FREE</h3>
+          <h3 className="fontInfo">
+            {Object.keys(type?.[1].free_Fonts).length} FREE
+          </h3>
           <div className="fontUnderline"></div>
         </button>
       </div>
@@ -59,7 +66,7 @@ const TypeButtonExplore = ({ type }) => {
   // explore takes you to ./typefaces/type
   return (
     <div className="typeButtonBuyContainer">
-      <Link to={`./typefaces/${type}`}>
+      <Link to={`./typefaces/type#${type}`}>
         <span>
           <h3 className="buttonFont">{"Explore"}</h3>
         </span>
@@ -126,9 +133,11 @@ const DownloadForm = ({ type, displayForm, setDisplayForm, index }) => {
             </div>
             <div className="subinfoContainer">
               <h4 className="subinfo">
-                {`Enter your e-mail to get ${type[1].free_Fonts[0].name} ${
-                  type[1].free_Fonts[3]?.name
-                    ? "and " + type[1].free_Fonts[3]?.name
+                {`Enter your e-mail to get ${
+                  Object.keys(type?.[1].free_Fonts)[0]
+                } ${
+                  Object.keys(type?.[1].free_Fonts)[1]
+                    ? "and " + Object.keys(type?.[1].free_Fonts)[1]
                     : ""
                 } free desktop and web fonts with license to use as you wish.`}
               </h4>
@@ -170,7 +179,7 @@ const TypeComponent = ({ sectionRef, data }) => {
   return (
     <section
       className="sectionWhite"
-      ref={(el) => (sectionRef.current[1] = el)}
+      // ref={(el) => (sectionRef.current[1] = el)}
     >
       <div className="typeFaceSection">
         <div className="typeFaceSectionContainer">

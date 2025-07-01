@@ -13,6 +13,8 @@ import AboutUsComponent from "./COMPONENTS/ABOUT_US/ABOUTUS_component";
 import { exportData } from "./COMPONENTS/abstract_components/Sections/Sections";
 import BlogComponent from "./COMPONENTS/BLOG/BLOG";
 import BlogPosterComponent from "./COMPONENTS/BLOG_POSTER/blog_posterComponent";
+import TypeComponent from "./COMPONENTS/HOME/TYPEFACE";
+import Specific_TypeComponent from "./COMPONENTS/TYPE_FONT/typeComponent";
 
 const localData = import.meta.glob("../public/resourceFolder_typeFoward/**/*", {
   eager: true,
@@ -124,6 +126,10 @@ function App() {
               <Route
                 path="blog/blog_poster"
                 element={<BlogPosterComponent data={data} />}
+              />
+              <Route
+                path="typefaces/type"
+                element={<Specific_TypeComponent data={data} />}
               />
             </Routes>
             <FooterComponent />

@@ -1,12 +1,10 @@
 import "./blog_poster.scss";
 import { useLocation } from "react-router-dom";
-import {
-  BlogSections,
-  HeaderSection,
-} from "../abstract_components/blogSections/blogSectionComponent";
 
 import SubscribeComponent from "../HOME/SUBSCRIBE/SUBSCRIBE";
 import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
+import BlogSections from "../abstract_components/blogSections/blogContent/blogContent";
+import HeaderSection from "../abstract_components/blogSections/headerContent/headerContent";
 
 const BlogPosterComponent = ({ data }) => {
   const { hash } = useLocation(); // blog_poster#posterOne etc

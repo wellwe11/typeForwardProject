@@ -32,8 +32,8 @@
 
 @font-face {
   font-family: "font-Gogh";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Gogh/fonts/GoghVariableVF.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Gogh/fonts/GoghVariableVF.woff2);
+  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Gogh/fonts/GoghVariableVF/GoghVariableVF.woff),
+    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Gogh/fonts/GoghVariableVF/GoghVariableVF.woff2);
 
   font-weight: 100 900;
   font-stretch: normal;
@@ -42,13 +42,13 @@
 
 @font-face {
   font-family: "font-Gogh-italic";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Gogh/fonts/GoghVariableItalicVF.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Gogh/fonts/GoghVariableItalicVF.woff2);
+  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Gogh/fonts/GoghVariableItalic/GoghVariableItalicVF.woff),
+    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Gogh/fonts/GoghVariableItalic/GoghVariableItalicVF.woff2);
 }
 
 @font-face {
   font-family: "font-Oddval";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Oddval/fonts/OddvalVariable-VariableVF.woff2);
+  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Oddval/fonts/OddvalVariable_VariableVF/OddvalVariable-VariableVF.woff2);
 
   font-weight: 100 900;
   font-stretch: normal;
@@ -57,8 +57,8 @@
 
 @font-face {
   font-family: "font-Bion";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Bion/fonts/BionVariableVF.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Bion/fonts/BionVariableVF.woff2);
+  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Bion/fonts/bionVariable/BionVariableVF.woff),
+    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Bion/fonts/bionVariable/BionVariableVF.woff2);
   font-weight: 100 900;
   font-stretch: normal;
   font-style: normal;
@@ -75,8 +75,8 @@
 
 @font-face {
   font-family: "font-EmOne";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/EmOne/fonts/EmOneTVariable.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/EmOne/fonts/EmOneTVariable.woff2);
+  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/EmOne/fonts/EmOneTVariable/EmOneTVariable.woff),
+    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/EmOne/fonts/EmOneTVariable/EmOneTVariable.woff2);
   font-weight: 100 900;
   font-stretch: normal;
   font-style: normal;
@@ -84,8 +84,8 @@
 
 @font-face {
   font-family: "font-Garet";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Garet/fonts/GaretVariableVF.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Garet/fonts/GaretVariableVF.woff2);
+  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Garet/fonts/GarentVariableVF/GaretVariableVF.woff),
+    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Garet/fonts/GarentVariableVF/GaretVariableVF.woff2);
   font-weight: 100 900;
   font-stretch: normal;
   font-style: normal;
@@ -93,8 +93,8 @@
 
 @font-face {
   font-family: "font-Steam";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Steam/fonts/Steam-Base.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Steam/fonts/Steam-Base.woff2);
+  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Steam/fonts/Steam_Base/Steam-Base.woff),
+    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Steam/fonts/Steam_Base/Steam-Base.woff2);
   font-weight: 100 900;
   font-stretch: normal;
   font-style: normal;
@@ -155,6 +155,10 @@ a {
 }
 
 @media screen and (max-width: 800px) {
+  p {
+    font-size: 0.9rem;
+  }
+
   h1 {
     font-size: 1.2rem;
   }
@@ -168,6 +172,10 @@ a {
 }
 
 @media screen and (max-width: 600px) {
+  p {
+    font-size: 0.8rem;
+  }
+
   h2 {
     font-size: 0.9rem;
   }

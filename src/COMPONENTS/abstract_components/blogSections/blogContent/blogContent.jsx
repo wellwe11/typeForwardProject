@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import fetchAllText from "../../../../functions/fetchAllText";
 import DisplayMediaComponent from "../../displayMediaComponent/displayMediaComponent";
 import ReactMarkdown from "react-markdown";
+import sortByPosition from "../../../../functions/sortByPosition";
 
 export const BlogMainText = ({ children, textType = "h3" }) => {
   const TypeComponent = textType;
@@ -80,12 +81,13 @@ const BlogContent = ({ data, images, videos }) => {
     getText(data);
   }, []);
 
+  console.log(videos);
   return (
     <div className="blogContentContainer">
       <div className="blogMainTextContainer">
         <BlogMainText textType={"h3"}>{localThinText}</BlogMainText>
       </div>
-      <DisplayMediaComponent images={images} video={videos} />
+      <DisplayMediaComponent images={images} videos={videos} />
       <div>
         <CodeText>{localCodeText}</CodeText>
         <SectionText sectionTexts={localSections} />
@@ -95,4 +97,56 @@ const BlogContent = ({ data, images, videos }) => {
   );
 };
 
-export default BlogContent;
+const BlogSection = ({ data }) => {
+  const dataEntries = Object.entries(data);
+
+  const sectionsFiltered = dataEntries.filter(
+    (section) => !section.includes("_embedded")
+  );
+
+  const sectionsSorted = sortByPosition(sectionsFiltered);
+
+  if (sectionsSorted) {
+    return (
+      <div className="blogSection">
+        <div className="border"></div>
+        {sectionsSorted.map(([section, input]) => (
+          <div key={section}>
+            <BlogContent
+              data={input.bio[0]?.url}
+              images={input.images || null}
+              videos={input.videos || null}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+};
+
+export const BlogSections = ({ data }) => {
+  const sectionEntries = Object.entries(data);
+
+  const sortByPosition = (items) => {
+    return items.sort(
+      ([, a], [, b]) =>
+        +a?._embedded.info.position - +b?._embedded.info.position
+    );
+  };
+  const sectionsSorted = sortByPosition(sectionEntries);
+
+  return (
+    <div className="blogSectionsContainer">
+      {sectionsSorted.map(([section, obj]) => (
+        <div className="blogSectionContainer" key={section}>
+          <div className="blogSectionTitleContainer">
+            <h2>{section.replace(/_/g, " ")}</h2>
+          </div>
+          <BlogSection data={obj} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default BlogSections;

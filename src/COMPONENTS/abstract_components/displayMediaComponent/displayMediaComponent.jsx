@@ -31,7 +31,7 @@ const VideoComponent = ({ localImages, localVideos }) => {
   return (
     <div className="blogImageContainer">
       <video
-        key={windowWidth > 1000 ? "main" : "square"}
+        key={windowWidth > 999 ? "main" : "square"}
         preload="none"
         autoPlay
         loop
@@ -40,7 +40,7 @@ const VideoComponent = ({ localImages, localVideos }) => {
         poster={localImages.square}
       >
         <source
-          src={windowWidth > 1000 ? localVideos.main : localVideos.square}
+          src={windowWidth > 999 ? localVideos.main : localVideos.square}
           type="video/mp4"
         />
       </video>
