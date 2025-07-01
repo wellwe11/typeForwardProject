@@ -5,67 +5,7 @@ import fetchAllText from "../../../functions/fetchAllText";
 import ReactMarkdown from "react-markdown";
 import sortByPosition from "../../../functions/sortByPosition";
 import DisplayMediaComponent from "../displayMediaComponent/displayMediaComponent";
-
-const BlogContent = ({ data, images, videos }) => {
-  const [localThinText, setThinText] = useState(null);
-  const [localBioText, setBioText] = useState(null);
-  const [localSections, setLocalSections] = useState(null);
-  const [localCodeText, setLocalCodeText] = useState(null);
-
-  const getText = async (url) => {
-    const { thinText, bioText, sections, codeText } = await fetchAllText(url);
-
-    setThinText(thinText);
-    setBioText(bioText);
-
-    if (sections) {
-      setLocalSections(sections);
-    }
-
-    if (codeText) {
-      setLocalCodeText(codeText);
-    }
-  };
-
-  useEffect(() => {
-    getText(data);
-  }, []);
-
-  if (localThinText || localBioText || localCodeText) {
-    return (
-      <div className="blogContentContainer">
-        <h3 className="blogMainText">
-          <ReactMarkdown>{localThinText}</ReactMarkdown>
-        </h3>
-        <DisplayMediaComponent images={images} video={videos} />
-        <div>
-          {localCodeText && (
-            <pre className="code-section">
-              <code>{localCodeText.replace(/`/g, "")}</code>
-            </pre>
-          )}
-
-          {localSections && (
-            <ul className="blogSectionUl">
-              {localSections.map((section, index) => (
-                <li className="blogLi" key={index}>
-                  <h4 className="blogLiText">
-                    <strong>{section.bold} </strong>
-                    <ReactMarkdown>{section.thin}</ReactMarkdown>
-                  </h4>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        <h4 className="blogSubText" style={{ color: "black" }}>
-          {localBioText}
-        </h4>
-      </div>
-    );
-  }
-};
+import BlogContent from "./blogContent/blogContent";
 
 const BlogSection = ({ data }) => {
   const dataEntries = Object.entries(data);
