@@ -4,13 +4,15 @@ import fetchAllText from "../../../../functions/fetchAllText";
 import DisplayMediaComponent from "../../displayMediaComponent/displayMediaComponent";
 import ReactMarkdown from "react-markdown";
 
-const BlogMainText = ({ children, textType }) => {
+export const BlogMainText = ({ children, textType = "h3" }) => {
   const TypeComponent = textType;
-  return (
-    <TypeComponent className="blogMainText">
-      <ReactMarkdown>{children}</ReactMarkdown>
-    </TypeComponent>
-  );
+  if (children) {
+    return (
+      <TypeComponent className="blogMainText">
+        <ReactMarkdown>{children}</ReactMarkdown>
+      </TypeComponent>
+    );
+  }
 };
 
 const CodeText = ({ children }) => {
@@ -80,7 +82,9 @@ const BlogContent = ({ data, images, videos }) => {
 
   return (
     <div className="blogContentContainer">
-      <BlogMainText textType={"h3"}>{localThinText}</BlogMainText>
+      <div className="blogMainTextContainer">
+        <BlogMainText textType={"h3"}>{localThinText}</BlogMainText>
+      </div>
       <DisplayMediaComponent images={images} video={videos} />
       <div>
         <CodeText>{localCodeText}</CodeText>

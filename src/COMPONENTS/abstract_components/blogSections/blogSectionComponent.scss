@@ -7,7 +7,8 @@
 
   .headerBio {
     margin-left: 5vw;
-    width: 60vw;
+    width: 100%;
+
     .headerContainer {
       padding-top: 5vw;
       padding-bottom: 2vw;
@@ -19,46 +20,10 @@
         color: black;
       }
     }
-    .headerBioTextContainer {
+
+    .headerSectionText {
       padding-bottom: 5vw;
-      .headerBioText {
-        white-space: pre-line;
-        font-variation-settings: "wght" 400;
-        color: black;
-      }
-    }
-
-    .headerSectionsContainer {
-      padding-left: 2vw;
-      .headerSection {
-        padding-top: 1vw;
-        padding-bottom: 1vw;
-
-        color: black;
-
-        &::marker {
-          font-size: 1.8vw;
-        }
-
-        .headerLiButton {
-          cursor: pointer;
-
-          .underLine {
-            transition: width 0.2s ease-out;
-            width: 0%;
-            height: 3.5px;
-            background-color: black;
-            opacity: 0;
-          }
-
-          &:hover {
-            .underLine {
-              width: 100%;
-              opacity: 1;
-            }
-          }
-        }
-      }
+      padding-top: 5vw;
     }
 
     @media screen and (max-width: 1000px) {
@@ -68,8 +33,7 @@
 }
 
 .blogSectionsContainer {
-  padding-top: 10vw;
-  width: 80vw;
+  width: 100%;
 
   .blogSectionTitleContainer {
     color: black;
@@ -82,5 +46,38 @@
     width: 100%;
     height: 2px;
     background-color: black;
+  }
+}
+
+.headerSectionsContainer {
+  padding-left: 2vw;
+  .headerSection {
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+
+    color: black;
+
+    &::marker {
+      font-size: 1.8vw;
+    }
+
+    .headerLiButton {
+      cursor: pointer;
+
+      .underLine {
+        transition: width 0.2s ease-out;
+        width: 0%;
+        height: 3.5px;
+        background-color: black;
+        opacity: 0;
+      }
+
+      &:hover {
+        .underLine {
+          width: 100%;
+          opacity: 1;
+        }
+      }
+    }
   }
 }

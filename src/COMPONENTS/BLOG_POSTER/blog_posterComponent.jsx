@@ -6,6 +6,7 @@ import {
 } from "../abstract_components/blogSections/blogSectionComponent";
 
 import SubscribeComponent from "../HOME/SUBSCRIBE/SUBSCRIBE";
+import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
 
 const BlogPosterComponent = ({ data }) => {
   const { hash } = useLocation(); // blog_poster#posterOne etc
@@ -21,14 +22,21 @@ const BlogPosterComponent = ({ data }) => {
     const specifiedData = blogData[0][1].blog || [];
 
     return (
-      <div className="blogSectionComponent">
-        <HeaderSection
-          data={specifiedData.header}
-          sections={specifiedData.sections}
-        />
-        <BlogSections data={specifiedData.sections} />
-        <SubscribeComponent sectionRef={" "} />
-      </div>
+      <SizeContainerComponent sectionColor="white">
+        <div className="blogSectionComponent">
+          <div className="blogSectionHeader">
+            <HeaderSection
+              data={specifiedData.header}
+              sections={specifiedData.sections}
+            />
+          </div>
+          <div className="blogSections">
+            <BlogSections data={specifiedData.sections} />
+          </div>
+
+          <SubscribeComponent sectionRef={" "} />
+        </div>
+      </SizeContainerComponent>
     );
   }
 };
