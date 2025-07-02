@@ -1,6 +1,6 @@
 import "./componentTitle.scss";
 
-const H_OneComponent = ({ title, textColor, textSize }) => {
+const H_OneComponent = ({ title, textColor = "white", textSize = 6 }) => {
   const lineHeight = textSize + 1;
 
   const minsSize = 30;

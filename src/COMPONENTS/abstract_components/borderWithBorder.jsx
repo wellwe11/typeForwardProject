@@ -48,14 +48,15 @@ const BorderWithBorderBox = ({
             />
           </div>
         ) : (
-          <ExternalImageComp image={img} />
+          <ExternalImageComp image={img ? img : ""} />
         )}
         {eventHandler === "button" && (
           <button
             onClick={event}
             className="button"
             style={{
-              borderTop: borderColor,
+              borderTop: img ? borderColor : "",
+              minHeight: !img ? "100%" : "",
             }}
           >
             <span>

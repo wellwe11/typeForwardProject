@@ -5,37 +5,21 @@ import { Link } from "react-router-dom";
 import "./HOME.scss";
 import { EnterEmailAndOrSub } from "./SUBSCRIBE/SUBSCRIBE";
 import fetchText from "../../functions/importFont";
+import fetchFontStyle from "../abstract_components/typeSections/getFontStyle";
+import addSpaceBeforeCaps from "../../functions/addSpaceBeforeCaps";
 
-const TypeFaceComponent = ({ type, handleDisplayForm }) => {
+export const TypeFaceComponent = ({
+  children,
+  type,
+  handleDisplayForm,
+  linkTo,
+  fontColor = "black",
+}) => {
   const [thinTex, setThinText] = useState();
+
   useEffect(() => {
-    if (!type[0] || !type[1]) return;
-
-    const fontEntries = Object.entries(type?.[1]?.fonts);
-
-    console.log(fontEntries, type?.[0]);
-    const style = document.createElement("style");
-    style.id = `dynamic-font-${type?.[0]}`;
-    style.innerHTML = `
-      @font-face {
-        font-family: '${type?.[0]}';
-        src: url('${fontEntries?.[0]?.[1]?.[0]?.url}');
-        font-weight: normal;
-        font-style: normal;
-      }
-    `;
-
-    document.head.appendChild(style);
-
-    return () => {
-      const existing = document.getElementById(`dynamic-font-${type[0]}`);
-      if (existing) document.head.removeChild(existing);
-    };
+    fetchFontStyle(type);
   }, [type]);
-
-  function addSpaceBeforeCaps(text) {
-    return text.replace(/([a-z])([A-Z])/g, "$1 $2");
-  }
 
   fetchText(type[1].bio[0].url, setThinText);
 
@@ -43,26 +27,33 @@ const TypeFaceComponent = ({ type, handleDisplayForm }) => {
     <div className="typeFaceContainer" style={{ fontFamily: type[0] }}>
       <h1 className="typeFaceName">{addSpaceBeforeCaps(type[0])}</h1>
       <h3 className="typeFaceDescription">{thinTex}</h3>
+      <h3 className="typeFaceDescription">{children}</h3>
       <div className="fontAvaliableContainer">
-        <Link to={`./typefaces/type#${type[0]}`} className="fontInfoBtn">
-          <h3 className="fontInfo">
+        <Link to={`${linkTo ? linkTo : ""}`} className="fontInfoBtn">
+          <h3 className="fontInfo" style={{ color: fontColor }}>
             {Object.keys(type?.[1]?.fonts).length} FONTS
           </h3>
-          <div className="fontUnderline"></div>
+          <div
+            className="fontUnderline"
+            style={{ backgroundColor: fontColor }}
+          ></div>
         </Link>
-        {/* <h4>Free: {type?.free.length} </h4> */}
+
         <button className="fontInfoBtn" onClick={handleDisplayForm}>
-          <h3 className="fontInfo">
+          <h3 className="fontInfo" style={{ color: fontColor }}>
             {Object.keys(type?.[1].free_Fonts).length} FREE
           </h3>
-          <div className="fontUnderline"></div>
+          <div
+            className="fontUnderline"
+            style={{ backgroundColor: fontColor }}
+          ></div>
         </button>
       </div>
     </div>
   );
 };
 
-const TypeButtonExplore = ({ type }) => {
+const TypeButtonExplore = ({ type, backgroundColor = "black" }) => {
   // explore takes you to ./typefaces/type
   return (
     <div className="typeButtonBuyContainer">
@@ -154,6 +145,8 @@ const DownloadForm = ({ type, displayForm, setDisplayForm, index }) => {
 
 const TypeComponent = ({ sectionRef, data }) => {
   const [displayForm, setDisplayForm] = useState(null);
+
+  // display pop-up form
   const handleDisplayForm = (i) => setDisplayForm(i);
 
   const [fonts, setFonts] = useState();
@@ -199,6 +192,7 @@ const TypeComponent = ({ sectionRef, data }) => {
                   <TypeFaceComponent
                     type={type}
                     handleDisplayForm={() => handleDisplayForm(index)}
+                    linkTo={`./typefaces/type#${type[0]}`}
                   />
                   <div className="buyDownloadButtonsContainer">
                     <TypeButtonExplore type={type[0]} />

@@ -2,9 +2,9 @@ import "./displayMediaComponent.scss";
 import { useEffect, useState } from "react";
 import sortType from "../../../functions/sortType";
 
-const PictureComponent = ({ localImages }) => {
+const PictureComponent = ({ localImages, mediaStyle }) => {
   return (
-    <div className="blogImageContainer">
+    <div className="blogImageContainer" style={mediaStyle}>
       <picture>
         <source
           media="(min-width:image/svg+xml 1000px)"
@@ -17,7 +17,7 @@ const PictureComponent = ({ localImages }) => {
   );
 };
 
-const VideoComponent = ({ localImages, localVideos }) => {
+const VideoComponent = ({ localImages, localVideos, mediaStyle }) => {
   const [windowWidth, setWindowWidth] = useState(null);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const VideoComponent = ({ localImages, localVideos }) => {
   }, []);
 
   return (
-    <div className="blogImageContainer">
+    <div className="blogImageContainer" style={mediaStyle}>
       <video
         key={windowWidth > 999 ? "main" : "square"}
         preload="none"
@@ -48,7 +48,8 @@ const VideoComponent = ({ localImages, localVideos }) => {
   );
 };
 
-const DisplayMediaComponent = ({ images, videos }) => {
+const DisplayMediaComponent = ({ images, videos, mediaStyle }) => {
+  console.log("asd", images, videos);
   const [localImages, setLocalImages] = useState(null);
   const [localVideos, setLocalVideos] = useState(null);
 
@@ -66,11 +67,15 @@ const DisplayMediaComponent = ({ images, videos }) => {
     return (
       <div className="displayMediaComponent">
         {localVideos && (
-          <VideoComponent localImages={localImages} localVideos={localVideos} />
+          <VideoComponent
+            localImages={localImages}
+            localVideos={localVideos}
+            mediaStyle={mediaStyle}
+          />
         )}
 
         {!localVideos && localImages && (
-          <PictureComponent localImages={localImages} />
+          <PictureComponent localImages={localImages} mediaStyle={mediaStyle} />
         )}
       </div>
     );

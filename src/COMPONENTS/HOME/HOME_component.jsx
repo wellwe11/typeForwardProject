@@ -25,7 +25,7 @@ const CurrentImageDotComp = ({ array, activeIndex, setActiveIndex }) => {
   );
 };
 
-const ForwardWelcomeComponent = ({ sectionRef }) => {
+export const ForwardWelcomeComponent = ({ sectionRef }) => {
   const navLinks = useNavLinks();
 
   const [activeFontIndex, setActiveFontIndex] = useState(2);

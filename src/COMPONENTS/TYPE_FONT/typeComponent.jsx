@@ -1,11 +1,20 @@
+import "./typeComponent.scss";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import fetchWholeMd from "../../functions/fetchWholeMd";
+import TypeHeader from "../abstract_components/typeSections/typeSection";
+import ImageWheelContainer from "../abstract_components/imageWheelSlider/imageWheelComponent";
+import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
 
 const Specific_TypeComponent = ({ data }) => {
+  // font name
   const [typeName, setTypeName] = useState(null);
-  const [typeObject, setTypeObject] = useState(null);
   const { hash } = useLocation();
+
+  // unique types properties. Each type has a few variation of information.
+  const [typeObject, setTypeObject] = useState(null);
+
+  // foundation-file for each font
   const [mdFile, setMdFile] = useState(null);
 
   useEffect(() => {
@@ -20,8 +29,6 @@ const Specific_TypeComponent = ({ data }) => {
     };
     fetchMd();
   }, []);
-
-  console.log(mdFile);
 
   useEffect(() => {
     if (!hash) return;
@@ -38,11 +45,15 @@ const Specific_TypeComponent = ({ data }) => {
     setTypeObject(data.typefaces.fonts[typeName]);
   }, [typeName]);
 
-  return (
-    <div>
-      <h1 style={{ color: "black" }}>hello</h1>
-    </div>
-  );
+  if (mdFile && typeObject) {
+    const customTypeEntry = [typeName, typeObject];
+    return (
+      <div className="specific_TypeComponent">
+        <TypeHeader type={customTypeEntry} />
+        <ImageWheelContainer data={typeObject} />
+      </div>
+    );
+  }
 };
 
 export default Specific_TypeComponent;

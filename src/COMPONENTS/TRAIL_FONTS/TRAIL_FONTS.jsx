@@ -59,7 +59,7 @@ const TrailFontsComponent = ({ data }) => {
       <SizeContainerComponent sectionColor={"white"}>
         <div className="trailFontContainer">
           <div className="titleContainer">
-            <H_OneComponent title={"Download trial fonts"} />
+            <H_OneComponent title={"Download trial fonts"} textColor="black" />
           </div>
           <div className="content">
             <div className="leftContentContainer">
