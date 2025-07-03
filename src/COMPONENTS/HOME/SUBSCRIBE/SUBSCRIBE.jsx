@@ -138,7 +138,8 @@ export const SubCheck = () => {
 export const EnterEmailAndOrSub = ({ children }) => {
   return (
     <div className="enterInfoContainer">
-      <H_OneComponent title={children} />
+      <H_OneComponent title={children} textColor="black" />
+      <br />
       <EmailInput />
       <SubCheck />
     </div>

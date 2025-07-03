@@ -26,7 +26,6 @@ const OpenTypeComponent = ({ data, font }) => {
     setActiveTextStyle(0);
   }, []);
 
-  console.log(activeTextStyle);
   if (data) {
     const thinText = data.openType_Features.thin;
     const boldText = data.openType_Features.bold;
@@ -51,42 +50,42 @@ const OpenTypeComponent = ({ data, font }) => {
               {fontRepresentations.map(([index, representation]) => {
                 return (
                   <div className="fontDisplay" key={index}>
-                    <div className="presentationNormal">
+                    <span
+                      className="presentationNormal"
+                      style={{
+                        opacity: activeTextStyle === 1 ? "0" : "1",
+                        fontFamily: font[0],
+                      }}
+                    >
                       <ReactMarkdown
                         components={{
                           p: ({ node, ...props }) => (
-                            <h5
-                              className="presentation"
-                              style={{
-                                opacity: activeTextStyle === 1 ? "0" : "1",
-                                fontFamily: font[0],
-                              }}
-                              {...props}
-                            />
+                            <h5 className="presentationText" {...props} />
                           ),
                         }}
                       >
                         {representation?.text}
                       </ReactMarkdown>
-                    </div>
+                    </span>
 
-                    <ReactMarkdown
-                      components={{
-                        p: ({ node, ...props }) => (
-                          <h5
-                            className="presentation"
-                            style={{
-                              fontFeatureSettings: `"${representation.style}" 1`,
-                              opacity: activeTextStyle,
-                              fontFamily: font[0],
-                            }}
-                            {...props}
-                          />
-                        ),
+                    <span
+                      className="presentation"
+                      style={{
+                        fontFeatureSettings: `"${representation.style}" 1`,
+                        opacity: activeTextStyle,
+                        fontFamily: font[0],
                       }}
                     >
-                      {representation?.text}
-                    </ReactMarkdown>
+                      <ReactMarkdown
+                        components={{
+                          p: ({ node, ...props }) => (
+                            <h5 className="presentationText" {...props} />
+                          ),
+                        }}
+                      >
+                        {representation?.text}
+                      </ReactMarkdown>
+                    </span>
 
                     <h5 className="info">{index}</h5>
                   </div>
