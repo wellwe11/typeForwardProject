@@ -13,6 +13,7 @@ const ImageWheelDots = ({ amountOfImages, activeDot, setActiveDot }) => {
           activeDot === i + 1 ? "activeDot" : ""
         }`}
         onClick={() => setActiveDot(i + 1)}
+        key={i}
       />
     );
   }
@@ -23,7 +24,6 @@ const ImageWheelDots = ({ amountOfImages, activeDot, setActiveDot }) => {
 const ImageWheelContainer = ({ data }) => {
   const media = Object.entries(data?.fontBlog.media);
   const [activeImage, setActiveImage] = useState(1);
-  const [imageHover, setImageHover] = useState(false);
   const [leftHover, setLeftHover] = useState(false);
   const [rightHover, setRightHover] = useState(false);
 
@@ -46,12 +46,7 @@ const ImageWheelContainer = ({ data }) => {
 
   const mediaElements = media.map(([index, item]) => {
     return (
-      <div
-        className="imageWheelImage"
-        key={index}
-        onMouseEnter={() => setImageHover(true)}
-        onMouseLeave={() => setImageHover(false)}
-      >
+      <div className="imageWheelImage" key={index}>
         {item.videos ? (
           <DisplayMediaComponent
             videos={item.videos}
@@ -75,10 +70,10 @@ const ImageWheelContainer = ({ data }) => {
   });
 
   useEffect(() => {
-    if (!imageHover) {
+    if (!leftHover && !rightHover) {
       const timer = setTimeout(() => {
         handleActiveImage();
-      }, 3000);
+      }, 4000);
 
       return () => clearTimeout(timer);
     }
@@ -115,7 +110,6 @@ const ImageWheelContainer = ({ data }) => {
                 activeDot={activeImage}
                 setActiveDot={setActiveImage}
               />
-              {ImageWheelDots}
             </div>
           </div>
         </div>

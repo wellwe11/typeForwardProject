@@ -49,7 +49,6 @@ const VideoComponent = ({ localImages, localVideos, mediaStyle }) => {
 };
 
 const DisplayMediaComponent = ({ images, videos, mediaStyle }) => {
-  console.log("asd", images, videos);
   const [localImages, setLocalImages] = useState(null);
   const [localVideos, setLocalVideos] = useState(null);
 

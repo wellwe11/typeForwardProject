@@ -2,9 +2,9 @@ import "./typeComponent.scss";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import fetchWholeMd from "../../functions/fetchWholeMd";
-import TypeHeader from "../abstract_components/typeSections/typeSection";
+import TypeHeader from "../abstract_components/typeSections/typeTopSection/typeSection";
 import ImageWheelContainer from "../abstract_components/imageWheelSlider/imageWheelComponent";
-import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
+import OpenTypeComponent from "../abstract_components/typeSections/OpenType_Features/openType";
 
 const Specific_TypeComponent = ({ data }) => {
   // font name
@@ -47,10 +47,12 @@ const Specific_TypeComponent = ({ data }) => {
 
   if (mdFile && typeObject) {
     const customTypeEntry = [typeName, typeObject];
+
     return (
       <div className="specific_TypeComponent">
         <TypeHeader type={customTypeEntry} />
         <ImageWheelContainer data={typeObject} />
+        <OpenTypeComponent data={mdFile} font={customTypeEntry} />
       </div>
     );
   }

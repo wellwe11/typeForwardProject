@@ -1,11 +1,11 @@
 import "./typeSection.scss";
 
 import { useEffect, useState } from "react";
-import SizeContainerComponent from "../sizeContainer/sizeContainerComponent";
-import fetchText from "../../../functions/importFont";
-import fetchWholeMd from "../../../functions/fetchWholeMd";
-import { TypeFaceComponent } from "../../HOME/TYPEFACE";
-import BorderWithBorderBox from "../borderWithBorder";
+import SizeContainerComponent from "../../sizeContainer/sizeContainerComponent";
+import fetchText from "../../../../functions/importFont";
+import fetchWholeMd from "../../../../functions/fetchWholeMd";
+import { TypeFaceComponent } from "../../../HOME/TYPEFACE";
+import BorderWithBorderBox from "../../borderWithBorder";
 
 const ButtonContainer = () => {
   return (

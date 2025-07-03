@@ -1,0 +1,43 @@
+.openTypeComponentContainer {
+  display: flex;
+  justify-content: space-between;
+  .leftSection {
+    width: 60%;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    position: relative;
+    .fontDisplay {
+      width: 100%;
+
+      padding-top: 30px;
+      padding-bottom: 30px;
+      color: black;
+
+      position: relative;
+
+      .presentationNormal {
+        position: absolute;
+      }
+
+      .presentation {
+        transition: opacity 0.4s ease;
+        font-size: 2.4rem;
+        font-variation-settings: "wght" 400;
+        margin-bottom: 5px;
+        line-height: 40px;
+      }
+
+      .info {
+        font-variation-settings: "wght" 400;
+      }
+    }
+  }
+  .rightSection {
+    width: 35%;
+    background-color: gray;
+  }
+}
