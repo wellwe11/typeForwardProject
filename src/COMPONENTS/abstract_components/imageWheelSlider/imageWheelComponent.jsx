@@ -1,8 +1,8 @@
 import "./imageWheelSlider.scss";
-import BorderWithBorderBox from "../borderWithBorder";
 import DisplayMediaComponent from "../displayMediaComponent/displayMediaComponent";
 import { useEffect, useState } from "react";
 import SizeContainerComponent from "../sizeContainer/sizeContainerComponent";
+import RoundButton from "../roundButton/roundButton";
 
 const ImageWheelDots = ({ amountOfImages, activeDot, setActiveDot }) => {
   const dots = [];
@@ -24,6 +24,8 @@ const ImageWheelContainer = ({ data }) => {
   const media = Object.entries(data?.fontBlog.media);
   const [activeImage, setActiveImage] = useState(1);
   const [imageHover, setImageHover] = useState(false);
+  const [leftHover, setLeftHover] = useState(false);
+  const [rightHover, setRightHover] = useState(false);
 
   const handleActiveImage = () => {
     if (activeImage === mediaElements?.length) {
@@ -33,12 +35,20 @@ const ImageWheelContainer = ({ data }) => {
     }
   };
 
+  const handlePrevImage = () => {
+    console.log("left clicked");
+    if (activeImage === 0) {
+      setActiveImage(mediaElements?.length);
+    } else {
+      setActiveImage((prev) => prev - 1);
+    }
+  };
+
   const mediaElements = media.map(([index, item]) => {
     return (
       <div
         className="imageWheelImage"
         key={index}
-        onClick={handleActiveImage}
         onMouseEnter={() => setImageHover(true)}
         onMouseLeave={() => setImageHover(false)}
       >
@@ -79,7 +89,26 @@ const ImageWheelContainer = ({ data }) => {
       <SizeContainerComponent sectionColor="white">
         <div className="imageWheelContainer">
           <div className="mediaElementsContainer">
-            {mediaElements}
+            <div className="mediaAndPointers">
+              <div
+                className="leftSide"
+                onClick={handlePrevImage}
+                onMouseEnter={() => setLeftHover(true)}
+                onMouseLeave={() => setLeftHover(false)}
+              >
+                <RoundButton hover={leftHover} />
+              </div>
+              {mediaElements}
+              <div
+                className="rightSide"
+                onClick={handleActiveImage}
+                onMouseEnter={() => setRightHover(true)}
+                onMouseLeave={() => setRightHover(false)}
+              >
+                <RoundButton hover={rightHover} />
+              </div>
+            </div>
+
             <div className="imageWheelDotsContainer">
               <ImageWheelDots
                 amountOfImages={mediaElements?.length}

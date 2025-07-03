@@ -1,0 +1,33 @@
+.svgRoundButtonContainer {
+  height: clamp(40px, 5vw, 50px);
+  width: clamp(40px, 5vw, 50px);
+  background-color: white;
+
+  border-radius: 90px;
+  border: 2px solid black;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  svg {
+    height: 100%;
+    width: 100%;
+
+    polygon {
+    }
+  }
+}
+
+.isHovered {
+  background-color: black;
+
+  svg {
+    transform: scale(1.1);
+  }
+
+  polygon {
+    transition: fill 0.3s ease;
+    fill: white !important;
+  }
+}

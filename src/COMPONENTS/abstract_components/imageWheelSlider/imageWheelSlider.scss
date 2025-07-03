@@ -1,27 +1,63 @@
 .imageWheelContainer {
   width: 100%;
   height: 100%;
-  min-height: 35vw;
-  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 
   .mediaElementsContainer {
-    display: flex;
-    height: 100%;
     width: 100%;
+    height: 100%;
+
+    .mediaAndPointers {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      position: relative;
+
+      .leftSide {
+        left: 2vw;
+      }
+
+      .rightSide {
+        right: 2vw;
+        transform: rotateY(180deg);
+        order: 3;
+      }
+
+      .leftSide,
+      .rightSide {
+        cursor: pointer;
+        position: absolute;
+        z-index: 1;
+        height: 100%;
+        width: 50%;
+        top: 0;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      @media screen and (max-width: 1000px) {
+      }
+    }
   }
 
   .imageWheelImage {
     min-width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
   }
 
   .imageWheelDotsContainer {
-    position: absolute;
-    bottom: -5%;
-    left: 0;
-    transform: translate(35%);
+    z-index: 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
   }
 }
 
@@ -30,13 +66,12 @@
   justify-content: center;
   align-items: center;
 
-  padding-top: clamp(20px, 5vw, 30px);
   img {
     max-width: 100px;
   }
 
   .fontInfoImageWheeldot {
-    transition: box-shadow 0.4s ease;
+    transition: box-shadow 0.6s ease;
     cursor: pointer;
     height: clamp(16px, 1.5vw, 24px);
     width: clamp(16px, 1.5vw, 24px);
@@ -51,6 +86,7 @@
   }
 
   .activeDot {
+    transition: box-shadow 0.4s ease;
     box-shadow: 0 0 0 12px #000000 inset !important;
   }
 }
