@@ -5,6 +5,7 @@ import "./openType.scss";
 
 import BoldAndThinText from "../../boldAndThinText/boldAndThinText";
 import fetchFontStyle from "../getFontStyle";
+import H_OneComponent from "../../componentTitle/componentTitle";
 
 const OpenTypeComponent = ({ data, font }) => {
   const [activeTextStyle, setActiveTextStyle] = useState(null);
@@ -38,45 +39,69 @@ const OpenTypeComponent = ({ data, font }) => {
     return (
       <SizeContainerComponent sectionColor="white">
         <div className="openTypeComponentContainer">
-          <div className="leftSection">
-            {fontRepresentations.map(([index, representation]) => {
-              return (
-                <div className="fontDisplay" key={index}>
-                  <div className="presentationNormal">
-                    <h1
-                      className="presentation"
-                      style={{
-                        opacity: activeTextStyle === 1 ? "0" : "1",
-                        fontFamily: font[0],
-                      }}
-                    >
-                      <ReactMarkdown>{representation?.text}</ReactMarkdown>
-                    </h1>
-                  </div>
-                  <h1
-                    className="presentation"
-                    style={{
-                      fontFeatureSettings: `"${representation.style}" 1`,
-                      opacity: activeTextStyle,
-                      fontFamily: font[0],
-                    }}
-                  >
-                    <ReactMarkdown>{representation?.text}</ReactMarkdown>
-                  </h1>
-                  <h4 className="info">{index}</h4>
-                </div>
-              );
-            })}
-          </div>
-          <div className="rightSection">
-            <BoldAndThinText
-              thinText={thinText}
-              boldText={boldText}
-              fontColor="black"
+          <div className="titleContainer">
+            <H_OneComponent
+              title="OpenType Features"
+              textColor="black"
+              textSize={1}
             />
           </div>
+          <div className="openTypesectionsContainer">
+            <div className="leftSection">
+              {fontRepresentations.map(([index, representation]) => {
+                return (
+                  <div className="fontDisplay" key={index}>
+                    <div className="presentationNormal">
+                      <ReactMarkdown
+                        components={{
+                          p: ({ node, ...props }) => (
+                            <h5
+                              className="presentation"
+                              style={{
+                                opacity: activeTextStyle === 1 ? "0" : "1",
+                                fontFamily: font[0],
+                              }}
+                              {...props}
+                            />
+                          ),
+                        }}
+                      >
+                        {representation?.text}
+                      </ReactMarkdown>
+                    </div>
+
+                    <ReactMarkdown
+                      components={{
+                        p: ({ node, ...props }) => (
+                          <h5
+                            className="presentation"
+                            style={{
+                              fontFeatureSettings: `"${representation.style}" 1`,
+                              opacity: activeTextStyle,
+                              fontFamily: font[0],
+                            }}
+                            {...props}
+                          />
+                        ),
+                      }}
+                    >
+                      {representation?.text}
+                    </ReactMarkdown>
+
+                    <h5 className="info">{index}</h5>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="rightSection">
+              <BoldAndThinText
+                thinText={thinText}
+                boldText={boldText}
+                fontColor="black"
+              />
+            </div>
+          </div>
         </div>
-        <h1>hello</h1>
       </SizeContainerComponent>
     );
   }
