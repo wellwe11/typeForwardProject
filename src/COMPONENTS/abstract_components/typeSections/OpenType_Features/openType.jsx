@@ -76,7 +76,10 @@ const LeftSection = ({ data, font }) => {
 const OpenTypeComponent = ({ data, font }) => {
   if (data) {
     const thinText = data.openType_Features.thin;
-    const boldText = data.openType_Features.bold;
+    const boldText = data.openType_Features.bold.replace(
+      "REPLACE_ME",
+      font[0] + "s"
+    );
 
     console.log(font);
 
@@ -93,11 +96,13 @@ const OpenTypeComponent = ({ data, font }) => {
           <div className="openTypesectionsContainer">
             <LeftSection data={data} font={font} />
             <div className="rightSection">
-              <BoldAndThinText
-                thinText={thinText}
-                boldText={boldText}
-                fontColor="black"
-              />
+              <div className="rightText">
+                <BoldAndThinText
+                  thinText={thinText}
+                  boldText={boldText}
+                  fontColor="black"
+                />
+              </div>
             </div>
           </div>
         </div>
