@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import SizeContainerComponent from "../../sizeContainer/sizeContainerComponent";
 import "./typeInputTexts.scss";
+import H_OneComponent from "../../componentTitle/componentTitle";
 
 const FontVariationButton = ({
   children,
@@ -168,14 +169,23 @@ const TypeInputTextsComponent = ({ type, data, fontBio }) => {
     if (inputTypes && inputInitialTexts) {
       return (
         <SizeContainerComponent sectionColor="white">
-          <div className="typeInputTextsComponentContainer">
-            <Inputs
-              texts={inputInitialTexts}
-              type={type}
-              inputTypes={inputTypes}
-              fonts={fonts}
-              freeFonts={freeFonts}
-            />
+          <div className="typefacesContainer">
+            <div className="topBorder">
+              <H_OneComponent
+                textColor="black"
+                title={"Family Overview"}
+                textSize={1}
+              />
+            </div>
+            <div className="typeInputTextsComponentContainer">
+              <Inputs
+                texts={inputInitialTexts}
+                type={type}
+                inputTypes={inputTypes}
+                fonts={fonts}
+                freeFonts={freeFonts}
+              />
+            </div>
           </div>
         </SizeContainerComponent>
       );

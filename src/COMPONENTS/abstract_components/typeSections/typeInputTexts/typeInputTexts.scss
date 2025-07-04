@@ -1,5 +1,18 @@
-.typeInputTextsComponentContainer {
-  width: 100%;
+.typefacesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .topBorder {
+    width: 120%;
+    border-bottom: 2px solid black;
+    margin-bottom: 100px;
+  }
+
+  .typeInputTextsComponentContainer {
+    width: 100%;
+    position: relative;
+  }
 }
 
 .inputsContainer {
@@ -33,13 +46,21 @@
         }
       }
     }
+
+    @media screen and (max-width: 1000px) {
+      padding-left: 100px;
+      margin-top: -350px;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
   }
 }
 
 .inputWithTextContainer {
   input {
     width: 100%;
-    font-size: 4rem;
+    font-size: 5vw;
     font-variation-settings: var(--fontStyle);
     spellcheck: false;
     -webkit-user-modify: read-write-plaintext-only;
@@ -51,6 +72,22 @@
   justify-content: space-between;
   align-items: center;
   width: clamp(670px, 50vw, 750px);
+
+  @media screen and (max-width: 1000px) {
+    width: clamp(500px, 40vw, 550px);
+  }
+
+  @media screen and (max-width: 1000px) {
+    position: sticky;
+    top: 150px;
+
+    margin-left: -65px;
+    display: flex;
+    flex-direction: column;
+
+    height: 300px;
+    width: fit-content;
+  }
 }
 
 .buttonActive {
@@ -127,5 +164,9 @@
       transition: all 0.2s ease;
       color: white;
     }
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: clamp(120px, 10vw, 140px);
   }
 }
