@@ -24,18 +24,7 @@ const ButtonContainer = () => {
   );
 };
 
-const TypeSideComponent = ({ type }) => {
-  const [artists, setArtists] = useState(null);
-
-  useEffect(() => {
-    const getWholeBio = async () => {
-      const fontBlogBio = await fetchWholeMd(type[1].fontBlog.bio[0].url);
-      setArtists(fontBlogBio.artists);
-    };
-
-    getWholeBio();
-  }, [type]);
-
+const TypeSideComponent = ({ type, artists }) => {
   return (
     <div className="typeInfoContainer">
       <TypeFaceComponent type={type} fontColor="white">
@@ -51,13 +40,13 @@ const TypeSideComponent = ({ type }) => {
   );
 };
 
-const TypeHeader = ({ type }) => {
+const TypeHeader = ({ type, artists }) => {
   console.log(type);
 
   return (
     <SizeContainerComponent>
       <div className="typeHeader">
-        <TypeSideComponent type={type} />
+        <TypeSideComponent type={type} artists={artists} />
         <ButtonContainer />
       </div>
     </SizeContainerComponent>

@@ -7,7 +7,24 @@ import BoldAndThinText from "../../boldAndThinText/boldAndThinText";
 import fetchFontStyle from "../getFontStyle";
 import H_OneComponent from "../../componentTitle/componentTitle";
 
-const OpenTypeComponent = ({ data, font }) => {
+const LeftSpan = ({ representation, style, className }) => {
+  return (
+    <span className={className} style={style}>
+      <ReactMarkdown
+        components={{
+          p: ({ node, ...props }) => (
+            <h5 className="presentationText" {...props} />
+          ),
+        }}
+      >
+        {representation?.text}
+      </ReactMarkdown>
+    </span>
+  );
+};
+
+const LeftSection = ({ data, font }) => {
+  const fontRepresentations = Object.entries(data.font_Representations);
   const [activeTextStyle, setActiveTextStyle] = useState(null);
 
   useEffect(() => {
@@ -26,14 +43,42 @@ const OpenTypeComponent = ({ data, font }) => {
     setActiveTextStyle(0);
   }, []);
 
+  return (
+    <div className="leftSection">
+      {fontRepresentations.map(([index, representation]) => {
+        return (
+          <div className="fontDisplay" key={index}>
+            <LeftSpan
+              className={"presentation"}
+              representation={representation}
+              style={{
+                opacity: activeTextStyle === 1 ? "0" : "1",
+                fontFamily: font[0],
+              }}
+            />
+            <LeftSpan
+              className={"presentationNormal"}
+              representation={representation}
+              style={{
+                fontFeatureSettings: `"${representation.style}" 1`,
+                opacity: activeTextStyle,
+                fontFamily: font[0],
+              }}
+            />
+            <h5 className="info">{index}</h5>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const OpenTypeComponent = ({ data, font }) => {
   if (data) {
     const thinText = data.openType_Features.thin;
     const boldText = data.openType_Features.bold;
 
-    const fontRepresentations = Object.entries(data.font_Representations);
-
     console.log(font);
-    fetchFontStyle(font);
 
     return (
       <SizeContainerComponent sectionColor="white">
@@ -46,52 +91,7 @@ const OpenTypeComponent = ({ data, font }) => {
             />
           </div>
           <div className="openTypesectionsContainer">
-            <div className="leftSection">
-              {fontRepresentations.map(([index, representation]) => {
-                return (
-                  <div className="fontDisplay" key={index}>
-                    <span
-                      className="presentationNormal"
-                      style={{
-                        opacity: activeTextStyle === 1 ? "0" : "1",
-                        fontFamily: font[0],
-                      }}
-                    >
-                      <ReactMarkdown
-                        components={{
-                          p: ({ node, ...props }) => (
-                            <h5 className="presentationText" {...props} />
-                          ),
-                        }}
-                      >
-                        {representation?.text}
-                      </ReactMarkdown>
-                    </span>
-
-                    <span
-                      className="presentation"
-                      style={{
-                        fontFeatureSettings: `"${representation.style}" 1`,
-                        opacity: activeTextStyle,
-                        fontFamily: font[0],
-                      }}
-                    >
-                      <ReactMarkdown
-                        components={{
-                          p: ({ node, ...props }) => (
-                            <h5 className="presentationText" {...props} />
-                          ),
-                        }}
-                      >
-                        {representation?.text}
-                      </ReactMarkdown>
-                    </span>
-
-                    <h5 className="info">{index}</h5>
-                  </div>
-                );
-              })}
-            </div>
+            <LeftSection data={data} font={font} />
             <div className="rightSection">
               <BoldAndThinText
                 thinText={thinText}

@@ -41,60 +41,9 @@
 }
 
 @font-face {
-  font-family: "font-Gogh-italic";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Gogh/fonts/GoghVariableItalic/GoghVariableItalicVF.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Gogh/fonts/GoghVariableItalic/GoghVariableItalicVF.woff2);
-}
-
-@font-face {
   font-family: "font-Oddval";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Oddval/fonts/OddvalVariable_VariableVF/OddvalVariable-VariableVF.woff2);
+  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts//Oddval/fonts/OddvalVariable_VariableVF/OddvalVariable-VariableVF.woff2);
 
-  font-weight: 100 900;
-  font-stretch: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "font-Bion";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Bion/fonts/bionVariable/BionVariableVF.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Bion/fonts/bionVariable/BionVariableVF.woff2);
-  font-weight: 100 900;
-  font-stretch: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "font-Forward";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/forwarfonts/dVF.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/forwarfonts/dVF.woff2);
-  font-weight: 100 900;
-  font-stretch: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "font-EmOne";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/EmOne/fonts/EmOneTVariable/EmOneTVariable.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/EmOne/fonts/EmOneTVariable/EmOneTVariable.woff2);
-  font-weight: 100 900;
-  font-stretch: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "font-Garet";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Garet/fonts/GarentVariableVF/GaretVariableVF.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Garet/fonts/GarentVariableVF/GaretVariableVF.woff2);
-  font-weight: 100 900;
-  font-stretch: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "font-Steam";
-  src: url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Steam/fonts/Steam_Base/Steam-Base.woff),
-    url(../public/resourceFolder_typeFoward/assets/typefaces/fonts/Steam/fonts/Steam_Base/Steam-Base.woff2);
   font-weight: 100 900;
   font-stretch: normal;
   font-style: normal;
@@ -125,7 +74,6 @@ input,
 button,
 textarea,
 select {
-  font: inherit;
   border: none;
   background: none;
   outline: none;
