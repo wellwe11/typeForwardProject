@@ -2,27 +2,43 @@ import { useEffect, useRef, useState } from "react";
 import SizeContainerComponent from "../../sizeContainer/sizeContainerComponent";
 import "./typeInputTexts.scss";
 
-const FontVariationButton = ({ children, className, setActiveClass }) => {
+const FontVariationButton = ({
+  children,
+  className,
+  setActiveFontStyle,
+  activeFontStyle,
+}) => {
+  console.log(activeFontStyle, children);
   return (
     <div
-      onClick={() => setActiveClass(className)}
-      className="fontVariationButtonContainer"
+      onClick={() => setActiveFontStyle(className)}
+      className={`fontVariationButtonContainer ${
+        activeFontStyle.replace("font", "") === children ? "buttonActive" : ""
+      }`}
     >
-      <button onClick={() => setActiveClass(className)} className={className}>
+      <button
+        onClick={() => setActiveFontStyle(className)}
+        className={className}
+      >
+        <div className="smallDot"></div>
+        <div className="smallDot"></div>
+        <div className="smallDot"></div>
+        <div className="smallDot"></div>
         {children.replace(/_/g, " ")}
       </button>
     </div>
   );
 };
 
-const FontVariations = ({ array, setActiveClass }) => {
+const FontVariations = ({ array, activeFontStyle, setActiveFontStyle }) => {
   return (
     <div className="fontVariationsContainer">
       {array.map((item, index) => (
         <div key={index}>
           <FontVariationButton
-            setActiveClass={setActiveClass}
+            setActiveFontStyle={setActiveFontStyle}
             className={`font${item}`}
+            activeFontStyle={activeFontStyle}
           >
             {item}
           </FontVariationButton>
@@ -32,10 +48,8 @@ const FontVariations = ({ array, setActiveClass }) => {
   );
 };
 
-const InputWithText = ({ type, text, activeClass, fontWeight }) => {
+const InputWithText = ({ type, text, activeFontStyle, fontWeight }) => {
   const [localText, setLocalText] = useState(null);
-
-  console.log(activeClass);
 
   useEffect(() => {
     setLocalText(text);
@@ -50,17 +64,16 @@ const InputWithText = ({ type, text, activeClass, fontWeight }) => {
     return (
       <div className="inputWithTextContainer">
         <input
-          className={activeClass}
           onChange={handleInput}
           style={{
             color: "black",
             fontFamily: type[0],
             fontVariationSettings: `"wght" ${fontWeight}, ${
-              activeClass === "fontITALIC"
+              activeFontStyle === "fontITALIC"
                 ? `"ital" 1`
-                : activeClass === "fontCONDENSED"
+                : activeFontStyle === "fontCONDENSED"
                 ? `"wdth" 0`
-                : activeClass === "fontCONDENSED_ITALIC"
+                : activeFontStyle === "fontCONDENSED_ITALIC"
                 ? `"ital" 1, "wdth" 0`
                 : `"ital" 0`
             }`,
@@ -73,7 +86,7 @@ const InputWithText = ({ type, text, activeClass, fontWeight }) => {
 };
 
 const Inputs = ({ texts, type, inputTypes, fonts, freeFonts }) => {
-  const [activeClass, setActiveClass] = useState(null);
+  const [activeFontStyle, setActiveFontStyle] = useState("fontREGULAR");
   const [freeFontNames, setFreeFontsNames] = useState([]);
   const fontTitles = [
     "Hairline",
@@ -89,7 +102,7 @@ const Inputs = ({ texts, type, inputTypes, fonts, freeFonts }) => {
     "Variable",
   ];
 
-  const fontWeight = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 500];
+  const fontWeights = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 500];
 
   useEffect(() => {
     const localArray = [];
@@ -102,7 +115,11 @@ const Inputs = ({ texts, type, inputTypes, fonts, freeFonts }) => {
 
   return (
     <div className="inputsContainer">
-      <FontVariations array={inputTypes} setActiveClass={setActiveClass} />
+      <FontVariations
+        array={inputTypes}
+        setActiveFontStyle={setActiveFontStyle}
+        activeFontStyle={activeFontStyle}
+      />
       <div className="fontsWrapper">
         {texts.map((text, index) => {
           const fontTitle = fontTitles[index];
@@ -129,8 +146,8 @@ const Inputs = ({ texts, type, inputTypes, fonts, freeFonts }) => {
                 <InputWithText
                   text={text}
                   type={type}
-                  activeClass={activeClass}
-                  fontWeight={fontWeight[index]}
+                  activeFontStyle={activeFontStyle}
+                  fontWeight={fontWeights[index]}
                 />
               </div>
             )

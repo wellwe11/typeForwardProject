@@ -41,24 +41,9 @@
     width: 100%;
     font-size: 4rem;
     font-variation-settings: var(--fontStyle);
+    spellcheck: false;
+    -webkit-user-modify: read-write-plaintext-only;
   }
-}
-
-.fontRegular {
-}
-
-.fontITALIC {
-  font-variation-settings: "ital" 1;
-  font-style: italic;
-}
-
-.fontCONDENSED {
-  font-variation-settings: "wdth" 0;
-}
-
-.fontCONDENSED_ITALIC {
-  font-variation-settings: "ital" 1, "wdth" 0;
-  font-style: italic;
 }
 
 .fontVariationsContainer {
@@ -66,6 +51,52 @@
   justify-content: space-between;
   align-items: center;
   width: clamp(670px, 50vw, 750px);
+}
+
+.buttonActive {
+  border: 2px solid white;
+  background-color: black;
+
+  cursor: pointer;
+  position: relative;
+
+  button {
+    cursor: pointer;
+    color: white !important;
+  }
+
+  .smallDot {
+    height: 12.5px;
+    width: 12.5px;
+    background-color: white;
+    position: absolute;
+    border: 2px solid black;
+    opacity: 1 !important;
+
+    &:nth-of-type(1) {
+      transition: opacity 0.6s ease;
+      left: -5px;
+      top: -5px;
+    }
+
+    &:nth-of-type(2) {
+      transition: opacity 0.5s ease;
+      left: -5px;
+      bottom: -5px;
+    }
+
+    &:nth-of-type(3) {
+      transition: opacity 0.35s ease;
+      right: -5px;
+      top: -5px;
+    }
+
+    &:nth-of-type(4) {
+      transition: opacity 0.65s ease;
+      right: -5px;
+      bottom: -5px;
+    }
+  }
 }
 
 .fontVariationButtonContainer {
@@ -83,6 +114,10 @@
     font-weight: 600;
     cursor: pointer;
     color: black;
+
+    .smallDot {
+      opacity: 0;
+    }
   }
 
   &:hover {
