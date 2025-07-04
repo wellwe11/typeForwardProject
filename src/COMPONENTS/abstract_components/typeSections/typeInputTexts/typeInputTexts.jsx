@@ -32,8 +32,10 @@ const FontVariations = ({ array, setActiveClass }) => {
   );
 };
 
-const InputWithText = ({ type, text, activeClass }) => {
+const InputWithText = ({ type, text, activeClass, fontWeight }) => {
   const [localText, setLocalText] = useState(null);
+
+  console.log(activeClass);
 
   useEffect(() => {
     setLocalText(text);
@@ -53,6 +55,15 @@ const InputWithText = ({ type, text, activeClass }) => {
           style={{
             color: "black",
             fontFamily: type[0],
+            fontVariationSettings: `"wght" ${fontWeight}, ${
+              activeClass === "fontITALIC"
+                ? `"ital" 1`
+                : activeClass === "fontCONDENSED"
+                ? `"wdth" 0`
+                : activeClass === "fontCONDENSED_ITALIC"
+                ? `"ital" 1, "wdth" 0`
+                : `"ital" 0`
+            }`,
           }}
           value={localText}
         />
@@ -78,6 +89,8 @@ const Inputs = ({ texts, type, inputTypes, fonts, freeFonts }) => {
     "Variable",
   ];
 
+  const fontWeight = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 500];
+
   useEffect(() => {
     const localArray = [];
     if (freeFonts) {
@@ -90,31 +103,40 @@ const Inputs = ({ texts, type, inputTypes, fonts, freeFonts }) => {
   return (
     <div className="inputsContainer">
       <FontVariations array={inputTypes} setActiveClass={setActiveClass} />
-      {texts.map((text, index) => {
-        const fontTitle = fontTitles[index];
-        const isFreeFont = freeFontNames.some((a) => a.includes(fontTitle));
+      <div className="fontsWrapper">
+        {texts.map((text, index) => {
+          const fontTitle = fontTitles[index];
+          const isFreeFont = freeFontNames.some((a) => a.includes(fontTitle));
 
-        return (
-          <div className="fontText" key={index}>
-            <div className="fontTitle">
-              {isFreeFont && (
-                <div className="freeContainer">
-                  <h3>FREE</h3>
+          return (
+            fontTitle && (
+              <div className="fontText" key={index}>
+                <div className="fontTitle">
+                  {isFreeFont && (
+                    <div className="freeContainer">
+                      <h3>FREE</h3>
+                    </div>
+                  )}
+
+                  {fontTitle && (
+                    <>
+                      <h3
+                        style={{ color: "black" }}
+                      >{`${type[0]} ${fontTitle}`}</h3>
+                    </>
+                  )}
                 </div>
-              )}
-
-              {fontTitle && (
-                <>
-                  <h3
-                    style={{ color: "black" }}
-                  >{`${type[0]} ${fontTitle}`}</h3>
-                </>
-              )}
-            </div>
-            <InputWithText text={text} type={type} activeClass={activeClass} />
-          </div>
-        );
-      })}
+                <InputWithText
+                  text={text}
+                  type={type}
+                  activeClass={activeClass}
+                  fontWeight={fontWeight[index]}
+                />
+              </div>
+            )
+          );
+        })}
+      </div>
     </div>
   );
 };
