@@ -1,7 +1,7 @@
 import "./blog_poster.scss";
 import { useLocation } from "react-router-dom";
 
-import SubscribeComponent from "../HOME/SUBSCRIBE/SUBSCRIBE";
+import SubscribeComponent from "../SUBSCRIBE/SUBSCRIBE";
 import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
 import BlogSections from "../abstract_components/blogSections/blogContent/blogContent";
 import HeaderSection from "../abstract_components/blogSections/headerContent/headerContent";
@@ -9,9 +9,9 @@ import HeaderSection from "../abstract_components/blogSections/headerContent/hea
 const BlogPosterComponent = ({ data }) => {
   const { hash } = useLocation(); // blog_poster#posterOne etc
 
-  const blogServicesEntries = Object.entries(data.blog.services);
+  const blogServicesEntries = Object.entries(data.Blog.services);
 
-  if (data.blog.services) {
+  if (data.Blog.services) {
     // parse correct obj
     const blogData = blogServicesEntries.filter((link) =>
       link.includes(hash.replace(/#/g, ""))

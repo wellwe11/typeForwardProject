@@ -113,8 +113,11 @@
       position: relative;
 
       .rightText {
-        position: sticky;
         top: 120px;
+
+        @media screen and (min-width: 1000px) {
+          position: sticky;
+        }
       }
     }
 

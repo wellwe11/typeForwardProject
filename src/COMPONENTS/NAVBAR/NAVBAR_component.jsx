@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import "./NAVBAR.scss";
 import SvgLogo from "./svgLogo";
+import addSpaceBeforeCaps from "../../functions/addSpaceBeforeCaps";
 
 const ToggleMenuButton = ({ showButtons, setShowButtons }) => {
   const handleShowButtons = () => setShowButtons(!showButtons);
@@ -92,11 +93,11 @@ const NavButtons = ({ backgroundColor, data }) => {
                           : "",
                     }}
                   >
-                    {firstLetterCapital(index)}
+                    {addSpaceBeforeCaps(firstLetterCapital(index))}
                   </h2>
                 </span>
                 <span className="keyTextSpanHidden">
-                  <h2>{firstLetterCapital(index)}</h2>
+                  <h2>{addSpaceBeforeCaps(firstLetterCapital(index))}</h2>
                 </span>
               </Link>
             </div>

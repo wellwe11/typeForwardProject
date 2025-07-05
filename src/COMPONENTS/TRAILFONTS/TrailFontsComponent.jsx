@@ -1,10 +1,11 @@
 import "./TRAIL_FONTS.scss";
-import { EnterEmailAndOrSub, SubscribeInfo } from "../HOME/SUBSCRIBE/SUBSCRIBE";
+import { useEffect, useState } from "react";
+
+import { EnterEmailAndOrSub, SubscribeInfo } from "../SUBSCRIBE/SUBSCRIBE";
 import ContactUsComp from "../abstract_components/contactUs/contactUs";
 import H_OneComponent from "../abstract_components/componentTitle/componentTitle";
 import BoldAndThinText from "../abstract_components/boldAndThinText/boldAndThinText";
 import SizeContainerComponent from "../abstract_components/sizeContainer/sizeContainerComponent";
-import { useEffect, useState } from "react";
 import fetchText from "../../functions/importFont";
 
 const SignUpInfoContent = ({ data }) => {
@@ -53,8 +54,9 @@ const TrailFontsComponent = ({ data }) => {
     return <div>Loading...</div>;
   }
 
-  if (data.trail_fonts) {
-    const dataTrailFonts = Object.entries(data?.trail_fonts);
+  console.log(data);
+  if (data.TrailFonts) {
+    const dataTrailFonts = Object.entries(data?.TrailFonts);
     return (
       <SizeContainerComponent sectionColor={"white"}>
         <div className="trailFontContainer">

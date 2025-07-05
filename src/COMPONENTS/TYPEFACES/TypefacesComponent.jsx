@@ -5,8 +5,8 @@ import "./HOME.scss";
 
 import "../../index.scss";
 
-import TypeComponent from "./TYPEFACE";
-import SubsrcibeComponent from "./SUBSCRIBE/SUBSCRIBE";
+import TypeComponent, { TypeFaceComponent } from "./TYPEFACE";
+import SubsrcibeComponent from "../SUBSCRIBE/SUBSCRIBE";
 import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 
 const CurrentImageDotComp = ({ array, activeIndex, setActiveIndex }) => {
@@ -74,7 +74,7 @@ export const ForwardWelcomeComponent = ({ sectionRef }) => {
   return (
     <section
       className="sectionBlack"
-      ref={(el) => (sectionRef.current[0] = el)}
+      // ref={(el) => (sectionRef.current[0] = el)}
     >
       <div
         className="forwardWelcome"
@@ -112,8 +112,8 @@ export const ForwardWelcomeComponent = ({ sectionRef }) => {
   );
 };
 
-const HomeComponent = ({ sectionRef, data }) => {
-  if (data.typefaces) {
+const TypefacesComponent = ({ sectionRef, data }) => {
+  if (data.Typefaces) {
     return (
       <div className="homeContainer">
         <ForwardWelcomeComponent sectionRef={sectionRef} />
@@ -124,7 +124,7 @@ const HomeComponent = ({ sectionRef, data }) => {
           profileTitle={"no title, no border"}
           profileHeader={"Type Services"}
           canHover={false}
-          section={"typefaces"}
+          section={"Typefaces"}
           sectionColor={"black"}
           linkOrButton={"Link"}
           event={"services"}
@@ -137,4 +137,4 @@ const HomeComponent = ({ sectionRef, data }) => {
   }
 };
 
-export default React.memo(HomeComponent);
+export default React.memo(TypefacesComponent);

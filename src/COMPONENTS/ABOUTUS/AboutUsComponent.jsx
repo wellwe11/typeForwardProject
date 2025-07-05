@@ -4,10 +4,10 @@ import React, { memo } from "react";
 
 import TopSectionBio from "../abstract_components/topSectionBio/topSectionBio";
 import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
-import SubscribeComponent from "../HOME/SUBSCRIBE/SUBSCRIBE";
+import SubscribeComponent from "../SUBSCRIBE/SUBSCRIBE";
 
 const AboutUsComponent = ({ data, sectionRef }) => {
-  if (!data.about_us) {
+  if (!data.AboutUs) {
     return (
       <div>
         <h1>...Loading</h1>
@@ -15,8 +15,8 @@ const AboutUsComponent = ({ data, sectionRef }) => {
     );
   }
 
-  if (data.about_us) {
-    const aboutUsEntries = Object.entries(data.about_us);
+  if (data.AboutUs) {
+    const aboutUsEntries = Object.entries(data.AboutUs);
 
     return (
       <div className="aboutUsComponent">
@@ -24,7 +24,7 @@ const AboutUsComponent = ({ data, sectionRef }) => {
         <ProfilesComponent
           data={data}
           canHover={true}
-          section={"about_us"}
+          section={"AboutUs"}
           sectionColor={"white"}
           flexOrder={1}
         />

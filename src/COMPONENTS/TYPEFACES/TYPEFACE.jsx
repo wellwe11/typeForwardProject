@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./HOME.scss";
-import { EnterEmailAndOrSub } from "./SUBSCRIBE/SUBSCRIBE";
+import { EnterEmailAndOrSub } from "../SUBSCRIBE/SUBSCRIBE";
 import fetchText from "../../functions/importFont";
 import fetchFontStyle from "../abstract_components/typeSections/getFontStyle";
 import addSpaceBeforeCaps from "../../functions/addSpaceBeforeCaps";
@@ -143,7 +143,7 @@ const DownloadForm = ({ type, displayForm, setDisplayForm, index }) => {
   );
 };
 
-const TypeComponent = ({ sectionRef, data }) => {
+const TypefaceComponent = ({ sectionRef, data }) => {
   const [displayForm, setDisplayForm] = useState(null);
 
   // display pop-up form
@@ -153,7 +153,7 @@ const TypeComponent = ({ sectionRef, data }) => {
 
   useEffect(() => {
     if (Object.keys(data)?.length > 0) {
-      setFonts(Object.entries(data?.typefaces?.fonts));
+      setFonts(Object.entries(data?.Typefaces?.fonts));
     }
   }, [data]);
 
@@ -210,4 +210,4 @@ const TypeComponent = ({ sectionRef, data }) => {
   );
 };
 
-export default TypeComponent;
+export default TypefaceComponent;

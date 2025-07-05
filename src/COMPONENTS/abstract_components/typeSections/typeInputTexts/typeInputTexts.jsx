@@ -9,7 +9,6 @@ const FontVariationButton = ({
   setActiveFontStyle,
   activeFontStyle,
 }) => {
-  console.log(activeFontStyle, children);
   return (
     <div
       onClick={() => setActiveFontStyle(className)}

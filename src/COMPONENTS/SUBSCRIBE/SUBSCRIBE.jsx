@@ -1,6 +1,7 @@
 import { useEffect, useState, memo } from "react";
 import "./SUBSCRIBE.scss";
-import H_OneComponent from "../../abstract_components/componentTitle/componentTitle";
+
+import H_OneComponent from "../abstract_components/componentTitle/componentTitle";
 
 const SubscribeButton = ({ canClick, type, handler }) => {
   return (

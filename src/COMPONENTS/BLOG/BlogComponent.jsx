@@ -2,23 +2,24 @@ import "./BLOG.scss";
 import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 import { GridImageEffect } from "./gridWaveEffect";
 
-import SubsrcibeComponent from "../HOME/SUBSCRIBE/SUBSCRIBE";
+import SubsrcibeComponent from "../SUBSCRIBE/SUBSCRIBE";
 
 import { WaveImageEffect } from "./blobWaveEffect";
 
 const BlogComponent = ({ data, sectionRef }) => {
-  if (data.blog) {
-    const blogKeys = Object.keys(data.blog.services).map(
+  console.log(data);
+  if (data.Blog) {
+    const blogKeys = Object.keys(data.Blog.services).map(
       (key) => "blog/blog_poster/#" + key
     );
-    console.log(blogKeys);
+
     return (
       <div className="blogContainer">
         <ProfilesComponent
           data={data}
           profileTitle={"no title"}
           canHover={false}
-          section={"blog"}
+          section={"Blog"}
           sectionColor={"white"}
           linkOrButton={"Link"}
           event={blogKeys}

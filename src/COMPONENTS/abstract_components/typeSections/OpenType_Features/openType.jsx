@@ -81,8 +81,6 @@ const OpenTypeComponent = ({ data, font }) => {
       font[0] + "s"
     );
 
-    console.log(font);
-
     return (
       <SizeContainerComponent sectionColor="white">
         <div className="openTypeComponentContainer">

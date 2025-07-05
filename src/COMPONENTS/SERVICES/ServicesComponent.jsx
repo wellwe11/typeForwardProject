@@ -1,16 +1,16 @@
 import "./SERVICES.scss";
-import SubscribeComponent from "../HOME/SUBSCRIBE/SUBSCRIBE";
+import SubscribeComponent from "../SUBSCRIBE/SUBSCRIBE";
 
 import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 import TopSectionBio from "../abstract_components/topSectionBio/topSectionBio";
 
 const ServicesComponent = ({ sectionRef, data }) => {
-  if (!data || !data.services) {
+  if (!data || !data.Services) {
     return <div>Loading...</div>;
   }
 
-  if (data.services) {
-    const dataEntries = Object.entries(data?.services);
+  if (data.Services) {
+    const dataEntries = Object.entries(data?.Services);
 
     return (
       <div className="servicesComponentContainer">
@@ -23,7 +23,7 @@ const ServicesComponent = ({ sectionRef, data }) => {
         <ProfilesComponent
           data={data}
           canHover={false}
-          section={"services"}
+          section={"Services"}
           sectionColor={"white"}
           linkOrButton={"button"}
           event={null}

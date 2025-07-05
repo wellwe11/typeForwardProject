@@ -22,10 +22,8 @@ const Specific_TypeComponent = ({ data }) => {
 
   const [customTypeEntry, setCustomTypeEntry] = useState(null);
 
-  console.log(mdFile, typeObject, typeName);
-
   useEffect(() => {
-    const mdPath = data?.typefaces?.bio?.[0]?.url;
+    const mdPath = data?.Typefaces?.bio?.[0]?.url;
 
     if (!mdPath) return;
 
@@ -49,7 +47,7 @@ const Specific_TypeComponent = ({ data }) => {
   useEffect(() => {
     if (!typeName) return;
 
-    setTypeObject(data.typefaces.fonts[typeName]);
+    setTypeObject(data.Typefaces.fonts[typeName]);
   }, [typeName]);
 
   useEffect(() => {

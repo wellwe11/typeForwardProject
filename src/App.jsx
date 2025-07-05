@@ -1,19 +1,18 @@
-import HomeComponent from "./COMPONENTS/HOME/HOME_component";
-import NavBarComponent from "./COMPONENTS/NAVBAR/NAVBAR_component";
-import { TabComponentProvider } from "./TABCOMPONENTPROVIDER";
+import "./App.scss";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-import "./App.scss";
-import FooterComponent from "./COMPONENTS/FOOTER/FOOTER";
-import { useEffect, useRef, useState } from "react";
-import ServicesComponent from "./COMPONENTS/SERVICES/SERVICES_component";
-import TrailFontsComponent from "./COMPONENTS/TRAIL_FONTS/TRAIL_FONTS";
-import AboutUsComponent from "./COMPONENTS/ABOUT_US/ABOUTUS_component";
 import { exportData } from "./COMPONENTS/abstract_components/Sections/Sections";
-import BlogComponent from "./COMPONENTS/BLOG/BLOG";
+import { TabComponentProvider } from "./TABCOMPONENTPROVIDER";
+import FooterComponent from "./COMPONENTS/FOOTER/FOOTER";
+import NavBarComponent from "./COMPONENTS/NAVBAR/NAVBAR_component";
+// import TypeservicesComponent from "./COMPONENTS/HOME/HOME_component";
+// import ServicesComponent from "./COMPONENTS/SERVICES/SERVICES_component";
+// import TrailFontsComponent from "./COMPONENTS/TRAIL_FONTS/TRAIL_FONTS";
+// import AboutUsComponent from "./COMPONENTS/ABOUT_US/ABOUTUS_component";
+// import BlogComponent from "./COMPONENTS/BLOG/BLOG";
 import BlogPosterComponent from "./COMPONENTS/BLOG_POSTER/blog_posterComponent";
-
 import Specific_TypeComponent from "./COMPONENTS/TYPE_FONT/typeComponent";
 
 const localData = import.meta.glob("../public/resourceFolder_typeFoward/**/*", {
@@ -84,54 +83,87 @@ function App() {
 
   //   return () => observer.disconnect();
   // }, []);
+  const componentMap = useMemo(() => {
+    const map = {};
+    Object.keys(data).forEach((pageName) => {
+      map[pageName] = lazy(() =>
+        import(
+          `./COMPONENTS/${pageName.toUpperCase()}/${pageName}Component.jsx`
+        )
+      );
+    });
 
-  if (!data.typefaces?._embedded) return null;
+    return map;
+  }, [Object.keys(data).join(",")]);
+
+  console.log(componentMap);
+
+  if (!data.Typefaces?._embedded) return null;
 
   if (data) {
+    console.log("Component map keys:", Object.keys(componentMap));
+
     return (
       <div className="appContainer">
         <TabComponentProvider>
           <Router>
             <ScrollToTop />
             <NavBarComponent backgroundColor={navbarColor} data={data} />
-            <Routes>
-              <Route
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                {Object.entries(data).map(([pageName, obj]) => {
+                  const Component = componentMap[pageName];
+                  console.log(componentMap[pageName]);
+
+                  return (
+                    <Route
+                      key={pageName}
+                      path={obj._embedded.info.linkTo || "/"}
+                      element={<Component data={data} />}
+                    />
+                  );
+                })}
+
+                {/* <Route
                 path=""
                 element={<HomeComponent sectionRef={sectionRefs} data={data} />}
-              />
-
-              <Route
+                />
+                
+                <Route
                 path="services"
                 element={
                   <ServicesComponent sectionRef={sectionRefs} data={data} />
-                }
-              />
-              <Route
-                path="trail_fonts"
-                element={
-                  <TrailFontsComponent sectionRef={sectionRefs} data={data} />
-                }
-              />
-
-              <Route
-                path="about_us"
-                element={
-                  <AboutUsComponent sectionRef={sectionRefs} data={data} />
-                }
-              />
-              <Route
-                path="blog"
-                element={<BlogComponent sectionRef={sectionRefs} data={data} />}
-              />
-              <Route
-                path="blog/blog_poster"
-                element={<BlogPosterComponent data={data} />}
-              />
-              <Route
-                path="typefaces/type"
-                element={<Specific_TypeComponent data={data} />}
-              />
-            </Routes>
+                  }
+                  />
+                  <Route
+                  path="trail_fonts"
+                  element={
+                    <TrailFontsComponent sectionRef={sectionRefs} data={data} />
+                    }
+                    />
+                    
+                    <Route
+                    path="about_us"
+                    element={
+                      <AboutUsComponent sectionRef={sectionRefs} data={data} />
+                      }
+                      />
+                      <Route
+                      path="blog"
+                      element={<BlogComponent sectionRef={sectionRefs} data={data} />}
+                      />
+                      
+                      */}
+                <Route
+                  path="blog/blog_poster"
+                  element={<BlogPosterComponent data={data} />}
+                />
+                <Route
+                  path="typefaces/type"
+                  element={<Specific_TypeComponent data={data} />}
+                />
+              </Routes>
+            </Suspense>
             <FooterComponent />
           </Router>
         </TabComponentProvider>
