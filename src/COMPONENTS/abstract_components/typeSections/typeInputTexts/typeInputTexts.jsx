@@ -50,7 +50,6 @@ const FontVariations = ({ array, activeFontStyle, setActiveFontStyle }) => {
 };
 
 const InputWithText = ({ text, type, fontInfo }) => {
-  console.log(type);
   const [localText, setLocalText] = useState(text);
 
   const handleInput = (t) => {
@@ -64,7 +63,9 @@ const InputWithText = ({ text, type, fontInfo }) => {
         <input
           onChange={handleInput}
           style={{
-            fontVariationSettings: `"wght" ${fontInfo.wght}, "wdth" ${fontInfo.wdth}, "ital" ${fontInfo.ital}`,
+            fontVariationSettings: `"wght" ${fontInfo?.wght || 500}, "wdth" ${
+              fontInfo?.wdth || 1
+            }, "ital" ${fontInfo?.ital}`,
             fontFamily: `${type[0]}`,
           }}
           value={localText}
@@ -79,9 +80,13 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
   const [freeFontNames, setFreeFontsNames] = useState([]);
 
   const [fontStyles, setFontStyles] = useState({});
+  const doesHaveVariable = Object.keys(type[1].fonts).some((font) =>
+    font.includes("Variable")
+  );
 
   const seperateFonts = (arr, setter) => {
     const arrObj = { regular: [] };
+
     arr.forEach((item) => {
       const splittedName = item.name?.split(" ");
 
@@ -94,9 +99,7 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
           arrObj[`${keyName}`] = [];
         }
 
-        if (keyName) {
-          arrObj[`${keyName}`]?.push(item);
-        }
+        arrObj[`${keyName}`]?.push(item);
       }
     });
 
@@ -116,8 +119,6 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
     setFreeFontsNames(localArray);
   }, [fonts, freeFonts]);
 
-  console.log(fontStyles);
-
   return (
     <div className="inputsContainer">
       <FontVariations
@@ -127,7 +128,7 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
       />
       <div className="fontsWrapper">
         {fontStyles[activeFontStyle]?.map((text, index) => {
-          const fontTitle = text?.name;
+          const fontTitle = text?.name || "Regular";
           const isFreeFont = freeFontNames.some((a) => a.includes(fontTitle));
 
           return (
@@ -157,6 +158,15 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
             )
           );
         })}
+        {activeFontStyle === "regular" && (
+          <>
+            <div className="fontTitle">
+              <h3 style={{ color: "black" }}>{`${type[0]} Variable`}</h3>
+            </div>
+
+            <InputWithText text={texts[0]} type={type} />
+          </>
+        )}
       </div>
     </div>
   );
