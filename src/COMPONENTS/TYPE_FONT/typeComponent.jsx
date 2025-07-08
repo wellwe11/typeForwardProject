@@ -1,6 +1,8 @@
 import "./typeComponent.scss";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import opentype from "opentype.js";
+
 import fetchWholeMd from "../../functions/fetchWholeMd";
 import TypeHeader from "../abstract_components/typeSections/typeTopSection/typeSection";
 import ImageWheelContainer from "../abstract_components/imageWheelSlider/imageWheelComponent";
@@ -21,6 +23,8 @@ const Specific_TypeComponent = ({ data }) => {
   const [fontBio, setFontBio] = useState(null);
 
   const [customTypeEntry, setCustomTypeEntry] = useState(null);
+
+  const [fontInfo, setFontInfo] = useState(null);
 
   useEffect(() => {
     const mdPath = data?.Typefaces?.bio?.[0]?.url;
@@ -66,6 +70,47 @@ const Specific_TypeComponent = ({ data }) => {
     if (mdFile && typeObject) setCustomTypeEntry([typeName, typeObject]);
   }, [mdFile, typeObject]);
 
+  useEffect(() => {
+    if (!data) return;
+
+    const path = data?.Typefaces?.fonts.Bion.fonts.BionVariableVF[0].url;
+
+    opentype.load(path, (err, font) => {
+      if (err) {
+        console.error("Font could not be loaded:", err);
+        setFontInfo({ error: "Font could not be loaded." });
+        return;
+      }
+
+      const fvar = font.tables.fvar;
+      if (!fvar) {
+        setFontInfo({ error: "Font is not variable or no fvar table found." });
+        return;
+      }
+
+      // Extract axes info
+      const axes = fvar.axes.map((axis) => ({
+        tag: axis.tag,
+        name: axis.name.en,
+        minValue: axis.minValue,
+        defaultValue: axis.defaultValue,
+        maxValue: axis.maxValue,
+      }));
+
+      // Extract named instances info
+      const instances = fvar.instances.map((inst) => ({
+        name: inst.name.en,
+        coordinates: inst.coordinates,
+      }));
+
+      const names = font.names;
+
+      setFontInfo({ axes, instances, designer: names.designer?.en || "N/A" });
+    });
+  }, [data]);
+
+  console.log(fontInfo);
+
   if (customTypeEntry) {
     return (
       <div className="specific_TypeComponent">
@@ -76,6 +121,7 @@ const Specific_TypeComponent = ({ data }) => {
           data={mdFile}
           type={customTypeEntry}
           fontBio={fontBio}
+          fontInfo={fontInfo}
         />
       </div>
     );

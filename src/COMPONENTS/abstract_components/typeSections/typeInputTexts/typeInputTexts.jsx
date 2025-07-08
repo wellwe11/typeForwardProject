@@ -24,20 +24,21 @@ const FontVariationButton = ({
         <div className="smallDot"></div>
         <div className="smallDot"></div>
         <div className="smallDot"></div>
-        {children.replace(/_/g, " ")}
+        {children.replace(/_/g, " ").toUpperCase()}
       </button>
     </div>
   );
 };
 
 const FontVariations = ({ array, activeFontStyle, setActiveFontStyle }) => {
+  const buttonObjectKeys = Object.keys(array);
   return (
     <div className="fontVariationsContainer">
-      {array.map((item, index) => (
+      {buttonObjectKeys.map((item, index) => (
         <div key={index}>
           <FontVariationButton
             setActiveFontStyle={setActiveFontStyle}
-            className={`font${item}`}
+            className={`${item}`}
             activeFontStyle={activeFontStyle}
           >
             {item}
@@ -48,12 +49,9 @@ const FontVariations = ({ array, activeFontStyle, setActiveFontStyle }) => {
   );
 };
 
-const InputWithText = ({ type, text, activeFontStyle, fontWeight }) => {
-  const [localText, setLocalText] = useState(null);
-
-  useEffect(() => {
-    setLocalText(text);
-  }, []);
+const InputWithText = ({ text, type, fontInfo }) => {
+  console.log(type);
+  const [localText, setLocalText] = useState(text);
 
   const handleInput = (t) => {
     const value = t.target.value;
@@ -66,17 +64,8 @@ const InputWithText = ({ type, text, activeFontStyle, fontWeight }) => {
         <input
           onChange={handleInput}
           style={{
-            color: "black",
-            fontFamily: type[0],
-            fontVariationSettings: `"wght" ${fontWeight}, ${
-              activeFontStyle === "fontITALIC"
-                ? `"ital" 1`
-                : activeFontStyle === "fontCONDENSED"
-                ? `"wdth" 0`
-                : activeFontStyle === "fontCONDENSED_ITALIC"
-                ? `"ital" 1, "wdth" 0`
-                : `"ital" 0`
-            }`,
+            fontVariationSettings: `"wght" ${fontInfo.wght}, "wdth" ${fontInfo.wdth}, "ital" ${fontInfo.ital}`,
+            fontFamily: `${type[0]}`,
           }}
           value={localText}
         />
@@ -85,24 +74,38 @@ const InputWithText = ({ type, text, activeFontStyle, fontWeight }) => {
   }
 };
 
-const Inputs = ({ texts, type, inputTypes, fonts, freeFonts }) => {
-  const [activeFontStyle, setActiveFontStyle] = useState("fontREGULAR");
+const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
+  const [activeFontStyle, setActiveFontStyle] = useState("regular");
   const [freeFontNames, setFreeFontsNames] = useState([]);
-  const fontTitles = [
-    "Hairline",
-    "Thin",
-    "Light",
-    "Book",
-    "Regular",
-    "Medium",
-    "Semibold",
-    "Bold",
-    "Heavy",
-    "Black",
-    "Variable",
-  ];
 
-  const fontWeights = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 500];
+  const [fontStyles, setFontStyles] = useState({});
+
+  const seperateFonts = (arr, setter) => {
+    const arrObj = { regular: [] };
+    arr.forEach((item) => {
+      const splittedName = item.name?.split(" ");
+
+      if (splittedName?.length === 1) {
+        arrObj.regular.push(item);
+      } else {
+        const keyName = splittedName?.slice(1).toString().replace(",", " ");
+
+        if (!arrObj[`${keyName}`] && keyName !== undefined) {
+          arrObj[`${keyName}`] = [];
+        }
+
+        if (keyName) {
+          arrObj[`${keyName}`]?.push(item);
+        }
+      }
+    });
+
+    setter(arrObj);
+  };
+
+  useEffect(() => {
+    seperateFonts(fontInfo.instances, setFontStyles);
+  }, [fontInfo]);
 
   useEffect(() => {
     const localArray = [];
@@ -113,16 +116,18 @@ const Inputs = ({ texts, type, inputTypes, fonts, freeFonts }) => {
     setFreeFontsNames(localArray);
   }, [fonts, freeFonts]);
 
+  console.log(fontStyles);
+
   return (
     <div className="inputsContainer">
       <FontVariations
-        array={inputTypes}
+        array={fontStyles}
         setActiveFontStyle={setActiveFontStyle}
         activeFontStyle={activeFontStyle}
       />
       <div className="fontsWrapper">
-        {texts.map((text, index) => {
-          const fontTitle = fontTitles[index];
+        {fontStyles[activeFontStyle]?.map((text, index) => {
+          const fontTitle = text?.name;
           const isFreeFont = freeFontNames.some((a) => a.includes(fontTitle));
 
           return (
@@ -144,10 +149,9 @@ const Inputs = ({ texts, type, inputTypes, fonts, freeFonts }) => {
                   )}
                 </div>
                 <InputWithText
-                  text={text}
+                  text={texts[index]}
                   type={type}
-                  activeFontStyle={activeFontStyle}
-                  fontWeight={fontWeights[index]}
+                  fontInfo={text?.coordinates}
                 />
               </div>
             )
@@ -158,7 +162,7 @@ const Inputs = ({ texts, type, inputTypes, fonts, freeFonts }) => {
   );
 };
 
-const TypeInputTextsComponent = ({ type, data, fontBio }) => {
+const TypeInputTextsComponent = ({ type, data, fontBio, fontInfo }) => {
   if (data) {
     const inputTypes = fontBio?.Family_Overview;
     const inputInitialTexts = data.sections;
@@ -183,6 +187,7 @@ const TypeInputTextsComponent = ({ type, data, fontBio }) => {
                 inputTypes={inputTypes}
                 fonts={fonts}
                 freeFonts={freeFonts}
+                fontInfo={fontInfo}
               />
             </div>
           </div>

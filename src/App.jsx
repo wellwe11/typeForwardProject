@@ -1,17 +1,17 @@
 import "./App.scss";
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import {
+  useLocation,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
 
 import { exportData } from "./COMPONENTS/abstract_components/Sections/Sections";
 import { TabComponentProvider } from "./TABCOMPONENTPROVIDER";
 import FooterComponent from "./COMPONENTS/FOOTER/FOOTER";
 import NavBarComponent from "./COMPONENTS/NAVBAR/NAVBAR_component";
-// import TypeservicesComponent from "./COMPONENTS/HOME/HOME_component";
-// import ServicesComponent from "./COMPONENTS/SERVICES/SERVICES_component";
-// import TrailFontsComponent from "./COMPONENTS/TRAIL_FONTS/TRAIL_FONTS";
-// import AboutUsComponent from "./COMPONENTS/ABOUT_US/ABOUTUS_component";
-// import BlogComponent from "./COMPONENTS/BLOG/BLOG";
+
 import BlogPosterComponent from "./COMPONENTS/BLOG_POSTER/blog_posterComponent";
 import Specific_TypeComponent from "./COMPONENTS/TYPE_FONT/typeComponent";
 
@@ -33,6 +33,7 @@ const ScrollToTop = () => {
 };
 
 function App() {
+  // for navbar to track section-color
   const sectionRefs = useRef([]);
   const [navbarColor, setNavColor] = useState("black");
   const [data, setData] = useState({});
@@ -50,7 +51,6 @@ function App() {
     fetchData();
   }, []);
 
-  console.log(data);
   if (!data) {
     return (
       <div>
@@ -96,13 +96,9 @@ function App() {
     return map;
   }, [Object.keys(data).join(",")]);
 
-  console.log(componentMap);
-
   if (!data.Typefaces?._embedded) return null;
 
   if (data) {
-    console.log("Component map keys:", Object.keys(componentMap));
-
     return (
       <div className="appContainer">
         <TabComponentProvider>
@@ -113,7 +109,6 @@ function App() {
               <Routes>
                 {Object.entries(data).map(([pageName, obj]) => {
                   const Component = componentMap[pageName];
-                  console.log(componentMap[pageName]);
 
                   return (
                     <Route
@@ -124,36 +119,6 @@ function App() {
                   );
                 })}
 
-                {/* <Route
-                path=""
-                element={<HomeComponent sectionRef={sectionRefs} data={data} />}
-                />
-                
-                <Route
-                path="services"
-                element={
-                  <ServicesComponent sectionRef={sectionRefs} data={data} />
-                  }
-                  />
-                  <Route
-                  path="trail_fonts"
-                  element={
-                    <TrailFontsComponent sectionRef={sectionRefs} data={data} />
-                    }
-                    />
-                    
-                    <Route
-                    path="about_us"
-                    element={
-                      <AboutUsComponent sectionRef={sectionRefs} data={data} />
-                      }
-                      />
-                      <Route
-                      path="blog"
-                      element={<BlogComponent sectionRef={sectionRefs} data={data} />}
-                      />
-                      
-                      */}
                 <Route
                   path="blog/blog_poster"
                   element={<BlogPosterComponent data={data} />}

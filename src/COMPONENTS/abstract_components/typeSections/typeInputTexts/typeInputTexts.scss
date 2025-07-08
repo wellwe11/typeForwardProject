@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
   .topBorder {
     width: 120%;
     border-bottom: 2px solid black;
@@ -18,13 +19,16 @@
 .inputsContainer {
   width: 100%;
 
-  --fontItalic: "ital" 1;
-  --fontCONDENSED: "wdth" 0;
-  --fontCONDENSED_ITALIC: "ital" 1, "wdth" 0;
+  --regular: none;
+  --italic: "ital" 1;
+  --cond: "wdth" 0;
+  --cond_italic: "ital" 1, "wdth" 0;
 
   .fontsWrapper {
     padding-top: clamp(20px, 3vw, 60px);
+    width: 100%;
     .fontText {
+      width: 100%;
       padding-top: 25px;
       padding-bottom: 25px;
       .fontTitle {
@@ -58,10 +62,12 @@
 }
 
 .inputWithTextContainer {
+  width: 100%;
   input {
     width: 100%;
-    font-size: 5vw;
-    font-variation-settings: var(--fontStyle);
+    color: black;
+    font-size: 4.5vw;
+
     spellcheck: false;
     -webkit-user-modify: read-write-plaintext-only;
   }

@@ -217,7 +217,6 @@ const Profiles = ({
   headerSize,
   ExternalImage,
 }) => {
-  console.log(event);
   return (
     <SizeContainerComponent sectionColor={sectionColor || "white"}>
       <div className="profilesContainer">
