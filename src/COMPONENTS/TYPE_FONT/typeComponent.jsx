@@ -81,12 +81,14 @@ const Specific_TypeComponent = ({ data }) => {
         setFontInfo({ error: "Font could not be loaded." });
         return;
       }
-
+      console.log(font);
       const fvar = font.tables.fvar;
       if (!fvar) {
         setFontInfo({ error: "Font is not variable or no fvar table found." });
         return;
       }
+
+      console.log(fvar);
 
       // Extract axes info
       const axes = fvar.axes.map((axis) => ({
@@ -109,12 +111,10 @@ const Specific_TypeComponent = ({ data }) => {
     });
   }, [data]);
 
-  console.log(fontInfo);
-
   if (customTypeEntry) {
     return (
       <div className="specific_TypeComponent">
-        <TypeHeader type={customTypeEntry} artists={fontBio?.artists} />
+        <TypeHeader type={customTypeEntry} fontInfo={fontInfo} />
         <ImageWheelContainer data={typeObject} />
         <OpenTypeComponent data={mdFile} font={customTypeEntry} />
         <TypeInputTextsComponent

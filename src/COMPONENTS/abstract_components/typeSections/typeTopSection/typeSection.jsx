@@ -1,9 +1,6 @@
 import "./typeSection.scss";
 
-import { useEffect, useState } from "react";
 import SizeContainerComponent from "../../sizeContainer/sizeContainerComponent";
-import fetchText from "../../../../functions/importFont";
-import fetchWholeMd from "../../../../functions/fetchWholeMd";
 import { TypeFaceComponent } from "../../../TYPEFACES/TYPEFACE";
 import BorderWithBorderBox from "../../borderWithBorder";
 
@@ -25,32 +22,29 @@ const ButtonContainer = () => {
 };
 
 const TypeSideComponent = ({ type, artists }) => {
-  return (
-    <div className="typeInfoContainer">
-      <TypeFaceComponent type={type} fontColor="white">
-        {artists && (
-          <>
-            {`Designed by ${artists[0]} ${
-              artists.length > 1 ? "and " + artists[1] : ""
-            }${artists.length > 2 ? artists.slice(2) : ""} `}
-          </>
-        )}
-      </TypeFaceComponent>
-    </div>
-  );
+  if (type && artists) {
+    return (
+      <div className="typeInfoContainer">
+        <TypeFaceComponent type={type} fontColor="white">
+          {`Designed by ${artists}.`}
+        </TypeFaceComponent>
+      </div>
+    );
+  }
 };
 
-const TypeHeader = ({ type, artists }) => {
-  console.log(type);
-
-  return (
-    <SizeContainerComponent>
-      <div className="typeHeader">
-        <TypeSideComponent type={type} artists={artists} />
-        <ButtonContainer />
-      </div>
-    </SizeContainerComponent>
-  );
+const TypeHeader = ({ type, fontInfo }) => {
+  if (type) {
+    const artists = fontInfo?.designer;
+    return (
+      <SizeContainerComponent>
+        <div className="typeHeader">
+          <TypeSideComponent type={type} artists={artists} />
+          <ButtonContainer />
+        </div>
+      </SizeContainerComponent>
+    );
+  }
 };
 
 export default TypeHeader;

@@ -72,8 +72,7 @@
 .fontVariationsContainer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: clamp(670px, 50vw, 750px);
+  width: fit-content;
 
   @media screen and (max-width: 1000px) {
     width: clamp(500px, 40vw, 550px);
@@ -148,6 +147,8 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  margin-right: 2vw;
 
   button {
     font-weight: 600;

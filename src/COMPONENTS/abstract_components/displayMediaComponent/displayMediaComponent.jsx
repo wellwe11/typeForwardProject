@@ -37,7 +37,7 @@ const VideoComponent = ({ localImages, localVideos, mediaStyle }) => {
         loop
         muted
         playsInline
-        poster={localImages.square}
+        poster={localImages?.square}
       >
         <source
           src={windowWidth > 999 ? localVideos.main : localVideos.square}

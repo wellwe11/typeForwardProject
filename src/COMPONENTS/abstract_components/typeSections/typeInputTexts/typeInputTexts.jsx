@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import SizeContainerComponent from "../../sizeContainer/sizeContainerComponent";
 import "./typeInputTexts.scss";
 import H_OneComponent from "../../componentTitle/componentTitle";
+import fetchSpecificItem from "../../../../functions/fetchSpecificItem";
 
 const FontVariationButton = ({
   children,
@@ -31,22 +32,25 @@ const FontVariationButton = ({
 };
 
 const FontVariations = ({ array, activeFontStyle, setActiveFontStyle }) => {
-  const buttonObjectKeys = Object.keys(array);
-  return (
-    <div className="fontVariationsContainer">
-      {buttonObjectKeys.map((item, index) => (
-        <div key={index}>
-          <FontVariationButton
-            setActiveFontStyle={setActiveFontStyle}
-            className={`${item}`}
-            activeFontStyle={activeFontStyle}
-          >
-            {item}
-          </FontVariationButton>
-        </div>
-      ))}
-    </div>
-  );
+  // const buttonObjectKeys = Object.keys(array);
+
+  if (array) {
+    return (
+      <div className="fontVariationsContainer">
+        {array?.map((item, index) => (
+          <div key={index}>
+            <FontVariationButton
+              setActiveFontStyle={setActiveFontStyle}
+              className={`${item}`}
+              activeFontStyle={activeFontStyle}
+            >
+              {item}
+            </FontVariationButton>
+          </div>
+        ))}
+      </div>
+    );
+  }
 };
 
 const InputWithText = ({ text, type, fontInfo }) => {
@@ -64,7 +68,7 @@ const InputWithText = ({ text, type, fontInfo }) => {
           onChange={handleInput}
           style={{
             fontVariationSettings: `"wght" ${fontInfo?.wght || 500}, "wdth" ${
-              fontInfo?.wdth || 1
+              fontInfo?.wdth
             }, "ital" ${fontInfo?.ital}`,
             fontFamily: `${type[0]}`,
           }}
@@ -78,6 +82,7 @@ const InputWithText = ({ text, type, fontInfo }) => {
 const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
   const [activeFontStyle, setActiveFontStyle] = useState("regular");
   const [freeFontNames, setFreeFontsNames] = useState([]);
+  const [fontVariationMd, setFontVariationMd] = useState(null);
 
   const [fontStyles, setFontStyles] = useState({});
   const doesHaveVariable = Object.keys(type[1].fonts).some((font) =>
@@ -88,7 +93,7 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
     const arrObj = { regular: [] };
 
     arr.forEach((item) => {
-      const splittedName = item.name?.split(" ");
+      const splittedName = item.name?.toLowerCase()?.split(" ");
 
       if (splittedName?.length === 1) {
         arrObj.regular.push(item);
@@ -107,7 +112,9 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
   };
 
   useEffect(() => {
-    seperateFonts(fontInfo.instances, setFontStyles);
+    if (fontInfo?.instances) {
+      seperateFonts(fontInfo.instances, setFontStyles);
+    }
   }, [fontInfo]);
 
   useEffect(() => {
@@ -119,67 +126,87 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
     setFreeFontsNames(localArray);
   }, [fonts, freeFonts]);
 
-  return (
-    <div className="inputsContainer">
-      <FontVariations
-        array={fontStyles}
-        setActiveFontStyle={setActiveFontStyle}
-        activeFontStyle={activeFontStyle}
-      />
-      <div className="fontsWrapper">
-        {fontStyles[activeFontStyle]?.map((text, index) => {
-          const fontTitle = text?.name || "Regular";
-          const isFreeFont = freeFontNames.some((a) => a.includes(fontTitle));
+  useEffect(() => {
+    const fetchItems = async () => {
+      const fontVariationButtonsMd = await fetchSpecificItem(
+        type[1]?.fontBlog.bio[0].url,
+        "family_overview"
+      );
 
-          return (
-            fontTitle && (
-              <div className="fontText" key={index}>
-                <div className="fontTitle">
-                  {isFreeFont && (
-                    <div className="freeContainer">
-                      <h3>FREE</h3>
-                    </div>
-                  )}
+      if (fontVariationButtonsMd) {
+        setFontVariationMd(fontVariationButtonsMd);
+      }
+    };
 
-                  {fontTitle && (
-                    <>
-                      <h3
-                        style={{ color: "black" }}
-                      >{`${type[0]} ${fontTitle}`}</h3>
-                    </>
-                  )}
-                </div>
-                <InputWithText
-                  text={texts[index]}
-                  type={type}
-                  fontInfo={text?.coordinates}
-                />
-              </div>
-            )
-          );
-        })}
-        {activeFontStyle === "regular" && (
-          <>
-            <div className="fontTitle">
-              <h3 style={{ color: "black" }}>{`${type[0]} Variable`}</h3>
-            </div>
+    fetchItems();
+  }, []);
 
-            <InputWithText text={texts[0]} type={type} />
-          </>
+  if (fontInfo) {
+    return (
+      <div className="inputsContainer">
+        {fontVariationMd.length > 1 && (
+          <FontVariations
+            array={fontVariationMd}
+            setActiveFontStyle={setActiveFontStyle}
+            activeFontStyle={activeFontStyle}
+          />
         )}
+        <div className="fontsWrapper">
+          {doesHaveVariable && (
+            <>
+              {fontStyles[activeFontStyle]?.map((text, index) => {
+                const fontTitle = text?.name || "Regular";
+                const isFreeFont = freeFontNames.some((a) =>
+                  a.includes(fontTitle)
+                );
+
+                return (
+                  fontTitle && (
+                    <div className="fontText" key={index}>
+                      <div className="fontTitle">
+                        {isFreeFont && (
+                          <div className="freeContainer">
+                            <h3>FREE</h3>
+                          </div>
+                        )}
+                        <h3
+                          style={{ color: "black" }}
+                        >{`${type[0]} ${fontTitle}`}</h3>
+                      </div>
+
+                      <InputWithText
+                        text={texts[index]}
+                        type={type}
+                        fontInfo={text?.coordinates}
+                      />
+                    </div>
+                  )
+                );
+              })}
+
+              {activeFontStyle === "regular" && (
+                <>
+                  <div className="fontTitle">
+                    <h3 style={{ color: "black" }}>{`${type[0]} Variable`}</h3>
+                  </div>
+                  <InputWithText text={texts[0]} type={type} />
+                </>
+              )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
-const TypeInputTextsComponent = ({ type, data, fontBio, fontInfo }) => {
+const TypeInputTextsComponent = ({ type, data, fontInfo }) => {
   if (data) {
-    const inputTypes = fontBio?.Family_Overview;
     const inputInitialTexts = data.sections;
     const fonts = type?.[1].fonts;
     const freeFonts = type?.[1].free_Fonts;
 
-    if (inputTypes && inputInitialTexts) {
+    if (inputInitialTexts) {
       return (
         <SizeContainerComponent sectionColor="white">
           <div className="typefacesContainer">
@@ -194,7 +221,6 @@ const TypeInputTextsComponent = ({ type, data, fontBio, fontInfo }) => {
               <Inputs
                 texts={inputInitialTexts}
                 type={type}
-                inputTypes={inputTypes}
                 fonts={fonts}
                 freeFonts={freeFonts}
                 fontInfo={fontInfo}
