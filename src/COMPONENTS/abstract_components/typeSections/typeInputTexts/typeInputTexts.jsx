@@ -3,6 +3,8 @@ import SizeContainerComponent from "../../sizeContainer/sizeContainerComponent";
 import "./typeInputTexts.scss";
 import H_OneComponent from "../../componentTitle/componentTitle";
 import fetchSpecificItem from "../../../../functions/fetchSpecificItem";
+import addSpaceBeforeCaps from "../../../../functions/addSpaceBeforeCaps";
+import fetchFontStyle from "../getFontStyle";
 
 const FontVariationButton = ({
   children,
@@ -79,15 +81,18 @@ const InputWithText = ({ text, type, fontInfo }) => {
   }
 };
 
-const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
+const Inputs = ({
+  texts,
+  type,
+  fonts,
+  freeFonts,
+  fontInfo,
+  fontVariationMd,
+}) => {
   const [activeFontStyle, setActiveFontStyle] = useState("regular");
   const [freeFontNames, setFreeFontsNames] = useState([]);
-  const [fontVariationMd, setFontVariationMd] = useState(null);
 
   const [fontStyles, setFontStyles] = useState({});
-  const doesHaveVariable = Object.keys(type[1].fonts).some((font) =>
-    font.includes("Variable")
-  );
 
   const seperateFonts = (arr, setter) => {
     const arrObj = { regular: [] };
@@ -126,31 +131,19 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
     setFreeFontsNames(localArray);
   }, [fonts, freeFonts]);
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      const fontVariationButtonsMd = await fetchSpecificItem(
-        type[1]?.fontBlog.bio[0].url,
-        "family_overview"
-      );
-
-      if (fontVariationButtonsMd) {
-        setFontVariationMd(fontVariationButtonsMd);
-      }
-    };
-
-    fetchItems();
-  }, []);
-
   if (fontInfo) {
+    const doesHaveVariable = Object?.keys(type?.[1].fonts).some((font) =>
+      font.includes("Variable")
+    );
+
     return (
       <div className="inputsContainer">
-        {fontVariationMd.length > 1 && (
-          <FontVariations
-            array={fontVariationMd}
-            setActiveFontStyle={setActiveFontStyle}
-            activeFontStyle={activeFontStyle}
-          />
-        )}
+        <FontVariations
+          array={fontVariationMd}
+          setActiveFontStyle={setActiveFontStyle}
+          activeFontStyle={activeFontStyle}
+        />
+
         <div className="fontsWrapper">
           {doesHaveVariable && (
             <>
@@ -200,7 +193,81 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo }) => {
   }
 };
 
+const StaleInput = ({ font, index, texts }) => {
+  console.log(index);
+
+  const fetchFontStyle = (type) => {
+    if (!type) return;
+
+    const fontEntries = Object.entries(type?.[1]);
+    const style = document.createElement("style");
+    style.id = `dynamic-font-${type?.[0]}`;
+    style.innerHTML = `
+      @font-face {
+        font-family: '${type?.[0]}';
+        src: url('${fontEntries?.[0]?.[1]?.url}');
+        font-weight: normal;
+        font-style: normal;
+      }
+    `;
+
+    document.head.appendChild(style);
+
+    return () => {
+      const existing = document.getElementById(`dynamic-font-${type[0]}`);
+      if (existing) document.head.removeChild(existing);
+    };
+  };
+
+  useEffect(() => {
+    fetchFontStyle(font);
+  }, []);
+
+  return (
+    <div>
+      <InputWithText text={texts[index]} type={font} />
+    </div>
+  );
+};
+
+const StaleFontVariation = ({ fontData, texts }) => {
+  if (fontData) {
+    const fontVariations = Object.entries(fontData?.[1]?.fonts);
+    return (
+      <div>
+        {fontVariations.map(([key, object], index) => (
+          <div>
+            <div>
+              <h1 style={{ color: "black" }}>
+                {addSpaceBeforeCaps(key.replace(/_/g, " "))}
+              </h1>
+            </div>
+            <StaleInput font={[key, object]} index={index} texts={texts} />
+          </div>
+        ))}
+      </div>
+    );
+  }
+};
+
 const TypeInputTextsComponent = ({ type, data, fontInfo }) => {
+  const [fontVariationMd, setFontVariationMd] = useState(null);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const fontVariationButtonsMd = await fetchSpecificItem(
+        type[1]?.fontBlog.bio[0].url,
+        "family_overview"
+      );
+
+      if (fontVariationButtonsMd) {
+        setFontVariationMd(fontVariationButtonsMd);
+      }
+    };
+
+    fetchItems();
+  }, []);
+
   if (data) {
     const inputInitialTexts = data.sections;
     const fonts = type?.[1].fonts;
@@ -218,13 +285,18 @@ const TypeInputTextsComponent = ({ type, data, fontInfo }) => {
               />
             </div>
             <div className="typeInputTextsComponentContainer">
-              <Inputs
-                texts={inputInitialTexts}
-                type={type}
-                fonts={fonts}
-                freeFonts={freeFonts}
-                fontInfo={fontInfo}
-              />
+              {fontVariationMd?.length > 1 ? (
+                <Inputs
+                  fontVariationMd={fontVariationMd}
+                  texts={inputInitialTexts}
+                  type={type}
+                  fonts={fonts}
+                  freeFonts={freeFonts}
+                  fontInfo={fontInfo}
+                />
+              ) : (
+                <StaleFontVariation fontData={type} texts={inputInitialTexts} />
+              )}
             </div>
           </div>
         </SizeContainerComponent>
