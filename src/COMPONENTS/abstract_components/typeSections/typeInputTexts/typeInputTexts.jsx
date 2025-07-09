@@ -194,8 +194,6 @@ const Inputs = ({
 };
 
 const StaleInput = ({ font, index, texts }) => {
-  console.log(index);
-
   const fetchFontStyle = (type) => {
     if (!type) return;
 
@@ -233,18 +231,39 @@ const StaleInput = ({ font, index, texts }) => {
 const StaleFontVariation = ({ fontData, texts }) => {
   if (fontData) {
     const fontVariations = Object.entries(fontData?.[1]?.fonts);
+    console.log(fontData);
+
+    const freeFonts = Object.keys(fontData[1].free_Fonts);
+    console.log(freeFonts);
     return (
       <div>
-        {fontVariations.map(([key, object], index) => (
-          <div>
+        {fontVariations.map(([key, object], index) => {
+          const isFreeFont = freeFonts.some((a) =>
+            a.toLowerCase().includes(key.toLowerCase())
+          );
+          // console.log(
+          //   key.toLowerCase(),
+          //   object,
+          //   freeFonts.toString().toLowerCase()
+          // );
+
+          console.log(isFreeFont);
+          return (
             <div>
-              <h1 style={{ color: "black" }}>
-                {addSpaceBeforeCaps(key.replace(/_/g, " "))}
-              </h1>
+              <div className="fontTitle">
+                {isFreeFont && (
+                  <div className="freeContainer">
+                    <h3>FREE</h3>
+                  </div>
+                )}
+                <h3 style={{ color: "black" }}>
+                  {addSpaceBeforeCaps(key.replace(/_/g, " "))}
+                </h3>
+              </div>
+              <StaleInput font={[key, object]} index={index} texts={texts} />
             </div>
-            <StaleInput font={[key, object]} index={index} texts={texts} />
-          </div>
-        ))}
+          );
+        })}
       </div>
     );
   }
