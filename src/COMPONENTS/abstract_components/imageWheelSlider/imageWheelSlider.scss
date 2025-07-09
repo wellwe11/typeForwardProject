@@ -17,13 +17,20 @@
       position: relative;
 
       .leftSide {
-        left: 2vw;
+        left: 0;
+        .roundButtonContainerLeft {
+          padding-left: 1vw;
+        }
       }
 
       .rightSide {
-        right: 2vw;
+        right: 0;
         transform: rotateY(180deg);
         order: 3;
+
+        .roundButtonContainerRight {
+          padding-left: 1vw;
+        }
       }
 
       .leftSide,

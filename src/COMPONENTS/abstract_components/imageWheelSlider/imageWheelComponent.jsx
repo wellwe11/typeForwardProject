@@ -91,7 +91,9 @@ const ImageWheelContainer = ({ data }) => {
                 onMouseEnter={() => setLeftHover(true)}
                 onMouseLeave={() => setLeftHover(false)}
               >
-                <RoundButton hover={leftHover} />
+                <div className="roundButtonContainerLeft">
+                  <RoundButton hover={leftHover} />
+                </div>
               </div>
               {mediaElements}
               <div
@@ -100,7 +102,9 @@ const ImageWheelContainer = ({ data }) => {
                 onMouseEnter={() => setRightHover(true)}
                 onMouseLeave={() => setRightHover(false)}
               >
-                <RoundButton hover={rightHover} />
+                <div className="roundButtonContainerRight">
+                  <RoundButton hover={rightHover} />
+                </div>
               </div>
             </div>
 
