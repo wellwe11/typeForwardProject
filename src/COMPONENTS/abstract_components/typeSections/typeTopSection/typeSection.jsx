@@ -4,16 +4,22 @@ import SizeContainerComponent from "../../sizeContainer/sizeContainerComponent";
 import { TypeFaceComponent } from "../../../TYPEFACES/TYPEFACE";
 import BorderWithBorderBox from "../../borderWithBorder";
 
-const ButtonContainer = () => {
+export const ButtonContainer = ({ backgroundColor = "black" }) => {
   return (
     <div className="typeButtons">
       <div className="typeButtonContainer">
-        <BorderWithBorderBox eventHandler={"button"} backgroundColor="black">
+        <BorderWithBorderBox
+          eventHandler={"button"}
+          backgroundColor={backgroundColor}
+        >
           Buy ↗
         </BorderWithBorderBox>
       </div>
       <div className="typeButtonContainer">
-        <BorderWithBorderBox eventHandler={"button"} backgroundColor="black">
+        <BorderWithBorderBox
+          eventHandler={"button"}
+          backgroundColor={backgroundColor}
+        >
           Download ↓
         </BorderWithBorderBox>
       </div>

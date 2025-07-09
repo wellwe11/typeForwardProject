@@ -4,7 +4,7 @@ import "./typeInputTexts.scss";
 import H_OneComponent from "../../componentTitle/componentTitle";
 import fetchSpecificItem from "../../../../functions/fetchSpecificItem";
 import addSpaceBeforeCaps from "../../../../functions/addSpaceBeforeCaps";
-import fetchFontStyle from "../getFontStyle";
+import { ButtonContainer } from "../typeTopSection/typeSection";
 
 const FontVariationButton = ({
   children,
@@ -67,6 +67,7 @@ const InputWithText = ({ text, type, fontInfo }) => {
     return (
       <div className="inputWithTextContainer">
         <input
+          spellcheck="false"
           onChange={handleInput}
           style={{
             fontVariationSettings: `"wght" ${fontInfo?.wght || 500}, "wdth" ${
@@ -221,35 +222,23 @@ const StaleInput = ({ font, index, texts }) => {
     fetchFontStyle(font);
   }, []);
 
-  return (
-    <div>
-      <InputWithText text={texts[index]} type={font} />
-    </div>
-  );
+  return <InputWithText text={texts[index]} type={font} />;
 };
 
 const StaleFontVariation = ({ fontData, texts }) => {
   if (fontData) {
     const fontVariations = Object.entries(fontData?.[1]?.fonts);
-    console.log(fontData);
-
     const freeFonts = Object.keys(fontData[1].free_Fonts);
-    console.log(freeFonts);
+
     return (
       <div>
         {fontVariations.map(([key, object], index) => {
           const isFreeFont = freeFonts.some((a) =>
             a.toLowerCase().includes(key.toLowerCase())
           );
-          // console.log(
-          //   key.toLowerCase(),
-          //   object,
-          //   freeFonts.toString().toLowerCase()
-          // );
 
-          console.log(isFreeFont);
           return (
-            <div>
+            <div className="fontText">
               <div className="fontTitle">
                 {isFreeFont && (
                   <div className="freeContainer">
@@ -316,6 +305,9 @@ const TypeInputTextsComponent = ({ type, data, fontInfo }) => {
               ) : (
                 <StaleFontVariation fontData={type} texts={inputInitialTexts} />
               )}
+            </div>
+            <div className="buttons">
+              <ButtonContainer backgroundColor="white" />
             </div>
           </div>
         </SizeContainerComponent>
