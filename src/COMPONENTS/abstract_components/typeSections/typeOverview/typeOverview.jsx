@@ -1,9 +1,40 @@
 import "./typeOverview.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SizeContainerComponent from "../../sizeContainer/sizeContainerComponent";
+import RoundButton from "../../roundButton/roundButton";
 
 const TypeOverviewComponent = ({ data }) => {
   const [overviewImage, setOverviewImage] = useState(null);
+  const [buttonHasBeenHovered, setButtonHasBeenHovered] = useState(false);
+
+  const boxViewerRef = useRef();
+
+  const handleMouseDown = () => {
+    let animationFrameId = null;
+
+    const handleMouseMove = (e) => {
+      if (animationFrameId) return;
+
+      animationFrameId = requestAnimationFrame(() => {
+        const x = e.clientX - 220;
+        if (boxViewerRef.current && x < 1000 && x > 50) {
+          boxViewerRef.current.style.minWidth = `${x}px`;
+        }
+        console.log(x);
+        animationFrameId = null;
+      });
+    };
+
+    const handleMouseUp = () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+
   useEffect(() => {
     if (!data) return;
     const imagesFile = data?.[1].fontBlog.overview_images.images;
@@ -25,16 +56,32 @@ const TypeOverviewComponent = ({ data }) => {
   }, [data]);
 
   if (overviewImage) {
-    console.log(overviewImage);
     return (
       <SizeContainerComponent sectionColor="black">
         <div className="typeOverview">
-          <div className="boxHoverViewerContainer">
-            <div className="boxHoverViewer">
+          <div
+            className="boxHoverViewerContainer"
+            onMouseEnter={() => setButtonHasBeenHovered(true)}
+          >
+            <div
+              className="boxHoverViewer"
+              style={{
+                animation: !buttonHasBeenHovered
+                  ? "hoverMe 2s infinite ease-in-out"
+                  : "",
+                minWidth: buttonHasBeenHovered ? "7%" : "",
+              }}
+              ref={boxViewerRef}
+              onMouseDown={handleMouseDown}
+            >
+              <div className="arrowRight">
+                <RoundButton />
+              </div>
               <img
                 className="typeOverviewCLean"
                 src={overviewImage.characteristics[0].url}
                 alt=""
+                draggable="false"
               />
             </div>
           </div>
@@ -43,6 +90,7 @@ const TypeOverviewComponent = ({ data }) => {
               className="typeOverviewCharacteristics"
               src={overviewImage.clean[0].url}
               alt=""
+              draggable="false"
             />
           </div>
         </div>
