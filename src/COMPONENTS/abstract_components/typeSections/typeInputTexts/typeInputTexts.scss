@@ -18,7 +18,7 @@
   .buttons {
     width: 100%;
 
-    padding-top: 5vw;
+    padding-top: 50px;
     display: flex;
     justify-content: flex-end;
   }
@@ -101,23 +101,23 @@
 }
 
 .buttonActive {
-  border: 2px solid white;
-  background-color: black;
+  border: 2px solid var(--buttonColor);
+  background-color: var(--notButtonColor);
 
   cursor: pointer;
   position: relative;
 
   button {
     cursor: pointer;
-    color: white !important;
+    color: var(--buttonColor) !important;
   }
 
   .smallDot {
     height: 12.5px;
     width: 12.5px;
-    background-color: white;
+    background-color: var(--buttonColor);
     position: absolute;
-    border: 2px solid black;
+    border: 2px solid var(--notButtonColor);
     opacity: 1 !important;
 
     &:nth-of-type(1) {
@@ -147,7 +147,7 @@
 }
 
 .fontVariationButtonContainer {
-  border: 2px solid black;
+  border: 2px solid var(--notButtonColor);
 
   width: clamp(160px, 10vw, 250px);
   height: clamp(70px, 5vw, 100px);
@@ -162,7 +162,7 @@
   button {
     font-weight: 600;
     cursor: pointer;
-    color: black;
+    color: var(--notButtonColor);
 
     .smallDot {
       opacity: 0;
@@ -171,10 +171,10 @@
 
   &:hover {
     transition: all 0.2s ease;
-    background-color: black;
+    background-color: var(--notButtonColor);
     button {
       transition: all 0.2s ease;
-      color: white;
+      color: var(--buttonColor);
     }
   }
 

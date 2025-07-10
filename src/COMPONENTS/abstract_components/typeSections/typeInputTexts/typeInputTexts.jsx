@@ -6,18 +6,26 @@ import fetchSpecificItem from "../../../../functions/fetchSpecificItem";
 import addSpaceBeforeCaps from "../../../../functions/addSpaceBeforeCaps";
 import { ButtonContainer } from "../typeTopSection/typeSection";
 
-const FontVariationButton = ({
+export const FontVariationButton = ({
   children,
+  specificInputText,
   className,
   setActiveFontStyle,
   activeFontStyle,
+  buttonColor = "white",
 }) => {
   return (
     <div
-      onClick={() => setActiveFontStyle(className)}
+      onClick={() => setActiveFontStyle(className) || null}
       className={`fontVariationButtonContainer ${
-        activeFontStyle.replace("font", "") === children ? "buttonActive" : ""
+        activeFontStyle && activeFontStyle.replace("font", "") === children
+          ? "buttonActive"
+          : ""
       }`}
+      style={{
+        "--buttonColor": buttonColor,
+        "--notButtonColor": buttonColor === "black" ? "white" : "black",
+      }}
     >
       <button
         onClick={() => setActiveFontStyle(className)}
@@ -27,7 +35,7 @@ const FontVariationButton = ({
         <div className="smallDot"></div>
         <div className="smallDot"></div>
         <div className="smallDot"></div>
-        {children.replace(/_/g, " ").toUpperCase()}
+        {specificInputText || children.replace(/_/g, " ").toUpperCase()}
       </button>
     </div>
   );

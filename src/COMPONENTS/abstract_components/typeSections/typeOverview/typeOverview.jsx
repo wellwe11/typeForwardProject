@@ -2,8 +2,10 @@ import "./typeOverview.scss";
 import { useEffect, useRef, useState } from "react";
 import SizeContainerComponent from "../../sizeContainer/sizeContainerComponent";
 import RoundButton from "../../roundButton/roundButton";
+import { FontVariationButton } from "../typeInputTexts/typeInputTexts";
 
 const TypeOverviewComponent = ({ data }) => {
+  const [activeOverview, setActiveOverview] = useState("characteristics");
   const [overviewImage, setOverviewImage] = useState(null);
   const [buttonHasBeenHovered, setButtonHasBeenHovered] = useState(false);
 
@@ -17,7 +19,7 @@ const TypeOverviewComponent = ({ data }) => {
 
       animationFrameId = requestAnimationFrame(() => {
         const x = e.clientX - 220;
-        if (boxViewerRef.current && x < 1000 && x > 50) {
+        if (boxViewerRef.current && x < 1000 && x > 80) {
           boxViewerRef.current.style.minWidth = `${x}px`;
         }
         console.log(x);
@@ -59,6 +61,24 @@ const TypeOverviewComponent = ({ data }) => {
     return (
       <SizeContainerComponent sectionColor="black">
         <div className="typeOverview">
+          <div className="fontVariationContainer">
+            <FontVariationButton
+              buttonColor="black"
+              activeFontStyle={activeOverview}
+              setActiveFontStyle={setActiveOverview}
+              className={"CHARACTERISTICS"}
+            >
+              CHARACTERISTICS
+            </FontVariationButton>
+            <FontVariationButton
+              buttonColor="black"
+              activeFontStyle={activeOverview}
+              setActiveFontStyle={setActiveOverview}
+              className={"ABOUT"}
+            >
+              ABOUT
+            </FontVariationButton>
+          </div>
           <div
             className="boxHoverViewerContainer"
             onMouseEnter={() => setButtonHasBeenHovered(true)}
