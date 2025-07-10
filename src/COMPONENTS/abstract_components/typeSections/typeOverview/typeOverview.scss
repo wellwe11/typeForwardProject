@@ -1,0 +1,63 @@
+.typeOverview {
+  width: 100%;
+  height: 500px;
+  position: relative;
+
+  .boxHoverViewerContainer {
+    width: 100%;
+    .boxHoverViewer {
+      position: absolute;
+
+      height: 100%;
+
+      border-left: 2px solid white;
+      border-right: 2px solid white;
+      z-index: 1;
+      overflow: hidden;
+
+      animation: hoverMe 2s infinite ease-out;
+
+      .typeOverviewCLean {
+        min-width: 70vw;
+        height: 100%;
+        position: absolute;
+      }
+    }
+  }
+
+  @keyframes hoverMe {
+    0% {
+      width: 2%;
+    }
+    9% {
+      width: 2.6%;
+    }
+    15% {
+      width: 2%;
+    }
+    20% {
+      width: 2.6%;
+    }
+    25% {
+      width: 2%;
+    }
+    100% {
+      width: 2%;
+    }
+  }
+
+  .imagesContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    filter: blur(5px);
+  }
+
+  .typeOverviewCharacteristics {
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+}

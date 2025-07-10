@@ -4,7 +4,6 @@ import SizeContainerComponent from "../../sizeContainer/sizeContainerComponent";
 import "./openType.scss";
 
 import BoldAndThinText from "../../boldAndThinText/boldAndThinText";
-import fetchFontStyle from "../getFontStyle";
 import H_OneComponent from "../../componentTitle/componentTitle";
 
 const LeftSpan = ({ representation, style, className }) => {
@@ -23,8 +22,33 @@ const LeftSpan = ({ representation, style, className }) => {
   );
 };
 
-const LeftSection = ({ data, font }) => {
+const LeftSection = ({ data, font, fontInfo }) => {
+  const [displayableFontFeatures, setDisplayableFontFeatures] = useState(null);
+
+  // example-texts font features
+  const fontFeatures = fontInfo?.fontFeatures;
+
+  // example-texts which will display different font-changes
   const fontRepresentations = Object.entries(data.font_Representations);
+
+  const fintFontRepresentations = () => {
+    const fontRepresentationsStyle = fontFeatures?.map((e) => e?.tag);
+
+    const filteredFontFeatures = fontRepresentations.filter((item) =>
+      fontRepresentationsStyle.includes(item[1].style)
+    );
+
+    if (filteredFontFeatures) {
+      setDisplayableFontFeatures(filteredFontFeatures);
+    }
+  };
+
+  useEffect(() => {
+    if (fontInfo) {
+      fintFontRepresentations();
+    }
+  }, [fontInfo]);
+
   const [activeTextStyle, setActiveTextStyle] = useState(null);
 
   useEffect(() => {
@@ -43,37 +67,44 @@ const LeftSection = ({ data, font }) => {
     setActiveTextStyle(0);
   }, []);
 
-  return (
-    <div className="leftSection">
-      {fontRepresentations.map(([index, representation]) => {
-        return (
-          <div className="fontDisplay" key={index}>
-            <LeftSpan
-              className={"presentation"}
-              representation={representation}
-              style={{
-                opacity: activeTextStyle === 1 ? "0" : "1",
-                fontFamily: font[0],
-              }}
-            />
-            <LeftSpan
-              className={"presentationNormal"}
-              representation={representation}
-              style={{
-                fontFeatureSettings: `"${representation.style}" 1`,
-                opacity: activeTextStyle,
-                fontFamily: font[0],
-              }}
-            />
-            <h5 className="info">{index}</h5>
-          </div>
-        );
-      })}
-    </div>
-  );
+  if (displayableFontFeatures) {
+    return (
+      <div className="leftSection">
+        {displayableFontFeatures.map(([name, representation], index) => {
+          return (
+            <div className="fontDisplay" key={name}>
+              <LeftSpan
+                className={"presentation"}
+                representation={representation}
+                style={{
+                  opacity: activeTextStyle === 1 ? "0" : "1",
+                  fontFamily: font[0],
+                  fontFeatureSettings: `"${representation?.style}" 0`,
+                }}
+              />
+              <LeftSpan
+                className={"presentationNormal"}
+                representation={representation}
+                style={{
+                  opacity: activeTextStyle,
+                  fontFamily: font[0],
+                  fontFeatureSettings: `"${representation?.style}" 1`,
+                }}
+              />
+              <h5 className="info">{`${
+                /\d/.test(representation?.style)
+                  ? representation?.style + " -"
+                  : ""
+              }  ${name}`}</h5>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 };
 
-const OpenTypeComponent = ({ data, font }) => {
+const OpenTypeComponent = ({ data, font, fontInfo }) => {
   if (data) {
     const thinText = data.openType_Features.thin;
     const boldText = data.openType_Features.bold.replace(
@@ -92,7 +123,7 @@ const OpenTypeComponent = ({ data, font }) => {
             />
           </div>
           <div className="openTypesectionsContainer">
-            <LeftSection data={data} font={font} />
+            <LeftSection data={data} font={font} fontInfo={fontInfo} />
             <div className="rightSection">
               <div className="rightText">
                 <BoldAndThinText

@@ -8,6 +8,7 @@ import TypeHeader from "../abstract_components/typeSections/typeTopSection/typeS
 import ImageWheelContainer from "../abstract_components/imageWheelSlider/imageWheelComponent";
 import OpenTypeComponent from "../abstract_components/typeSections/OpenType_Features/openType";
 import TypeInputTextsComponent from "../abstract_components/typeSections/typeInputTexts/typeInputTexts";
+import TypeOverviewComponent from "../abstract_components/typeSections/typeOverview/typeOverview";
 
 const Specific_TypeComponent = ({ data }) => {
   // font name
@@ -83,6 +84,13 @@ const Specific_TypeComponent = ({ data }) => {
       }
 
       const fvar = font.tables.fvar;
+      const gsub = font.tables.gsub;
+
+      if (!gsub) {
+        setFontInfo({ error: "Font is not variable or no gsub table found." });
+        return;
+      }
+
       if (!fvar) {
         setFontInfo({ error: "Font is not variable or no fvar table found." });
         return;
@@ -105,7 +113,28 @@ const Specific_TypeComponent = ({ data }) => {
 
       const names = font.names;
 
-      setFontInfo({ axes, instances, designer: names.designer?.en || "N/A" });
+      const features = gsub.features.map((feature, index) => ({
+        tag: feature.tag,
+      }));
+
+      const filterFeatures = () => {
+        const localArr = [];
+
+        features.map((item) => {
+          if (!localArr.some((i) => i.tag === item.tag)) {
+            localArr.push(item);
+          }
+        });
+        return localArr;
+      };
+      const filteredFeatures = filterFeatures();
+
+      setFontInfo({
+        axes,
+        instances,
+        designer: names.designer?.en,
+        fontFeatures: filteredFeatures || "N/A",
+      });
     });
   }, [data]);
 
@@ -113,8 +142,13 @@ const Specific_TypeComponent = ({ data }) => {
     return (
       <div className="specific_TypeComponent">
         <TypeHeader type={customTypeEntry} fontInfo={fontInfo} />
+        <TypeOverviewComponent data={customTypeEntry} />
         <ImageWheelContainer data={typeObject} />
-        <OpenTypeComponent data={mdFile} font={customTypeEntry} />
+        <OpenTypeComponent
+          data={mdFile}
+          font={customTypeEntry}
+          fontInfo={fontInfo}
+        />
         <TypeInputTextsComponent
           data={mdFile}
           type={customTypeEntry}
