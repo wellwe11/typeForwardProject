@@ -33,12 +33,12 @@ const TypeOverviewComponent = ({ data }) => {
       animationFrameId = requestAnimationFrame(() => {
         const x = e.clientX;
 
-        if (
-          boxViewerRef.current &&
-          x < screenWidth - screenWidth / 3 + 320 &&
-          x > 350
-        ) {
-          boxViewerRef.current.style.width = `${x - 170}px`;
+        if (boxViewerRef.current) {
+          if (screenWidth > 1200) {
+            boxViewerRef.current.style.width = `${x - 215}px`;
+          } else {
+            boxViewerRef.current.style.width = `${x - 130}px`;
+          }
         }
 
         animationFrameId = null;
@@ -114,7 +114,6 @@ const TypeOverviewComponent = ({ data }) => {
                   animation: !buttonHasBeenHovered
                     ? "hoverMe 2s infinite ease-in-out"
                     : "",
-                  minWidth: !buttonHasBeenHovered ? "7%" : "",
                 }}
                 ref={boxViewerRef}
                 onMouseDown={handleMouseDown}
