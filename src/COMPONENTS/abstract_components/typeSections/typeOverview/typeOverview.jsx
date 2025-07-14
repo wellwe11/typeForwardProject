@@ -5,6 +5,7 @@ import RoundButton from "../../roundButton/roundButton";
 import { FontVariationButton } from "../typeInputTexts/typeInputTexts";
 import H_OneComponent from "../../componentTitle/componentTitle";
 import fetchSpecificItem from "../../../../functions/fetchSpecificItem";
+import BoldAndThinText from "../../boldAndThinText/boldAndThinText";
 
 const TypeOverview = ({ screenWidth, overviewImage }) => {
   const boxViewerRef = useRef();
@@ -104,8 +105,10 @@ const FontVariationButtons = ({ activeOverview, setActiveOverview }) => {
 };
 
 const AboutTypeOverview = ({ data }) => {
-  const [textBold, setTextBold] = useState(null);
-  const [textThin, setTextThin] = useState(null);
+  const [boldText, setBoldText] = useState(null);
+  const [thinText, setThinText] = useState(null);
+  const [font_tldr, setFont_tldr] = useState(null);
+
   useEffect(() => {
     if (data) {
       const textToFetch = data?.[1]?.bio[0].url;
@@ -113,8 +116,9 @@ const AboutTypeOverview = ({ data }) => {
         const fetchedText = await fetchSpecificItem(textToFetch, "fontAbout");
 
         if (fetchedText) {
-          setTextBold(fetchedText?.bold);
-          setTextThin(fetchedText?.thin);
+          setBoldText(fetchedText?.bold);
+          setThinText(fetchedText?.thin);
+          setFont_tldr(fetchedText?.font_tldr);
         }
       };
 
@@ -122,14 +126,39 @@ const AboutTypeOverview = ({ data }) => {
     }
   }, [data]);
 
-  console.log(textBold, textThin);
+  console.log(boldText, thinText, font_tldr);
 
-  //   fetchSpecificItem(data)
-  return (
-    <div>
-      <h1>hello</h1>
-    </div>
-  );
+  if ((boldText || thinText) && font_tldr) {
+    return (
+      <div className="aboutTypeOverview">
+        <div className="leftText">
+          <BoldAndThinText
+            boldText={boldText}
+            boldWeight={800}
+            thinText={thinText}
+            amountOfSpace={2}
+          />
+        </div>
+        <div className="rightText">
+          {Object.keys(font_tldr).map((item, index) => (
+            <div className="rightTextWrapper">
+              <BoldAndThinText
+                boldText={item.replace(/_/g, " ") + ":"}
+                boldWeight={800}
+                thinText={
+                  Object.values(font_tldr[item]).map((item, index) => (
+                    <div className="tldrListItem">{item}</div>
+                  ))
+                  // <div className="tldrListItems">{font_tldr[item]}</div>
+                }
+                amountOfSpace={0}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 };
 
 const TypeOverviewComponent = ({ data }) => {
