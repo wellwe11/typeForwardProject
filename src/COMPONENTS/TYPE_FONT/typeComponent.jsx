@@ -93,7 +93,6 @@ const Specific_TypeComponent = ({ data }) => {
         const fontName = font.names.fontFamily.en;
 
         const fvar = font?.tables.fvar;
-        console.log(font);
         const gsub = font.tables.gsub;
 
         if (!gsub) {
@@ -119,6 +118,8 @@ const Specific_TypeComponent = ({ data }) => {
         }));
 
         const names = font.names;
+
+        console.log(gsub);
 
         const features = gsub.features.map((feature, index) => ({
           tag: feature.tag,

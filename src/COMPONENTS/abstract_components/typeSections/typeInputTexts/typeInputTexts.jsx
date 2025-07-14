@@ -72,16 +72,17 @@ const InputWithText = ({ text, type, fontInfo }) => {
     setLocalText(value);
   };
 
-  if (localText) {
+  console.log(type);
+  if (fontInfo) {
     return (
       <div className="inputWithTextContainer">
         <input
-          spellcheck="false"
+          spellCheck="false"
           onChange={handleInput}
           style={{
             fontVariationSettings: `"wght" ${fontInfo?.wght || 500}, "wdth" ${
-              fontInfo?.wdth
-            }, "ital" ${fontInfo?.ital}`,
+              fontInfo?.wdth || 1
+            }, "ital" ${fontInfo?.ital || 0}`,
             fontFamily: `${type[0]}`,
           }}
           value={localText}
@@ -139,7 +140,6 @@ const Inputs = ({ texts, type, fonts, freeFonts, fontInfo, array }) => {
   }, [fonts, freeFonts]);
 
   if (fontInfo) {
-    console.log(fontInfo);
     const doesHaveVariable = fontInfo?.fontName
       .toLowerCase()
       .includes("variable");
@@ -247,7 +247,7 @@ const StaleFontVariation = ({ fontData, texts }) => {
           );
 
           return (
-            <div className="fontText">
+            <div className="fontText" key={index}>
               <div className="fontTitle">
                 {isFreeFont && (
                   <div className="freeContainer">

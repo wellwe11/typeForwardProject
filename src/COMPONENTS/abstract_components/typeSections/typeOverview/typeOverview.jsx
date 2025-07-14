@@ -145,13 +145,15 @@ const AboutTypeOverview = ({ data }) => {
         </div>
         <div className="rightText">
           {Object.keys(font_tldr).map((item, index) => (
-            <div className="rightTextWrapper">
+            <div className="rightTextWrapper" key={index}>
               <BoldAndThinText
                 boldText={item.replace(/_/g, " ") + ":"}
                 boldWeight={800}
                 thinText={
                   Object.values(font_tldr[item]).map((item, index) => (
-                    <div className="tldrListItem">{item}</div>
+                    <div key={index} className="tldrListItem">
+                      {item}
+                    </div>
                   ))
                   // <div className="tldrListItems">{font_tldr[item]}</div>
                 }
