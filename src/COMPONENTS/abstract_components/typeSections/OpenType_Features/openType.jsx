@@ -35,7 +35,7 @@ const LeftSection = ({ data, font, fontInfo }) => {
     const fontRepresentationsStyle = fontFeatures?.map((e) => e?.tag);
 
     const filteredFontFeatures = fontRepresentations.filter((item) =>
-      fontRepresentationsStyle.includes(item[1].style)
+      fontRepresentationsStyle?.includes(item[1].style)
     );
 
     if (filteredFontFeatures) {

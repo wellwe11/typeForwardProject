@@ -74,75 +74,87 @@ const Specific_TypeComponent = ({ data }) => {
   useEffect(() => {
     if (!data) return;
 
-    const path = data?.Typefaces?.fonts.Bion.fonts.BionVariableVF[0].url;
+    const fonts = data?.Typefaces?.fonts?.[typeName]?.fonts;
 
-    opentype.load(path, (err, font) => {
-      if (err) {
-        console.error("Font could not be loaded:", err);
-        setFontInfo({ error: "Font could not be loaded." });
-        return;
-      }
+    if (fonts) {
+      const firstKey = Object.keys(fonts)?.[0];
 
-      const fvar = font.tables.fvar;
-      const gsub = font.tables.gsub;
+      const firstFont = fonts[firstKey];
 
-      if (!gsub) {
-        setFontInfo({ error: "Font is not variable or no gsub table found." });
-        return;
-      }
+      const path = firstFont?.[0]?.url;
 
-      if (!fvar) {
-        setFontInfo({ error: "Font is not variable or no fvar table found." });
-        return;
-      }
+      opentype.load(path, (err, font) => {
+        if (err) {
+          console.error("Font could not be loaded:", err);
+          setFontInfo({ error: "Font could not be loaded." });
+          return;
+        }
 
-      // Extract axes info
-      const axes = fvar.axes.map((axis) => ({
-        tag: axis.tag,
-        name: axis.name.en,
-        minValue: axis.minValue,
-        defaultValue: axis.defaultValue,
-        maxValue: axis.maxValue,
-      }));
+        const fontName = font.names.fontFamily.en;
 
-      // Extract named instances info
-      const instances = fvar.instances.map((inst) => ({
-        name: inst.name.en,
-        coordinates: inst.coordinates,
-      }));
+        const fvar = font?.tables.fvar;
+        console.log(font);
+        const gsub = font.tables.gsub;
 
-      const names = font.names;
+        if (!gsub) {
+          setFontInfo({
+            error: "Font is not variable or no gsub table found.",
+          });
+          return;
+        }
 
-      const features = gsub.features.map((feature, index) => ({
-        tag: feature.tag,
-      }));
+        // Extract axes info
+        const axes = fvar.axes.map((axis) => ({
+          tag: axis.tag,
+          name: axis.name.en,
+          minValue: axis.minValue,
+          defaultValue: axis.defaultValue,
+          maxValue: axis.maxValue,
+        }));
 
-      const filterFeatures = () => {
-        const localArr = [];
+        // Extract named instances info
+        const instances = fvar.instances.map((inst) => ({
+          name: inst.name.en,
+          coordinates: inst.coordinates,
+        }));
 
-        features.map((item) => {
-          if (!localArr.some((i) => i.tag === item.tag)) {
-            localArr.push(item);
-          }
+        const names = font.names;
+
+        const features = gsub.features.map((feature, index) => ({
+          tag: feature.tag,
+        }));
+
+        const filterFeatures = () => {
+          const localArr = [];
+
+          features.map((item) => {
+            if (!localArr.some((i) => i.tag === item.tag)) {
+              localArr.push(item);
+            }
+          });
+          return localArr;
+        };
+        const filteredFeatures = filterFeatures();
+
+        setFontInfo({
+          axes,
+          instances,
+          designer: names.designer?.en,
+          fontFeatures: filteredFeatures || "N/A",
+          fontName: fontName || "NO NAME",
         });
-        return localArr;
-      };
-      const filteredFeatures = filterFeatures();
-
-      setFontInfo({
-        axes,
-        instances,
-        designer: names.designer?.en,
-        fontFeatures: filteredFeatures || "N/A",
       });
-    });
-  }, [data]);
+    }
+  }, [typeName]);
 
   if (customTypeEntry) {
     return (
       <div className="specific_TypeComponent">
         <TypeHeader type={customTypeEntry} fontInfo={fontInfo} />
-        <TypeOverviewComponent data={customTypeEntry} />
+        <TypeOverviewComponent
+          data={customTypeEntry}
+          placeholderData={data?.Typefaces.placeholderImage[0].url}
+        />
         <ImageWheelContainer data={typeObject} />
         <OpenTypeComponent
           data={mdFile}

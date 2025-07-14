@@ -7,7 +7,7 @@ import H_OneComponent from "../../componentTitle/componentTitle";
 import fetchSpecificItem from "../../../../functions/fetchSpecificItem";
 import BoldAndThinText from "../../boldAndThinText/boldAndThinText";
 
-const TypeOverview = ({ screenWidth, overviewImage }) => {
+const TypeOverview = ({ screenWidth, overviewImage, placeholderImage }) => {
   const boxViewerRef = useRef();
   const [buttonHasBeenHovered, setButtonHasBeenHovered] = useState(false);
 
@@ -63,7 +63,7 @@ const TypeOverview = ({ screenWidth, overviewImage }) => {
         <div className="typeOverviewCharacteristicsContainer">
           <img
             className="typeOverviewCharacteristics"
-            src={overviewImage.characteristics[0].url}
+            src={overviewImage?.characteristics[0]?.url || placeholderImage}
             alt=""
             draggable="false"
           />
@@ -72,7 +72,7 @@ const TypeOverview = ({ screenWidth, overviewImage }) => {
       <div className="cleanContainer">
         <img
           className="typeOverviewClean"
-          src={overviewImage.clean[0].url}
+          src={overviewImage?.clean[0]?.url || placeholderImage}
           alt=""
           draggable="false"
         />
@@ -81,27 +81,33 @@ const TypeOverview = ({ screenWidth, overviewImage }) => {
   );
 };
 
-const FontVariationButtons = ({ activeOverview, setActiveOverview }) => {
-  return (
-    <div className="fontVariationContainer">
-      <FontVariationButton
-        buttonColor="black"
-        activeFontStyle={activeOverview}
-        setActiveFontStyle={setActiveOverview}
-        className={"CHARACTERISTICS"}
-      >
-        CHARACTERISTICS
-      </FontVariationButton>
-      <FontVariationButton
-        buttonColor="black"
-        activeFontStyle={activeOverview}
-        setActiveFontStyle={setActiveOverview}
-        className={"ABOUT"}
-      >
-        ABOUT
-      </FontVariationButton>
-    </div>
-  );
+const FontVariationButtons = ({
+  activeOverview,
+  setActiveOverview,
+  overviewImage,
+}) => {
+  if (overviewImage) {
+    return (
+      <div className="fontVariationContainer">
+        <FontVariationButton
+          buttonColor="black"
+          activeFontStyle={activeOverview}
+          setActiveFontStyle={setActiveOverview}
+          className={"CHARACTERISTICS"}
+        >
+          CHARACTERISTICS
+        </FontVariationButton>
+        <FontVariationButton
+          buttonColor="black"
+          activeFontStyle={activeOverview}
+          setActiveFontStyle={setActiveOverview}
+          className={"ABOUT"}
+        >
+          ABOUT
+        </FontVariationButton>
+      </div>
+    );
+  }
 };
 
 const AboutTypeOverview = ({ data }) => {
@@ -126,9 +132,7 @@ const AboutTypeOverview = ({ data }) => {
     }
   }, [data]);
 
-  console.log(boldText, thinText, font_tldr);
-
-  if ((boldText || thinText) && font_tldr) {
+  if ((boldText && thinText) || font_tldr) {
     return (
       <div className="aboutTypeOverview">
         <div className="leftText">
@@ -161,9 +165,10 @@ const AboutTypeOverview = ({ data }) => {
   }
 };
 
-const TypeOverviewComponent = ({ data }) => {
+const TypeOverviewComponent = ({ data, placeholderData }) => {
   const [overviewImage, setOverviewImage] = useState(null);
   const [activeOverview, setActiveOverview] = useState("CHARACTERISTICS");
+
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -182,7 +187,7 @@ const TypeOverviewComponent = ({ data }) => {
   useEffect(() => {
     if (!data) return;
 
-    const imagesFile = data?.[1].fontBlog.overview_images.images;
+    const imagesFile = data?.[1]?.fontBlog?.overview_images?.images;
     const imagesArray = {
       clean: [],
       characteristics: [],
@@ -197,10 +202,12 @@ const TypeOverviewComponent = ({ data }) => {
       });
 
       setOverviewImage(imagesArray);
+    } else {
+      setActiveOverview("ABOUT");
     }
   }, [data]);
 
-  if (overviewImage && screenWidth > 999) {
+  if (screenWidth > 999) {
     return (
       <SizeContainerComponent sectionColor="black">
         <div className="typeOverview">
@@ -211,12 +218,14 @@ const TypeOverviewComponent = ({ data }) => {
             <FontVariationButtons
               activeOverview={activeOverview}
               setActiveOverview={setActiveOverview}
+              overviewImage={overviewImage}
             />
           </div>
-          {activeOverview === "CHARACTERISTICS" && (
+          {activeOverview === "CHARACTERISTICS" && overviewImage && (
             <TypeOverview
               screenWidth={screenWidth}
               overviewImage={overviewImage}
+              placeholderImage={placeholderData}
             />
           )}
 
