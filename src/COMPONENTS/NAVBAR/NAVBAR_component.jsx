@@ -5,13 +5,16 @@ import React, { useEffect, useState } from "react";
 import "./NAVBAR.scss";
 import SvgLogo from "./svgLogo";
 import addSpaceBeforeCaps from "../../functions/addSpaceBeforeCaps";
+import NavBarSVG from "./navIcons/navSVG";
 
-const ToggleMenuButton = ({ showButtons, setShowButtons }) => {
-  const handleShowButtons = () => setShowButtons(!showButtons);
+const ToggleMenuButton = ({ showButtons, handleShowButtons }) => {
   return (
     <div className="toggleMenuButton">
       <button className="viewMenuButtons" onClick={handleShowButtons}>
-        <h1>{showButtons ? "X" : "+"}</h1>
+        <NavBarSVG
+          showButtons={showButtons}
+          handleShowButtons={handleShowButtons}
+        />
       </button>
     </div>
   );
@@ -34,8 +37,13 @@ const LogoButton = ({ backgroundColor }) => {
   );
 };
 
-const NavButtons = ({ backgroundColor, data }) => {
-  const [showButtons, setShowButtons] = useState(false);
+const NavButtons = ({
+  backgroundColor,
+  data,
+  showButtons,
+  setShowButtons,
+  handleShowButtons,
+}) => {
   const [activeTab, setActiveTab] = useState("");
 
   const buttonsObject = Object.entries(data);
@@ -60,7 +68,7 @@ const NavButtons = ({ backgroundColor, data }) => {
       <div className="LinksContainer">
         <ToggleMenuButton
           showButtons={showButtons}
-          setShowButtons={setShowButtons}
+          handleShowButtons={handleShowButtons}
         />
         {buttonsObject.map(([index, obj]) => {
           return (
@@ -68,6 +76,7 @@ const NavButtons = ({ backgroundColor, data }) => {
               key={index}
               className="uniqueLinkContainer"
               style={{ display: showButtons ? "flex" : "" }}
+              onClick={() => setShowButtons(false)}
             >
               <Link
                 to={
@@ -109,10 +118,13 @@ const NavButtons = ({ backgroundColor, data }) => {
 };
 
 const NavBarComponent = ({ backgroundColor, data }) => {
+  const [showButtons, setShowButtons] = useState(false);
+  const handleShowButtons = () => setShowButtons(!showButtons);
   if (data) {
     return (
       <div
         className="navBarContainer"
+        onMouseLeave={() => setShowButtons(false)}
         style={{
           backgroundColor: backgroundColor === "white" ? "white" : "black",
           color: backgroundColor === "black" ? "white" : "black",
@@ -120,7 +132,13 @@ const NavBarComponent = ({ backgroundColor, data }) => {
             backgroundColor === "white" ? "2px solid black" : "2px solid white",
         }}
       >
-        <NavButtons backgroundColor={backgroundColor} data={data} />
+        <NavButtons
+          backgroundColor={backgroundColor}
+          data={data}
+          showButtons={showButtons}
+          setShowButtons={setShowButtons}
+          handleShowButtons={handleShowButtons}
+        />
       </div>
     );
   }

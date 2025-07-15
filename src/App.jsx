@@ -149,6 +149,9 @@ export default App;
  * Add SVG animations to small-window navbar for dropdown menu and fix the logic for how it opens/closes
  * Fix "free" button for fonts (currently small text for some reason)
  *
+ * Make so the navbar changes color and match whatever section screen currently is over
+ * also apply it for +/x button when window is smaller
+ *
  *
  * on home page -> download -> form doesnt pop up in center of screen
  *

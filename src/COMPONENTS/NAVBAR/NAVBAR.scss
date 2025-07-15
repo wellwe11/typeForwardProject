@@ -103,6 +103,10 @@
 
       padding: 15px;
 
+      max-height: 50%;
+      min-height: 40px;
+      min-width: 70px;
+
       .keyTextSpan {
         position: absolute;
         top: 50%;
@@ -177,18 +181,22 @@
       align-items: flex-end;
     }
   }
-
-  .toggleMenuButton {
-    visibility: visible !important;
-  }
 }
 
 .toggleMenuButton {
   visibility: hidden;
   position: absolute;
-  top: 30px;
-  right: 10px;
+  top: 20px;
+  right: 45px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .viewMenuButtons {
+  }
+
+  @media screen and (max-width: 800px) {
+    visibility: visible;
   }
 }

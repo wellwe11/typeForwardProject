@@ -1,0 +1,30 @@
+.hb {
+  cursor: pointer;
+  transition: 0.3s;
+  width: 50px;
+}
+
+.line {
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.top {
+  transform: rotate(0) translate(0, 0);
+}
+.middle {
+  opacity: 1;
+}
+.bottom {
+  transform: rotate(0) translate(0, 0);
+}
+
+.hb.open .top {
+  transform: rotate(45deg) translate(1px, 1px);
+}
+.hb.open .middle {
+  opacity: 0;
+}
+.hb.open .bottom {
+  transform: rotate(-45deg) translate(1px, -1px);
+}
