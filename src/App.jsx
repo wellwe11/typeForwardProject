@@ -152,9 +152,9 @@ export default App;
  * ". Type&nbsp;Forward " on https://www.typeforward.com/services#custom-licensing
  *“A typeface that is odd and oval, why not call it “Oddval,” suggested the designers at FourPlus. We immediately fell in love with it. We knew the name might sound strange but wasn’t that the point from the beginning?
  *
- * Make it so text on nav-bar is thick on load (when you refresh page, the current page should be bold-text on navbar)
- * Navbar currently does not scale well when you make window smaller
- * Add SVG animations to small-window navbar for dropdown menu and fix the logic for how it opens/closes
+
+
+
  * Fix "free" button for fonts (currently small text for some reason)
  *
  * Make so the navbar changes color and match whatever section screen currently is over

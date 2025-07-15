@@ -41,7 +41,7 @@ export const TypeFaceComponent = ({
 
         <button className="fontInfoBtn" onClick={handleDisplayForm}>
           <h3 className="fontInfo" style={{ color: fontColor }}>
-            {Object.keys(type?.[1].free_Fonts).length} FREE
+            {Object.keys(type?.[1]?.free_Fonts).length} FREE
           </h3>
           <div
             className="fontUnderline"
