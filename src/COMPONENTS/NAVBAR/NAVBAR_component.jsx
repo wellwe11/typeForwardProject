@@ -44,12 +44,14 @@ const NavButtons = ({
   setShowButtons,
   handleShowButtons,
 }) => {
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState("/");
+  console.log(activeTab);
 
   const location = useLocation();
 
   useEffect(() => {
-    setActiveTab(location.pathname.replace("/", ""));
+    if (location.pathname !== "/")
+      setActiveTab(location.pathname.replace("/", ""));
   }, []);
 
   const buttonsObject = Object.entries(data);
@@ -70,7 +72,9 @@ const NavButtons = ({
 
   return (
     <ul className="navBarUl">
-      <LogoButton backgroundColor={backgroundColor} />
+      <div onClick={() => setActiveTab("/")}>
+        <LogoButton backgroundColor={backgroundColor} />
+      </div>
       <div className="LinksContainer">
         <ToggleMenuButton
           showButtons={showButtons}
