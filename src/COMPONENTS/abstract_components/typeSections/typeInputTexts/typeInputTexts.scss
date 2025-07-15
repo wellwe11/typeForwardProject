@@ -33,7 +33,7 @@
 
     @media screen and (max-width: 1000px) {
       padding-left: 100px;
-      margin-top: -430px;
+      margin-top: -245px;
     }
   }
 
@@ -47,7 +47,7 @@
   input {
     width: 100%;
     color: black;
-    font-size: 5.5vw;
+    font-size: clamp(20px, 5.5vw, 70px);
 
     -webkit-user-modify: read-write-plaintext-only;
   }
@@ -149,8 +149,8 @@
 .fontVariationButtonContainer {
   border: 2px solid var(--notButtonColor);
 
-  width: clamp(160px, 10vw, 250px);
-  height: clamp(70px, 5vw, 100px);
+  width: clamp(160px, 10vw, 190px);
+  height: clamp(70px, 5vw, 80px);
 
   display: flex;
   justify-content: center;

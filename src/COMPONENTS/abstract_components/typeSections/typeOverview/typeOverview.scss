@@ -150,6 +150,7 @@
   display: flex;
   justify-content: space-between;
   padding-top: 10vw;
+  position: relative;
   .leftText {
     white-space: pre-line;
     line-height: 1.5;
@@ -158,6 +159,9 @@
 
   .rightText {
     width: 30%;
+    height: fit-content;
+    position: sticky;
+    top: 120px;
 
     .rightTextWrapper {
       display: flex;

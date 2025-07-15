@@ -90,36 +90,27 @@ const Specific_TypeComponent = ({ data }) => {
           return;
         }
 
-        const fontName = font.names.fontFamily.en;
+        const fontName = font?.names.fontFamily.en;
 
         const fvar = font?.tables.fvar;
-        const gsub = font.tables.gsub;
-
-        if (!gsub) {
-          setFontInfo({
-            error: "Font is not variable or no gsub table found.",
-          });
-          return;
-        }
+        const gsub = font?.tables.gsub;
 
         // Extract axes info
-        const axes = fvar.axes.map((axis) => ({
-          tag: axis.tag,
-          name: axis.name.en,
-          minValue: axis.minValue,
-          defaultValue: axis.defaultValue,
-          maxValue: axis.maxValue,
+        const axes = fvar?.axes.map((axis) => ({
+          tag: axis?.tag,
+          name: axis?.name.en,
+          minValue: axis?.minValue,
+          defaultValue: axis?.defaultValue,
+          maxValue: axis?.maxValue,
         }));
 
         // Extract named instances info
-        const instances = fvar.instances.map((inst) => ({
+        const instances = fvar?.instances.map((inst) => ({
           name: inst.name.en,
           coordinates: inst.coordinates,
         }));
 
-        const names = font.names;
-
-        console.log(gsub);
+        const names = font?.names;
 
         const features = gsub.features.map((feature, index) => ({
           tag: feature.tag,

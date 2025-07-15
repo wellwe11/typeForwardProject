@@ -125,6 +125,7 @@ const AboutTypeOverview = ({ data }) => {
           setBoldText(fetchedText?.bold);
           setThinText(fetchedText?.thin);
           setFont_tldr(fetchedText?.font_tldr);
+          console.log(fetchedText?.font_tldr);
         }
       };
 
@@ -132,7 +133,7 @@ const AboutTypeOverview = ({ data }) => {
     }
   }, [data]);
 
-  if ((boldText && thinText) || font_tldr) {
+  if (boldText && thinText && font_tldr) {
     return (
       <div className="aboutTypeOverview">
         <div className="leftText">
@@ -144,7 +145,7 @@ const AboutTypeOverview = ({ data }) => {
           />
         </div>
         <div className="rightText">
-          {Object.keys(font_tldr).map((item, index) => (
+          {Object?.keys(font_tldr).map((item, index) => (
             <div className="rightTextWrapper" key={index}>
               <BoldAndThinText
                 boldText={item.replace(/_/g, " ") + ":"}

@@ -87,6 +87,7 @@
 
 .navBarUl {
   width: var(--InlineWidth);
+  max-width: 90vw;
 
   display: flex;
   justify-content: space-between;

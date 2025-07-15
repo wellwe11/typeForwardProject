@@ -72,8 +72,7 @@ const InputWithText = ({ text, type, fontInfo }) => {
     setLocalText(value);
   };
 
-  console.log(type);
-  if (fontInfo) {
+  if (fontInfo || text) {
     return (
       <div className="inputWithTextContainer">
         <input
@@ -314,7 +313,7 @@ const TypeInputTextsComponent = ({ type, data, fontInfo }) => {
               />
             </div>
             <div className="typeInputTextsComponentContainer">
-              {fontVariationsArr ? (
+              {fontVariationsArr?.["REGULAR"] ? (
                 <Inputs
                   array={fontVariationsArr}
                   texts={inputInitialTexts}
