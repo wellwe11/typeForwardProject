@@ -24,8 +24,6 @@ const LinkImagesComponent = ({ sectionColor, data }) => {
 
   const dataEntries = Object.entries(data);
 
-  console.log(dataEntries);
-
   return (
     <div
       className="linkImagesContainer"
@@ -39,7 +37,7 @@ const LinkImagesComponent = ({ sectionColor, data }) => {
     >
       {icons &&
         dataEntries.map(([index, obj]) => (
-          <div className="iconButtonContainer">
+          <div className="iconButtonContainer" key={index}>
             <div className="insideIconButtonContainer">
               <button
                 className="iconButton"

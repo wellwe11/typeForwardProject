@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import React, { useEffect, useState } from "react";
 
@@ -45,6 +45,12 @@ const NavButtons = ({
   handleShowButtons,
 }) => {
   const [activeTab, setActiveTab] = useState("");
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setActiveTab(location.pathname.replace("/", ""));
+  }, []);
 
   const buttonsObject = Object.entries(data);
 

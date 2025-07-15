@@ -38,6 +38,7 @@ function App() {
   const [navbarColor, setNavColor] = useState("black");
   const [data, setData] = useState({});
   const [extended_assets, setExtended_assets] = useState(null);
+  const [activeTab, setActiveTab] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,8 +53,6 @@ function App() {
 
     fetchData();
   }, []);
-
-  console.log(extended_assets);
 
   if (!data) {
     return (
@@ -118,7 +117,12 @@ function App() {
                     <Route
                       key={pageName}
                       path={obj._embedded.info.linkTo || "/"}
-                      element={<Component data={data} />}
+                      element={
+                        <Component
+                          data={data}
+                          extendedAssets={extended_assets}
+                        />
+                      }
                     />
                   );
                 })}
@@ -155,6 +159,11 @@ export default App;
  *
  * Make so the navbar changes color and match whatever section screen currently is over
  * also apply it for +/x button when window is smaller
+ *
+ *
+ * clicking subscribe should direct you to the subscribe section which is on each page
+ *
+ * add social-links to each "about us" creator
  *
  *
  * on home page -> download -> form doesnt pop up in center of screen

@@ -15,10 +15,10 @@ const TopSectionBio = ({
   configuredTitle,
   displayImages,
   displaySocials,
+  extendedAssets,
 }) => {
   const [thinText, setThinText] = useState("");
   const [boldText, setBoldText] = useState("");
-  const dataobject = Object.fromEntries(data).services;
   const updatedData = Object.fromEntries(data);
   const componentTitle = Object.fromEntries(data)._embedded.info.title;
 
@@ -35,7 +35,6 @@ const TopSectionBio = ({
       key !== "bio" && key !== "_embedded" && value !== "services"
   );
 
-  console.log(updatedData);
   return (
     <SizeContainerComponent
       sectionColor={"black"}
@@ -77,7 +76,7 @@ const TopSectionBio = ({
             {displaySocials && (
               <LinkImagesComponent
                 sectionColor={"black"}
-                data={updatedData._embedded.info.socials}
+                data={extendedAssets?.socials_icons}
               />
             )}
           </div>

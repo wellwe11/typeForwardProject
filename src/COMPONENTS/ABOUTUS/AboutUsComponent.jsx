@@ -6,7 +6,8 @@ import TopSectionBio from "../abstract_components/topSectionBio/topSectionBio";
 import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 import SubscribeComponent from "../SUBSCRIBE/SUBSCRIBE";
 
-const AboutUsComponent = ({ data, sectionRef }) => {
+const AboutUsComponent = ({ data, sectionRef, extendedAssets }) => {
+  console.log(extendedAssets);
   if (!data.AboutUs) {
     return (
       <div>
@@ -20,7 +21,11 @@ const AboutUsComponent = ({ data, sectionRef }) => {
 
     return (
       <div className="aboutUsComponent">
-        <TopSectionBio data={aboutUsEntries} displaySocials={true} />
+        <TopSectionBio
+          data={aboutUsEntries}
+          displaySocials={true}
+          extendedAssets={extendedAssets}
+        />
         <ProfilesComponent
           data={data}
           canHover={true}
