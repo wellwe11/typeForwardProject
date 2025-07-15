@@ -8,6 +8,8 @@ import SizeContainerComponent from "../sizeContainer/sizeContainerComponent";
 import BoldAndThinText from "../boldAndThinText/boldAndThinText";
 import H_OneComponent from "../componentTitle/componentTitle";
 import fetchSpecificItem from "../../../functions/fetchSpecificItem";
+import fetchWholeMd from "../../../functions/fetchWholeMd";
+import LinkImagesComponent from "../smallIcons/smallIconsComponent";
 
 const ProfileImage = ({
   children,
@@ -117,7 +119,17 @@ const ProfileText = ({
   );
 };
 
-const ProfileSocials = () => {};
+export const ProfileSocials = ({ data, socialData }) => {
+  console.log(data);
+  return (
+    <div className="socialsIconsContainer">
+      <LinkImagesComponent
+        data={data?.bio?.socials_icons}
+        sectionColor="white"
+      />
+    </div>
+  );
+};
 
 export const Profile = ({
   profile,
@@ -139,18 +151,29 @@ export const Profile = ({
   const name = firstLetterCapital(profile);
 
   const [specificTitle, setSpecificTitle] = useState("");
+  const [socials, setSocials] = useState("");
 
-  if (data.bio) {
-    const fetchItems = async () => {
-      const fetchedText = await fetchSpecificItem(data.bio[0].url, "bigTitle");
+  useEffect(() => {
+    if (data.bio) {
+      const fetchItems = async () => {
+        const fetchedText = await fetchSpecificItem(
+          data.bio[0].url,
+          "bigTitle"
+        );
+        const fetchedAll = await fetchWholeMd(data?.bio[0].url);
 
-      if (fetchedText) {
-        setSpecificTitle(fetchedText);
-      }
-    };
+        if (fetchedText) {
+          setSpecificTitle(fetchedText);
+        }
 
-    fetchItems();
-  }
+        if (fetchedAll?.links) {
+          setSocials(fetchedAll?.links);
+        }
+      };
+
+      fetchItems();
+    }
+  }, []);
 
   return (
     <div className="profileContainer">
@@ -179,7 +202,7 @@ export const Profile = ({
             headerSize={headerSize}
             sectionColor={sectionColor}
           />
-          <ProfileSocials />
+          {socials && <ProfileSocials data={data} socialData={socials} />}
         </div>
         <div
           className="rightSide"

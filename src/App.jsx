@@ -152,7 +152,6 @@ export default App;
  * ". Type&nbsp;Forward " on https://www.typeforward.com/services#custom-licensing
  *“A typeface that is odd and oval, why not call it “Oddval,” suggested the designers at FourPlus. We immediately fell in love with it. We knew the name might sound strange but wasn’t that the point from the beginning?
  *
- * FORWARD text on home-page is not scaling well with screen-resizing atm
  *
  * Make so the navbar changes color and match whatever section screen currently is over
  * also apply it for +/x button when window is smaller

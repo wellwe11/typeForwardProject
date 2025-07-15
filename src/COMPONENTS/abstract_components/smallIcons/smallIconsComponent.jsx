@@ -1,14 +1,6 @@
 import "./smallIconsComponent.scss";
 
-const icons = import.meta.glob(
-  "../../../../public/resourceFolder_typeFoward/extended_assets/socials_icons/*.svg",
-  {
-    eager: true,
-    as: "url",
-  }
-);
-
-const LinkImagesComponent = ({ sectionColor, data }) => {
+const LinkImagesComponent = ({ sectionColor = "black", data }) => {
   const bgColor = sectionColor === "black" ? "black" : "white";
   const textColor = bgColor === "black" ? "white" : "black";
   const borderColor = bgColor === "black" ? "white" : "black";
@@ -35,19 +27,18 @@ const LinkImagesComponent = ({ sectionColor, data }) => {
         "--filterColorWhite": imageFilterWhite,
       }}
     >
-      {icons &&
-        dataEntries.map(([index, obj]) => (
-          <div className="iconButtonContainer" key={index}>
-            <div className="insideIconButtonContainer">
-              <button
-                className="iconButton"
-                onClick={() => window.open(obj, "_blank")}
-              >
-                <img src={obj?.url} alt="" />
-              </button>
-            </div>
+      {dataEntries.map(([index, obj]) => (
+        <div className="iconButtonContainer" key={index}>
+          <div className="insideIconButtonContainer">
+            <button
+              className="iconButton"
+              onClick={() => window.open(obj, "_blank")}
+            >
+              <img src={obj?.url} alt="" />
+            </button>
           </div>
-        ))}
+        </div>
+      ))}
     </div>
   );
 };

@@ -60,3 +60,20 @@
     left: 0;
   }
 }
+
+.socialsIconsContainer {
+  display: flex;
+  width: fit-content;
+
+  .linkImagesContainer {
+    min-width: fit-content;
+
+    .iconButtonContainer {
+      margin-left: 20px;
+    }
+
+    .iconButtonContainer:first-of-type {
+      margin-left: 0px !important;
+    }
+  }
+}

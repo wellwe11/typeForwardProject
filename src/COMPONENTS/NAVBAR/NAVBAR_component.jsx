@@ -45,7 +45,6 @@ const NavButtons = ({
   handleShowButtons,
 }) => {
   const [activeTab, setActiveTab] = useState("/");
-  console.log(activeTab);
 
   const location = useLocation();
 
