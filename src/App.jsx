@@ -155,7 +155,7 @@ export default App;
 
 
 
- * Fix "free" button for fonts (currently small text for some reason)
+
  *
  * Make so the navbar changes color and match whatever section screen currently is over
  * also apply it for +/x button when window is smaller

@@ -212,11 +212,22 @@
           }
 
           .typeButtonBuyContainer {
+            a {
+              &:hover {
+                .buttonFont {
+                  color: white;
+                }
+              }
+            }
           }
 
           .typeButtonDownloadContainer {
             button {
-              color: black;
+              &:hover {
+                .buttonFont {
+                  color: white;
+                }
+              }
             }
           }
 
@@ -244,6 +255,8 @@
 
               .buttonFont {
                 font-weight: 400;
+                color: black;
+                font-size: 18px;
               }
             }
 
