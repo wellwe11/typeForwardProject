@@ -124,11 +124,12 @@ const DownloadForm = ({ type, displayForm, setDisplayForm, index }) => {
             </div>
             <div className="subinfoContainer">
               <h4 className="subinfo">
-                {`Enter your e-mail to get ${
-                  Object.keys(type?.[1].free_Fonts)[0]
-                } ${
+                {`Enter your e-mail to get ${Object.keys(
+                  type?.[1].free_Fonts
+                )[0].replace(/_/g, " ")} ${
                   Object.keys(type?.[1].free_Fonts)[1]
-                    ? "and " + Object.keys(type?.[1].free_Fonts)[1]
+                    ? "and " +
+                      Object.keys(type?.[1].free_Fonts)[1].replace(/_/g, " ")
                     : ""
                 } free desktop and web fonts with license to use as you wish.`}
               </h4>
