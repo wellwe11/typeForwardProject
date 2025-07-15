@@ -24,6 +24,8 @@ const LinkImagesComponent = ({ sectionColor, data }) => {
 
   const dataEntries = Object.entries(data);
 
+  console.log(dataEntries);
+
   return (
     <div
       className="linkImagesContainer"
@@ -43,14 +45,7 @@ const LinkImagesComponent = ({ sectionColor, data }) => {
                 className="iconButton"
                 onClick={() => window.open(obj, "_blank")}
               >
-                <img
-                  src={
-                    icons[
-                      `../../../../public/resourceFolder_typeFoward/extended_assets/socials_icons/${index}.min.svg`
-                    ]
-                  }
-                  alt=""
-                />
+                <img src={obj?.url} alt="" />
               </button>
             </div>
           </div>

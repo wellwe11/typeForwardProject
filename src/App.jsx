@@ -37,6 +37,7 @@ function App() {
   const sectionRefs = useRef([]);
   const [navbarColor, setNavColor] = useState("black");
   const [data, setData] = useState({});
+  const [extended_assets, setExtended_assets] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,10 +47,13 @@ function App() {
       );
 
       setData(fetchedData.assets);
+      setExtended_assets(fetchedData.extended_assets);
     };
 
     fetchData();
   }, []);
+
+  console.log(extended_assets);
 
   if (!data) {
     return (
@@ -129,7 +133,7 @@ function App() {
                 />
               </Routes>
             </Suspense>
-            <FooterComponent />
+            <FooterComponent data={extended_assets?.socials_icons} />
           </Router>
         </TabComponentProvider>
       </div>

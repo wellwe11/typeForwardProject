@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import LinkImagesComponent from "../abstract_components/smallIcons/smallIconsComponent";
 
-const FooterComponent = () => {
+const FooterComponent = ({ data }) => {
   const todaysYear = new Date().getFullYear();
 
   const navButtonNames = {
@@ -37,9 +37,9 @@ const FooterComponent = () => {
               </Link>
             ))}
             <button className="linkButton email">
-              <h3 className="linkText">contact@typeforward.com</h3>
+              <h2 className="linkText">contact@typeforward.com</h2>
             </button>
-            <LinkImagesComponent sectionColor={"black"} />
+            <LinkImagesComponent data={data} sectionColor={"black"} />
           </div>
         </div>
       </div>
