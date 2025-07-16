@@ -97,7 +97,8 @@
     align-items: center;
     justify-content: space-around;
 
-    width: clamp(600px, 75%, 700px);
+    width: clamp(90vw, 75%, 700px);
+    max-width: 800px;
 
     .uniqueLinkContainer {
       cursor: pointer;
@@ -165,6 +166,10 @@
     .LinksContainer {
       .uniqueLinkContainer {
         display: none;
+      }
+
+      .uniqueLinkContainer:last-of-type {
+        border-bottom: 30px solid black;
       }
     }
 
