@@ -175,7 +175,7 @@ const TypefaceComponent = ({ sectionRef, data }) => {
       className="sectionWhite"
       // ref={(el) => (sectionRef.current[1] = el)}
     >
-      <div className="typeFaceSection">
+      <div className="typeFaceSection" id="typefaces">
         <div className="typeFaceSectionContainer">
           <div className="typeFaceSectionTitle">
             <h1>Typefaces</h1>

@@ -81,6 +81,16 @@ const NavButtons = ({
   const firstLetterCapital = (string) =>
     string.charAt(0).toUpperCase() + string.slice(1).replace(/_/g, " ");
 
+  // go back to top of page
+  // for when you  click same navbuttons that are currently active
+  const scrollToTop = (topNr) => {
+    window.scrollTo({
+      top: topNr || 0,
+      behavior: "smooth",
+    });
+  };
+
+  // if you click sub, directs you to the section thats sub
   const scrollToSub = () => {
     if (document.getElementById("contact")) {
       console.log("asd1");
@@ -93,6 +103,21 @@ const NavButtons = ({
       setTimeout(() => {
         return document
           .getElementById("contact")
+          .scrollIntoView({ behavior: "smooth" });
+      }, 50);
+    }
+  };
+
+  const scrollTypefaces = () => {
+    if (document.getElementById("typefaces")) {
+      return document
+        .getElementById("typefaces")
+        .scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        return document
+          .getElementById("typefaces")
           .scrollIntoView({ behavior: "smooth" });
       }, 50);
     }
@@ -125,6 +150,17 @@ const NavButtons = ({
 
                 if (obj._embedded.info.linkTo.includes("#")) {
                   scrollToSub();
+                }
+                if (obj._embedded.info.linkTo.includes("/")) {
+                  console.log(obj._embedded.info.linkTo);
+                  scrollTypefaces();
+                }
+
+                if (
+                  !obj._embedded.info.linkTo.includes("#") &&
+                  !obj._embedded.info.linkTo.includes("/")
+                ) {
+                  scrollToTop();
                 }
 
                 setShowButtons(false);
