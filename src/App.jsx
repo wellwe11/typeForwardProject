@@ -54,14 +54,6 @@ function App() {
     fetchData();
   }, []);
 
-  if (!data) {
-    return (
-      <div>
-        <h1>...Loading</h1>
-      </div>
-    );
-  }
-
   // useEffect(() => {
   //   const observer = new IntersectionObserver(
   //     (entries) => {
@@ -86,6 +78,7 @@ function App() {
 
   //   return () => observer.disconnect();
   // }, []);
+
   const componentMap = useMemo(() => {
     const map = {};
     Object.keys(data).forEach((pageName) => {
@@ -98,6 +91,14 @@ function App() {
 
     return map;
   }, [Object.keys(data).join(",")]);
+
+  if (!data) {
+    return (
+      <div>
+        <h1>...Loading</h1>
+      </div>
+    );
+  }
 
   if (!data.Typefaces?._embedded) return null;
 
@@ -154,14 +155,34 @@ export default App;
  *
  *
  * Make so the navbar changes color and match whatever section screen currently is over
- * also apply it for +/x button when window is smaller
- * currently, navbar doesnt change color if you change page
+ * ---also apply it for +/x button when window is smaller
+ * ---currently, navbar doesnt change color if you change page
+ * ---Make navbar return to top of page if you click same page which yo are currently on
+ *
+ * fix 'contact us' email buttons style
+ *
+ * Create Privacy Policy page which is navigated to from the footer
  *
  *
  * clicking subscribe should direct you to the subscribe section which is on each page
- *
- * add social-links to each "about us" creator
+ * on blog-page. Clicking nav-buttons should navigate to corresponding section
  *
  * add cookies button when page is first loaded
  * maybe make it so that cookies are saved when you've clicked accept or not accept
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * '' extras for future if I want to:
+ * add link to social-icons (for profiles, footer, about us etc)
  */

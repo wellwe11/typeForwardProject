@@ -178,6 +178,7 @@ const SubsrcibeComponent = ({ sectionRef }) => {
   return (
     <section
       className="sectionWhite"
+      id="contact"
       // ref={(el) => (sectionRef.current[3] = el)}
     >
       <div className="subscribeComponentSection">

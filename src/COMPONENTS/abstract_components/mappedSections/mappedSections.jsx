@@ -120,7 +120,6 @@ const ProfileText = ({
 };
 
 export const ProfileSocials = ({ data, socialData }) => {
-  console.log(data);
   return (
     <div className="socialsIconsContainer">
       <LinkImagesComponent

@@ -97,6 +97,8 @@
     align-items: center;
     justify-content: space-around;
 
+    width: clamp(600px, 75%, 700px);
+
     .uniqueLinkContainer {
       cursor: pointer;
       position: relative;
@@ -105,16 +107,18 @@
 
       max-height: 50%;
       min-height: 40px;
-      min-width: 70px;
+      min-width: 60px;
 
       .keyTextSpan {
+        font-family: "font-Gogh", sans-serif;
+        font-size: 0.97rem;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
 
         font-variation-settings: "wght" 500;
-        transition: font-variation-settings 0.3s ease;
+        transition: font-variation-settings 0.18s ease-out;
 
         .keyText {
           white-space: nowrap;
@@ -127,6 +131,7 @@
     }
 
     .keyTextSpanHidden {
+      margin-top: -4px;
       opacity: 0;
     }
   }

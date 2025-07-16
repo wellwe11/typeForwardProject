@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import React, { useEffect, useState } from "react";
 
@@ -23,11 +23,22 @@ const ToggleMenuButton = ({ showButtons, handleShowButtons }) => {
 const LogoButton = ({ backgroundColor }) => {
   const [isHover, setIsHover] = useState(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
   const handleIsHover = () => setIsHover(!isHover);
 
   return (
     <div className="LogoContainer">
-      <Link onMouseEnter={handleIsHover} onMouseLeave={handleIsHover} to={""}>
+      <Link
+        onMouseEnter={handleIsHover}
+        onMouseLeave={handleIsHover}
+        to={""}
+        onClick={scrollToTop}
+      >
         <h1 className="logoTitle">type forward</h1>
         <div className="SVGContainer">
           <SvgLogo isHover={isHover} backgroundColor={backgroundColor} />
@@ -47,6 +58,7 @@ const NavButtons = ({
   const [activeTab, setActiveTab] = useState("/");
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.pathname !== "/")
@@ -69,6 +81,23 @@ const NavButtons = ({
   const firstLetterCapital = (string) =>
     string.charAt(0).toUpperCase() + string.slice(1).replace(/_/g, " ");
 
+  const scrollToSub = () => {
+    if (document.getElementById("contact")) {
+      console.log("asd1");
+      return document
+        .getElementById("contact")
+        .scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.log("asd");
+      navigate("/");
+      setTimeout(() => {
+        return document
+          .getElementById("contact")
+          .scrollIntoView({ behavior: "smooth" });
+      }, 50);
+    }
+  };
+
   return (
     <ul className="navBarUl">
       <div onClick={() => setActiveTab("/")}>
@@ -81,44 +110,43 @@ const NavButtons = ({
         />
         {buttonsObject.map(([index, obj]) => {
           return (
-            <div
+            <button
               key={index}
               className="uniqueLinkContainer"
               style={{ display: showButtons ? "flex" : "" }}
-              onClick={() => setShowButtons(false)}
+              onClick={() => {
+                navigate(obj._embedded.info.linkTo);
+                !obj._embedded.info.linkTo.includes("#")
+                  ? setActiveTab(obj._embedded.info.linkTo.toLowerCase())
+                  : obj._embedded.info.linkTo.includes("#") &&
+                    !document.getElementById("contact")
+                  ? setActiveTab("/")
+                  : "";
+
+                if (obj._embedded.info.linkTo.includes("#")) {
+                  scrollToSub();
+                }
+
+                setShowButtons(false);
+              }}
             >
-              <Link
-                to={
-                  !obj._embedded.info.linkTo.includes("#")
-                    ? obj._embedded.info.linkTo
-                    : ""
-                }
-                onClick={() =>
-                  setActiveTab(
-                    !obj._embedded.info.linkTo.includes("#")
-                      ? obj._embedded.info.linkTo.toLowerCase()
-                      : ""
-                  )
-                }
-              >
-                <span className="keyTextSpan">
-                  <h2
-                    className="keyText"
-                    style={{
-                      fontVariationSettings:
-                        obj._embedded.info.linkTo === activeTab
-                          ? "'wght' 820"
-                          : "",
-                    }}
-                  >
-                    {addSpaceBeforeCaps(firstLetterCapital(index))}
-                  </h2>
-                </span>
-                <span className="keyTextSpanHidden">
-                  <h2>{addSpaceBeforeCaps(firstLetterCapital(index))}</h2>
-                </span>
-              </Link>
-            </div>
+              <span className="keyTextSpan">
+                <h2
+                  className="keyText"
+                  style={{
+                    fontVariationSettings:
+                      obj._embedded.info.linkTo === activeTab
+                        ? "'wght' 820"
+                        : "",
+                  }}
+                >
+                  {addSpaceBeforeCaps(firstLetterCapital(index))}
+                </h2>
+              </span>
+              <span className="keyTextSpanHidden">
+                <h2>{addSpaceBeforeCaps(firstLetterCapital(index))}</h2>
+              </span>
+            </button>
           );
         })}
       </div>
