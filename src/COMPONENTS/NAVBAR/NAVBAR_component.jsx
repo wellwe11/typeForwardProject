@@ -83,9 +83,9 @@ const NavButtons = ({
 
   // go back to top of page
   // for when you  click same navbuttons that are currently active
-  const scrollToTop = (topNr) => {
+  const scrollToTop = () => {
     window.scrollTo({
-      top: topNr || 0,
+      top: 0,
       behavior: "smooth",
     });
   };
@@ -93,17 +93,15 @@ const NavButtons = ({
   // if you click sub, directs you to the section thats sub
   const scrollToSub = () => {
     if (document.getElementById("contact")) {
-      console.log("asd1");
       return document
         .getElementById("contact")
-        .scrollIntoView({ behavior: "smooth" });
+        .scrollIntoView({ block: "center", behavior: "smooth" });
     } else {
-      console.log("asd");
       navigate("/");
       setTimeout(() => {
         return document
           .getElementById("contact")
-          .scrollIntoView({ behavior: "smooth" });
+          .scrollIntoView({ behavior: "smooth", block: "center" });
       }, 50);
     }
   };
@@ -140,7 +138,11 @@ const NavButtons = ({
               className="uniqueLinkContainer"
               style={{ display: showButtons ? "flex" : "" }}
               onClick={() => {
-                navigate(obj._embedded.info.linkTo);
+                console.log(index);
+                if (!obj._embedded.info.linkTo.includes("#")) {
+                  navigate(obj._embedded.info.linkTo);
+                }
+
                 !obj._embedded.info.linkTo.includes("#")
                   ? setActiveTab(obj._embedded.info.linkTo.toLowerCase())
                   : obj._embedded.info.linkTo.includes("#") &&
@@ -149,10 +151,12 @@ const NavButtons = ({
                   : "";
 
                 if (obj._embedded.info.linkTo.includes("#")) {
+                  console.log("sub");
                   scrollToSub();
                 }
+
                 if (obj._embedded.info.linkTo.includes("/")) {
-                  console.log(obj._embedded.info.linkTo);
+                  console.log("typefaces");
                   scrollTypefaces();
                 }
 

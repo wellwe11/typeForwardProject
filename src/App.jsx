@@ -157,15 +157,14 @@ export default App;
  * Make so the navbar changes color and match whatever section screen currently is over
  * ---also apply it for +/x button when window is smaller
  * ---currently, navbar doesnt change color if you change page
- * ---Make navbar return to top of page if you click same page which yo are currently on
  *
  * fix 'contact us' email buttons style
  *
  * Create Privacy Policy page which is navigated to from the footer
  *
  *
- * clicking subscribe should direct you to the subscribe section which is on each page
  * on blog-page. Clicking nav-buttons should navigate to corresponding section
+ * on blog page, subscribe does not work
  *
  * add cookies button when page is first loaded
  * maybe make it so that cookies are saved when you've clicked accept or not accept

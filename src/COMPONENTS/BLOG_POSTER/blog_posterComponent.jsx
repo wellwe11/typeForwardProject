@@ -17,7 +17,7 @@ const BlogPosterComponent = ({ data }) => {
       link.includes(hash.replace(/#/g, ""))
     );
 
-    const specifiedData = blogData[0][1].blog || [];
+    const specifiedData = blogData?.[0]?.[1]?.blog || [];
 
     return (
       <SizeContainerComponent sectionColor="white">
