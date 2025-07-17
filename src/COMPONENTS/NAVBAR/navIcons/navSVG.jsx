@@ -1,6 +1,6 @@
 import "./navSVG.scss";
 
-const NavBarSVG = ({ showButtons, handleShowButtons }) => {
+const NavBarSVG = ({ showButtons, handleShowButtons, backgroundColor }) => {
   return (
     <svg
       className={`hb ${showButtons ? "open" : ""}`}
@@ -8,8 +8,9 @@ const NavBarSVG = ({ showButtons, handleShowButtons }) => {
       viewBox="0 0 10 10"
       stroke="#eee"
       strokeWidth=".6"
-      fill="none"
+      fill="black"
       onClick={handleShowButtons}
+      stroke={backgroundColor === "black" ? "white" : "black"}
     >
       <line className="line top" x1="2" y1="3" x2="8" y2="3" />
       <line className="line middle" x1="2" y1="5" x2="8" y2="5" />

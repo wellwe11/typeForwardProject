@@ -7,13 +7,18 @@ import SvgLogo from "./svgLogo";
 import addSpaceBeforeCaps from "../../functions/addSpaceBeforeCaps";
 import NavBarSVG from "./navIcons/navSVG";
 
-const ToggleMenuButton = ({ showButtons, handleShowButtons }) => {
+const ToggleMenuButton = ({
+  showButtons,
+  handleShowButtons,
+  backgroundColor,
+}) => {
   return (
     <div className="toggleMenuButton">
       <button className="viewMenuButtons" onClick={handleShowButtons}>
         <NavBarSVG
           showButtons={showButtons}
           handleShowButtons={handleShowButtons}
+          backgroundColor={backgroundColor}
         />
       </button>
     </div>
@@ -128,6 +133,7 @@ const NavButtons = ({
         <ToggleMenuButton
           showButtons={showButtons}
           handleShowButtons={handleShowButtons}
+          backgroundColor={backgroundColor}
         />
         {buttonsObject.map(([index, obj]) => {
           return (
