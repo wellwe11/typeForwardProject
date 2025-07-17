@@ -21,7 +21,7 @@ const ImageWheelDots = ({ amountOfImages, activeDot, setActiveDot }) => {
   return <div className="imageWheelDots">{dots}</div>;
 };
 
-const ImageWheelContainer = ({ data }) => {
+const ImageWheelContainer = ({ data, sectionRef }) => {
   const media = Object.entries(data?.fontBlog.media);
   const [activeImage, setActiveImage] = useState(1);
   const [leftHover, setLeftHover] = useState(false);
@@ -81,7 +81,7 @@ const ImageWheelContainer = ({ data }) => {
 
   if (media) {
     return (
-      <SizeContainerComponent sectionColor="white">
+      <SizeContainerComponent sectionColor="white" sectionRef={sectionRef}>
         <div className="imageWheelContainer">
           <div className="mediaElementsContainer">
             <div className="mediaAndPointers">

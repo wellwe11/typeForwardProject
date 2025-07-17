@@ -49,7 +49,7 @@ const SubscribeContent = () => {
   );
 };
 
-const TrailFontsComponent = ({ data }) => {
+const TrailFontsComponent = ({ data, sectionRef }) => {
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -58,7 +58,10 @@ const TrailFontsComponent = ({ data }) => {
   if (data.TrailFonts) {
     const dataTrailFonts = Object.entries(data?.TrailFonts);
     return (
-      <SizeContainerComponent sectionColor={"white"}>
+      <SizeContainerComponent
+        sectionColor={"white"}
+        sectionRef={(el) => (sectionRef.current[0] = el)}
+      >
         <div className="trailFontContainer">
           <div className="titleContainer">
             <H_OneComponent title={"Download trial fonts"} textColor="black" />

@@ -9,8 +9,9 @@ import ImageWheelContainer from "../abstract_components/imageWheelSlider/imageWh
 import OpenTypeComponent from "../abstract_components/typeSections/OpenType_Features/openType";
 import TypeInputTextsComponent from "../abstract_components/typeSections/typeInputTexts/typeInputTexts";
 import TypeOverviewComponent from "../abstract_components/typeSections/typeOverview/typeOverview";
+import SubsrcibeComponent from "../SUBSCRIBE/SUBSCRIBE";
 
-const Specific_TypeComponent = ({ data }) => {
+const Specific_TypeComponent = ({ data, sectionRef }) => {
   // font name
   const [typeName, setTypeName] = useState(null);
   const { hash } = useLocation();
@@ -142,23 +143,34 @@ const Specific_TypeComponent = ({ data }) => {
   if (customTypeEntry) {
     return (
       <div className="specific_TypeComponent">
-        <TypeHeader type={customTypeEntry} fontInfo={fontInfo} />
+        <TypeHeader
+          type={customTypeEntry}
+          fontInfo={fontInfo}
+          sectionRef={(el) => (sectionRef.current[0] = el)}
+        />
         <TypeOverviewComponent
           data={customTypeEntry}
           placeholderData={data?.Typefaces.placeholderImage[0].url}
+          sectionRef={(el) => (sectionRef.current[1] = el)}
         />
-        <ImageWheelContainer data={typeObject} />
+        <ImageWheelContainer
+          data={typeObject}
+          sectionRef={(el) => (sectionRef.current[2] = el)}
+        />
         <OpenTypeComponent
           data={mdFile}
           font={customTypeEntry}
           fontInfo={fontInfo}
+          sectionRef={(el) => (sectionRef.current[3] = el)}
         />
         <TypeInputTextsComponent
           data={mdFile}
           type={customTypeEntry}
           fontBio={fontBio}
           fontInfo={fontInfo}
+          sectionRef={(el) => (sectionRef.current[4] = el)}
         />
+        <SubsrcibeComponent sectionRef={(el) => (sectionRef.current[5] = el)} />
       </div>
     );
   }

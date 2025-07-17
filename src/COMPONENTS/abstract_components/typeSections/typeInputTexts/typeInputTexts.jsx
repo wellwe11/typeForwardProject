@@ -266,7 +266,7 @@ const StaleFontVariation = ({ fontData, texts }) => {
   }
 };
 
-const TypeInputTextsComponent = ({ type, data, fontInfo }) => {
+const TypeInputTextsComponent = ({ type, data, fontInfo, sectionRef }) => {
   const [fontVariationsArr, setFontVariationsArr] = useState(null);
 
   useEffect(() => {
@@ -303,7 +303,7 @@ const TypeInputTextsComponent = ({ type, data, fontInfo }) => {
 
     if (inputInitialTexts) {
       return (
-        <SizeContainerComponent sectionColor="white">
+        <SizeContainerComponent sectionColor="white" sectionRef={sectionRef}>
           <div className="typefacesContainer">
             <div className="topBorder">
               <H_OneComponent

@@ -6,7 +6,7 @@ import SizeContainerComponent from "../abstract_components/sizeContainer/sizeCon
 import BlogSections from "../abstract_components/blogSections/blogContent/blogContent";
 import HeaderSection from "../abstract_components/blogSections/headerContent/headerContent";
 
-const BlogPosterComponent = ({ data }) => {
+const BlogPosterComponent = ({ data, sectionRef }) => {
   const { hash } = useLocation(); // blog_poster#posterOne etc
 
   const blogServicesEntries = Object.entries(data.Blog.services);
@@ -20,7 +20,10 @@ const BlogPosterComponent = ({ data }) => {
     const specifiedData = blogData?.[0]?.[1]?.blog || [];
 
     return (
-      <SizeContainerComponent sectionColor="white">
+      <SizeContainerComponent
+        sectionColor="white"
+        sectionRef={(el) => (sectionRef.current[0] = el)}
+      >
         <div className="blogSectionComponent">
           <div className="blogSectionHeader">
             <HeaderSection
@@ -32,7 +35,9 @@ const BlogPosterComponent = ({ data }) => {
             <BlogSections data={specifiedData.sections} />
           </div>
 
-          <SubscribeComponent sectionRef={" "} />
+          <SubscribeComponent
+            sectionRef={(el) => (sectionRef.current[1] = el)}
+          />
         </div>
       </SizeContainerComponent>
     );

@@ -39,11 +39,11 @@ const TypeSideComponent = ({ type, artists }) => {
   }
 };
 
-const TypeHeader = ({ type, fontInfo }) => {
+const TypeHeader = ({ type, fontInfo, sectionRef }) => {
   if (type) {
     const artists = fontInfo?.designer;
     return (
-      <SizeContainerComponent>
+      <SizeContainerComponent sectionRef={sectionRef}>
         <div className="typeHeader">
           <TypeSideComponent type={type} artists={artists} />
           <ButtonContainer />

@@ -25,6 +25,7 @@ const AboutUsComponent = ({ data, sectionRef, extendedAssets }) => {
           data={aboutUsEntries}
           displaySocials={true}
           extendedAssets={extendedAssets}
+          sectionRef={(el) => (sectionRef.current[0] = el)}
         />
         <ProfilesComponent
           data={data}
@@ -32,9 +33,10 @@ const AboutUsComponent = ({ data, sectionRef, extendedAssets }) => {
           section={"AboutUs"}
           sectionColor={"white"}
           flexOrder={1}
+          sectionRef={(el) => (sectionRef.current[1] = el)}
         />
 
-        <SubscribeComponent sectionRef={sectionRef} />
+        <SubscribeComponent sectionRef={(el) => (sectionRef.current[2] = el)} />
       </div>
     );
   }

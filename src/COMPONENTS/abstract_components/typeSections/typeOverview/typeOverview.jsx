@@ -168,7 +168,7 @@ const AboutTypeOverview = ({ data }) => {
   }
 };
 
-const TypeOverviewComponent = ({ data, placeholderData }) => {
+const TypeOverviewComponent = ({ data, placeholderData, sectionRef }) => {
   const [overviewImage, setOverviewImage] = useState(null);
   const [activeOverview, setActiveOverview] = useState("CHARACTERISTICS");
 
@@ -212,7 +212,7 @@ const TypeOverviewComponent = ({ data, placeholderData }) => {
 
   if (screenWidth > 999) {
     return (
-      <SizeContainerComponent sectionColor="black">
+      <SizeContainerComponent sectionColor="black" sectionRef={sectionRef}>
         <div className="typeOverview">
           <div className="titleContainer">
             <H_OneComponent title="Overview" textColor="white" textSize={1} />

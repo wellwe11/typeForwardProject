@@ -36,10 +36,7 @@ const TopSectionBio = ({
   );
 
   return (
-    <SizeContainerComponent
-      sectionColor={"black"}
-      //   sectionRef={(el) => (sectionRef.current[5] = el)}
-    >
+    <SizeContainerComponent sectionColor={"black"} sectionRef={sectionRef}>
       <div className="topSectionBioSectionContainer">
         <div className="titleContainer">
           <H_OneComponent title={configuredTitle || componentTitle} />

@@ -15,12 +15,13 @@ const ServicesComponent = ({ sectionRef, data }) => {
     return (
       <div className="servicesComponentContainer">
         <TopSectionBio
-          sectionRef={sectionRef}
+          sectionRef={(el) => (sectionRef.current[0] = el)}
           data={dataEntries}
           displayImages={true}
           configuredTitle={"Type Services"}
         />
         <ProfilesComponent
+          sectionRef={(el) => (sectionRef.current[1] = el)}
           data={data}
           canHover={false}
           section={"Services"}
@@ -31,7 +32,7 @@ const ServicesComponent = ({ sectionRef, data }) => {
           flexOrder={2}
         />
 
-        <SubscribeComponent sectionRef={sectionRef} />
+        <SubscribeComponent sectionRef={(el) => (sectionRef.current[2] = el)} />
       </div>
     );
   }

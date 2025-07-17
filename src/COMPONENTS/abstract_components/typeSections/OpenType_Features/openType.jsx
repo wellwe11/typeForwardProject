@@ -104,7 +104,7 @@ const LeftSection = ({ data, font, fontInfo }) => {
   }
 };
 
-const OpenTypeComponent = ({ data, font, fontInfo }) => {
+const OpenTypeComponent = ({ data, font, fontInfo, sectionRef }) => {
   if (data) {
     const thinText = data.openType_Features.thin;
     const boldText = data.openType_Features.bold.replace(
@@ -113,7 +113,7 @@ const OpenTypeComponent = ({ data, font, fontInfo }) => {
     );
 
     return (
-      <SizeContainerComponent sectionColor="white">
+      <SizeContainerComponent sectionColor="white" sectionRef={sectionRef}>
         <div className="openTypeComponentContainer">
           <div className="titleContainer">
             <H_OneComponent

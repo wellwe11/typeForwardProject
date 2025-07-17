@@ -195,11 +195,40 @@ const NavButtons = ({
   );
 };
 
-const NavBarComponent = ({ backgroundColor, data }) => {
+const NavBarComponent = ({ data, navbarColor, setNavColor, sectionRefs }) => {
   const [showButtons, setShowButtons] = useState(false);
   const handleShowButtons = () => setShowButtons(!showButtons);
+  const location = useLocation();
 
-  console.log(backgroundColor);
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const visibleEntry = entries.find((entry) => entry.isIntersecting);
+
+      if (visibleEntry) {
+        const themeColor = visibleEntry.target.dataset.theme;
+        setNavColor(themeColor);
+      }
+    });
+
+    const timer = setTimeout(() => {
+      sectionRefs.current.forEach(
+        (section) => {
+          if (section) {
+            observer.observe(section);
+          }
+        },
+        {
+          root: null,
+          threshold: 1,
+        }
+      );
+    }, 300);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, [location]);
 
   if (data) {
     return (
@@ -207,14 +236,14 @@ const NavBarComponent = ({ backgroundColor, data }) => {
         className="navBarContainer"
         onMouseLeave={() => setShowButtons(false)}
         style={{
-          backgroundColor: backgroundColor,
-          color: backgroundColor === "black" ? "white" : "black",
+          backgroundColor: navbarColor,
+          color: navbarColor === "black" ? "white" : "black",
           borderBottom:
-            backgroundColor === "white" ? "2px solid black" : "2px solid white",
+            navbarColor === "white" ? "2px solid black" : "2px solid white",
         }}
       >
         <NavButtons
-          backgroundColor={backgroundColor}
+          backgroundColor={navbarColor}
           data={data}
           showButtons={showButtons}
           setShowButtons={setShowButtons}

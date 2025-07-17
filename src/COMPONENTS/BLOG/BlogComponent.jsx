@@ -27,9 +27,10 @@ const BlogComponent = ({ data, sectionRef }) => {
           flexOrder={2}
           headerSize={4.5}
           ExternalImage={[GridImageEffect, WaveImageEffect]}
+          sectionRef={(el) => (sectionRef.current[0] = el)}
         />
 
-        <SubsrcibeComponent sectionRef={sectionRef} />
+        <SubsrcibeComponent sectionRef={(el) => (sectionRef.current[1] = el)} />
       </div>
     );
   }
