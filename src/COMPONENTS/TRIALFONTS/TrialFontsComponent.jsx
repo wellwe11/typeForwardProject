@@ -1,4 +1,4 @@
-import "./TRAIL_FONTS.scss";
+import "./TRIAL_FONTS.scss";
 import { useEffect, useState } from "react";
 
 import { EnterEmailAndOrSub, SubscribeInfo } from "../SUBSCRIBE/SUBSCRIBE";
@@ -49,14 +49,13 @@ const SubscribeContent = () => {
   );
 };
 
-const TrailFontsComponent = ({ data, sectionRef }) => {
+const TrialFontsComponent = ({ data, sectionRef }) => {
   if (!data) {
     return <div>Loading...</div>;
   }
 
-  console.log(data);
-  if (data.TrailFonts) {
-    const dataTrailFonts = Object.entries(data?.TrailFonts);
+  if (data?.TrialFonts) {
+    const dataTrailFonts = Object.entries(data?.TrialFonts);
     return (
       <SizeContainerComponent
         sectionColor={"white"}
@@ -80,4 +79,4 @@ const TrailFontsComponent = ({ data, sectionRef }) => {
   }
 };
 
-export default TrailFontsComponent;
+export default TrialFontsComponent;

@@ -65,6 +65,7 @@ function App() {
       );
     });
 
+    console.log(map);
     return map;
   }, [Object.keys(data).join(",")]);
 
@@ -151,6 +152,7 @@ export default App;
  *
  *
  * '' extras for future if I want to:
+ * fix so when a page loads, it doesnt look so explosive (all containers are built as they are tabbed, so it looks a bit wild when you switch tabs)
  * add cookies button when page is first loaded
  * ---maybe make it so that cookies are saved when you've clicked accept or not accept
  * add link to social-icons (for profiles, footer, about us etc)
