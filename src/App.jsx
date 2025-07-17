@@ -143,22 +143,19 @@ export default App;
  *“A typeface that is odd and oval, why not call it “Oddval,” suggested the designers at FourPlus. We immediately fell in love with it. We knew the name might sound strange but wasn’t that the point from the beginning?
  *
  *
- * Make so the navbar changes color and match whatever section screen currently is over
- * ---also apply it for +/x button when window is smaller
- * ---small bug where the navbar doesnt always change color. This is because between each component, there's a small gray area where entry is undefined
- *
  * fix 'contact us' email buttons style
- *
- * Create Privacy Policy page which is navigated to from the footer
- *
  *
  * on blog-page. Clicking nav-buttons should navigate to corresponding section
  * on blog page, subscribe does not work
  *
- * add cookies button when page is first loaded
- * maybe make it so that cookies are saved when you've clicked accept or not accept
  *
  *
  * '' extras for future if I want to:
+ * add cookies button when page is first loaded
+ * ---maybe make it so that cookies are saved when you've clicked accept or not accept
  * add link to social-icons (for profiles, footer, about us etc)
+ *
+ * Create Privacy Policy page which is navigated to from the footer
+ *
+ * * ---small bug where the navbar doesnt always change color. This is because between each component, there's a small gray area where entry is undefined
  */
