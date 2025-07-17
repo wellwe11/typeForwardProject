@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import "./NAVBAR.scss";
 import SvgLogo from "./svgLogo";
@@ -114,9 +114,7 @@ const NavButtons = ({
     } else {
       navigate("/");
       setTimeout(() => {
-        return document
-          .getElementById("typefaces")
-          .scrollIntoView({ behavior: "smooth" });
+        return document.getElementById("typefaces").scrollIntoView();
       }, 50);
     }
   };
@@ -136,7 +134,10 @@ const NavButtons = ({
             <button
               key={index}
               className="uniqueLinkContainer"
-              style={{ display: showButtons ? "flex" : "" }}
+              style={{
+                display: showButtons ? "flex" : "",
+                color: backgroundColor === "white" ? "black" : "white",
+              }}
               onClick={() => {
                 console.log(index);
                 if (!obj._embedded.info.linkTo.includes("#")) {
@@ -197,13 +198,16 @@ const NavButtons = ({
 const NavBarComponent = ({ backgroundColor, data }) => {
   const [showButtons, setShowButtons] = useState(false);
   const handleShowButtons = () => setShowButtons(!showButtons);
+
+  console.log(backgroundColor);
+
   if (data) {
     return (
       <div
         className="navBarContainer"
         onMouseLeave={() => setShowButtons(false)}
         style={{
-          backgroundColor: backgroundColor === "white" ? "white" : "black",
+          backgroundColor: backgroundColor,
           color: backgroundColor === "black" ? "white" : "black",
           borderBottom:
             backgroundColor === "white" ? "2px solid black" : "2px solid white",

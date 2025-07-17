@@ -14,6 +14,7 @@ export const TypeFaceComponent = ({
   handleDisplayForm,
   linkTo,
   fontColor = "black",
+  sectionRef,
 }) => {
   const [thinTex, setThinText] = useState();
 
@@ -24,7 +25,11 @@ export const TypeFaceComponent = ({
   fetchText(type[1].bio[0].url, setThinText);
 
   return (
-    <div className="typeFaceContainer" style={{ fontFamily: type[0] }}>
+    <div
+      className="typeFaceContainer"
+      style={{ fontFamily: type[0] }}
+      ref={sectionRef}
+    >
       <h1 className="typeFaceName">{addSpaceBeforeCaps(type[0])}</h1>
       <h3 className="typeFaceDescription">{thinTex}</h3>
       <h3 className="typeFaceDescription">{children}</h3>
@@ -144,7 +149,7 @@ const DownloadForm = ({ type, displayForm, setDisplayForm, index }) => {
   );
 };
 
-const TypefaceComponent = ({ sectionRef, data }) => {
+const TypeComponent = ({ sectionRef, data }) => {
   const [displayForm, setDisplayForm] = useState(null);
 
   // display pop-up form
@@ -170,45 +175,44 @@ const TypefaceComponent = ({ sectionRef, data }) => {
     };
   }, [displayForm]);
 
-  return (
-    <section
-      className="sectionWhite"
-      // ref={(el) => (sectionRef.current[1] = el)}
-    >
-      <div className="typeFaceSection" id="typefaces">
-        <div className="typeFaceSectionContainer">
-          <div className="typeFaceSectionTitle">
-            <h1>Typefaces</h1>
-          </div>
-          {fonts &&
-            fonts.map((type, index) => (
-              <section className="typeFace" key={index}>
-                <DownloadForm
-                  type={type}
-                  displayForm={displayForm}
-                  setDisplayForm={setDisplayForm}
-                  index={index}
-                />
-                <div className="innerWidthContainer" key={index}>
-                  <TypeFaceComponent
+  if (fonts) {
+    return (
+      <section className="sectionWhite" ref={sectionRef} data-theme={"white"}>
+        <div className="typeFaceSection" id="typefaces">
+          <div className="typeFaceSectionContainer">
+            <div className="typeFaceSectionTitle">
+              <h1>Typefaces</h1>
+            </div>
+            {fonts &&
+              fonts.map((type, index) => (
+                <section className="typeFace" key={index}>
+                  <DownloadForm
                     type={type}
-                    handleDisplayForm={() => handleDisplayForm(index)}
-                    linkTo={`./typefaces/type#${type[0]}`}
+                    displayForm={displayForm}
+                    setDisplayForm={setDisplayForm}
+                    index={index}
                   />
-                  <div className="buyDownloadButtonsContainer">
-                    <TypeButtonExplore type={type[0]} />
-                    <TypeButtonDownload
-                      type={type[0]}
+                  <div className="innerWidthContainer" key={index}>
+                    <TypeFaceComponent
+                      type={type}
                       handleDisplayForm={() => handleDisplayForm(index)}
+                      linkTo={`./typefaces/type#${type[0]}`}
                     />
+                    <div className="buyDownloadButtonsContainer">
+                      <TypeButtonExplore type={type[0]} />
+                      <TypeButtonDownload
+                        type={type[0]}
+                        handleDisplayForm={() => handleDisplayForm(index)}
+                      />
+                    </div>
                   </div>
-                </div>
-              </section>
-            ))}
+                </section>
+              ))}
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  }
 };
 
-export default TypefaceComponent;
+export default TypeComponent;

@@ -238,9 +238,14 @@ const Profiles = ({
   profileHeader,
   headerSize,
   ExternalImage,
+  sectionRef,
 }) => {
   return (
-    <SizeContainerComponent sectionColor={sectionColor || "white"}>
+    <SizeContainerComponent
+      sectionColor={sectionColor || "white"}
+      sectionRef={sectionRef}
+      data-theme={sectionColor}
+    >
       <div className="profilesContainer">
         {data.map(([key, value], index) => (
           <div key={`${key} profile`} className="profileContainer">
@@ -281,6 +286,7 @@ const ProfilesComponent = ({
   profileHeader,
   headerSize,
   ExternalImage,
+  sectionRef,
 }) => {
   const dataServices = Object.entries(data[section].services);
 
@@ -300,6 +306,7 @@ const ProfilesComponent = ({
           profileHeader={profileHeader}
           headerSize={headerSize}
           ExternalImage={ExternalImage}
+          sectionRef={sectionRef}
         />
       </div>
     );

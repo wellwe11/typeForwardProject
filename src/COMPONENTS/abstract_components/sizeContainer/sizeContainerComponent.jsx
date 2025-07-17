@@ -12,6 +12,7 @@ const SizeContainerComponent = ({
     <section
       className={`section${firstLetterCapital(sectionColor)}`}
       ref={sectionRef}
+      data-theme={sectionColor}
     >
       <div className="sectionContainer">
         <div className="contentContainer">

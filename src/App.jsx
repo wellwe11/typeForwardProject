@@ -35,10 +35,11 @@ const ScrollToTop = () => {
 function App() {
   // for navbar to track section-color
   const sectionRefs = useRef([]);
+
   const [navbarColor, setNavColor] = useState("black");
+
   const [data, setData] = useState({});
   const [extended_assets, setExtended_assets] = useState(null);
-  const [activeTab, setActiveTab] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,30 +55,35 @@ function App() {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       const visibleEntry = entries.find((entry) => entry.isIntersecting);
-  //       if (visibleEntry) {
-  //         const classList = visibleEntry.target.classList;
-  //         if (classList.contains("sectionBlack")) {
-  //           setNavColor("black");
-  //         } else {
-  //           setNavColor("white");
-  //         }
-  //       }
-  //     },
-  //     {
-  //       threshold: 0.17,
-  //     }
-  //   );
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const visibleEntry = entries.find((entry) => entry.isIntersecting);
 
-  //   sectionRefs.current.forEach((section) => {
-  //     if (section) observer.observe(section);
-  //   });
+      if (visibleEntry) {
+        const themeColor = visibleEntry.target.dataset.theme;
+        setNavColor(themeColor);
+      }
+    });
 
-  //   return () => observer.disconnect();
-  // }, []);
+    const timer = setTimeout(() => {
+      sectionRefs.current.forEach(
+        (section) => {
+          if (section) {
+            observer.observe(section);
+          }
+        },
+        {
+          root: null,
+          threshold: 1,
+        }
+      );
+    }, 1000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, [sectionRefs]);
 
   const componentMap = useMemo(() => {
     const map = {};
@@ -122,6 +128,7 @@ function App() {
                         <Component
                           data={data}
                           extendedAssets={extended_assets}
+                          sectionRef={sectionRefs}
                         />
                       }
                     />

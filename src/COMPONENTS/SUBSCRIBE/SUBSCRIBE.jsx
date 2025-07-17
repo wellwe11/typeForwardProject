@@ -177,9 +177,10 @@ export const SubscribeInfo = () => {
 const SubsrcibeComponent = ({ sectionRef }) => {
   return (
     <section
+      ref={sectionRef}
       className="sectionWhite"
       id="contact"
-      // ref={(el) => (sectionRef.current[3] = el)}
+      data-theme={"white"}
     >
       <div className="subscribeComponentSection">
         <div className="subscribeComponentContainer">
@@ -197,4 +198,4 @@ const SubsrcibeComponent = ({ sectionRef }) => {
   );
 };
 
-export default memo(SubsrcibeComponent);
+export default SubsrcibeComponent;

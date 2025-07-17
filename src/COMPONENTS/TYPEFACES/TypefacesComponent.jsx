@@ -5,7 +5,7 @@ import "./HOME.scss";
 
 import "../../index.scss";
 
-import TypeComponent, { TypeFaceComponent } from "./TYPEFACE";
+import TypeComponent from "./TYPEFACE";
 import SubsrcibeComponent from "../SUBSCRIBE/SUBSCRIBE";
 import ProfilesComponent from "../abstract_components/mappedSections/mappedSections";
 
@@ -72,10 +72,7 @@ export const ForwardWelcomeComponent = ({ sectionRef }) => {
   }, []);
 
   return (
-    <section
-      className="sectionBlack"
-      // ref={(el) => (sectionRef.current[0] = el)}
-    >
+    <section className="sectionBlack" ref={sectionRef} data-theme="black">
       <div
         className="forwardWelcome"
         onMouseMove={!fontButtonsHover ? handleMouseMove : null}
@@ -113,11 +110,17 @@ export const ForwardWelcomeComponent = ({ sectionRef }) => {
 };
 
 const TypefacesComponent = ({ sectionRef, data }) => {
-  if (data.Typefaces) {
+  if (data.Typefaces?.fonts) {
     return (
       <div className="homeContainer">
-        <ForwardWelcomeComponent sectionRef={sectionRef} />
-        <TypeComponent sectionRef={sectionRef} data={data} />
+        <ForwardWelcomeComponent
+          sectionRef={(el) => (sectionRef.current[0] = el)}
+        />
+
+        <TypeComponent
+          sectionRef={(el) => (sectionRef.current[1] = el)}
+          data={data}
+        />
 
         <ProfilesComponent
           data={data}
@@ -130,11 +133,12 @@ const TypefacesComponent = ({ sectionRef, data }) => {
           event={"services"}
           eventName={"Learn more"}
           flexOrder={2}
+          sectionRef={(el) => (sectionRef.current[2] = el)}
         />
-        <SubsrcibeComponent sectionRef={sectionRef} />
+        <SubsrcibeComponent sectionRef={(el) => (sectionRef.current[3] = el)} />
       </div>
     );
   }
 };
 
-export default React.memo(TypefacesComponent);
+export default TypefacesComponent;
