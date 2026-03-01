@@ -1,6 +1,6 @@
 # typeForwardProject: eCommerce type website
 
-A recreation of a website that sells types, with control for content without having to code.
+A recreation of a website that sell types, with control for content without having to code.
 
 ## Tech Stack
 
