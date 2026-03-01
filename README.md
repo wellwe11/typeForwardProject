@@ -1,12 +1,48 @@
-# React + Vite
+# typeForwardProject: eCommerce type website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A recreation of a website that sells types, with control for content without having to code.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Frontend Core
 
-## Expanding the ESLint configuration
+- **React 19** (Vite)
+- **React Router 7**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 3D & Typography
+
+- **Three.js**
+- **Opentype.js**
+- **React markdown**
+
+### Styling & Animation
+
+- **Sass**
+
+### Quality Assurance
+
+- **ESLint**
+
+## Features
+
+- **Fun Design**
+- **Control over pages & products without having to code**
+- **Updateable components across the website. Simply add files, and follow a strict file-structure, and website will automatically update**
+
+## Getting Started
+
+### 1. Clone the repo
+
+`git clone https://github.com/wellwe11/typeForwardProject`
+
+### 2. Install dependencies
+
+`npm install`
+
+### 3. Run the project
+
+`npm run dev`
+
+## Project Context
+
+An attempt to recreate a friends website, making it more dynamic and controllable for someone who does not code. All main-components that handle pages (on navbar), as well as products, content, such as blog-posts, 'about us', is updateable simply by adding/deleting files (Files must follow a specific structure in order to work).
