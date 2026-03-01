@@ -15,7 +15,7 @@ A recreation of a website that sells types, with control for content without hav
 - **Opentype.js**
 - **React markdown**
 
-### Styling & Animation
+### Styling
 
 - **Sass**
 
